@@ -1,0 +1,10 @@
+# Dados pessoais do usuário — nunca versionar
+memoria.md
+iscas-local.md
+user-memory.md
+user-profile.md
+
+# Sistema
+.DS_Store
+Thumbs.db
+*.tmp

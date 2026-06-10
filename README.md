@@ -2,47 +2,57 @@
 
 Skills para o Claude Desktop que criam posts de carrossel para Instagram usando o Método DOPA da Triwer.
 
-**Versão atual:** 1.0.0
-
 ---
 
 ## O que está incluído
 
-### carrossel-triwer
+### carrossel-triwer (v1.0.0)
 Cria posts de carrossel para o feed do Instagram seguindo o framework DOPA (Descoberta, Oportunidade, Provocação, Autoridade). Conecta com seu Notion para usar suas histórias, perfis de público e depoimentos como base de dados.
 
-### cta-triwer
+### cta-triwer (v1.0.0)
 Decide se o carrossel deve ter Manychat, escolhe a isca certa e escreve os slides 09-10 finais. Especialista em criar e sugerir novas iscas quando necessário.
 
-As duas skills são parte do mesmo pipeline — o carrossel-triwer passa o handoff para a cta-triwer automaticamente.
+As duas skills são parte do mesmo pipeline — o carrossel-triwer passa o handoff para a cta-triwer automaticamente. Mas cada uma tem instalação, versão e atualização independentes: instale só a que precisar.
 
 ---
 
 ## Instalação
 
-### Mac / Linux
+### carrossel-triwer
 
+**Mac / Linux**
 ```bash
-curl -fsSL https://raw.githubusercontent.com/paulovyn1/triwer-skills/main/scripts/instalar-mac.sh | bash
+curl -fsSL https://raw.githubusercontent.com/paulovyn1/triwer-skills/main/scripts/instalar-carrossel-mac.sh | bash
 ```
 
-### Windows (PowerShell)
-
+**Windows (PowerShell)**
 ```powershell
-irm https://raw.githubusercontent.com/paulovyn1/triwer-skills/main/scripts/instalar-windows.ps1 | iex
+irm https://raw.githubusercontent.com/paulovyn1/triwer-skills/main/scripts/instalar-carrossel-windows.ps1 | iex
+```
+
+### cta-triwer
+
+**Mac / Linux**
+```bash
+curl -fsSL https://raw.githubusercontent.com/paulovyn1/triwer-skills/main/scripts/instalar-cta-mac.sh | bash
+```
+
+**Windows (PowerShell)**
+```powershell
+irm https://raw.githubusercontent.com/paulovyn1/triwer-skills/main/scripts/instalar-cta-windows.ps1 | iex
 ```
 
 O instalador:
 - Verifica se já há uma versão instalada
 - Só atualiza se houver versão mais nova
 - Preserva seus dados pessoais (memória e iscas locais) em atualizações
-- Instala as duas skills juntas
+- Cada skill é instalada e atualizada de forma independente
 
 ---
 
 ## Atualizar
 
-Rode o mesmo comando de instalação — o script detecta a versão instalada e só baixa se houver atualização.
+Rode o comando de instalação da skill que deseja atualizar — o script detecta a versão instalada e só baixa se houver uma versão mais nova.
 
 ---
 
@@ -72,7 +82,13 @@ Após instalar, abra o Claude Desktop e digite:
 /carrossel-triwer
 ```
 
-Na primeira vez, o onboarding iniciará automaticamente para configurar seu ambiente.
+ou, para a CTA:
+
+```
+/cta-triwer
+```
+
+Na primeira vez que cada skill for usada, o onboarding dela iniciará automaticamente para configurar seu ambiente.
 
 ---
 
@@ -92,7 +108,9 @@ Na primeira vez, o onboarding iniciará automaticamente para configurar seu ambi
 │   │   └── mc/  MC001–MC015
 │   └── referencias/
 │       ├── manual-headline.md
-│       └── outliers-headline.md
+│       ├── outliers-headline.md
+│       ├── orientacoes-quem-sou-eu.md
+│       └── orientacoes-publico.md
 │
 └── cta-triwer/
     ├── SKILL.md
@@ -113,8 +131,8 @@ Na primeira vez, o onboarding iniciará automaticamente para configurar seu ambi
 Se preferir instalar sem o script:
 
 1. Baixe ou clone este repositório
-2. Copie a pasta `carrossel-triwer/` para `~/.claude/skills/carrossel-triwer/`
-3. Copie a pasta `cta-triwer/` para `~/.claude/skills/cta-triwer/`
+2. Para o **carrossel-triwer**: copie a pasta `carrossel-triwer/` para `~/.claude/skills/carrossel-triwer/`
+3. Para o **cta-triwer**: copie a pasta `cta-triwer/` para `~/.claude/skills/cta-triwer/`
 4. **Não sobrescreva** `memoria.md` e `iscas-local.md` se já existirem
 
 ---

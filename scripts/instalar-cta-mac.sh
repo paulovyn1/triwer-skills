@@ -1,20 +1,16 @@
 #!/bin/bash
 
 # =============================================================
-# Triwer Skills — Instalador para Mac e Linux
-# Instala: carrossel-triwer + cta-triwer
+# Triwer Skills — Instalador do cta-triwer (Mac e Linux)
 # =============================================================
 
 set -e
 
 REPO="https://raw.githubusercontent.com/paulovyn1/triwer-skills/main"
-VERSION_URL="$REPO/VERSION"
 SKILLS_DIR="$HOME/.claude/skills"
-CARROSSEL_DIR="$SKILLS_DIR/carrossel-triwer"
 CTA_DIR="$SKILLS_DIR/cta-triwer"
-VERSION_FILE_CARROSSEL="$CARROSSEL_DIR/VERSION"
-VERSION_FILE_CTA="$CTA_DIR/VERSION"
-TMP_DIR=$(mktemp -d)
+VERSION_URL="$REPO/cta-triwer/VERSION"
+VERSION_FILE="$CTA_DIR/VERSION"
 
 # Cores
 GREEN='\033[0;32m'
@@ -25,8 +21,7 @@ NC='\033[0m'
 
 echo ""
 echo -e "${BLUE}╔══════════════════════════════════════╗${NC}"
-echo -e "${BLUE}║     Triwer Skills — Instalador       ║${NC}"
-echo -e "${BLUE}║   carrossel-triwer + cta-triwer      ║${NC}"
+echo -e "${BLUE}║      Triwer Skills — cta-triwer      ║${NC}"
 echo -e "${BLUE}╚══════════════════════════════════════╝${NC}"
 echo ""
 
@@ -42,7 +37,6 @@ REMOTE_VERSION=$(curl -fsSL "$VERSION_URL" 2>/dev/null || echo "")
 
 if [ -z "$REMOTE_VERSION" ]; then
     echo -e "${RED}✗ Não foi possível conectar ao repositório. Verifique sua conexão.${NC}"
-    rm -rf "$TMP_DIR"
     exit 1
 fi
 
@@ -50,15 +44,14 @@ echo -e "   Versão disponível: ${GREEN}$REMOTE_VERSION${NC}"
 
 # Verificar versão instalada
 INSTALLED_VERSION=""
-if [ -f "$VERSION_FILE_CARROSSEL" ]; then
-    INSTALLED_VERSION=$(cat "$VERSION_FILE_CARROSSEL")
+if [ -f "$VERSION_FILE" ]; then
+    INSTALLED_VERSION=$(cat "$VERSION_FILE")
 fi
 
 if [ "$INSTALLED_VERSION" = "$REMOTE_VERSION" ]; then
     echo ""
     echo -e "${GREEN}✓ Você já tem a versão mais recente instalada ($INSTALLED_VERSION).${NC}"
     echo ""
-    rm -rf "$TMP_DIR"
     exit 0
 fi
 
@@ -85,33 +78,9 @@ download_file() {
 
 # Criar estrutura de pastas
 echo -e "${YELLOW}→ Criando pastas...${NC}"
-mkdir -p "$CARROSSEL_DIR/indices"
-mkdir -p "$CARROSSEL_DIR/modelos/mc"
-mkdir -p "$CARROSSEL_DIR/modelos/mh"
-mkdir -p "$CARROSSEL_DIR/referencias"
 mkdir -p "$CTA_DIR/referencias"
 
-# Baixar carrossel-triwer
-echo -e "${YELLOW}→ Baixando carrossel-triwer...${NC}"
-download_file "carrossel-triwer/SKILL.md" "$CARROSSEL_DIR/SKILL.md"
-download_file "carrossel-triwer/indices/modelos-headline.md" "$CARROSSEL_DIR/indices/modelos-headline.md"
-download_file "carrossel-triwer/indices/modelos-carrossel.md" "$CARROSSEL_DIR/indices/modelos-carrossel.md"
-download_file "carrossel-triwer/referencias/manual-headline.md" "$CARROSSEL_DIR/referencias/manual-headline.md"
-download_file "carrossel-triwer/referencias/outliers-headline.md" "$CARROSSEL_DIR/referencias/outliers-headline.md"
-
-echo -e "${YELLOW}→ Baixando modelos de carrossel (MC001–MC015)...${NC}"
-for i in $(seq -w 1 15); do
-    N=$(printf "%03d" $i)
-    download_file "carrossel-triwer/modelos/mc/MC${N}.md" "$CARROSSEL_DIR/modelos/mc/MC${N}.md"
-done
-
-echo -e "${YELLOW}→ Baixando modelos de headline (MH001–MH016)...${NC}"
-for i in $(seq -w 1 16); do
-    N=$(printf "%03d" $i)
-    download_file "carrossel-triwer/modelos/mh/MH${N}.md" "$CARROSSEL_DIR/modelos/mh/MH${N}.md"
-done
-
-# Baixar cta-triwer
+# Baixar arquivos
 echo -e "${YELLOW}→ Baixando cta-triwer...${NC}"
 download_file "cta-triwer/SKILL.md" "$CTA_DIR/SKILL.md"
 download_file "cta-triwer/referencias/iscas-regras.md" "$CTA_DIR/referencias/iscas-regras.md"
@@ -126,19 +95,14 @@ else
 fi
 
 # memoria.md: nunca sobrescrever se já existir
-if [ ! -f "$CARROSSEL_DIR/memoria.md" ]; then
-    echo -e "   ↳ memoria.md do carrossel será criado no primeiro uso"
-fi
 if [ ! -f "$CTA_DIR/memoria.md" ]; then
-    echo -e "   ↳ memoria.md da CTA será criado no primeiro uso"
+    echo -e "   ↳ memoria.md será criado no primeiro uso (onboarding)"
+else
+    echo -e "   ↳ memoria.md mantido (seus dados pessoais)"
 fi
 
 # Salvar versão instalada
-echo "$REMOTE_VERSION" > "$VERSION_FILE_CARROSSEL"
-echo "$REMOTE_VERSION" > "$VERSION_FILE_CTA"
-
-# Limpar temp
-rm -rf "$TMP_DIR"
+echo "$REMOTE_VERSION" > "$VERSION_FILE"
 
 echo ""
 echo -e "${GREEN}╔══════════════════════════════════════╗${NC}"
@@ -155,7 +119,7 @@ echo -e "  1. Conecte o Notion no Claude Desktop"
 echo -e "     Configurações → Integrações → Notion"
 echo ""
 echo -e "  2. Abra uma nova conversa no Claude Desktop"
-echo -e "     e digite: ${YELLOW}/carrossel-triwer${NC}"
+echo -e "     e digite: ${YELLOW}/cta-triwer${NC}"
 echo ""
 echo -e "  3. O onboarding iniciará automaticamente."
 echo ""

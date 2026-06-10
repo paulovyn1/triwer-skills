@@ -5,7 +5,7 @@
 
 $ErrorActionPreference = "Stop"
 
-$REPO = "https://raw.githubusercontent.com/triwer/triwer-skills/main"
+$REPO = "https://raw.githubusercontent.com/paulovyn1/triwer-skills/main"
 $SKILLS_DIR = "$env:USERPROFILE\.claude\skills"
 $CARROSSEL_DIR = "$SKILLS_DIR\carrossel-triwer"
 $CTA_DIR = "$SKILLS_DIR\cta-triwer"

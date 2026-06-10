@@ -23,13 +23,13 @@ As duas skills são parte do mesmo pipeline — o carrossel-triwer passa o hando
 ### Mac / Linux
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/triwer/triwer-skills/main/scripts/instalar-mac.sh | bash
+curl -fsSL https://raw.githubusercontent.com/paulovyn1/triwer-skills/main/scripts/instalar-mac.sh | bash
 ```
 
 ### Windows (PowerShell)
 
 ```powershell
-irm https://raw.githubusercontent.com/triwer/triwer-skills/main/scripts/instalar-windows.ps1 | iex
+irm https://raw.githubusercontent.com/paulovyn1/triwer-skills/main/scripts/instalar-windows.ps1 | iex
 ```
 
 O instalador:

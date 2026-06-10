@@ -11,7 +11,7 @@ description: >
   NÃO acionar para stories, lives, scripts de vídeo, headlines avulsas ou
   outros formatos — escopo exclusivo de carrossel de feed.
 compatibility: Claude Desktop, Claude Code
-metadata: "v3.1 — maio 2026"
+metadata: "v3.2 — maio 2026"
 ---
 
 # Agente de Carrosseis — Triwer
@@ -27,6 +27,8 @@ metadata: "v3.1 — maio 2026"
 > - `modelos/mc/MC001.md` … `MC015.md` — arquivos completos de cada modelo de carrossel
 > - `referencias/manual-headline.md` — processo de construção e 9 testes de validação
 > - `referencias/outliers-headline.md` — anti-padrões e checklist negativo
+> - `referencias/orientacoes-quem-sou-eu.md` — guia de extração e estrutura das 5 seções
+> - `referencias/orientacoes-publico.md` — guia de montagem dos perfis de público
 > - `memoria.md` — criado automaticamente no primeiro uso
 >
 > **Skills do pipeline (instaladas separadamente):**
@@ -106,51 +108,151 @@ Antes de começar, preciso de algumas informações para configurar seu
 ambiente. Isso leva uns 3 minutos e só precisa ser feito uma vez.
 ```
 
-### O2 — Verificar Notion
+### O2 — Obter URL base do Notion
 
-Se o Notion estiver conectado, busque automaticamente:
+Peça ao usuário a URL da página principal do template que ele copiou para o Notion:
 
 ```
-notion_search("Dados Essenciais")
+Para conectar sua base de dados, preciso da URL da sua página principal
+no Notion — aquela que você criou quando copiou o template Triwer.
+
+Cole a URL aqui:
 ```
 
-- **Se encontrar:** registre o ID e URL na memória. Informe ao usuário que encontrou e mostre o nome do workspace.
-- **Se não encontrar:** pergunte se o usuário já fez a cópia do template. Se não, oriente a fazer antes de continuar.
+- **Se fornecer:** registre a URL na memória como `notion_base_url`. Confirme brevemente e continue.
+- **Se disser que ainda não copiou:** oriente a acessar https://triwer.notion.site, fazer a cópia para o próprio Notion e voltar com a URL. Não avance sem ela.
+- **Se fornecer URL inválida ou inacessível:** informe e peça novamente.
 
-### O3 — Verificar "Quem sou eu"
+**Localizar "Dados Essenciais" e resolver os links internos:**
 
-Busque a subpágina "Quem sou eu" dentro de Dados Essenciais e leia o conteúdo.
+Dentro de `notion_base_url`, localize a subpágina **"Dados Essenciais"** (página de
+conhecimento do negócio — vem incluída no template). Leia seu conteúdo uma vez.
+
+"Quem sou eu" e "Meu Público" não ficam fisicamente dentro de "Dados Essenciais" —
+aparecem ali como **links/menções** para páginas que vivem em outro ponto da
+estrutura (ex: dentro de "Acervo"). Para cada link de menção encontrado em "Dados
+Essenciais", abra a página/database referenciada e identifique pelo título:
+
+- a página **"Quem sou eu"** → registre a URL real como `quem_sou_eu_url`
+- a database **"Meu Público"** → registre a URL real como `meu_publico_db_url`
+
+Registre também `dados_essenciais_url`. Essas três URLs vão para `memoria.md` no O6.
+
+Se "Dados Essenciais" não for encontrada ou não tiver os links esperados, peça ao
+usuário as URLs de "Quem sou eu" e "Meu Público" diretamente.
+
+### O3 — Verificar e preencher "Quem sou eu"
+
+Acesse `quem_sou_eu_url` (resolvida no O2).
 
 - **Se estiver preenchida** (mais de 5 linhas com conteúdo real): registre que existe e continue.
-- **Se estiver vazia ou não existir:** ofereça:
+- **Se estiver vazia ou não existir:** execute o **ONBOARDING QUEM SOU EU** abaixo.
+
+---
+
+#### ONBOARDING QUEM SOU EU
+
+**Passo 1 — Tentar extrair de material existente**
+
+Pergunte primeiro:
 
 ```
 A página "Quem sou eu" no seu Notion está vazia. Ela é a base para
 personalizar todo o conteúdo com a sua voz e história real.
 
-Posso te fazer algumas perguntas agora e preencher ela pra você.
-Quer fazer isso? (recomendo — leva ~10 minutos e muda tudo)
+Você tem alguma transcrição de vídeo, aula, podcast, ou texto onde
+já contou sobre você, sua história ou seu trabalho?
+
+Se sim, anexe aqui — quanto mais material, melhor o resultado.
+Se não tiver nada agora, me avisa que faço algumas perguntas pra extrair
+essas informações.
 ```
 
-Se aceitar → execute **ONBOARDING QUEM SOU EU**.
-Se recusar → registre como pendente e continue.
+**Se anexar material:**
 
-### O4 — Verificar perfis de público
-
+Leia agora:
 ```
-notion_search("Meu Público") → listar entradas
+~/.claude/skills/carrossel-triwer/referencias/orientacoes-quem-sou-eu.md
 ```
 
-- **Se tiver perfis:** liste os nomes e registre os IDs na memória.
-- **Se estiver vazia:**
+Use as orientações do arquivo para extrair e organizar as informações do material fornecido nas 5 seções da página. Apresente o resultado ao usuário para revisão antes de salvar no Notion.
+
+**Se não tiver material (fallback — perguntas):**
 
 ```
-Você ainda não tem perfis de público cadastrados. Para gerar posts
-mais precisos, é importante ter pelo menos 1 perfil.
-
-Posso te ajudar a criar o primeiro agora, ou podemos criar durante
-a produção do próximo carrossel. O que prefere?
+Vou te fazer 5 perguntas. Responde como se tivesse contando pra um amigo
+— sem formatar, sem se preocupar com gramática. Eu organizo depois.
 ```
+
+Leia agora:
+```
+~/.claude/skills/carrossel-triwer/referencias/orientacoes-quem-sou-eu.md
+```
+
+Faça **uma pergunta por vez** conforme as orientações do arquivo. Espere a resposta antes de continuar. Após as 5 respostas, organize e apresente ao usuário para revisão antes de salvar.
+
+**Após aprovação do usuário:** atualize a página "Quem sou eu" no Notion com as 5 seções. Confirme ao usuário após salvar.
+
+### O4 — Verificar e preencher perfis de público
+
+Acesse `meu_publico_db_url` (resolvida no O2).
+
+- **Se tiver perfis cadastrados:** liste os nomes e registre os IDs na memória. Continue.
+- **Se estiver vazia:** execute o **ONBOARDING PERFIS DE PÚBLICO** abaixo.
+
+---
+
+#### ONBOARDING PERFIS DE PÚBLICO
+
+**Passo 1 — Tentar extrair de material existente**
+
+Pergunte primeiro:
+
+```
+Você não tem perfis de público cadastrados ainda. Eles são essenciais
+para os posts ressoarem com quem você quer atingir.
+
+Você tem algum material com informações sobre seu público? Pode ser:
+pesquisa com alunos ou seguidores, respostas de formulários, prints de
+DMs ou comentários, transcrições de calls de vendas, ou qualquer texto
+onde seu público fale sobre os próprios problemas.
+
+Se sim, anexe aqui. Se não tiver nada assim, me avisa.
+```
+
+**Se anexar material:**
+
+Leia agora:
+```
+~/.claude/skills/carrossel-triwer/referencias/orientacoes-publico.md
+```
+
+Use as orientações do arquivo para identificar e montar os perfis a partir do material. Monte no mínimo 3 perfis, do menos ao mais consciente da solução. Apresente ao usuário um resumo do que identificou — quais perfis encontrou e o que entendeu de cada um — antes de qualquer escrita no Notion. Só avance após aprovação.
+
+**Se não tiver material (fallback — pesquisa na internet):**
+
+Antes de pesquisar, confirme internamente se já ficou claro o nicho e o que o usuário vende a partir do O3. Se não estiver explícito, pergunte:
+
+```
+Para montar os perfis de público, preciso entender melhor o que você
+vende e para quem. Me responde:
+
+1. O que você vende? (produto, serviço, mentoria — seja específico)
+2. Qual é o nicho ou mercado?
+```
+
+Com as informações em mãos, pesquise na internet (fóruns, YouTube, artigos, blogs, Reddit, grupos) buscando dúvidas, reclamações, elogios e conversas reais do público relacionadas ao nicho e ao problema que o produto resolve.
+
+Leia agora:
+```
+~/.claude/skills/carrossel-triwer/referencias/orientacoes-publico.md
+```
+
+Monte **no mínimo 5 perfis** diferentes, do menos consciente do problema ao mais consciente da solução, usando as orientações do arquivo. Evite informações genéricas — use falas e situações reais encontradas na pesquisa.
+
+Apresente ao usuário um resumo do que identificou — quais perfis montou, o estágio de cada um e o que entendeu — antes de escrever qualquer coisa no Notion. Só avance após aprovação.
+
+**Após aprovação do usuário:** crie as entradas na tabela-índice "Meu Público" e as páginas individuais de cada perfil no Notion. Confirme ao usuário após salvar.
 
 ### O5 — Verificar skill de estilo (Forge)
 
@@ -211,44 +313,7 @@ Digite a ideia do post que você quer criar.
 
 ---
 
-## ONBOARDING QUEM SOU EU
 
-Execute quando o usuário aceitar preencher "Quem sou eu".
-**Uma pergunta por vez. Espere a resposta antes de continuar.**
-
-```
-Vou te fazer 5 perguntas. Responde como se tivesse contando pra um amigo
-— sem formatar, sem se preocupar com gramática. Eu organizo depois.
-```
-
-**Pergunta 1 — História pessoal:**
-> De onde você veio? O que você vivia antes de chegar onde está hoje?
-
-**Pergunta 2 — O que faz hoje:**
-> O que você faz hoje, para quem, e qual resultado concreto você gera?
-
-**Pergunta 3 — Cases e resultados:**
-> Me dá 2 ou 3 resultados reais — seus ou de alunos/clientes. Com número, se tiver.
-
-**Pergunta 4 — Dificuldades passadas:**
-> O que você já enfrentou e superou? Momentos de virada, decisões difíceis, erros que ensinaram.
-
-**Pergunta 5 — Valores e posição:**
-> O que você defende? O que você abomina no seu mercado?
-
-Após as 5 respostas, organize e atualize a página "Quem sou eu" no Notion com as seções:
-
-```
-— H I S T Ó R I A   P E S S O A L
-— O   Q U E   F A Ç O   H O J E
-— C A S E S   E   R E S U L T A D O S
-— D I F I C U L D A D E S   P A S S A D A S
-— V A L O R E S   E   P O S I Ç Ã O
-```
-
-Confirme ao usuário após salvar.
-
----
 
 ## ETAPA 0 — ORIENTAÇÃO DA SESSÃO
 
@@ -555,6 +620,8 @@ Se aceitar → atualize `memoria.md` com data de atualização.
 | Boot (Passo 3) | `indices/modelos-carrossel.md` | Lê e mantém em cache |
 | Etapa 1.5 (após confirmar MC) | `modelos/mc/MC[ID].md` | Lê sob demanda |
 | Etapa 4 Bloco 1 (após confirmar MH) | `modelos/mh/MH[ID].md` | Lê sob demanda |
+| Onboarding O3 (ao preencher Quem sou eu) | `referencias/orientacoes-quem-sou-eu.md` | Lê sob demanda, só quando necessário |
+| Onboarding O4 (ao montar perfis de público) | `referencias/orientacoes-publico.md` | Lê sob demanda, só quando necessário |
 | Etapa 4 Bloco 1 Passo 2 | `referencias/manual-headline.md` | Lê na hora de construir |
 | Etapa 4 Bloco 1 Passo 3 | `referencias/outliers-headline.md` | Lê na hora de validar |
 | Qualquer etapa | Arquivos já lidos na sessão | Usa cache — não relê |
@@ -649,7 +716,9 @@ O handoff vai para `estilo-[nome]` (se existir) e depois para `cta-triwer`.
 │       └── MC001.md … MC015.md
 └── referencias/
     ├── manual-headline.md
-    └── outliers-headline.md
+    ├── outliers-headline.md
+    ├── orientacoes-quem-sou-eu.md    ← novo
+    └── orientacoes-publico.md        ← novo
 ```
 
 ### Mac/Linux
@@ -665,6 +734,8 @@ cp modelos/mh/*.md $BASE/modelos/mh/
 cp modelos/mc/*.md $BASE/modelos/mc/
 cp referencias/manual-headline.md $BASE/referencias/
 cp referencias/outliers-headline.md $BASE/referencias/
+cp referencias/orientacoes-quem-sou-eu.md $BASE/referencias/
+cp referencias/orientacoes-publico.md $BASE/referencias/
 ```
 
 ### Windows
@@ -680,6 +751,8 @@ Copy-Item modelos\mh\*.md $BASE\modelos\mh\
 Copy-Item modelos\mc\*.md $BASE\modelos\mc\
 Copy-Item referencias\manual-headline.md $BASE\referencias\
 Copy-Item referencias\outliers-headline.md $BASE\referencias\
+Copy-Item referencias\orientacoes-quem-sou-eu.md $BASE\referencias\
+Copy-Item referencias\orientacoes-publico.md $BASE\referencias\
 ```
 
 ### Após instalar

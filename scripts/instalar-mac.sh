@@ -7,7 +7,7 @@
 
 set -e
 
-REPO="https://raw.githubusercontent.com/triwer/triwer-skills/main"
+REPO="https://raw.githubusercontent.com/paulovyn1/triwer-skills/main"
 VERSION_URL="$REPO/VERSION"
 SKILLS_DIR="$HOME/.claude/skills"
 CARROSSEL_DIR="$SKILLS_DIR/carrossel-triwer"

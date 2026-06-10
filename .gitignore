@@ -8,3 +8,6 @@ user-profile.md
 .DS_Store
 Thumbs.db
 *.tmp
+
+# Configurações locais do Claude Code
+.claude/

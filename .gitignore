@@ -11,3 +11,9 @@ Thumbs.db
 
 # Configurações locais do Claude Code
 .claude/
+
+# Repositórios independentes (têm GitHub próprio)
+obsidian-zettelkasten/
+
+# Artefatos gerados (scripts/empacotar-zips.*) — não versionar, recriar quando precisar
+dist/

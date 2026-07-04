@@ -1,16 +1,16 @@
 #!/bin/bash
 
 # =============================================================
-# Triwer Skills — Instalador do carrossel-triwer (Mac e Linux)
+# Triwer Skills — Instalador do notion-zettelkasten-si (Mac e Linux)
 # =============================================================
 
 set -e
 
 REPO="https://raw.githubusercontent.com/paulovyn1/triwer-skills/main"
 SKILLS_DIR="$HOME/.claude/skills"
-CARROSSEL_DIR="$SKILLS_DIR/carrossel-triwer"
-VERSION_URL="$REPO/carrossel-triwer/VERSION"
-VERSION_FILE="$CARROSSEL_DIR/VERSION"
+ZETTEL_DIR="$SKILLS_DIR/notion-zettelkasten-si"
+VERSION_URL="$REPO/notion-zettelkasten-si/VERSION"
+VERSION_FILE="$ZETTEL_DIR/VERSION"
 
 # Cores
 GREEN='\033[0;32m'
@@ -20,9 +20,9 @@ BLUE='\033[0;34m'
 NC='\033[0m'
 
 echo ""
-echo -e "${BLUE}╔══════════════════════════════════════╗${NC}"
-echo -e "${BLUE}║   Triwer Skills — carrossel-triwer   ║${NC}"
-echo -e "${BLUE}╚══════════════════════════════════════╝${NC}"
+echo -e "${BLUE}╔══════════════════════════════════════════╗${NC}"
+echo -e "${BLUE}║   Triwer Skills — notion-zettelkasten-si ║${NC}"
+echo -e "${BLUE}╚══════════════════════════════════════════╝${NC}"
 echo ""
 
 # Verificar curl
@@ -78,34 +78,16 @@ download_file() {
 
 # Criar estrutura de pastas
 echo -e "${YELLOW}→ Criando pastas...${NC}"
-mkdir -p "$CARROSSEL_DIR/indices"
-mkdir -p "$CARROSSEL_DIR/modelos/mc"
-mkdir -p "$CARROSSEL_DIR/modelos/mh"
-mkdir -p "$CARROSSEL_DIR/referencias"
+mkdir -p "$ZETTEL_DIR/references"
 
 # Baixar arquivos principais
-echo -e "${YELLOW}→ Baixando carrossel-triwer...${NC}"
-download_file "carrossel-triwer/SKILL.md" "$CARROSSEL_DIR/SKILL.md"
-download_file "carrossel-triwer/indices/modelos-headline.md" "$CARROSSEL_DIR/indices/modelos-headline.md"
-download_file "carrossel-triwer/indices/modelos-carrossel.md" "$CARROSSEL_DIR/indices/modelos-carrossel.md"
-download_file "carrossel-triwer/referencias/manual-headline.md" "$CARROSSEL_DIR/referencias/manual-headline.md"
-download_file "carrossel-triwer/referencias/outliers-headline.md" "$CARROSSEL_DIR/referencias/outliers-headline.md"
-
-echo -e "${YELLOW}→ Baixando modelos de carrossel (MC001–MC015)...${NC}"
-for i in $(seq -w 1 15); do
-    N=$(printf "%03d" $i)
-    download_file "carrossel-triwer/modelos/mc/MC${N}.md" "$CARROSSEL_DIR/modelos/mc/MC${N}.md"
-done
-
-echo -e "${YELLOW}→ Baixando modelos de headline (MH001–MH016)...${NC}"
-for i in $(seq -w 1 16); do
-    N=$(printf "%03d" $i)
-    download_file "carrossel-triwer/modelos/mh/MH${N}.md" "$CARROSSEL_DIR/modelos/mh/MH${N}.md"
-done
+echo -e "${YELLOW}→ Baixando notion-zettelkasten-si...${NC}"
+download_file "notion-zettelkasten-si/SKILL.md" "$ZETTEL_DIR/SKILL.md"
+download_file "notion-zettelkasten-si/references/diagramacao.md" "$ZETTEL_DIR/references/diagramacao.md"
 
 # memoria.md: nunca sobrescrever se já existir
-if [ ! -f "$CARROSSEL_DIR/memoria.md" ]; then
-    echo -e "   ↳ memoria.md será criado no primeiro uso (onboarding)"
+if [ ! -f "$ZETTEL_DIR/memoria.md" ]; then
+    echo -e "   ↳ memoria.md será criado no primeiro uso"
 else
     echo -e "   ↳ memoria.md mantido (seus dados pessoais)"
 fi
@@ -126,9 +108,6 @@ echo ""
 echo -e "  ${BLUE}Próximos passos:${NC}"
 echo -e "  1. Complete o /onboarding-triwer antes, se ainda não fez"
 echo ""
-echo -e "  2. Rode /prisma-triwer e /oraculo-triwer se ainda não tiver"
-echo -e "     'Quem sou eu' e 'Meu Público' preenchidos"
-echo ""
-echo -e "  3. Abra uma nova conversa"
-echo -e "     e digite: ${YELLOW}/carrossel-triwer${NC}"
+echo -e "  2. Não precisa rodar por comando — sempre que você pedir para"
+echo -e "     salvar algo no Notion, esta skill entra em ação"
 echo ""

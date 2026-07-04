@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Diagnóstico de Produto — Dr. House</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:         #FFFCF4;
+  --bg-warm:    #F2EBDB;
+  --card-bg:    #FDFAF5;
+  --ink:        #2A0200;
+  --ink-soft:   #4A2418;
+  --muted:      #87672A;
+  --gold-1:     #B28431;
+  --gold-2:     #D5AE66;
+  --gold-3:     #F6EDDD;
+  --gold-gradient: linear-gradient(85.41deg, #B28431 -3.48%, #D5AE66 20.83%, #F6EDDD 52.17%, #D5AE66 79.18%, #B28431 100.25%);
+  --red:        #E52222;
+  --red-dark:   #C00000;
+  --rule:       #E1C3A1;
+  --serif:  'Libre Baskerville', Georgia, serif;
+  --sans:   'DM Sans', -apple-system, sans-serif;
+  --mono:   'Space Mono', monospace;
+  --status-critico:       #C00000;
+  --status-critico-bg:    #FBEAEA;
+  --status-estrutural:    #87672A;
+  --status-estrutural-bg: #F6EDDD;
+  --status-ajuste:        #6B5B95;
+  --status-ajuste-bg:     #EFEDF5;
+  --status-forte:         #3C6B2E;
+  --status-forte-bg:      #EDF3E8;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--ink-soft);
+  font-family: var(--sans);
+  font-weight: 300;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+
+.container { max-width: 860px; margin: 0 auto; padding: 0 32px; }
+
+.anchor-bar {
+  position: sticky; top: 0; z-index: 100;
+  background: var(--ink);
+  border-bottom: 2px solid var(--gold-1);
+  padding: 0 16px;
+  overflow-x: auto;
+  white-space: nowrap;
+}
+.anchor-bar-inner { max-width: 860px; margin: 0 auto; display: flex; gap: 4px; }
+.anchor-link {
+  font-family: var(--mono);
+  font-size: 10.5px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--gold-3);
+  opacity: .68;
+  text-decoration: none;
+  padding: 14px 16px;
+  border-bottom: 3px solid transparent;
+  transition: opacity .15s, border-color .15s;
+  flex-shrink: 0;
+  display: inline-block;
+}
+.anchor-link:hover, .anchor-link:focus { opacity: 1; border-bottom-color: var(--gold-2); }
+
+.hero {
+  background: var(--ink);
+  background-image: radial-gradient(ellipse at top right, rgba(178,132,49,.18), transparent 60%);
+  color: var(--gold-3);
+  padding: 56px 32px 48px;
+}
+.hero-inner { max-width: 860px; margin: 0 auto; }
+.hero-brand {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 22px;
+  color: var(--gold-2);
+  margin-bottom: 28px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.hero-brand::before { content: '◆'; font-size: 13px; color: var(--gold-1); }
+.hero h1 {
+  font-family: var(--serif);
+  font-size: clamp(30px, 5vw, 46px);
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -.02em;
+  color: #FFFCF4;
+  margin-bottom: 14px;
+}
+.hero h1 em {
+  font-style: italic;
+  background: var(--gold-gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+.hero .hero-sub { font-size: 15px; color: var(--gold-3); opacity: .85; max-width: 620px; margin-bottom: 24px; }
+.hero-meta { display: flex; flex-wrap: wrap; gap: 8px; }
+.tag {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  padding: 5px 12px;
+  border-radius: 3px;
+  display: inline-block;
+}
+.tag.solid  { background: var(--gold-gradient); color: var(--ink); font-weight: 700; }
+.tag.outline { background: transparent; color: var(--gold-3); border: 1px solid rgba(246,237,221,.35); }
+.tag.red    { background: var(--red); color: #FFFCF4; }
+
+section.block { padding: 48px 0; }
+section.block.alt { background: var(--bg-warm); }
+
+.section-marker {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: var(--gold-1);
+  margin-bottom: 18px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.section-marker::before { content: '//'; }
+
+section.block h2 {
+  font-family: var(--serif);
+  font-size: clamp(20px, 3vw, 28px);
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--ink);
+  margin-bottom: 18px;
+}
+section.block h2 em { font-style: italic; color: var(--red-dark); }
+section.block p { font-size: 15px; color: var(--ink-soft); margin-bottom: 16px; max-width: 720px; }
+section.block p strong { color: var(--ink); font-weight: 500; }
+
+.callout {
+  background: var(--ink);
+  color: var(--gold-3);
+  border-radius: 8px;
+  padding: 30px 32px;
+  margin: 24px 0;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--gold-1);
+}
+.callout::before {
+  content: '"';
+  font-family: var(--serif);
+  font-size: 110px;
+  color: rgba(213,174,102,.12);
+  position: absolute;
+  top: -18px; left: 16px;
+  line-height: 1;
+}
+.callout p {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 17px;
+  line-height: 1.6;
+  color: var(--gold-3) !important;
+  position: relative;
+  z-index: 1;
+  margin-bottom: 0;
+  max-width: 100%;
+}
+
+.alert, .achado {
+  padding: 18px 22px;
+  border-radius: 0 8px 8px 0;
+  margin: 20px 0;
+  border-left: 4px solid var(--rule);
+}
+.alert { border-left-color: var(--status-critico); background: var(--status-critico-bg); }
+.achado.critico    { border-left-color: var(--status-critico);    background: var(--status-critico-bg); }
+.achado.estrutural { border-left-color: var(--status-estrutural); background: var(--status-estrutural-bg); }
+.achado.ajuste     { border-left-color: var(--status-ajuste);     background: var(--status-ajuste-bg); }
+.achado.forte      { border-left-color: var(--status-forte);      background: var(--status-forte-bg); }
+
+.achado-label, .alert-label {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+.alert-label { color: var(--status-critico); }
+.achado.critico .achado-label    { color: var(--status-critico); }
+.achado.estrutural .achado-label { color: var(--status-estrutural); }
+.achado.ajuste .achado-label     { color: var(--status-ajuste); }
+.achado.forte .achado-label      { color: var(--status-forte); }
+
+.achado h3 { font-family: var(--serif); font-size: 17px; font-weight: 700; color: var(--ink); margin-bottom: 8px; }
+.achado p, .alert p { font-size: 14px; color: var(--ink-soft); line-height: 1.6; margin-bottom: 8px; max-width: 100%; }
+.achado p:last-child, .alert p:last-child { margin-bottom: 0; }
+.achado p strong { color: var(--ink); font-weight: 500; }
+
+.bridge-card {
+  position: relative;
+  background: var(--ink);
+  color: #FFFCF4;
+  border-radius: 8px;
+  padding: 30px 32px;
+  margin: 28px 0;
+}
+.bridge-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 8px;
+  border: 1.5px solid transparent;
+  background: var(--gold-gradient);
+  -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: destination-out;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+.bridge-card .bridge-label {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: var(--gold-2);
+  margin-bottom: 10px;
+}
+.bridge-card p { font-size: 15px; color: #FFFCF4; margin-bottom: 0; max-width: 100%; }
+.bridge-card p strong { color: var(--gold-3); font-weight: 700; }
+
+.bloco-header { display: flex; align-items: center; gap: 16px; margin-bottom: 16px; margin-top: 36px; }
+.bloco-header:first-of-type { margin-top: 0; }
+.bloco-num {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--ink);
+  background: var(--gold-gradient);
+  font-weight: 700;
+  padding: 5px 12px;
+  border-radius: 3px;
+  flex-shrink: 0;
+}
+.bloco-title { font-family: var(--serif); font-size: 17px; font-weight: 700; color: var(--ink); }
+.bloco-line { flex: 1; height: 1px; background: var(--rule); }
+
+.checklist { list-style: none; margin: 20px 0; }
+.checklist li {
+  display: flex; gap: 12px; align-items: flex-start;
+  padding: 12px 0; border-bottom: 1px solid var(--rule);
+  font-size: 14px; color: var(--ink-soft); line-height: 1.5;
+}
+.checklist li:last-child { border-bottom: none; }
+.checklist li::before {
+  content: '✓'; flex-shrink: 0; width: 20px; height: 20px;
+  display: flex; align-items: center; justify-content: center;
+  margin-top: 1px; border-radius: 50%;
+  background: var(--status-forte); color: #FFFCF4; font-size: 11px; font-weight: 700;
+}
+.checklist li strong { color: var(--ink); font-weight: 500; }
+
+.numlist { counter-reset: numlist; margin: 20px 0; }
+.numlist li {
+  counter-increment: numlist; list-style: none;
+  display: grid; grid-template-columns: 32px 1fr; gap: 14px;
+  padding: 14px 0; border-bottom: 1px solid var(--rule);
+  font-size: 14px; color: var(--ink-soft); line-height: 1.6;
+}
+.numlist li:last-child { border-bottom: none; }
+.numlist li::before {
+  content: counter(numlist, decimal-leading-zero);
+  font-family: var(--mono); font-size: 12px; color: var(--red-dark); font-weight: 700;
+}
+
+.radar-section {
+  background: var(--ink);
+  background-image: radial-gradient(ellipse at bottom left, rgba(178,132,49,.15), transparent 55%);
+  padding: 56px 0;
+}
+.radar-wrap {
+  max-width: 520px;
+  margin: 0 auto;
+  background: rgba(255,255,255,.05);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(213,174,102,.35);
+  border-radius: 16px;
+  padding: 32px;
+  text-align: center;
+}
+.radar-legenda {
+  display: flex; justify-content: center; gap: 18px; flex-wrap: wrap;
+  margin-top: 18px;
+  font-family: var(--mono); font-size: 10px; letter-spacing: .06em; text-transform: uppercase;
+  color: var(--gold-3);
+}
+.radar-legenda span { display: inline-flex; align-items: center; gap: 6px; opacity: .85; }
+
+footer {
+  background: var(--ink);
+  padding: 36px 32px;
+  text-align: center;
+}
+.footer-brand {
+  font-family: var(--serif); font-style: italic; font-size: 18px;
+  background: var(--gold-gradient);
+  -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; color: transparent;
+  margin-bottom: 10px;
+}
+.footer-legal { font-family: var(--mono); font-size: 9px; letter-spacing: .04em; color: rgba(246,237,221,.6); line-height: 1.8; }
+</style>
+</head>
+<body>
+
+<nav class="anchor-bar">
+  <div class="anchor-bar-inner">
+    <a class="anchor-link" href="#contexto">Contexto</a>
+    <a class="anchor-link" href="#radar">Visão geral</a>
+    <a class="anchor-link" href="#diagnostico-geral">Diagnóstico</a>
+    <a class="anchor-link" href="#pontos-fortes">Pontos fortes</a>
+    <a class="anchor-link" href="#achados">Achados</a>
+    <a class="anchor-link" href="#perguntas">Perguntas</a>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="hero-inner">
+    <div class="hero-brand">Sim Inevitável</div>
+    <h1>Diagnóstico de Produto<br><em>{{NOME_PRODUTO}}</em></h1>
+    <p class="hero-sub">{{RESUMO_UMA_LINHA}}</p>
+    <div class="hero-meta">
+      <span class="tag solid">{{STATUS_GERAL}}</span>
+      <span class="tag outline">{{DATA_HOJE}}</span>
+      <span class="tag outline">Dr. House · Agente Avaliador de Produto</span>
+    </div>
+  </div>
+</header>
+
+<section class="block" id="contexto">
+  <div class="container">
+    <div class="section-marker">Seção 1</div>
+    <h2>Contexto <em>do produto</em></h2>
+
+    <!-- BLOCO_CONTEXTO × 8 — repetir este par para cada um dos 8 blocos da escavação,
+         nesta ordem fixa de número/título:
+         01 Criador · 02 Público e situação · 03 Promessa · 04 Mecanismo ·
+         05 Produto e entrega · 06 Preço · 07 Prova · 08 Aquisição -->
+    <div class="bloco-header">
+      <span class="bloco-num">{{BLOCO_NUM}}</span>
+      <span class="bloco-title">{{BLOCO_TITULO}}</span>
+      <span class="bloco-line"></span>
+    </div>
+    <p>{{BLOCO_TEXTO}}</p>
+    <!-- /BLOCO_CONTEXTO -->
+
+  </div>
+</section>
+
+<div class="radar-section" id="radar">
+  <div class="container">
+    <div class="section-marker" style="color:var(--gold-2)">Visão geral</div>
+    <h2 style="color:#FFFCF4">Onde a corrente <em style="color:var(--red)">sustenta ou quebra</em></h2>
+    <div class="radar-wrap">
+      <!-- RADAR_SVG — gerar só se houver 3+ critérios com achado. Ver
+           references/template-html.md § "O radar visual" para a especificação
+           completa de como calcular ângulos/posições dos pontos. Se houver menos
+           de 3 critérios com achado, remover esta div .radar-section inteira
+           (incluindo o link "Visão geral" da anchor-bar). -->
+      {{RADAR_SVG}}
+      <div class="radar-legenda">
+        <span>▲ Crítico</span><span>● Problema estrutural</span><span>■ Ajuste fino</span><span>✓ Ponto forte</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section class="block alt" id="diagnostico-geral">
+  <div class="container">
+    <div class="section-marker">Diagnóstico geral</div>
+    <div class="callout">
+      <p>{{DIAGNOSTICO_GERAL}}</p>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="pontos-fortes">
+  <div class="container">
+    <div class="section-marker">Pontos fortes</div>
+    <h2>O que já <em>sustenta a venda</em></h2>
+    <ul class="checklist">
+      <!-- PONTO_FORTE × N — repetir para cada ponto forte real. Se não houver
+           nenhum ponto forte genuíno, não invente um — omitir a lista inteira
+           e escrever "Nenhum ponto forte claro identificado nesta análise."
+           como parágrafo simples. -->
+      <li><strong>{{PONTO_FORTE_NOME}}.</strong> {{PONTO_FORTE_EXPLICACAO}}</li>
+      <!-- /PONTO_FORTE -->
+    </ul>
+  </div>
+</section>
+
+<section class="block alt" id="achados">
+  <div class="container">
+    <div class="section-marker">Onde ajustar e oportunidades</div>
+    <h2>Achados <em>por critério</em></h2>
+
+    <!-- ACHADO × N — repetir para cada critério com achado real, ordenado por
+         gravidade (crítico primeiro, depois estrutural, depois ajuste fino).
+         Trocar a classe "achado {{GRAVIDADE_CLASSE}}" e o ícone/label conforme:
+         critico    → ▲ Problema crítico
+         estrutural → ● Problema estrutural (ou "(risco de diferenciação)" quando aplicável)
+         ajuste     → ■ Ajuste fino -->
+    <div class="achado {{GRAVIDADE_CLASSE}}">
+      <div class="achado-label">{{GRAVIDADE_ICONE_LABEL}} · {{CRITERIO_NOME}}</div>
+      <h3>{{CRITERIO_NOME}}</h3>
+      <p><strong>O que está acontecendo:</strong> {{ACHADO_O_QUE}}</p>
+      <p><strong>Por que importa:</strong> {{ACHADO_POR_QUE}}</p>
+    </div>
+    <!-- /ACHADO -->
+
+  </div>
+</section>
+
+<!-- BRIDGE_CARD_SEXY — incluir SOMENTE se a checagem eliminatória de mecanismo
+     próprio falhou de forma crítica (ver SKILL.md § Encaminhamento). Omitir esta
+     seção inteira quando não houver falha crítica de mecanismo. -->
+<section class="block">
+  <div class="container">
+    <div class="bridge-card">
+      <div class="bridge-label">Próximo passo antes de qualquer ajuste</div>
+      <p><strong>{{BRIDGE_TEXTO}}</strong></p>
+    </div>
+  </div>
+</section>
+<!-- /BRIDGE_CARD_SEXY -->
+
+<section class="block" id="perguntas">
+  <div class="container">
+    <div class="section-marker">Perguntas em aberto</div>
+    <h2>Para levar <em>ao Sexy</em></h2>
+    <ol class="numlist">
+      <!-- PERGUNTA × N — repetir para cada pergunta em aberto -->
+      <li>{{PERGUNTA_TEXTO}}</li>
+      <!-- /PERGUNTA -->
+    </ol>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-brand">Sim Inevitável · Triwer</div>
+  <div class="footer-legal">
+    Desenvolvido por Milena Camila para o Sim Inevitável.<br>
+    Copyright © 2026 Triwer Marketing LTDA – Todos os direitos reservados.<br>
+    É proibida a reprodução total ou parcial de qualquer conteúdo ou metodologia presente.
+  </div>
+</footer>
+
+</body>
+</html>

@@ -1,16 +1,16 @@
 #!/bin/bash
 
 # =============================================================
-# Triwer Skills — Instalador do carrossel-triwer (Mac e Linux)
+# estilo-forge — Instalador (Mac e Linux)
 # =============================================================
 
 set -e
 
 REPO="https://raw.githubusercontent.com/paulovyn1/triwer-skills/main"
 SKILLS_DIR="$HOME/.claude/skills"
-CARROSSEL_DIR="$SKILLS_DIR/carrossel-triwer"
-VERSION_URL="$REPO/carrossel-triwer/VERSION"
-VERSION_FILE="$CARROSSEL_DIR/VERSION"
+FORGE_DIR="$SKILLS_DIR/estilo-forge"
+VERSION_URL="$REPO/estilo-forge/VERSION"
+VERSION_FILE="$FORGE_DIR/VERSION"
 
 # Cores
 GREEN='\033[0;32m'
@@ -21,7 +21,7 @@ NC='\033[0m'
 
 echo ""
 echo -e "${BLUE}╔══════════════════════════════════════╗${NC}"
-echo -e "${BLUE}║   Triwer Skills — carrossel-triwer   ║${NC}"
+echo -e "${BLUE}║          estilo-forge                ║${NC}"
 echo -e "${BLUE}╚══════════════════════════════════════╝${NC}"
 echo ""
 
@@ -78,37 +78,14 @@ download_file() {
 
 # Criar estrutura de pastas
 echo -e "${YELLOW}→ Criando pastas...${NC}"
-mkdir -p "$CARROSSEL_DIR/indices"
-mkdir -p "$CARROSSEL_DIR/modelos/mc"
-mkdir -p "$CARROSSEL_DIR/modelos/mh"
-mkdir -p "$CARROSSEL_DIR/referencias"
+mkdir -p "$FORGE_DIR/references"
 
-# Baixar arquivos principais
-echo -e "${YELLOW}→ Baixando carrossel-triwer...${NC}"
-download_file "carrossel-triwer/SKILL.md" "$CARROSSEL_DIR/SKILL.md"
-download_file "carrossel-triwer/indices/modelos-headline.md" "$CARROSSEL_DIR/indices/modelos-headline.md"
-download_file "carrossel-triwer/indices/modelos-carrossel.md" "$CARROSSEL_DIR/indices/modelos-carrossel.md"
-download_file "carrossel-triwer/referencias/manual-headline.md" "$CARROSSEL_DIR/referencias/manual-headline.md"
-download_file "carrossel-triwer/referencias/outliers-headline.md" "$CARROSSEL_DIR/referencias/outliers-headline.md"
-
-echo -e "${YELLOW}→ Baixando modelos de carrossel (MC001–MC015)...${NC}"
-for i in $(seq -w 1 15); do
-    N=$(printf "%03d" $i)
-    download_file "carrossel-triwer/modelos/mc/MC${N}.md" "$CARROSSEL_DIR/modelos/mc/MC${N}.md"
-done
-
-echo -e "${YELLOW}→ Baixando modelos de headline (MH001–MH016)...${NC}"
-for i in $(seq -w 1 16); do
-    N=$(printf "%03d" $i)
-    download_file "carrossel-triwer/modelos/mh/MH${N}.md" "$CARROSSEL_DIR/modelos/mh/MH${N}.md"
-done
-
-# memoria.md: nunca sobrescrever se já existir
-if [ ! -f "$CARROSSEL_DIR/memoria.md" ]; then
-    echo -e "   ↳ memoria.md será criado no primeiro uso (onboarding)"
-else
-    echo -e "   ↳ memoria.md mantido (seus dados pessoais)"
-fi
+# Baixar arquivos
+echo -e "${YELLOW}→ Baixando estilo-forge...${NC}"
+download_file "estilo-forge/SKILL.md" "$FORGE_DIR/SKILL.md"
+download_file "estilo-forge/references/analysis-framework.md" "$FORGE_DIR/references/analysis-framework.md"
+download_file "estilo-forge/references/skill-template.md" "$FORGE_DIR/references/skill-template.md"
+download_file "estilo-forge/references/universal-anti-ia.md" "$FORGE_DIR/references/universal-anti-ia.md"
 
 # Salvar versão instalada
 echo "$REMOTE_VERSION" > "$VERSION_FILE"
@@ -124,11 +101,12 @@ echo -e "${GREEN}║   Versão: $REMOTE_VERSION$(printf '%*s' $((29 - ${#REMOTE_
 echo -e "${GREEN}╚══════════════════════════════════════╝${NC}"
 echo ""
 echo -e "  ${BLUE}Próximos passos:${NC}"
-echo -e "  1. Complete o /onboarding-triwer antes, se ainda não fez"
+echo -e "  1. Abra uma nova conversa no Claude Code ou Claude Desktop"
+echo -e "     e digite: ${YELLOW}/estilo-forge${NC}"
 echo ""
-echo -e "  2. Rode /prisma-triwer e /oraculo-triwer se ainda não tiver"
-echo -e "     'Quem sou eu' e 'Meu Público' preenchidos"
+echo -e "  2. O onboarding iniciará automaticamente e vai te guiar"
+echo -e "     na criação da sua skill de estilo personalizada."
 echo ""
-echo -e "  3. Abra uma nova conversa"
-echo -e "     e digite: ${YELLOW}/carrossel-triwer${NC}"
+echo -e "  As skills geradas (estilo-[nome]) ficam em ~/.claude/skills/"
+echo -e "  e nunca são alteradas por atualizações do estilo-forge."
 echo ""

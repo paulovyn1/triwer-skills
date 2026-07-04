@@ -1,7 +1,11 @@
 # Orientações — Montagem de Perfis de Público
 
-> Este arquivo é lido sob demanda, apenas durante o onboarding O4.
+> Este arquivo é lido sob demanda, na Etapa 3 do `oraculo-triwer`.
 > Não carregar no boot.
+>
+> Origem: migrado de `carrossel-triwer/referencias/orientacoes-publico.md`
+> (Bloco 2 do plano de arquitetura — a responsabilidade de montar perfis de
+> público profundamente passa a ser exclusiva do `oraculo-triwer`).
 
 ---
 
@@ -66,12 +70,17 @@ Descrição em 2-3 linhas — quem é essa pessoa, o que faz, em que momento est
 - Faixa etária aproximada ou fase de vida
 - O que faz profissionalmente ou qual contexto vive
 - Em que momento específico da jornada está — o que está tentando resolver agora
+- Se a pesquisa/dado de origem trouxer essa informação: **como essa pessoa
+  encontrou o produto** (ex.: indicação, anúncio, busca no Google, redes
+  sociais) — incorpore como 1 frase dentro desta seção, não crie um campo
+  separado para isso.
 
 **Exemplo de qualidade:**
 > Mulher, 28-38 anos, trabalha como freelancer de design ou social
 > media. Tem clientes mas sente que está no limite — trabalha muito,
 > cobra pouco, não consegue escalar. Está olhando para mentorias pela
-> primeira vez.
+> primeira vez. Encontrou o produto por indicação de uma colega que já
+> era aluna.
 
 **Sinal de problema:**
 > "Pessoa que quer crescer profissionalmente." — genérico demais, inútil.

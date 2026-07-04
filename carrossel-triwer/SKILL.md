@@ -4,14 +4,15 @@ description: >
   Cria posts de carrossel para o Instagram seguindo o Método de Conteúdo
   Triwer (framework DOPA). Use esta skill sempre que pedir um carrossel,
   post de feed, slide deck de conteúdo, ou quando mencionar qualquer objetivo
-  DOPA (Descoberta, Oportunidade, Provocação, Autoridade). Inclui onboarding
-  automático, conexão com Notion como base de dados, coleta obrigatória de
-  inputs, estrutura dos 5 blocos fixos, aplicação de tom de voz via Forge,
-  detecção e cadastro de novas histórias, e memória persistente entre sessões.
-  NÃO acionar para stories, lives, scripts de vídeo, headlines avulsas ou
-  outros formatos — escopo exclusivo de carrossel de feed.
-compatibility: Claude Desktop, Claude Code
-metadata: "v3.2 — maio 2026"
+  DOPA (Descoberta, Oportunidade, Provocação, Autoridade). Requer o
+  ecossistema Triwer configurado (onboarding-triwer, e idealmente
+  prisma-triwer e oraculo-triwer já rodados) — conexão com Notion como base
+  de dados, estrutura dos 5 blocos fixos, aplicação de tom de voz via Forge,
+  detecção e cadastro de novas histórias, e memória persistente entre
+  sessões. NÃO acionar para stories, lives, scripts de vídeo, headlines
+  avulsas ou outros formatos — escopo exclusivo de carrossel de feed.
+compatibility: Claude Desktop, Claude Code, claude.ai
+metadata: "v4.1 — julho 2026 — cadastro de histórias delegado à historias-triwer"
 ---
 
 # Agente de Carrosseis — Triwer
@@ -27,13 +28,20 @@ metadata: "v3.2 — maio 2026"
 > - `modelos/mc/MC001.md` … `MC015.md` — arquivos completos de cada modelo de carrossel
 > - `referencias/manual-headline.md` — processo de construção e 9 testes de validação
 > - `referencias/outliers-headline.md` — anti-padrões e checklist negativo
-> - `referencias/orientacoes-quem-sou-eu.md` — guia de extração e estrutura das 5 seções
-> - `referencias/orientacoes-publico.md` — guia de montagem dos perfis de público
-> - `memoria.md` — criado automaticamente no primeiro uso
+> - `memoria.md` — criado automaticamente no primeiro uso (ou propagado pelo `onboarding-triwer`)
 >
-> **Skills do pipeline (instaladas separadamente):**
-> - `estilo-[seu-nome]/SKILL.md` — gerada pela skill Forge
-> - `cta-triwer/SKILL.md` — CTA e configuração Manychat
+> **Skills do ecossistema (instaladas separadamente, esta skill depende delas):**
+> - `onboarding-triwer/SKILL.md` — **obrigatória antes desta skill.** Resolve e
+>   grava todas as URLs do Notion usadas aqui.
+> - `prisma-triwer/SKILL.md` — preenche "Quem sou eu" (Viés Bruto Central).
+>   Esta skill bloqueia a geração se "Quem sou eu" estiver vazio.
+> - `oraculo-triwer/SKILL.md` — preenche "Meu Público" em profundidade. Esta
+>   skill bloqueia a geração se "Meu Público" estiver vazio.
+> - `historias-triwer/SKILL.md` — dependência leve (não bloqueia): a Etapa 1
+>   delega o cadastro de histórias detectadas na conversa para o processo
+>   documentado ali, em vez de manter uma cópia própria da lógica.
+> - `estilo-[seu-nome]/SKILL.md` — gerada pela skill `estilo-forge`, tom de voz.
+> - `cta-triwer/SKILL.md` — CTA e configuração Manychat, roda depois desta.
 >
 > **Base de dados:** Notion (Template Perfil do Aluno — Triwer)
 > Cada aluno tem sua própria cópia do template conectada via MCP do Notion.
@@ -53,12 +61,33 @@ metadata: "v3.2 — maio 2026"
 
 Antes de qualquer outra etapa, execute esta sequência. Não pule nenhum passo.
 
-### Passo 1 — Verificar memória
+### Passo 0 — Verificar onboarding
+
+Tente ler `~/.claude/skills/onboarding-triwer/memoria.md`.
+
+- **Se existir e tiver `onboarding_completo: true`:** prossiga.
+- **Se não existir, ou sem essa confirmação:** exiba:
+
+  > Antes de usar esta skill, você precisa concluir a configuração inicial do
+  > seu Notion. Isso leva poucos minutos e só precisa ser feito uma vez.
+  >
+  > Rode `/onboarding-triwer` primeiro, depois volte aqui.
+
+  Aguarde. Não prossiga sem o onboarding concluído.
+
+### Passo 1 — Carregar memória
 
 Tente ler `~/.claude/skills/carrossel-triwer/memoria.md`.
 
-- **Se existir:** carregue os dados em memória de trabalho. Vá para o Passo 2.
-- **Se não existir:** é o primeiro uso. Execute o **ONBOARDING** antes de continuar.
+- **Se existir:** carregue os dados em memória de trabalho (URLs do Notion,
+  perfis já usados, histórico). Vá para o Passo 2.
+- **Se não existir** (instalação feita depois do onboarding, ou onboarding
+  não propagou por algum motivo): leia
+  `~/.claude/skills/onboarding-triwer/memoria.md` diretamente, extraia as
+  URLs da seção "Notion — URLs essenciais", e crie
+  `~/.claude/skills/carrossel-triwer/memoria.md` com elas (mesmo formato do
+  Passo 6 abaixo). Não pergunte essas URLs ao aluno — elas já foram
+  resolvidas no onboarding.
 
 ### Passo 2 — Verificar conexão Notion
 
@@ -69,19 +98,79 @@ Verifique se a ferramenta `notion` está disponível tentando uma busca simples.
 
 > ⚠️ **Notion não conectado**
 >
-> Para funcionar com sua base de dados pessoal, esta skill precisa do conector do Notion ativo no Claude.
+> Esta skill precisa do conector do Notion ativo para ler e gravar no seu Notion pessoal.
 >
-> **Como conectar:**
-> 1. Abra as configurações do Claude Desktop
-> 2. Vá em **Integrações** (ou **Connectors**)
-> 3. Ative o **Notion** e autorize o acesso ao workspace onde está sua cópia do template Triwer
-> 4. Reinicie esta conversa depois de conectar
+> **Se você usa o Claude Desktop (app instalado):**
+> 1. Abra Configurações → Connectors (Conectores)
+> 2. Clique em "Add Connector" (Adicionar conector)
+> 3. Cole esta URL: `https://mcp.notion.com/mcp`
+> 4. Complete a autorização (OAuth) selecionando o workspace com a sua cópia do template Triwer
+> Disponível nos planos Pro, Max, Team e Enterprise.
 >
-> Se ainda não tem o template, acesse: https://triwer.notion.site e faça uma cópia para o seu Notion.
+> **Se você usa o claude.ai (navegador):**
+> 1. Clique no seu ícone de perfil (canto superior direito) → Settings
+> 2. No menu à esquerda, clique em Connectors
+> 3. Clique em "Browse connectors" e procure "Notion" na categoria Web
+> 4. Clique no "+" ao lado do Notion
+> 5. Autorize via OAuth e selecione o workspace/página do seu template Triwer
+>
+> **Se você usa o Claude Code (terminal):**
+> 1. Rode: `claude mcp add --transport http notion https://mcp.notion.com/mcp`
+> 2. Rode: `/mcp`
+> 3. Siga o fluxo de autorização (OAuth) no navegador que abrir
+>
+> Se ainda não tem o template, acesse:
+> https://triwer.notion.site/Template-Perfil-do-Aluno-3588e7e25d248106b767e8eaaba3e47f?source=copy_link
+> e faça uma cópia para o seu Notion — ou rode `/onboarding-triwer`, que cuida
+> disso automaticamente.
 >
 > Posso continuar sem o Notion, mas histórias, perfis de público e depoimentos precisarão ser fornecidos manualmente nesta sessão.
 
-### Passo 3 — Carregar índices locais
+### Passo 3 — Verificar "Quem sou eu" e "Meu Público"
+
+Acesse rapidamente (checagem leve, não leitura completa) `quem_sou_eu_url` e
+`meu_publico_db_url` da memória.
+
+- **Se "Quem sou eu" estiver vazia ou não existir** (menos de 5 linhas com
+  conteúdo real): exiba:
+
+  > Sua página "Quem sou eu" ainda não está preenchida. Ela é a base do seu
+  > posicionamento e da sua voz — sem ela, o conteúdo fica genérico.
+  >
+  > Rode `/prisma-triwer` primeiro, depois volte aqui.
+
+  Não gere conteúdo sem isso.
+
+- **Se "Meu Público" estiver vazia:** exiba:
+
+  > Você ainda não tem perfis de público cadastrados. Eles são essenciais
+  > para os posts ressoarem com quem você quer atingir.
+  >
+  > Rode `/oraculo-triwer` primeiro, depois volte aqui.
+
+  Não gere conteúdo sem isso.
+
+- **Se ambos preenchidos:** siga para o Passo 4.
+
+### Passo 4 — Verificar skill de estilo (Forge)
+
+Verifique se existe algum arquivo no padrão `~/.claude/skills/estilo-*/SKILL.md`.
+
+- **Se existir:** registre o path na memória. Continue.
+- **Se não existir:**
+
+```
+Não encontrei sua skill de tom de voz. Ela é gerada pela skill estilo-forge
+e adapta o conteúdo para soar como você — não como IA.
+
+Recomendo rodar a skill estilo-forge antes de criar seu primeiro carrossel.
+Quer fazer isso agora? (pode levar 15–20 minutos, mas é feito uma vez)
+```
+
+Se aceitar → instrua a rodar `/estilo-forge` em uma nova conversa e voltar depois.
+Se recusar → registre como pendente. O carrossel será gerado sem adaptação de voz.
+
+### Passo 5 — Carregar índices locais
 
 Leia apenas os dois arquivos de índice:
 
@@ -92,201 +181,21 @@ Leia apenas os dois arquivos de índice:
 
 Estes índices ficam em memória de trabalho durante toda a sessão. **Não reler. Não abrir os arquivos completos agora.**
 
----
+### Passo 6 — Formato de `memoria.md`
 
-## ONBOARDING — APENAS NO PRIMEIRO USO
-
-Execute quando `memoria.md` não existir.
-
-### O1 — Apresentação
-
-```
-Oi! Sou o Agente de Carrosseis da Triwer. Vou te ajudar a criar posts
-de feed usando o Método DOPA.
-
-Antes de começar, preciso de algumas informações para configurar seu
-ambiente. Isso leva uns 3 minutos e só precisa ser feito uma vez.
-```
-
-### O2 — Obter URL base do Notion
-
-Peça ao usuário a URL da página principal do template que ele copiou para o Notion:
-
-```
-Para conectar sua base de dados, preciso da URL da sua página principal
-no Notion — aquela que você criou quando copiou o template Triwer.
-
-Cole a URL aqui:
-```
-
-- **Se fornecer:** registre a URL na memória como `notion_base_url`. Confirme brevemente e continue.
-- **Se disser que ainda não copiou:** oriente a acessar https://triwer.notion.site, fazer a cópia para o próprio Notion e voltar com a URL. Não avance sem ela.
-- **Se fornecer URL inválida ou inacessível:** informe e peça novamente.
-
-**Localizar "Dados Essenciais" e resolver os links internos:**
-
-Dentro de `notion_base_url`, localize a subpágina **"Dados Essenciais"** (página de
-conhecimento do negócio — vem incluída no template). Leia seu conteúdo uma vez.
-
-"Quem sou eu" e "Meu Público" não ficam fisicamente dentro de "Dados Essenciais" —
-aparecem ali como **links/menções** para páginas que vivem em outro ponto da
-estrutura (ex: dentro de "Acervo"). Para cada link de menção encontrado em "Dados
-Essenciais", abra a página/database referenciada e identifique pelo título:
-
-- a página **"Quem sou eu"** → registre a URL real como `quem_sou_eu_url`
-- a database **"Meu Público"** → registre a URL real como `meu_publico_db_url`
-
-Registre também `dados_essenciais_url`. Essas três URLs vão para `memoria.md` no O6.
-
-Se "Dados Essenciais" não for encontrada ou não tiver os links esperados, peça ao
-usuário as URLs de "Quem sou eu" e "Meu Público" diretamente.
-
-### O3 — Verificar e preencher "Quem sou eu"
-
-Acesse `quem_sou_eu_url` (resolvida no O2).
-
-- **Se estiver preenchida** (mais de 5 linhas com conteúdo real): registre que existe e continue.
-- **Se estiver vazia ou não existir:** execute o **ONBOARDING QUEM SOU EU** abaixo.
-
----
-
-#### ONBOARDING QUEM SOU EU
-
-**Passo 1 — Tentar extrair de material existente**
-
-Pergunte primeiro:
-
-```
-A página "Quem sou eu" no seu Notion está vazia. Ela é a base para
-personalizar todo o conteúdo com a sua voz e história real.
-
-Você tem alguma transcrição de vídeo, aula, podcast, ou texto onde
-já contou sobre você, sua história ou seu trabalho?
-
-Se sim, anexe aqui — quanto mais material, melhor o resultado.
-Se não tiver nada agora, me avisa que faço algumas perguntas pra extrair
-essas informações.
-```
-
-**Se anexar material:**
-
-Leia agora:
-```
-~/.claude/skills/carrossel-triwer/referencias/orientacoes-quem-sou-eu.md
-```
-
-Use as orientações do arquivo para extrair e organizar as informações do material fornecido nas 5 seções da página. Apresente o resultado ao usuário para revisão antes de salvar no Notion.
-
-**Se não tiver material (fallback — perguntas):**
-
-```
-Vou te fazer 5 perguntas. Responde como se tivesse contando pra um amigo
-— sem formatar, sem se preocupar com gramática. Eu organizo depois.
-```
-
-Leia agora:
-```
-~/.claude/skills/carrossel-triwer/referencias/orientacoes-quem-sou-eu.md
-```
-
-Faça **uma pergunta por vez** conforme as orientações do arquivo. Espere a resposta antes de continuar. Após as 5 respostas, organize e apresente ao usuário para revisão antes de salvar.
-
-**Após aprovação do usuário:** atualize a página "Quem sou eu" no Notion com as 5 seções. Confirme ao usuário após salvar.
-
-### O4 — Verificar e preencher perfis de público
-
-Acesse `meu_publico_db_url` (resolvida no O2).
-
-- **Se tiver perfis cadastrados:** liste os nomes e registre os IDs na memória. Continue.
-- **Se estiver vazia:** execute o **ONBOARDING PERFIS DE PÚBLICO** abaixo.
-
----
-
-#### ONBOARDING PERFIS DE PÚBLICO
-
-**Passo 1 — Tentar extrair de material existente**
-
-Pergunte primeiro:
-
-```
-Você não tem perfis de público cadastrados ainda. Eles são essenciais
-para os posts ressoarem com quem você quer atingir.
-
-Você tem algum material com informações sobre seu público? Pode ser:
-pesquisa com alunos ou seguidores, respostas de formulários, prints de
-DMs ou comentários, transcrições de calls de vendas, ou qualquer texto
-onde seu público fale sobre os próprios problemas.
-
-Se sim, anexe aqui. Se não tiver nada assim, me avisa.
-```
-
-**Se anexar material:**
-
-Leia agora:
-```
-~/.claude/skills/carrossel-triwer/referencias/orientacoes-publico.md
-```
-
-Use as orientações do arquivo para identificar e montar os perfis a partir do material. Monte no mínimo 3 perfis, do menos ao mais consciente da solução. Apresente ao usuário um resumo do que identificou — quais perfis encontrou e o que entendeu de cada um — antes de qualquer escrita no Notion. Só avance após aprovação.
-
-**Se não tiver material (fallback — pesquisa na internet):**
-
-Antes de pesquisar, confirme internamente se já ficou claro o nicho e o que o usuário vende a partir do O3. Se não estiver explícito, pergunte:
-
-```
-Para montar os perfis de público, preciso entender melhor o que você
-vende e para quem. Me responde:
-
-1. O que você vende? (produto, serviço, mentoria — seja específico)
-2. Qual é o nicho ou mercado?
-```
-
-Com as informações em mãos, pesquise na internet (fóruns, YouTube, artigos, blogs, Reddit, grupos) buscando dúvidas, reclamações, elogios e conversas reais do público relacionadas ao nicho e ao problema que o produto resolve.
-
-Leia agora:
-```
-~/.claude/skills/carrossel-triwer/referencias/orientacoes-publico.md
-```
-
-Monte **no mínimo 5 perfis** diferentes, do menos consciente do problema ao mais consciente da solução, usando as orientações do arquivo. Evite informações genéricas — use falas e situações reais encontradas na pesquisa.
-
-Apresente ao usuário um resumo do que identificou — quais perfis montou, o estágio de cada um e o que entendeu — antes de escrever qualquer coisa no Notion. Só avance após aprovação.
-
-**Após aprovação do usuário:** crie as entradas na tabela-índice "Meu Público" e as páginas individuais de cada perfil no Notion. Confirme ao usuário após salvar.
-
-### O5 — Verificar skill de estilo (Forge)
-
-Verifique se existe algum arquivo no padrão `~/.claude/skills/estilo-*/SKILL.md`.
-
-- **Se existir:** registre o path na memória. Pronto.
-- **Se não existir:**
-
-```
-Não encontrei sua skill de tom de voz. Ela é gerada pela skill Forge
-e adapta o conteúdo para soar como você — não como IA.
-
-Recomendo rodar a skill Forge antes de criar seu primeiro carrossel.
-Quer fazer isso agora? (pode levar 15–20 minutos, mas é feito uma vez)
-```
-
-Se aceitar → instrua a rodar `/forge` em uma nova conversa e voltar depois.
-Se recusar → registre como pendente. O carrossel será gerado sem adaptação de voz.
-
-### O6 — Salvar memória
-
-Crie `~/.claude/skills/carrossel-triwer/memoria.md`:
+Se precisou criar `memoria.md` no Passo 1, use este formato:
 
 ```markdown
 # Memória — Carrossel Triwer
 _Última atualização: [data]_
 
 ## Configuração do Notion
-- Dados Essenciais: [URL da página]
-- Quem sou eu: [URL da subpágina] | status: [preenchida/pendente]
-- Meu Público (DB): [URL da database]
-- Histórias Inevitáveis (DB): [URL da database]
-- Depoimentos (DB): [URL da database]
-- Central de Conteúdo: [URL da página]
+- Dados Essenciais: [dados_essenciais_url]
+- Quem sou eu: [quem_sou_eu_url]
+- Meu Público (DB): [meu_publico_db_url]
+- Histórias Inevitáveis (DB): [historias_db_url]
+- Depoimentos (DB): [depoimentos_db_url]
+- Central de Conteúdo: [central_conteudo_url]
 
 ## Skill de estilo
 - Path: [~/.claude/skills/estilo-[nome]/SKILL.md | pendente]
@@ -302,18 +211,10 @@ _Última atualização: [data]_
 - [qualquer preferência que o usuário expressar durante o uso]
 
 ## Pendências
-- [itens pendentes do onboarding]
-```
-
-Confirme:
-```
-Pronto! Configuração salva. Pode começar a criar seus carrosseis.
-Digite a ideia do post que você quer criar.
+- [itens pendentes, ex.: tom de voz não configurado]
 ```
 
 ---
-
-
 
 ## ETAPA 0 — ORIENTAÇÃO DA SESSÃO
 
@@ -322,7 +223,7 @@ Digite a ideia do post que você quer criar.
 Busque os registros da database "Histórias Inevitáveis" lendo apenas os campos `História`, `Tipo` e `Descrição`:
 
 ```
-notion_fetch([URL da DB Histórias Inevitáveis da memória])
+notion_fetch([historias_db_url da memória])
 ```
 
 Guarde a lista em memória de trabalho. Não exiba ao usuário. **Não abra páginas individuais.**
@@ -351,7 +252,7 @@ Colete os 6 inputs. Podem vir de uma vez ou por pergunta progressiva. **Não fa�
 
 > Se o input 4 não existir: use situação reconhecível. **Nunca invente número.**
 
-> Se o input 6 não existir: verifique os Depoimentos no Notion filtrados pelo produto do input 5 antes de assumir que não tem prova.
+> Se o input 6 não existir: verifique os Depoimentos no Notion (`depoimentos_db_url` da memória) filtrados pelo produto do input 5 antes de assumir que não tem prova.
 
 ### Detecção de histórias na conversa
 
@@ -365,7 +266,17 @@ está no seu banco de histórias. Posso cadastrar agora para reutilizar
 depois? (leva 30 segundos)
 ```
 
-Se aceitar: colete título, tipo e descrição breve → crie a entrada na database "Histórias Inevitáveis" no Notion → registre o ID em memória local da sessão.
+**Se aceitar:** siga o processo de cadastro da skill `historias-triwer` — leia
+`~/.claude/skills/historias-triwer/SKILL.md`, seção "CADASTRAR A HISTÓRIA", e
+aplique a mesma estrutura de campos (Conflito/Fundo do poço, Decisão
+contraditória, Resultado inesperado, Dados brutos) sem sair desta conversa
+nem trocar de skill. Depois de gravar, registre o ID em memória local da
+sessão e volte para a Etapa 1.
+
+**Se `historias-triwer` não estiver instalada:** informe brevemente que o
+cadastro fica indisponível nesta sessão e sugira instalar `/historias-triwer`
+para não perder casos contados durante a criação de carrosséis. Não invente
+uma estrutura de campos própria como fallback.
 
 ---
 
@@ -441,7 +352,7 @@ Leia: [path registrado na memória — ex: ~/.claude/skills/estilo-paulinho/SKIL
 ```
 
 - **Se existir:** leia e mantenha as instruções em memória de trabalho. Não exiba ao usuário. Todos os slides respeitam essas instruções.
-- **Se não existir (pendente):** escreva sem adaptação de voz e registre no debriefe: "Tom de voz não aplicado — rode a skill Forge."
+- **Se não existir (pendente):** escreva sem adaptação de voz e registre no debriefe: "Tom de voz não aplicado — rode a skill estilo-forge."
 
 ---
 
@@ -616,12 +527,10 @@ Se aceitar → atualize `memoria.md` com data de atualização.
 
 | Momento | Arquivo | Ação |
 |---|---|---|
-| Boot (Passo 3) | `indices/modelos-headline.md` | Lê e mantém em cache |
-| Boot (Passo 3) | `indices/modelos-carrossel.md` | Lê e mantém em cache |
+| Boot (Passo 5) | `indices/modelos-headline.md` | Lê e mantém em cache |
+| Boot (Passo 5) | `indices/modelos-carrossel.md` | Lê e mantém em cache |
 | Etapa 1.5 (após confirmar MC) | `modelos/mc/MC[ID].md` | Lê sob demanda |
 | Etapa 4 Bloco 1 (após confirmar MH) | `modelos/mh/MH[ID].md` | Lê sob demanda |
-| Onboarding O3 (ao preencher Quem sou eu) | `referencias/orientacoes-quem-sou-eu.md` | Lê sob demanda, só quando necessário |
-| Onboarding O4 (ao montar perfis de público) | `referencias/orientacoes-publico.md` | Lê sob demanda, só quando necessário |
 | Etapa 4 Bloco 1 Passo 2 | `referencias/manual-headline.md` | Lê na hora de construir |
 | Etapa 4 Bloco 1 Passo 3 | `referencias/outliers-headline.md` | Lê na hora de validar |
 | Qualquer etapa | Arquivos já lidos na sessão | Usa cache — não relê |
@@ -630,7 +539,7 @@ Se aceitar → atualize `memoria.md` com data de atualização.
 
 | Momento | O que ler | O que NÃO ler |
 |---|---|---|
-| Boot | Nada | Qualquer conteúdo de páginas |
+| Boot | Checagem leve de "Quem sou eu" / "Meu Público" (existência, não conteúdo completo) | Conteúdo completo de qualquer página |
 | Etapa 0 | Somente títulos + Tipo + Descrição da DB Histórias | Páginas individuais |
 | Etapa 1.5 | Página individual da história confirmada | Todas as outras histórias |
 | Etapa 1.5 | Página individual do perfil confirmado | Todos os outros perfis |
@@ -656,6 +565,7 @@ Se aceitar → atualize `memoria.md` com data de atualização.
 | 11 | Manual de headline lido antes de escrever o slide 01 | Headline sem processo |
 | 12 | Checklist de outliers aplicado antes de fechar o slide 01 | Anti-padrão passa despercebido |
 | 13 | Memória atualizada apenas com confirmação do usuário | Privacidade e controle |
+| 14 | Nunca gerar conteúdo com "Quem sou eu" ou "Meu Público" vazios — orientar `/prisma-triwer` ou `/oraculo-triwer` | Conteúdo genérico, sem voz nem ressonância real |
 
 ---
 
@@ -705,7 +615,7 @@ O handoff vai para `estilo-[nome]` (se existir) e depois para `cta-triwer`.
 ```
 ~/.claude/skills/carrossel-triwer/
 ├── SKILL.md
-├── memoria.md                        ← criado automaticamente
+├── memoria.md                        ← criado/propagado automaticamente
 ├── indices/
 │   ├── modelos-headline.md
 │   └── modelos-carrossel.md
@@ -716,9 +626,7 @@ O handoff vai para `estilo-[nome]` (se existir) e depois para `cta-triwer`.
 │       └── MC001.md … MC015.md
 └── referencias/
     ├── manual-headline.md
-    ├── outliers-headline.md
-    ├── orientacoes-quem-sou-eu.md    ← novo
-    └── orientacoes-publico.md        ← novo
+    └── outliers-headline.md
 ```
 
 ### Mac/Linux
@@ -734,8 +642,6 @@ cp modelos/mh/*.md $BASE/modelos/mh/
 cp modelos/mc/*.md $BASE/modelos/mc/
 cp referencias/manual-headline.md $BASE/referencias/
 cp referencias/outliers-headline.md $BASE/referencias/
-cp referencias/orientacoes-quem-sou-eu.md $BASE/referencias/
-cp referencias/orientacoes-publico.md $BASE/referencias/
 ```
 
 ### Windows
@@ -751,11 +657,11 @@ Copy-Item modelos\mh\*.md $BASE\modelos\mh\
 Copy-Item modelos\mc\*.md $BASE\modelos\mc\
 Copy-Item referencias\manual-headline.md $BASE\referencias\
 Copy-Item referencias\outliers-headline.md $BASE\referencias\
-Copy-Item referencias\orientacoes-quem-sou-eu.md $BASE\referencias\
-Copy-Item referencias\orientacoes-publico.md $BASE\referencias\
 ```
 
 ### Após instalar
-1. Conecte o Notion no Claude Desktop (Configurações → Integrações)
-2. Abra uma nova conversa e digite `/carrossel-triwer`
-3. O onboarding iniciará automaticamente no primeiro uso
+
+1. Complete o `/onboarding-triwer` antes, se ainda não fez
+2. Rode `/prisma-triwer` e `/oraculo-triwer` se ainda não tiver "Quem sou eu"
+   e "Meu Público" preenchidos — esta skill bloqueia a geração sem eles
+3. Abra uma nova conversa e digite `/carrossel-triwer`

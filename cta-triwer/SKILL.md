@@ -8,8 +8,8 @@ description: >
   Busca iscas no Notion do aluno como fonte principal. Usa arquivo local
   como fallback quando Notion não estiver conectado. Detecta iscas novas
   mencionadas na conversa e oferece cadastrá-las no Notion automaticamente.
-compatibility: Claude Desktop, Claude Code
-metadata: "v3.0 — maio 2026"
+compatibility: Claude Desktop, Claude Code, claude.ai
+metadata: "v4.0 — julho 2026 — onboarding delegado ao onboarding-triwer"
 ---
 
 # CTA Triwer
@@ -31,12 +31,32 @@ slides 09-10 finais. Não reescreve o resto do carrossel — só o final.
 
 ## BOOT — EXECUTAR SEMPRE AO INICIAR
 
-### Passo 1 — Verificar memória
+### Passo 0 — Verificar onboarding
+
+Tente ler `~/.claude/skills/onboarding-triwer/memoria.md`.
+
+- **Se existir e tiver `onboarding_completo: true`:** prossiga.
+- **Se não existir, ou sem essa confirmação:** exiba:
+
+  > Antes de usar esta skill, você precisa concluir a configuração inicial do
+  > seu Notion. Isso leva poucos minutos e só precisa ser feito uma vez.
+  >
+  > Rode `/onboarding-triwer` primeiro, depois volte aqui.
+
+  Aguarde. Não prossiga sem o onboarding concluído.
+
+### Passo 1 — Carregar memória
 
 Tente ler `~/.claude/skills/cta-triwer/memoria.md`.
 
-- **Se existir:** carregue os dados em memória de trabalho. Especialmente: URL da database de Iscas no Notion e URL da database de Produtos.
-- **Se não existir:** é o primeiro uso. Execute o **ONBOARDING** antes de continuar.
+- **Se existir:** carregue os dados em memória de trabalho — especialmente
+  `iscas_db_url` e `produtos_db_url`. Vá para o Passo 2.
+- **Se não existir** (instalação feita depois do onboarding, ou onboarding
+  não propagou): leia `~/.claude/skills/onboarding-triwer/memoria.md`
+  diretamente, extraia `iscas_db_url` e `produtos_db_url` da seção "Notion —
+  URLs essenciais", e crie `~/.claude/skills/cta-triwer/memoria.md` com elas
+  (formato do Passo 4 abaixo). Não pergunte essas URLs ao aluno — já foram
+  resolvidas no onboarding.
 
 ### Passo 2 — Carregar regras
 
@@ -52,51 +72,49 @@ Mantenha em memória de trabalho. Não reler na mesma sessão.
 Verifique se a ferramenta `notion` está disponível.
 
 - **Se disponível:** confirme internamente. Fonte principal de iscas será o Notion.
-- **Se não disponível:** carregue o fallback local:
+- **Se não disponível:** exiba:
+
+  > ⚠️ **Notion não conectado**
+  >
+  > Esta skill precisa do conector do Notion ativo para ler e gravar no seu Notion pessoal.
+  >
+  > **Se você usa o Claude Desktop (app instalado):**
+  > 1. Abra Configurações → Connectors (Conectores)
+  > 2. Clique em "Add Connector" (Adicionar conector)
+  > 3. Cole esta URL: `https://mcp.notion.com/mcp`
+  > 4. Complete a autorização (OAuth) selecionando o workspace com a sua cópia do template Triwer
+  > Disponível nos planos Pro, Max, Team e Enterprise.
+  >
+  > **Se você usa o claude.ai (navegador):**
+  > 1. Clique no seu ícone de perfil (canto superior direito) → Settings
+  > 2. No menu à esquerda, clique em Connectors
+  > 3. Clique em "Browse connectors" e procure "Notion" na categoria Web
+  > 4. Clique no "+" ao lado do Notion
+  > 5. Autorize via OAuth e selecione o workspace/página do seu template Triwer
+  >
+  > **Se você usa o Claude Code (terminal):**
+  > 1. Rode: `claude mcp add --transport http notion https://mcp.notion.com/mcp`
+  > 2. Rode: `/mcp`
+  > 3. Siga o fluxo de autorização (OAuth) no navegador que abrir
+  >
+  > Posso continuar sem o Notion, usando um banco de iscas local como rascunho.
+
+  Depois disso, carregue o fallback local:
   ```
-  ~/.claude/skills/cta-triwer/referencias/iscas-exemplo.md
+  ~/.claude/skills/cta-triwer/referencias/iscas-local.md
   ```
-  E informe brevemente: "Notion não conectado — usando banco de iscas local como rascunho."
 
----
+### Passo 4 — Formato de `memoria.md`
 
-## ONBOARDING — APENAS NO PRIMEIRO USO
-
-Execute quando `memoria.md` não existir.
-
-### O1 — Verificar Notion
-
-Se o Notion estiver conectado, busque automaticamente a página "Central de ativos" e dentro dela a database "Iscas gerais":
-
-```
-notion_search("Iscas gerais")
-```
-
-- **Se encontrar:** registre a URL da database na memória.
-- **Se não encontrar:** oriente o aluno a verificar se fez a cópia do template Triwer corretamente e se a integração do Notion está ativa no Claude.
-
-### O2 — Verificar database de Produtos
-
-Busque a database "Produtos" no Notion:
-
-```
-notion_search("Produtos")
-```
-
-- **Se encontrar:** registre a URL na memória.
-- **Se não encontrar:** registre como pendente.
-
-### O3 — Salvar memória
-
-Crie `~/.claude/skills/cta-triwer/memoria.md`:
+Se precisou criar `memoria.md` no Passo 1, use este formato:
 
 ```markdown
 # Memória — CTA Triwer
 _Última atualização: [data]_
 
-## Notion
-- Iscas gerais (DB): [URL da database]
-- Produtos (DB): [URL da database]
+## Configuração do Notion
+- Iscas gerais (DB): [iscas_db_url]
+- Produtos (DB): [produtos_db_url]
 
 ## Preferências registradas
 - [preferências que o usuário expressar durante o uso]
@@ -118,12 +136,18 @@ _Última atualização: [data]_
 Ao receber o handoff da `carrossel-triwer`, extraia:
 
 ```
-modo               → nome do aluno (identifica o pipeline)
-dopa               → define a lógica de decisão de Manychat
-tema_do_post       → base para escolha da isca
+modo                → confirma que é o pipeline do aluno (sempre "aluno")
+nome_usuario        → nome do aluno, só para referência
+dopa                → define a lógica de decisão de Manychat
+tema_do_post        → base para escolha da isca
 produto_relacionado → filtra o banco de iscas no Notion
-rascunho           → o carrossel a finalizar
+rascunho             → o carrossel a finalizar
 ```
+
+> **Correção (02/07/2026):** a versão anterior descrevia `modo` como se
+> contivesse o nome do aluno. No handoff real do `carrossel-triwer`, `modo` é
+> sempre a string fixa `"aluno"` — o nome está em `nome_usuario`, campo
+> separado. Corrigido acima.
 
 Se acionada isoladamente (sem handoff), colete esses dados do usuário antes de continuar.
 
@@ -133,10 +157,10 @@ Se acionada isoladamente (sem handoff), colete esses dados do usuário antes de 
 
 ### Se Notion conectado (fonte principal)
 
-Com base no `produto_relacionado` do handoff, busque na database "Iscas gerais" filtrando pelo campo `Produto`:
+Com base no `produto_relacionado` do handoff, busque na database "Iscas gerais" (`iscas_db_url` da memória) filtrando pelo campo `Produto`:
 
 ```
-notion_fetch([URL da DB Iscas gerais da memória])
+notion_fetch([iscas_db_url da memória])
 → filtrar por Produto = [produto_relacionado]
 → filtrar por Status = "✅ Ativa"
 ```
@@ -147,7 +171,7 @@ Leia apenas os campos: `Nome`, `Código Manychat`, `O que entrega`, `Objetivo MC
 
 ### Se Notion não conectado (fallback local)
 
-Use o arquivo `referencias/iscas-exemplo.md` já carregado no boot. Identifique a seção que corresponde ao `produto_relacionado` e use as iscas ativas dessa seção.
+Use o arquivo `referencias/iscas-local.md` já carregado no boot. Identifique a seção que corresponde ao `produto_relacionado` e use as iscas ativas dessa seção.
 
 ---
 
@@ -305,7 +329,7 @@ Se aceitar → atualize `memoria.md` nas seções "Iscas com bom histórico" ou 
 ```
 ~/.claude/skills/cta-triwer/
 ├── SKILL.md
-├── memoria.md                        ← criado automaticamente
+├── memoria.md                        ← criado/propagado automaticamente
 └── referencias/
     ├── iscas-regras.md               ← lida no boot
     ├── padroes-de-iscas.md           ← lida ao criar isca nova
@@ -337,6 +361,6 @@ Copy-Item referencias\iscas-local.md $BASE\referencias\
 ```
 
 ### Após instalar
-1. Confirme que o Notion está conectado no Claude Desktop
+
+1. Complete o `/onboarding-triwer` antes, se ainda não fez
 2. Abra uma nova conversa e digite `/cta-triwer`
-3. O onboarding iniciará automaticamente no primeiro uso

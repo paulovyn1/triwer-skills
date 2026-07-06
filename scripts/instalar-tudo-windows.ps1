@@ -1,4 +1,4 @@
-# =============================================================
+﻿# =============================================================
 # Triwer Skills — Instalador completo do ecossistema (Windows/PowerShell)
 # =============================================================
 #
@@ -49,12 +49,29 @@ foreach ($installer in $INSTALLERS) {
     $CURRENT++
     Write-Color "[$CURRENT/$TOTAL] $($installer.Name)" "Blue"
 
+    # Cada instalador individual roda num processo powershell.exe FILHO, isolado,
+    # via -EncodedCommand (Base64 de UTF-16). Isso evita tres problemas reais:
+    # (1) rodar via Invoke-Expression no mesmo escopo fazia cada instalador
+    # redefinir $REPO com um valor diferente do deste script, "vazando" para as
+    # iteracoes seguintes do loop e quebrando as URLs de download; (2) um
+    # "exit 0"/"exit 1" dentro do instalador individual (ex.: quando a skill ja
+    # esta na versao mais recente) encerraria este script inteiro, nao so
+    # aquele item do loop; (3) gravar o script baixado num arquivo .ps1 em
+    # disco e rodar via -File exige que o PowerShell 5.1 detecte a codificacao
+    # certa (sem BOM ele assume o codepage ANSI do sistema, corrompendo
+    # caracteres especiais e ate quebrando o parser) -- -EncodedCommand evita
+    # esse problema por completo, sem tocar em disco.
     try {
-        $script = (Invoke-WebRequest -Uri "$REPO/$($installer.Path)" -UseBasicParsing).Content
-        Invoke-Expression $script
+        $scriptContent = (Invoke-WebRequest -Uri "$REPO/$($installer.Path)" -UseBasicParsing).Content
+        $encodedCommand = [Convert]::ToBase64String([System.Text.Encoding]::Unicode.GetBytes($scriptContent))
+
+        & powershell.exe -NoProfile -ExecutionPolicy Bypass -EncodedCommand $encodedCommand
+        if ($LASTEXITCODE -ne 0) {
+            throw "instalador retornou codigo $LASTEXITCODE"
+        }
         Write-Host ""
     } catch {
-        Write-Color "✗ Falha ao instalar: $($installer.Name)" "Red"
+        Write-Color "Falha ao instalar: $($installer.Name) - $($_.Exception.Message)" "Red"
         Write-Host ""
         $FAILED += $installer.Name
     }

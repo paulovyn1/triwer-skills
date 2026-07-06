@@ -1,4 +1,4 @@
-# =============================================================
+﻿# =============================================================
 # Triwer Skills — Empacota cada skill em um .zip para upload manual
 # (uso do mantenedor — gera dist/, não é para o aluno rodar)
 # =============================================================

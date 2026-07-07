@@ -73,6 +73,7 @@ New-Item -ItemType Directory -Force -Path $SEXY_DIR | Out-Null
 # Baixar arquivos principais
 Write-Color "→ Baixando sexy-triwer..." "Yellow"
 Download-File "sexy-triwer/SKILL.md" "$SEXY_DIR\SKILL.md"
+Download-File "sexy-triwer/assets/template-oportunidade-sexy.html" "$SEXY_DIR\assets\template-oportunidade-sexy.html"
 
 # memoria.md: nunca sobrescrever se já existir
 if (-not (Test-Path "$SEXY_DIR\memoria.md")) {

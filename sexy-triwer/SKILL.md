@@ -15,7 +15,7 @@ description: >
   carrosséis ou campanhas — escopo exclusivo de descoberta e validação da
   promessa.
 compatibility: Claude Desktop, Claude Code, claude.ai
-metadata: "v1.1 — julho 2026 — aceita diagnóstico HTML do dr-house-triwer como contexto"
+metadata: "v1.2 — julho 2026 — aceita diagnóstico HTML do dr-house-triwer como contexto; oferece entrega em página com identidade visual Triwer"
 ---
 
 # Sexy Triwer
@@ -223,7 +223,32 @@ refinando com o aluno. Não force uma proposta genérica só para fechar a etapa
 
 ---
 
-## ETAPA 5 — Gerar as 5 headlines exploratórias
+## ETAPA 5 — Perguntar o formato de entrega
+
+Depois que a investigação (Etapa 3) e a validação interna (Etapa 4) estiverem
+fechadas — e antes de gerar headlines ou o resumo final — pergunte como o
+aluno quer receber o resultado:
+
+- **Se já existir uma preferência registrada** em `memoria.md` (seção
+  "Preferências registradas") de uma sessão anterior: não repita a pergunta,
+  apenas confirme rapidamente (ex.: "Bora gerar em página, como da última
+  vez?") e siga.
+- **Se não houver preferência registrada**, pergunte:
+
+  ```
+  Antes de fechar tudo: você prefere receber esse resultado aqui mesmo, em
+  texto nessa conversa, ou numa página com identidade visual — no mesmo
+  padrão do diagnóstico que você recebe do Dr. House?
+  ```
+
+Guarde a resposta como `formato_entrega` (`texto` ou `pagina`) para as
+próximas etapas. Essa escolha afeta apenas a *apresentação* na Etapa 7 — o
+conteúdo (headlines, campos do resumo) é o mesmo nos dois formatos, e a
+gravação no Notion (Etapa 8) nunca muda.
+
+---
+
+## ETAPA 6 — Gerar as 5 headlines exploratórias
 
 > **Importante:** estas headlines servem para **testar e comunicar a
 > Oportunidade Sexy agora**, na validação da promessa. Elas **não substituem**
@@ -242,9 +267,10 @@ Etapa 4:
 
 ---
 
-## ETAPA 6 — Montar o resumo e apresentar para aprovação
+## ETAPA 7 — Montar o resumo e apresentar para aprovação
 
-Apresente ao aluno, **antes de gravar qualquer coisa no Notion**:
+Os campos abaixo são os mesmos independente do `formato_entrega` — o que muda
+é só a embalagem.
 
 ```
 Oportunidade Sexy definida:
@@ -263,22 +289,58 @@ Oportunidade Sexy definida:
 3. [headline 3]
 4. [headline 4]
 5. [headline 5]
-
-Posso salvar isso na subpágina de [produto_atual] no seu Notion?
 ```
 
-Aguarde confirmação explícita. Se o aluno pedir ajustes, refine e apresente de
-novo antes de gravar.
+**Se `formato_entrega` for `texto`:** apresente o bloco acima direto na
+conversa e pergunte: "Posso salvar isso na subpágina de [produto_atual] no seu
+Notion?"
+
+**Se `formato_entrega` for `pagina`:** siga a seção **IDENTIDADE VISUAL —
+Página de resultado** abaixo para gerar a página, preenchendo-a com os mesmos
+campos acima. Entregue a página ao aluno (como arquivo ou artifact,
+dependendo do ambiente) e, na conversa, pergunte: "Gerei a página com a
+Oportunidade Sexy de [produto_atual]. Ficou do jeito que você imaginava?
+Posso salvar o conteúdo na subpágina do seu Notion também?"
+
+Em ambos os casos: aguarde confirmação explícita antes de gravar. Se o aluno
+pedir ajustes, refine e apresente de novo (no mesmo formato escolhido) antes
+de gravar.
 
 ---
 
-## ETAPA 7 — Gravar no Notion
+## IDENTIDADE VISUAL — Página de resultado
+
+Usada apenas quando `formato_entrega == pagina` (Etapa 7).
+
+- **Template-base:** `~/.claude/skills/sexy-triwer/assets/template-oportunidade-sexy.html`.
+  Parta sempre desse arquivo — nunca gere a página do zero.
+- **Fidelidade obrigatória:** o bloco `<style>` do template (cores, fontes,
+  nomes de classe) é a identidade visual Triwer, a mesma usada pelo
+  `dr-house-triwer`. Nunca altere variáveis de cor, fontes, espaçamento ou
+  crie classes novas. Só o conteúdo textual muda.
+- **Preenchimento:** substitua cada `[[CAMPO]]` pelos dados desta sessão
+  (mesmos campos da Etapa 7). Repita `<li>` e blocos `.achado.forte` quantas
+  vezes forem necessários para as dores/desejos e provas coletadas. Se não
+  houver prova social coletada nesta sessão, remova a seção `#provas` inteira
+  em vez de deixar o campo vazio.
+- **Nunca deixe `[[CAMPO]]` sem preencher no HTML final** — é um marcador de
+  template, não um placeholder visível para o aluno.
+- **Entrega:** gere um HTML autocontido (sem dependências externas além das
+  fontes do Google Fonts já referenciadas) e entregue como arquivo ou artifact
+  conforme o que o ambiente atual suportar.
+
+---
+
+## ETAPA 8 — Gravar no Notion
 
 Após aprovação, escreva na subpágina de `produto_atual` (dentro da database
-"Produtos") um bloco com a mesma estrutura apresentada na Etapa 6 (título
-"Oportunidade Sexy", seguido dos campos listados). Se a subpágina já tiver uma
-Oportunidade Sexy anterior (caso de refinamento — Etapa 1), substitua o bloco
-antigo por este, não duplique.
+"Produtos") um bloco com a mesma estrutura de campos da Etapa 7 (título
+"Oportunidade Sexy", seguido dos campos listados) — **sempre como texto
+formatado, independente do `formato_entrega` escolhido na Etapa 5**: o Notion
+não renderiza o CSS da página, então mesmo quando o aluno recebeu a versão em
+página, o que vai para o Notion é o conteúdo estruturado em texto. Se a
+subpágina já tiver uma Oportunidade Sexy anterior (caso de refinamento —
+Etapa 1), substitua o bloco antigo por este, não duplique.
 
 > **Nota de implementação:** os nomes exatos de propriedades da database
 > "Produtos" (se houver campos estruturados além do conteúdo da página) ainda
@@ -296,7 +358,7 @@ Salvo! A Oportunidade Sexy de [produto_atual] está registrada no seu Notion.
 
 ---
 
-## ETAPA 8 — Atualizar memória e fechar
+## ETAPA 9 — Atualizar memória e fechar
 
 Atualize `~/.claude/skills/sexy-triwer/memoria.md`:
 
@@ -332,6 +394,7 @@ _Última atualização: [data]_
 | 7 | Nunca gravar no Notion sem confirmação explícita do aluno | Aluno perde controle sobre o próprio Notion |
 | 8 | Não avançar para o resumo final sem passar no checklist da Etapa 4 | Proposta genérica passa disfarçada de "sexy" |
 | 9 | Headlines desta skill nunca substituem a seleção de MH00X do `carrossel-triwer` | Confusão entre dois sistemas de headline distintos |
+| 10 | Página de resultado (`formato_entrega == pagina`) sempre parte do template em `assets/` — nunca alterar cores, fontes ou classes | Quebra a identidade visual Triwer, fica inconsistente com o diagnóstico do Dr. House |
 
 ---
 
@@ -343,6 +406,8 @@ _Última atualização: [data]_
 ~/.claude/skills/sexy-triwer/
 ├── SKILL.md
 ├── VERSION
+├── assets/
+│   └── template-oportunidade-sexy.html   ← identidade visual da página de resultado
 └── memoria.md                        ← criado automaticamente no primeiro uso
 ```
 
@@ -350,20 +415,22 @@ _Última atualização: [data]_
 
 ```bash
 BASE=~/.claude/skills/sexy-triwer
-mkdir -p $BASE
+mkdir -p $BASE/assets
 
 cp SKILL.md $BASE/
 cp VERSION $BASE/
+cp assets/template-oportunidade-sexy.html $BASE/assets/
 ```
 
 ### Windows
 
 ```powershell
 $BASE = "$env:USERPROFILE\.claude\skills\sexy-triwer"
-New-Item -ItemType Directory -Force -Path $BASE
+New-Item -ItemType Directory -Force -Path "$BASE\assets"
 
 Copy-Item SKILL.md $BASE\
 Copy-Item VERSION $BASE\
+Copy-Item assets\template-oportunidade-sexy.html "$BASE\assets\"
 ```
 
 ### Após instalar

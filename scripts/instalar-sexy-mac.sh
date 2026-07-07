@@ -83,6 +83,7 @@ mkdir -p "$SEXY_DIR"
 # Baixar arquivos principais
 echo -e "${YELLOW}→ Baixando sexy-triwer...${NC}"
 download_file "sexy-triwer/SKILL.md" "$SEXY_DIR/SKILL.md"
+download_file "sexy-triwer/assets/template-oportunidade-sexy.html" "$SEXY_DIR/assets/template-oportunidade-sexy.html"
 
 # memoria.md: nunca sobrescrever se já existir
 if [ ! -f "$SEXY_DIR/memoria.md" ]; then

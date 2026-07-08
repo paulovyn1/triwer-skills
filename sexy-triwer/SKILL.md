@@ -20,7 +20,7 @@ description: >
   campanhas — escopo exclusivo de descoberta e validação da promessa e de
   como apresentá-la.
 compatibility: Claude Desktop, Claude Code, claude.ai
-metadata: "v1.8 — julho 2026 — revisão de arquitetura para economia de tokens sem alterar nenhuma regra de negócio: BOOT reduzido de ~65 para ~10 linhas (troubleshooting de conexão Notion extraído para references/notion-setup.md, lido só se a conexão falhar); tabela 'REGRAS QUE NÃO MUDAM' reduzida de 19 para 7 itens (as 12 regras específicas de etapa já estavam explicadas em prosa nas próprias etapas — eram puro eco, não informação nova); o padrão de delegação a subagente ('se o ambiente tiver Agent/Task...') consolidado em uma única 'REGRA GERAL DE VERIFICAÇÃO CRÍTICA', referenciada nas 3 etapas que o usam (Etapa 6, 6A, 7) em vez de repetido por extenso 3 vezes. Nenhuma etapa, checklist, gate ou regra de comportamento foi removida ou enfraquecida — só a forma ficou mais enxuta. Histórico funcional: v1.7 corrigiu 3 furos de teste real (Passo 0 da Etapa 4 não pergunta mais se o produto 'é genérico', Etapa 5 sempre gera página HTML sem perguntar, Etapa 6A checa coerência ativo↔público); v1.6 separou headline de promessa com manual real de 5 modelos MH; v1.5 adicionou escolha de ângulo sem inventar contexto; v1.4 adicionou garimpo de ativos de marketing e seleção múltipla de pilares sem nomeá-los; v1.3 adicionou formato de entrega + pilar de desejo como eixos independentes"
+metadata: "v1.9 — julho 2026 — proíbe explicitamente gerar o resultado como Claude Artifact: a entrega final (Etapa 5/Passo 3 e a seção IDENTIDADE VISUAL) agora é sempre um arquivo .html salvo em disco seguindo o template-base, nunca artifact, independente do ambiente disponível — antes o texto dizia 'como arquivo ou artifact, dependendo do ambiente', o que deixava a decisão a critério do modelo. Histórico funcional: v1.8 foi revisão de arquitetura para economia de tokens sem alterar regra de negócio (BOOT reduzido de ~65 para ~10 linhas, troubleshooting de Notion extraído para references/notion-setup.md, tabela de regras reduzida de 19 para 7 itens, delegação a subagente consolidada numa única regra); v1.7 corrigiu 3 furos de teste real (Passo 0 da Etapa 4 não pergunta mais se o produto 'é genérico', Etapa 5 sempre gera página HTML sem perguntar, Etapa 6A checa coerência ativo↔público); v1.6 separou headline de promessa com manual real de 5 modelos MH; v1.5 adicionou escolha de ângulo sem inventar contexto; v1.4 adicionou garimpo de ativos de marketing e seleção múltipla de pilares sem nomeá-los; v1.3 adicionou formato de entrega + pilar de desejo como eixos independentes"
 ---
 
 # Sexy Triwer
@@ -688,9 +688,10 @@ itens passarem.
 ### Passo 3 — Apresentar para aprovação
 
 Siga a seção **IDENTIDADE VISUAL — Página de resultado** abaixo para gerar a
-página, preenchendo-a com os campos acima. Entregue a página ao aluno (como
-arquivo ou artifact, dependendo do ambiente) e, na conversa, pergunte: "Gerei
-a página com a Oportunidade Sexy de [produto_atual]. Ficou do jeito que você
+página, preenchendo-a com os campos acima. Entregue a página ao aluno sempre
+como arquivo HTML — nunca como Claude Artifact, independente do ambiente. Não
+pergunte ao aluno como ele prefere receber; na conversa, apenas pergunte:
+"Gerei a página com a Oportunidade Sexy de [produto_atual]. Ficou do jeito que você
 imaginava? Posso salvar o conteúdo na subpágina do seu Notion também?"
 
 Aguarde confirmação explícita antes de gravar. Se o aluno pedir ajustes,
@@ -718,8 +719,9 @@ entregue como página HTML, nunca como texto puro na conversa.
 - **Nunca deixe `[[CAMPO]]` sem preencher no HTML final** — é um marcador de
   template, não um placeholder visível para o aluno.
 - **Entrega:** gere um HTML autocontido (sem dependências externas além das
-  fontes do Google Fonts já referenciadas) e entregue como arquivo ou artifact
-  conforme o que o ambiente atual suportar.
+  fontes do Google Fonts já referenciadas) e entregue sempre como arquivo
+  `.html` salvo em disco. **Proibido gerar como Claude Artifact** — mesmo em
+  ambientes onde a ferramenta de artifact está disponível, não a use aqui.
 
 ---
 

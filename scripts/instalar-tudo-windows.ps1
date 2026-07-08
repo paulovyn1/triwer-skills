@@ -63,6 +63,12 @@ foreach ($installer in $INSTALLERS) {
     # esse problema por completo, sem tocar em disco.
     try {
         $scriptContent = (Invoke-WebRequest -Uri "$REPO/$($installer.Path)" -UseBasicParsing).Content
+        # Os .ps1 individuais sao salvos com BOM (necessario para rodarem sozinhos
+        # via -File, ver comentario acima). Aqui o BOM sobrevive dentro da string
+        # e, colado direto no inicio do -EncodedCommand, faz o parser tentar
+        # executar "<BOM>#" como comando antes de reconhecer o comentario --
+        # remover antes de codificar.
+        $scriptContent = $scriptContent.TrimStart([char]0xFEFF)
         $encodedCommand = [Convert]::ToBase64String([System.Text.Encoding]::Unicode.GetBytes($scriptContent))
 
         & powershell.exe -NoProfile -ExecutionPolicy Bypass -EncodedCommand $encodedCommand

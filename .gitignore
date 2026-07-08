@@ -17,3 +17,7 @@ obsidian-zettelkasten/
 
 # Artefatos gerados (scripts/empacotar-zips.*) — não versionar, recriar quando precisar
 dist/
+
+# Zips de cada skill para upload manual no claude.ai (Claude Desktop) —
+# distribuídos aos alunos fora do GitHub, não fazem diferença pro funcionamento da skill
+*.zip

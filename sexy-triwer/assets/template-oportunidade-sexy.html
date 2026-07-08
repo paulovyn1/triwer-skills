@@ -15,12 +15,16 @@
 
   Seções deste template (nessa ordem, todas obrigatórias exceto onde
   marcado "opcional"):
-  1. hero — nome do produto + "Oportunidade Sexy"
+  1. hero — nome do produto + "Oportunidade Sexy" + tags de formato/pilar
+     (FORMATO_PRODUTO e PILAR_DOMINANTE, definidos na Etapa 3A do SKILL.md)
   2. #oportunidade — a formulação final, em destaque (.callout)
   3. #publico — público-alvo + dores/desejos (.checklist)
   4. #provas — autoridade/prova social (.achado.forte) [opcional se não houver prova coletada]
-  5. #headlines — as 5 headlines exploratórias (.numlist)
-  6. footer
+  5. #ativos — ativos de marketing sexys da Etapa 6A (.checklist) — o que
+     mostrar e por que prova a promessa/pilar dominante, específico do
+     produto do aluno (nunca genérico)
+  6. #headlines — as 5 headlines exploratórias (.numlist)
+  7. footer
 -->
 <!DOCTYPE html>
 <html lang="pt-BR">
@@ -334,6 +338,7 @@ footer {
     <a class="anchor-link" href="#oportunidade">Oportunidade</a>
     <a class="anchor-link" href="#publico">Público</a>
     <a class="anchor-link" href="#provas">Provas</a>
+    <a class="anchor-link" href="#ativos">Ativos</a>
     <a class="anchor-link" href="#headlines">Headlines</a>
   </div>
 </nav>
@@ -347,6 +352,8 @@ footer {
       <span class="tag solid">Oportunidade Sexy definida</span>
       <span class="tag outline">[[DATA]]</span>
       <span class="tag outline">Sexy Triwer · Descoberta de Promessa</span>
+      <span class="tag outline">Formato: [[FORMATO_PRODUTO]]</span>
+      <span class="tag outline">Pilar: [[PILAR_DOMINANTE]]</span>
     </div>
   </div>
 </header>
@@ -400,7 +407,20 @@ footer {
   </div>
 </section>
 
-<section class="block alt" id="headlines">
+<section class="block alt" id="ativos">
+  <div class="container">
+    <div class="section-marker">Ativos de marketing sexys</div>
+    <h2>O que <em>mostrar</em> para provar essa promessa</h2>
+    <ul class="checklist">
+      <li><strong>[[ATIVO_1 — o que mostrar]]</strong> [[POR_QUE_1 — por que isso prova a promessa/pilar dominante]]</li>
+      <li><strong>[[ATIVO_2]]</strong> [[POR_QUE_2]]</li>
+      <li><strong>[[ATIVO_3]]</strong> [[POR_QUE_3]]</li>
+      <!-- repita para o 4º e 5º ativo, se houver -->
+    </ul>
+  </div>
+</section>
+
+<section class="block" id="headlines">
   <div class="container">
     <div class="section-marker">Headlines exploratórias</div>
     <h2>5 formas de <em>testar</em> essa promessa</h2>

@@ -78,12 +78,33 @@ download_file() {
 
 # Criar estrutura de pastas
 echo -e "${YELLOW}→ Criando pastas...${NC}"
-mkdir -p "$SEXY_DIR"
+mkdir -p "$SEXY_DIR/references/pilares-do-desejo" "$SEXY_DIR/references/tipos-de-produto" "$SEXY_DIR/assets"
 
 # Baixar arquivos principais
 echo -e "${YELLOW}→ Baixando sexy-triwer...${NC}"
 download_file "sexy-triwer/SKILL.md" "$SEXY_DIR/SKILL.md"
 download_file "sexy-triwer/assets/template-oportunidade-sexy.html" "$SEXY_DIR/assets/template-oportunidade-sexy.html"
+download_file "sexy-triwer/references/manual-headline.md" "$SEXY_DIR/references/manual-headline.md"
+download_file "sexy-triwer/references/notion-setup.md" "$SEXY_DIR/references/notion-setup.md"
+download_file "sexy-triwer/references/pilares-do-desejo/INDEX.md" "$SEXY_DIR/references/pilares-do-desejo/INDEX.md"
+download_file "sexy-triwer/references/pilares-do-desejo/01-gula.md" "$SEXY_DIR/references/pilares-do-desejo/01-gula.md"
+download_file "sexy-triwer/references/pilares-do-desejo/02-inveja.md" "$SEXY_DIR/references/pilares-do-desejo/02-inveja.md"
+download_file "sexy-triwer/references/pilares-do-desejo/03-ira.md" "$SEXY_DIR/references/pilares-do-desejo/03-ira.md"
+download_file "sexy-triwer/references/pilares-do-desejo/04-luxuria.md" "$SEXY_DIR/references/pilares-do-desejo/04-luxuria.md"
+download_file "sexy-triwer/references/pilares-do-desejo/05-preguica.md" "$SEXY_DIR/references/pilares-do-desejo/05-preguica.md"
+download_file "sexy-triwer/references/pilares-do-desejo/06-soberba.md" "$SEXY_DIR/references/pilares-do-desejo/06-soberba.md"
+download_file "sexy-triwer/references/pilares-do-desejo/07-avareza.md" "$SEXY_DIR/references/pilares-do-desejo/07-avareza.md"
+download_file "sexy-triwer/references/tipos-de-produto/INDEX.md" "$SEXY_DIR/references/tipos-de-produto/INDEX.md"
+download_file "sexy-triwer/references/tipos-de-produto/comunidade.md" "$SEXY_DIR/references/tipos-de-produto/comunidade.md"
+download_file "sexy-triwer/references/tipos-de-produto/consultoria.md" "$SEXY_DIR/references/tipos-de-produto/consultoria.md"
+download_file "sexy-triwer/references/tipos-de-produto/curso.md" "$SEXY_DIR/references/tipos-de-produto/curso.md"
+download_file "sexy-triwer/references/tipos-de-produto/desafio.md" "$SEXY_DIR/references/tipos-de-produto/desafio.md"
+download_file "sexy-triwer/references/tipos-de-produto/ebook.md" "$SEXY_DIR/references/tipos-de-produto/ebook.md"
+download_file "sexy-triwer/references/tipos-de-produto/ferramenta.md" "$SEXY_DIR/references/tipos-de-produto/ferramenta.md"
+download_file "sexy-triwer/references/tipos-de-produto/formacao.md" "$SEXY_DIR/references/tipos-de-produto/formacao.md"
+download_file "sexy-triwer/references/tipos-de-produto/mentoria-grupo.md" "$SEXY_DIR/references/tipos-de-produto/mentoria-grupo.md"
+download_file "sexy-triwer/references/tipos-de-produto/mentoria-individual.md" "$SEXY_DIR/references/tipos-de-produto/mentoria-individual.md"
+download_file "sexy-triwer/references/tipos-de-produto/pacotes.md" "$SEXY_DIR/references/tipos-de-produto/pacotes.md"
 
 # memoria.md: nunca sobrescrever se já existir
 if [ ! -f "$SEXY_DIR/memoria.md" ]; then

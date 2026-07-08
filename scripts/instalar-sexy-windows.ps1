@@ -68,12 +68,33 @@ Write-Host ""
 
 # Criar estrutura de pastas
 Write-Color "→ Criando pastas..." "Yellow"
-New-Item -ItemType Directory -Force -Path $SEXY_DIR | Out-Null
+New-Item -ItemType Directory -Force -Path "$SEXY_DIR\references\pilares-do-desejo","$SEXY_DIR\references\tipos-de-produto","$SEXY_DIR\assets" | Out-Null
 
 # Baixar arquivos principais
 Write-Color "→ Baixando sexy-triwer..." "Yellow"
 Download-File "sexy-triwer/SKILL.md" "$SEXY_DIR\SKILL.md"
 Download-File "sexy-triwer/assets/template-oportunidade-sexy.html" "$SEXY_DIR\assets\template-oportunidade-sexy.html"
+Download-File "sexy-triwer/references/manual-headline.md" "$SEXY_DIR\references\manual-headline.md"
+Download-File "sexy-triwer/references/notion-setup.md" "$SEXY_DIR\references\notion-setup.md"
+Download-File "sexy-triwer/references/pilares-do-desejo/INDEX.md" "$SEXY_DIR\references\pilares-do-desejo\INDEX.md"
+Download-File "sexy-triwer/references/pilares-do-desejo/01-gula.md" "$SEXY_DIR\references\pilares-do-desejo\01-gula.md"
+Download-File "sexy-triwer/references/pilares-do-desejo/02-inveja.md" "$SEXY_DIR\references\pilares-do-desejo\02-inveja.md"
+Download-File "sexy-triwer/references/pilares-do-desejo/03-ira.md" "$SEXY_DIR\references\pilares-do-desejo\03-ira.md"
+Download-File "sexy-triwer/references/pilares-do-desejo/04-luxuria.md" "$SEXY_DIR\references\pilares-do-desejo\04-luxuria.md"
+Download-File "sexy-triwer/references/pilares-do-desejo/05-preguica.md" "$SEXY_DIR\references\pilares-do-desejo\05-preguica.md"
+Download-File "sexy-triwer/references/pilares-do-desejo/06-soberba.md" "$SEXY_DIR\references\pilares-do-desejo\06-soberba.md"
+Download-File "sexy-triwer/references/pilares-do-desejo/07-avareza.md" "$SEXY_DIR\references\pilares-do-desejo\07-avareza.md"
+Download-File "sexy-triwer/references/tipos-de-produto/INDEX.md" "$SEXY_DIR\references\tipos-de-produto\INDEX.md"
+Download-File "sexy-triwer/references/tipos-de-produto/comunidade.md" "$SEXY_DIR\references\tipos-de-produto\comunidade.md"
+Download-File "sexy-triwer/references/tipos-de-produto/consultoria.md" "$SEXY_DIR\references\tipos-de-produto\consultoria.md"
+Download-File "sexy-triwer/references/tipos-de-produto/curso.md" "$SEXY_DIR\references\tipos-de-produto\curso.md"
+Download-File "sexy-triwer/references/tipos-de-produto/desafio.md" "$SEXY_DIR\references\tipos-de-produto\desafio.md"
+Download-File "sexy-triwer/references/tipos-de-produto/ebook.md" "$SEXY_DIR\references\tipos-de-produto\ebook.md"
+Download-File "sexy-triwer/references/tipos-de-produto/ferramenta.md" "$SEXY_DIR\references\tipos-de-produto\ferramenta.md"
+Download-File "sexy-triwer/references/tipos-de-produto/formacao.md" "$SEXY_DIR\references\tipos-de-produto\formacao.md"
+Download-File "sexy-triwer/references/tipos-de-produto/mentoria-grupo.md" "$SEXY_DIR\references\tipos-de-produto\mentoria-grupo.md"
+Download-File "sexy-triwer/references/tipos-de-produto/mentoria-individual.md" "$SEXY_DIR\references\tipos-de-produto\mentoria-individual.md"
+Download-File "sexy-triwer/references/tipos-de-produto/pacotes.md" "$SEXY_DIR\references\tipos-de-produto\pacotes.md"
 
 # memoria.md: nunca sobrescrever se já existir
 if (-not (Test-Path "$SEXY_DIR\memoria.md")) {

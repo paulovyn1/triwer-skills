@@ -49,13 +49,10 @@ if [ -f "$VERSION_FILE" ]; then
 fi
 
 if [ "$INSTALLED_VERSION" = "$REMOTE_VERSION" ]; then
-    echo ""
-    echo -e "${GREEN}✓ Você já tem a versão mais recente instalada ($INSTALLED_VERSION).${NC}"
-    echo ""
-    exit 0
-fi
-
-if [ -n "$INSTALLED_VERSION" ]; then
+    echo -e "   Versão instalada:  ${GREEN}$INSTALLED_VERSION${NC} (já é a mais recente)"
+    echo -e "${YELLOW}→ Conferindo arquivos...${NC}"
+    UPDATE=true
+elif [ -n "$INSTALLED_VERSION" ]; then
     echo -e "   Versão instalada:  ${YELLOW}$INSTALLED_VERSION${NC}"
     echo -e "${YELLOW}→ Atualizando para $REMOTE_VERSION...${NC}"
     UPDATE=true
@@ -86,10 +83,10 @@ download_file "cta-triwer/SKILL.md" "$CTA_DIR/SKILL.md"
 download_file "cta-triwer/referencias/iscas-regras.md" "$CTA_DIR/referencias/iscas-regras.md"
 download_file "cta-triwer/referencias/padroes-de-iscas.md" "$CTA_DIR/referencias/padroes-de-iscas.md"
 
-# iscas-local.md: nunca sobrescrever se já existir (dados do aluno)
+# iscas-local.md: dado pessoal do aluno, nunca versionado no repo — nunca
+# baixar nem sobrescrever, só criado pela skill no primeiro uso
 if [ ! -f "$CTA_DIR/referencias/iscas-local.md" ]; then
-    download_file "cta-triwer/referencias/iscas-local.md" "$CTA_DIR/referencias/iscas-local.md"
-    echo -e "   ↳ iscas-local.md criado"
+    echo -e "   ↳ iscas-local.md será criado no primeiro uso"
 else
     echo -e "   ↳ iscas-local.md mantido (seus dados pessoais)"
 fi

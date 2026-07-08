@@ -49,13 +49,10 @@ if [ -f "$VERSION_FILE" ]; then
 fi
 
 if [ "$INSTALLED_VERSION" = "$REMOTE_VERSION" ]; then
-    echo ""
-    echo -e "${GREEN}✓ Você já tem a versão mais recente instalada ($INSTALLED_VERSION).${NC}"
-    echo ""
-    exit 0
-fi
-
-if [ -n "$INSTALLED_VERSION" ]; then
+    echo -e "   Versão instalada:  ${GREEN}$INSTALLED_VERSION${NC} (já é a mais recente)"
+    echo -e "${YELLOW}→ Conferindo arquivos...${NC}"
+    UPDATE=true
+elif [ -n "$INSTALLED_VERSION" ]; then
     echo -e "   Versão instalada:  ${YELLOW}$INSTALLED_VERSION${NC}"
     echo -e "${YELLOW}→ Atualizando para $REMOTE_VERSION...${NC}"
     UPDATE=true
@@ -92,14 +89,14 @@ download_file "carrossel-triwer/referencias/manual-headline.md" "$CARROSSEL_DIR/
 download_file "carrossel-triwer/referencias/outliers-headline.md" "$CARROSSEL_DIR/referencias/outliers-headline.md"
 
 echo -e "${YELLOW}→ Baixando modelos de carrossel (MC001–MC015)...${NC}"
-for i in $(seq -w 1 15); do
-    N=$(printf "%03d" $i)
+for i in $(seq 1 15); do
+    N=$(printf "%03d" "$i")
     download_file "carrossel-triwer/modelos/mc/MC${N}.md" "$CARROSSEL_DIR/modelos/mc/MC${N}.md"
 done
 
 echo -e "${YELLOW}→ Baixando modelos de headline (MH001–MH016)...${NC}"
-for i in $(seq -w 1 16); do
-    N=$(printf "%03d" $i)
+for i in $(seq 1 16); do
+    N=$(printf "%03d" "$i")
     download_file "carrossel-triwer/modelos/mh/MH${N}.md" "$CARROSSEL_DIR/modelos/mh/MH${N}.md"
 done
 

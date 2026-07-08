@@ -49,13 +49,10 @@ if [ -f "$VERSION_FILE" ]; then
 fi
 
 if [ "$INSTALLED_VERSION" = "$REMOTE_VERSION" ]; then
-    echo ""
-    echo -e "${GREEN}✓ Você já tem a versão mais recente instalada ($INSTALLED_VERSION).${NC}"
-    echo ""
-    exit 0
-fi
-
-if [ -n "$INSTALLED_VERSION" ]; then
+    echo -e "   Versão instalada:  ${GREEN}$INSTALLED_VERSION${NC} (já é a mais recente)"
+    echo -e "${YELLOW}→ Conferindo arquivos...${NC}"
+    UPDATE=true
+elif [ -n "$INSTALLED_VERSION" ]; then
     echo -e "   Versão instalada:  ${YELLOW}$INSTALLED_VERSION${NC}"
     echo -e "${YELLOW}→ Atualizando para $REMOTE_VERSION...${NC}"
     UPDATE=true

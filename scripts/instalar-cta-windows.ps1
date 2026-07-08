@@ -48,13 +48,10 @@ if (Test-Path $VERSION_FILE) {
 }
 
 if ($INSTALLED_VERSION -eq $REMOTE_VERSION) {
-    Write-Host ""
-    Write-Color "✓ Você já tem a versão mais recente instalada ($INSTALLED_VERSION)." "Green"
-    Write-Host ""
-    exit 0
-}
-
-if ($INSTALLED_VERSION -ne "") {
+    Write-Color "   Versão instalada:  $INSTALLED_VERSION (já é a mais recente)" "Green"
+    Write-Color "→ Conferindo arquivos..." "Yellow"
+    $UPDATE = $true
+} elseif ($INSTALLED_VERSION -ne "") {
     Write-Color "   Versão instalada:  $INSTALLED_VERSION" "Yellow"
     Write-Color "→ Atualizando para $REMOTE_VERSION..." "Yellow"
     $UPDATE = $true
@@ -78,10 +75,10 @@ Download-File "cta-triwer/SKILL.md" "$CTA_DIR\SKILL.md"
 Download-File "cta-triwer/referencias/iscas-regras.md" "$CTA_DIR\referencias\iscas-regras.md"
 Download-File "cta-triwer/referencias/padroes-de-iscas.md" "$CTA_DIR\referencias\padroes-de-iscas.md"
 
-# iscas-local.md: nunca sobrescrever se já existir
+# iscas-local.md: dado pessoal do aluno, nunca versionado no repo — nunca
+# baixar nem sobrescrever, só criado pela skill no primeiro uso
 if (-not (Test-Path "$CTA_DIR\referencias\iscas-local.md")) {
-    Download-File "cta-triwer/referencias/iscas-local.md" "$CTA_DIR\referencias\iscas-local.md"
-    Write-Color "   ↳ iscas-local.md criado" "White"
+    Write-Color "   ↳ iscas-local.md será criado no primeiro uso" "White"
 } else {
     Write-Color "   ↳ iscas-local.md mantido (seus dados pessoais)" "White"
 }

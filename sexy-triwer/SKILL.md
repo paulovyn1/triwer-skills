@@ -20,7 +20,7 @@ description: >
   campanhas — escopo exclusivo de descoberta e validação da promessa e de
   como apresentá-la.
 compatibility: Claude Desktop, Claude Code, claude.ai
-metadata: "v1.9 — julho 2026 — proíbe explicitamente gerar o resultado como Claude Artifact: a entrega final (Etapa 5/Passo 3 e a seção IDENTIDADE VISUAL) agora é sempre um arquivo .html salvo em disco seguindo o template-base, nunca artifact, independente do ambiente disponível — antes o texto dizia 'como arquivo ou artifact, dependendo do ambiente', o que deixava a decisão a critério do modelo. Histórico funcional: v1.8 foi revisão de arquitetura para economia de tokens sem alterar regra de negócio (BOOT reduzido de ~65 para ~10 linhas, troubleshooting de Notion extraído para references/notion-setup.md, tabela de regras reduzida de 19 para 7 itens, delegação a subagente consolidada numa única regra); v1.7 corrigiu 3 furos de teste real (Passo 0 da Etapa 4 não pergunta mais se o produto 'é genérico', Etapa 5 sempre gera página HTML sem perguntar, Etapa 6A checa coerência ativo↔público); v1.6 separou headline de promessa com manual real de 5 modelos MH; v1.5 adicionou escolha de ângulo sem inventar contexto; v1.4 adicionou garimpo de ativos de marketing e seleção múltipla de pilares sem nomeá-los; v1.3 adicionou formato de entrega + pilar de desejo como eixos independentes"
+metadata: "v1.10 — julho 2026 — incorpora 3 furos graves achados em teste real com aluno (mesclado com a proibição de Claude Artifact já feita na v1.9): (1) Etapa 3 ganha `portfolio_produtos` — lista de todos os produtos/serviços do aluno, com regra em toda formulação subsequente (Etapa 3A, 4, 6A, 7) de nunca desvalorizar ou comparar desfavoravelmente qualquer item dela (a skill chegou a recomendar 'pagar assessoria é desperdício' pra vender uma comunidade do mesmo aluno que também vende a assessoria); (2) Etapa 6A ganha regra explícita: volume de aulas/módulos nunca é ativo de marketing válido, mesmo com pilar Gula — só volume de entregável pronto (modelos, templates) vale, porque grade de aulas comunica esforço de estudo e contradiz Preguiça; (3) Etapa 2 reforça que o diagnóstico do Dr. House (achados críticos/estruturais, bridge card, perguntas em aberto) é insumo obrigatório, não leitura de fundo — a promessa final precisa responder a ele, nunca repetir o mesmo problema já apontado. Checklist da Etapa 4 e segunda passada crítica da Etapa 7 ganharam os itens correspondentes de canibalização de portfólio, volume de aulas, e resposta ao diagnóstico do Dr. House. v1.9 proibiu explicitamente gerar o resultado como Claude Artifact — a entrega final é sempre um arquivo .html salvo em disco seguindo o template-base, nunca artifact, independente do ambiente (essa regra foi mantida integralmente nesta versão, mesmo com o merge trazendo uma formulação diferente e mais permissiva de outra fonte). v1.8 foi revisão de arquitetura para economia de tokens sem alterar regra de negócio (BOOT enxuto, tabela de regras de 19→7 itens, delegação a subagente consolidada); v1.7 corrigiu Passo 0 da Etapa 4 (não perguntar se produto é genérico), Etapa 5 sempre página HTML, Etapa 6A coerência ativo↔público; v1.6 separou headline de promessa; v1.5 adicionou escolha de ângulo sem inventar contexto; v1.4 adicionou garimpo de ativos de marketing; v1.3 adicionou formato de entrega + pilar de desejo como eixos independentes"
 ---
 
 # Sexy Triwer
@@ -144,10 +144,20 @@ reinterrogar o aluno sobre algo já respondido em outra skill:
    anexado nesta conversa. Se o aluno trouxer esse arquivo, leia as duas
    seções — "Contexto do produto" (os 8 blocos já levantados: criador,
    público, promessa, mecanismo, produto, preço, prova, aquisição) e
-   "Diagnóstico" (pontos fortes, onde ajustar, perguntas em aberto). Use isso
-   como base da investigação em vez de perguntar tudo de novo — em especial,
-   preste atenção às "Perguntas em aberto para levar ao Sexy": é exatamente o
-   que o Dr. House não conseguiu resolver e está esperando esta skill decidir.
+   "Diagnóstico" (pontos fortes, onde ajustar, achados por critério, perguntas
+   em aberto). **Isto não é leitura de fundo, é insumo obrigatório da
+   promessa:** se o diagnóstico apontar um achado crítico ou estrutural (ex.:
+   "o mecanismo remove o que o público mais pede", "a prova usada é de um
+   contexto de entrega diferente", "o público é heterogêneo demais para o
+   mesmo formato ao vivo"), a Oportunidade Sexy final **precisa responder a
+   esse achado** — nunca escrever uma promessa que repete ou ignora o mesmo
+   problema que o Dr. House já sinalizou como crítico. Se houver uma seção
+   "Próximo passo antes de qualquer ajuste" (bridge card) no diagnóstico, ela
+   é literalmente um convite direto a esta skill — leia com atenção redobrada
+   o que ela pede. As "Perguntas em aberto para levar ao Sexy" precisam ser
+   endereçadas uma a uma na investigação (Etapa 3) ou na escolha de ângulo
+   (Etapa 3A Passo 4) — não é opcional revisitá-las, é exatamente o que o Dr.
+   House não conseguiu resolver sozinho.
 
 Guarde tudo isso como contexto interno de trabalho. **Não despeje esse resumo
 no aluno** — use para não repetir perguntas, não para expor dados dele de volta
@@ -187,6 +197,18 @@ natural da conversa):
   demorado — e onde está a oportunidade de reduzir esse esforço percebido.
 - **Diferença real:** o que essa abordagem tem que o que já existe no
   nicho/mercado não tem.
+- **Portfólio completo do aluno:** quais outros produtos ou serviços ele
+  vende hoje, além deste. Pergunte de forma simples ("e além desse, o que
+  mais você vende hoje?") — não precisa perguntar se algum deles "não pode
+  ser atacado", isso é óbvio demais para perguntar e cabe à skill perceber
+  sozinha ao escrever a promessa. Guarde a lista completa como
+  `portfolio_produtos`: nenhuma formulação de promessa, ângulo ou ativo de
+  marketing (Etapa 3A, 4, 6A) pode desvalorizar, comparar desfavoravelmente
+  ou tornar outro item deste portfólio menos desejável — mesmo que pareça um
+  argumento de venda eficaz para o produto atual. Isso vale mesmo quando o
+  outro produto tem ticket mais alto e parece um "alvo fácil" de contraste
+  (ex.: nunca usar "pagar mensalidade de assessoria virou desperdício" para
+  vender uma comunidade, se o aluno também vende assessoria).
 
 Nunca venda o processo (os "pregos e o martelo"). Toda pergunta e toda
 formulação aponta para o resultado final desejado pelo público.
@@ -414,6 +436,12 @@ contra este checklist:
       promessa não deve enumerar bônus explicitamente; se é Preguiça, deve
       nomear o esforço específico eliminado — ver o arquivo do pilar em
       `references/pilares-do-desejo/`)
+- [ ] **Não desvaloriza nenhum item do `portfolio_produtos`** (Etapa 3) —
+      a promessa não usa outro produto/serviço do aluno como contraste
+      negativo, "desperdício" ou alternativa pior, mesmo que pareça um
+      argumento de venda eficaz (ex.: nunca vender uma comunidade dizendo
+      que pagar mensalidade de uma assessoria "é desperdício", se o aluno
+      também vende essa assessoria)
 
 Se qualquer item falhar: volte para a Etapa 3 ou 3A e continue investigando/
 refinando com o aluno. Não force uma proposta genérica só para fechar a etapa.
@@ -543,6 +571,15 @@ batido para quem só quer fechar a etapa rápido.
    emagrecimento" não serve — ele pressupõe um público diferente do que foi
    definido. Antes de fechar a lista, releia o público-alvo da Etapa 3 e
    confira se cada ativo é algo que essa pessoa específica teria ou faria.
+6. **Volume de aulas/módulos/conteúdo teórico nunca é ativo válido, mesmo
+   quando o pilar é Gula.** Gula funciona com volume de *entregável pronto
+   para usar* (modelos, templates, roteiros, checklists) — quantidade de
+   aulas é o oposto disso, porque ativa Preguiça na direção errada: todo
+   ser humano quer o problema resolvido com o menor esforço possível, e
+   "10 módulos densos" comunica esforço de estudo, não resultado facilitado.
+   Nunca sugira mostrar a grade de aulas, o número de módulos ou a
+   profundidade do conteúdo teórico como prova de valor — isso desvenda o
+   produto e afasta justamente quem mais quer comprar por Preguiça.
 
 **Exemplo do raciocínio esperado** (não é um padrão a copiar — é para
 ilustrar o nível de especificidade): para um produto cujo pilar dominante
@@ -678,6 +715,24 @@ relembrar a regra exata do pilar em questão:
       jornada — se o público é só "profissional que trava na venda", sem
       nenhuma menção a isso, o ativo pressupõe um público diferente do que
       foi validado)
+- [ ] **Nenhum item do `portfolio_produtos` foi desvalorizado:** releia a
+      promessa, os ativos e as 5 headlines uma a uma — nenhuma delas compara
+      este produto favoravelmente contra outro produto/serviço do próprio
+      aluno, nem usa esse outro produto como exemplo de "desperdício" ou
+      alternativa pior. Se o aluno vende assessoria/mentoria/consultoria de
+      ticket alto e o produto atual é de ticket mais baixo, é fácil esse
+      contraste escapar disfarçado de argumento de venda — confira com
+      atenção redobrada nesse cenário.
+- [ ] **Nenhum ativo ou headline usa volume de aulas/módulos como prova:**
+      quantidade só é ativo válido quando é entregável pronto para usar
+      (modelos, templates, roteiros) — nunca quando é grade de aulas,
+      número de módulos ou profundidade de conteúdo teórico, mesmo com
+      pilar Gula.
+- [ ] **Se houver diagnóstico do Dr. House anexado, a promessa responde aos
+      achados críticos/estruturais e às perguntas em aberto dele** — não
+      repete o mesmo problema que o diagnóstico já apontou (ex.: público
+      heterogêneo demais tratado como um só, mecanismo que remove o que o
+      público mais pede).
 
 **Se qualquer item falhar:** volte e reformule a proposta (não é preciso
 reabrir a investigação inteira — normalmente o ajuste é só na formulação da
@@ -758,6 +813,10 @@ _Última atualização: [data]_
 - Meu Público (DB): [meu_publico_db_url]
 - Histórias Inevitáveis (DB): [historias_db_url]
 
+## Portfólio completo do aluno
+- [lista de todos os produtos/serviços já mencionados em qualquer sessão —
+  nunca desvalorizar nenhum deles ao formular a promessa de outro produto]
+
 ## Produtos com Oportunidade Sexy já definida
 - [nome do produto] | [data] | [formato_produto] | [pilar_dominante] | [URL da subpágina]
 
@@ -767,6 +826,9 @@ _Última atualização: [data]_
 
 Guardar `formato_produto` e `pilar_dominante` aqui evita reperguntar os dois
 eixos da Etapa 3A se o aluno voltar para refinar o mesmo produto depois.
+Guardar o portfólio completo evita ter que perguntar de novo a cada produto
+novo, e permite checar canibalização mesmo quando o aluno não menciona o
+outro produto na sessão atual.
 
 ---
 
@@ -789,6 +851,12 @@ inteira, sem etapa dona:
 6. Nunca reperguntar algo que já está em "Quem sou eu" ou "Meu Público" no
    Notion — desperdiça tempo do aluno.
 7. Nunca gravar no Notion sem confirmação explícita do aluno.
+8. Nunca desvalorizar, comparar desfavoravelmente ou tornar menos desejável
+   qualquer item do `portfolio_produtos` do aluno (Etapa 3) — mesmo que
+   pareça um argumento de venda eficaz para o produto atual.
+9. Sempre entregar o resultado como arquivo HTML — nunca como Claude
+   Artifact, mesmo que o ambiente disponibilize a ferramenta (ver Etapa 5 /
+   IDENTIDADE VISUAL).
 
 ---
 

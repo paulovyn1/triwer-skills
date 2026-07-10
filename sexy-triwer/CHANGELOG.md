@@ -18,6 +18,11 @@ frontmatter do `SKILL.md` (não duplicado aqui).
 
 ---
 
+## 99.0.0 [CRITICAL] - 2026-07-10
+- ENTRADA DE TESTE (temporária) para validar o bloqueio automático do Passo 0.
+  Será revertida logo em seguida — ignore se esta entrada ainda estiver aqui
+  e não for parte de um teste em andamento.
+
 ## 1.10.1 - 2026-07-10
 - Adiciona o Passo 0 de verificação de versão no BOOT: a skill agora compara
   sua própria versão com a mais recente publicada neste arquivo e avisa o

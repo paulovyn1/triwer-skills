@@ -18,10 +18,12 @@ frontmatter do `SKILL.md` (não duplicado aqui).
 
 ---
 
-## 99.0.0 [CRITICAL] - 2026-07-10
-- ENTRADA DE TESTE (temporária) para validar o bloqueio automático do Passo 0.
-  Será revertida logo em seguida — ignore se esta entrada ainda estiver aqui
-  e não for parte de um teste em andamento.
+## 1.10.2 [CRITICAL] - 2026-07-10
+- Corrige um erro na Etapa 6A que permitia a skill sugerir volume de
+  aulas/módulos como ativo de marketing válido mesmo com o pilar Preguiça,
+  contradizendo a regra já estabelecida na v1.10. Quem estiver na v1.10.1 ou
+  anterior deve atualizar antes de gerar uma nova Oportunidade Sexy, para não
+  produzir um resultado inconsistente.
 
 ## 1.10.1 - 2026-07-10
 - Adiciona o Passo 0 de verificação de versão no BOOT: a skill agora compara

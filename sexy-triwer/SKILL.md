@@ -20,7 +20,7 @@ description: >
   campanhas — escopo exclusivo de descoberta e validação da promessa e de
   como apresentá-la.
 compatibility: Claude Desktop, Claude Code, claude.ai
-metadata: "v1.10 — julho 2026 — incorpora 3 furos graves achados em teste real com aluno (mesclado com a proibição de Claude Artifact já feita na v1.9): (1) Etapa 3 ganha `portfolio_produtos` — lista de todos os produtos/serviços do aluno, com regra em toda formulação subsequente (Etapa 3A, 4, 6A, 7) de nunca desvalorizar ou comparar desfavoravelmente qualquer item dela (a skill chegou a recomendar 'pagar assessoria é desperdício' pra vender uma comunidade do mesmo aluno que também vende a assessoria); (2) Etapa 6A ganha regra explícita: volume de aulas/módulos nunca é ativo de marketing válido, mesmo com pilar Gula — só volume de entregável pronto (modelos, templates) vale, porque grade de aulas comunica esforço de estudo e contradiz Preguiça; (3) Etapa 2 reforça que o diagnóstico do Dr. House (achados críticos/estruturais, bridge card, perguntas em aberto) é insumo obrigatório, não leitura de fundo — a promessa final precisa responder a ele, nunca repetir o mesmo problema já apontado. Checklist da Etapa 4 e segunda passada crítica da Etapa 7 ganharam os itens correspondentes de canibalização de portfólio, volume de aulas, e resposta ao diagnóstico do Dr. House. v1.9 proibiu explicitamente gerar o resultado como Claude Artifact — a entrega final é sempre um arquivo .html salvo em disco seguindo o template-base, nunca artifact, independente do ambiente (essa regra foi mantida integralmente nesta versão, mesmo com o merge trazendo uma formulação diferente e mais permissiva de outra fonte). v1.8 foi revisão de arquitetura para economia de tokens sem alterar regra de negócio (BOOT enxuto, tabela de regras de 19→7 itens, delegação a subagente consolidada); v1.7 corrigiu Passo 0 da Etapa 4 (não perguntar se produto é genérico), Etapa 5 sempre página HTML, Etapa 6A coerência ativo↔público; v1.6 separou headline de promessa; v1.5 adicionou escolha de ângulo sem inventar contexto; v1.4 adicionou garimpo de ativos de marketing; v1.3 adicionou formato de entrega + pilar de desejo como eixos independentes"
+metadata: "v1.10.1 — julho 2026 — adiciona o Passo 0 de verificação automática de versão no BOOT (compara a versão local com o CHANGELOG.md remoto e avisa/bloqueia o aluno conforme o caso; ver CHANGELOG.md para detalhes). v1.10 — julho 2026 — incorpora 3 furos graves achados em teste real com aluno (mesclado com a proibição de Claude Artifact já feita na v1.9): (1) Etapa 3 ganha `portfolio_produtos` — lista de todos os produtos/serviços do aluno, com regra em toda formulação subsequente (Etapa 3A, 4, 6A, 7) de nunca desvalorizar ou comparar desfavoravelmente qualquer item dela (a skill chegou a recomendar 'pagar assessoria é desperdício' pra vender uma comunidade do mesmo aluno que também vende a assessoria); (2) Etapa 6A ganha regra explícita: volume de aulas/módulos nunca é ativo de marketing válido, mesmo com pilar Gula — só volume de entregável pronto (modelos, templates) vale, porque grade de aulas comunica esforço de estudo e contradiz Preguiça; (3) Etapa 2 reforça que o diagnóstico do Dr. House (achados críticos/estruturais, bridge card, perguntas em aberto) é insumo obrigatório, não leitura de fundo — a promessa final precisa responder a ele, nunca repetir o mesmo problema já apontado. Checklist da Etapa 4 e segunda passada crítica da Etapa 7 ganharam os itens correspondentes de canibalização de portfólio, volume de aulas, e resposta ao diagnóstico do Dr. House. v1.9 proibiu explicitamente gerar o resultado como Claude Artifact — a entrega final é sempre um arquivo .html salvo em disco seguindo o template-base, nunca artifact, independente do ambiente (essa regra foi mantida integralmente nesta versão, mesmo com o merge trazendo uma formulação diferente e mais permissiva de outra fonte). v1.8 foi revisão de arquitetura para economia de tokens sem alterar regra de negócio (BOOT enxuto, tabela de regras de 19→7 itens, delegação a subagente consolidada); v1.7 corrigiu Passo 0 da Etapa 4 (não perguntar se produto é genérico), Etapa 5 sempre página HTML, Etapa 6A coerência ativo↔público; v1.6 separou headline de promessa; v1.5 adicionou escolha de ângulo sem inventar contexto; v1.4 adicionou garimpo de ativos de marketing; v1.3 adicionou formato de entrega + pilar de desejo como eixos independentes"
 ---
 
 # Sexy Triwer
@@ -71,6 +71,32 @@ nunca pule direto do rascunho para a apresentação.
 ---
 
 ## BOOT — EXECUTAR SEMPRE AO INICIAR
+
+0. **Verificação de versão:** leia o arquivo `VERSION` desta skill (sibling
+   do `SKILL.md`) — essa é a versão local. Em seguida, tente buscar
+   `https://raw.githubusercontent.com/paulovyn1/triwer-skills/main/sexy-triwer/CHANGELOG.md`
+   com a ferramenta de acesso à web disponível no ambiente atual (`WebFetch`
+   no Claude Code/Desktop; navegação/busca nativa no claude.ai). Se não
+   conseguir acessar (sem internet, sem ferramenta, timeout etc.), não
+   mencione nada e siga para o passo 1.
+
+   Se conseguir, leia a entrada mais recente (primeira do arquivo) do
+   CHANGELOG remoto e compare com a versão local:
+   - **Igual:** siga para o passo 1 sem dizer nada.
+   - **Remota mais nova, sem tag `[CRITICAL]`:** avise em uma linha, ex.:
+     "💡 Há uma versão nova da sexy-triwer disponível (v[local] → v[remota]).
+     Não é obrigatório atualizar agora, mas recomendo rodar o instalador
+     quando puder." Depois siga para o passo 1 normalmente — **não bloqueie**.
+   - **Remota mais nova, com tag `[CRITICAL]`:** pare aqui. Explique em 2-3
+     linhas, com base no resumo da entrada do CHANGELOG, por que essa versão
+     tem uma correção importante e não deve continuar sendo usada, e informe
+     como atualizar:
+     - **Claude Code/Desktop:** `irm https://raw.githubusercontent.com/paulovyn1/triwer-skills/main/scripts/instalar-sexy-windows.ps1 | iex` (Windows) ou `curl -fsSL https://raw.githubusercontent.com/paulovyn1/triwer-skills/main/scripts/instalar-sexy-mac.sh | bash` (Mac/Linux).
+     - **claude.ai (Skills nativo):** baixar o `.zip` mais recente e reenviar
+       em Settings → Capabilities → Skills → Upload skill.
+     Aguarde o aluno confirmar que atualizou antes de seguir para o passo 1.
+     Se ele insistir em prosseguir mesmo assim, atenda, mas deixe registrado
+     que não é o recomendado.
 
 1. **Onboarding:** tente ler `~/.claude/skills/onboarding-triwer/memoria.md`.
    Se não existir ou não tiver `onboarding_completo: true`, exiba: "Antes de

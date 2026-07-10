@@ -53,9 +53,29 @@ foreach ($skill in $SKILLS) {
     New-Item -ItemType Directory -Force -Path $tempDir | Out-Null
 
     Copy-Item -Path "$skillPath\*" -Destination $tempDir -Recurse -Force `
-        -Exclude @("memoria.md", "scripts", ".git")
+        -Exclude @("memoria.md", "scripts", ".git", "*.zip")
 
-    Compress-Archive -Path "$tempDir\*" -DestinationPath $zipPath -Force
+    # Compress-Archive grava os caminhos internos do zip com "\" (separador do
+    # Windows) em vez de "/" (exigido pelo formato ZIP) -- o validador de
+    # upload do claude.ai rejeita isso como "path with invalid characters".
+    # Por isso montamos o zip manualmente via System.IO.Compression, forçando
+    # "/" em cada nome de entrada.
+    Add-Type -AssemblyName System.IO.Compression
+    Add-Type -AssemblyName System.IO.Compression.FileSystem
+    $fs = [System.IO.File]::Open($zipPath, [System.IO.FileMode]::Create)
+    $archive = New-Object System.IO.Compression.ZipArchive($fs, [System.IO.Compression.ZipArchiveMode]::Create)
+    Get-ChildItem -Path $tempDir -Recurse -File | ForEach-Object {
+        $relPath = $_.FullName.Substring($tempDir.Length + 1).Replace([char]92, [char]47)
+        $entry = $archive.CreateEntry($relPath, [System.IO.Compression.CompressionLevel]::Optimal)
+        $entryStream = $entry.Open()
+        $fileStream = [System.IO.File]::OpenRead($_.FullName)
+        $fileStream.CopyTo($entryStream)
+        $fileStream.Dispose()
+        $entryStream.Dispose()
+    }
+    $archive.Dispose()
+    $fs.Dispose()
+
     Remove-Item -Recurse -Force $tempDir
 
     Write-Host "  ✓ $skill.zip" -ForegroundColor Green

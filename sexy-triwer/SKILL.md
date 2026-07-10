@@ -2,23 +2,19 @@
 name: sexy-triwer
 description: >
   Constrói e valida a Oportunidade Sexy do produto ou serviço do aluno — a
-  promessa específica, desejável e diferenciada por trás da oferta, com base no
-  método investigativo Sexy. Conduz uma entrevista provocadora e personalizada
-  (nunca genérica), reaproveitando o que já existe no Notion do aluno (Meu
-  Público, Quem sou eu, Histórias Inevitáveis) para não repetir perguntas já
-  respondidas, identifica o formato de entrega e o pilar de desejo dominante
-  do produto, garimpa ativos de marketing sexys específicos (elementos do
-  próprio produto que já provam a promessa, mesmo que o aluno não enxergue
-  isso sozinho), gera 5 headlines exploratórias que traduzem a promessa, e
-  grava o resultado na subpágina do produto/serviço dentro da database
-  "Produtos" do Notion. Use sempre que o aluno pedir para "criar a
+  promessa específica, desejável e diferenciada por trás da oferta. Conduz
+  uma entrevista provocadora (nunca genérica), reaproveitando o Notion do
+  aluno (Meu Público, Quem sou eu, Histórias Inevitáveis) para não repetir
+  perguntas já respondidas, identifica formato de entrega e pilar de desejo
+  dominante, garimpa ativos de marketing específicos do próprio produto,
+  gera 5 headlines exploratórias e grava o resultado na subpágina do produto
+  na database "Produtos" do Notion. Use quando o aluno pedir para "criar a
   oportunidade sexy", "achar a promessa do produto", "posicionar meu
   produto/serviço", "criar minha oferta sexy", "tornar meu produto mais
-  desejável", "como eu apresento isso pra vender mais", ou quando outra skill
-  do ecossistema Triwer precisar de uma promessa de produto ainda não
-  definida. NÃO acionar para nomear produtos, escrever carrosséis ou
-  campanhas — escopo exclusivo de descoberta e validação da promessa e de
-  como apresentá-la.
+  desejável", ou "como eu apresento isso pra vender mais", ou quando outra
+  skill Triwer precisar de uma promessa de produto ainda não definida. NÃO
+  acionar para nomear produtos, escrever carrosséis ou campanhas — escopo
+  exclusivo de descoberta e validação da promessa.
 compatibility: Claude Desktop, Claude Code, claude.ai
 metadata: "v1.10.1 — julho 2026 — adiciona o Passo 0 de verificação automática de versão no BOOT (compara a versão local com o CHANGELOG.md remoto e avisa/bloqueia o aluno conforme o caso; ver CHANGELOG.md para detalhes). v1.10 — julho 2026 — incorpora 3 furos graves achados em teste real com aluno (mesclado com a proibição de Claude Artifact já feita na v1.9): (1) Etapa 3 ganha `portfolio_produtos` — lista de todos os produtos/serviços do aluno, com regra em toda formulação subsequente (Etapa 3A, 4, 6A, 7) de nunca desvalorizar ou comparar desfavoravelmente qualquer item dela (a skill chegou a recomendar 'pagar assessoria é desperdício' pra vender uma comunidade do mesmo aluno que também vende a assessoria); (2) Etapa 6A ganha regra explícita: volume de aulas/módulos nunca é ativo de marketing válido, mesmo com pilar Gula — só volume de entregável pronto (modelos, templates) vale, porque grade de aulas comunica esforço de estudo e contradiz Preguiça; (3) Etapa 2 reforça que o diagnóstico do Dr. House (achados críticos/estruturais, bridge card, perguntas em aberto) é insumo obrigatório, não leitura de fundo — a promessa final precisa responder a ele, nunca repetir o mesmo problema já apontado. Checklist da Etapa 4 e segunda passada crítica da Etapa 7 ganharam os itens correspondentes de canibalização de portfólio, volume de aulas, e resposta ao diagnóstico do Dr. House. v1.9 proibiu explicitamente gerar o resultado como Claude Artifact — a entrega final é sempre um arquivo .html salvo em disco seguindo o template-base, nunca artifact, independente do ambiente (essa regra foi mantida integralmente nesta versão, mesmo com o merge trazendo uma formulação diferente e mais permissiva de outra fonte). v1.8 foi revisão de arquitetura para economia de tokens sem alterar regra de negócio (BOOT enxuto, tabela de regras de 19→7 itens, delegação a subagente consolidada); v1.7 corrigiu Passo 0 da Etapa 4 (não perguntar se produto é genérico), Etapa 5 sempre página HTML, Etapa 6A coerência ativo↔público; v1.6 separou headline de promessa; v1.5 adicionou escolha de ângulo sem inventar contexto; v1.4 adicionou garimpo de ativos de marketing; v1.3 adicionou formato de entrega + pilar de desejo como eixos independentes"
 ---

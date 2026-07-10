@@ -13,7 +13,7 @@ description: >
   detectar que o onboarding ainda não foi feito. Deve ser a primeira skill
   Triwer executada por qualquer aluno — todas as outras dependem dela.
 compatibility: Claude Desktop, Claude Code, claude.ai
-metadata: "v1.1 — julho 2026 — resolve iscas_db_url, mdi_db_url, conteudos_db_url"
+metadata: "v1.1.1 — julho 2026 — adiciona verificação automática de versão no BOOT (ver CHANGELOG.md). v1.1 — julho 2026 — resolve iscas_db_url, mdi_db_url, conteudos_db_url"
 ---
 
 # Onboarding Triwer
@@ -46,6 +46,34 @@ sessão.
 ---
 
 ## BOOT — EXECUTAR SEMPRE AO INICIAR
+
+### Verificação de versão (antes do Passo 1)
+
+Leia o arquivo `VERSION` desta skill (sibling do `SKILL.md`) — essa é a
+versão local. Em seguida, tente buscar
+`https://raw.githubusercontent.com/paulovyn1/triwer-skills/main/onboarding-triwer/CHANGELOG.md`
+com a ferramenta de acesso à web disponível no ambiente atual (`WebFetch` no
+Claude Code/Desktop; navegação/busca nativa no claude.ai). Se não conseguir
+acessar (sem internet, sem ferramenta, timeout etc.), não mencione nada e
+siga para o Passo 1.
+
+Se conseguir, leia a entrada mais recente (primeira do arquivo) do CHANGELOG
+remoto e compare com a versão local:
+- **Igual:** siga para o Passo 1 sem dizer nada.
+- **Remota mais nova, sem tag `[CRITICAL]`:** avise em uma linha, ex.: "💡 Há
+  uma versão nova da onboarding-triwer disponível (v[local] → v[remota]). Não
+  é obrigatório atualizar agora, mas recomendo rodar o instalador quando
+  puder." Depois siga para o Passo 1 normalmente — **não bloqueie**.
+- **Remota mais nova, com tag `[CRITICAL]`:** pare aqui. Explique em 2-3
+  linhas, com base no resumo da entrada do CHANGELOG, por que essa versão
+  tem uma correção importante e não deve continuar sendo usada, e informe
+  como atualizar:
+  - **Claude Code/Desktop:** `irm https://raw.githubusercontent.com/paulovyn1/triwer-skills/main/scripts/instalar-onboarding-windows.ps1 | iex` (Windows) ou `curl -fsSL https://raw.githubusercontent.com/paulovyn1/triwer-skills/main/scripts/instalar-onboarding-mac.sh | bash` (Mac/Linux).
+  - **claude.ai (Skills nativo):** baixar o `.zip` mais recente e reenviar
+    em Settings → Capabilities → Skills → Upload skill.
+  Aguarde o aluno confirmar que atualizou antes de seguir para o Passo 1. Se
+  ele insistir em prosseguir mesmo assim, atenda, mas deixe registrado que
+  não é o recomendado.
 
 ### Passo 1 — Verificar memória
 

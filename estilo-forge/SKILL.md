@@ -10,6 +10,7 @@ description: >
   O output não é texto final — é uma skill nova instalada em ~/.claude/skills/estilo-[nome]/.
   Acione esta skill antes de tentar replicar qualquer estilo de escrita de qualquer pessoa.
 compatibility: claude.ai, Claude Desktop, Cowork, Claude Code
+metadata: "v1.0.1 — julho 2026 — adiciona verificação automática de versão antes da Etapa 0 (ver CHANGELOG.md)"
 ---
 
 # estilo-forge
@@ -21,6 +22,36 @@ instalada localmente, treinada na voz real do usuário, não em IA imitando voz 
 
 O processo tem **7 etapas obrigatórias em sequência**. Cada etapa é um gatekeeper: a próxima
 só começa quando a anterior está completa. Não pule etapas.
+
+---
+
+## VERIFICAÇÃO DE VERSÃO — EXECUTAR ANTES DA ETAPA 0
+
+Leia o arquivo `VERSION` desta skill (sibling do `SKILL.md`) — essa é a
+versão local. Em seguida, tente buscar
+`https://raw.githubusercontent.com/paulovyn1/triwer-skills/main/estilo-forge/CHANGELOG.md`
+com a ferramenta de acesso à web disponível no ambiente atual (`WebFetch` no
+Claude Code/Desktop; navegação/busca nativa no claude.ai). Se não conseguir
+acessar (sem internet, sem ferramenta, timeout etc.), não mencione nada e
+siga para a Etapa 0.
+
+Se conseguir, leia a entrada mais recente (primeira do arquivo) do CHANGELOG
+remoto e compare com a versão local:
+- **Igual:** siga para a Etapa 0 sem dizer nada.
+- **Remota mais nova, sem tag `[CRITICAL]`:** avise em uma linha, ex.: "💡 Há
+  uma versão nova da estilo-forge disponível (v[local] → v[remota]). Não é
+  obrigatório atualizar agora, mas recomendo rodar o instalador quando
+  puder." Depois siga para a Etapa 0 normalmente — **não bloqueie**.
+- **Remota mais nova, com tag `[CRITICAL]`:** pare aqui. Explique em 2-3
+  linhas, com base no resumo da entrada do CHANGELOG, por que essa versão
+  tem uma correção importante e não deve continuar sendo usada, e informe
+  como atualizar:
+  - **Claude Code/Desktop:** `irm https://raw.githubusercontent.com/paulovyn1/triwer-skills/main/estilo-forge/scripts/instalar-windows.ps1 | iex` (Windows) ou `curl -fsSL https://raw.githubusercontent.com/paulovyn1/triwer-skills/main/estilo-forge/scripts/instalar-mac.sh | bash` (Mac/Linux).
+  - **claude.ai (Skills nativo):** baixar o `.zip` mais recente e reenviar
+    em Settings → Capabilities → Skills → Upload skill.
+  Aguarde o usuário confirmar que atualizou antes de seguir para a Etapa 0.
+  Se ele insistir em prosseguir mesmo assim, atenda, mas deixe registrado que
+  não é o recomendado.
 
 ---
 

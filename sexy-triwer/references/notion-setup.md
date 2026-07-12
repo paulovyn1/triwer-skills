@@ -1,6 +1,6 @@
 # Configurar conector do Notion
 
-Use este arquivo apenas quando o Passo 2 do BOOT detectar que o Notion não
+Use este arquivo apenas quando o Passo 3 do BOOT detectar que o Notion não
 está conectado. Na maioria das sessões o Notion já está conectado (onboarding
 já feito) e este arquivo nunca precisa ser lido.
 

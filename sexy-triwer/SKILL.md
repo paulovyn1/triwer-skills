@@ -2,21 +2,31 @@
 name: sexy-triwer
 description: >
   Constrói e valida a Oportunidade Sexy do produto ou serviço do aluno — a
-  promessa específica, desejável e diferenciada por trás da oferta. Conduz
-  uma entrevista provocadora (nunca genérica), reaproveitando o Notion do
-  aluno (Meu Público, Quem sou eu, Histórias Inevitáveis) para não repetir
-  perguntas já respondidas, identifica formato de entrega e pilar de desejo
-  dominante, garimpa ativos de marketing específicos do próprio produto,
-  gera 5 headlines exploratórias e grava o resultado na subpágina do produto
-  na database "Produtos" do Notion. Use quando o aluno pedir para "criar a
-  oportunidade sexy", "achar a promessa do produto", "posicionar meu
-  produto/serviço", "criar minha oferta sexy", "tornar meu produto mais
-  desejável", ou "como eu apresento isso pra vender mais", ou quando outra
-  skill Triwer precisar de uma promessa de produto ainda não definida. NÃO
+  promessa específica, desejável e diferenciada por trás da oferta, com base no
+  método investigativo Sexy. Segue a sequência causal objetivo → produto →
+  público → julgamento → ativos: investiga o objetivo do aluno e o que ele
+  topa executar antes de mexer em formato, investiga o diferencial real do
+  produto (não a descrição de superfície), define o público pela situação de
+  vida vivida (não demografia) com teste de verdade de mercado, urgência de
+  compra, quem decide, nível de consciência e teste de esteira contra o
+  portfólio, e julga a promessa final com uma bateria tripla de verdade,
+  desejo e formulação — nunca aceita uma promessa só porque soa correta.
+  Conduz uma entrevista provocadora e personalizada (nunca genérica),
+  reaproveitando o que já existe no Notion do aluno (Meu Público, Quem sou
+  eu, Histórias Inevitáveis, MDI) para não repetir perguntas já respondidas,
+  garimpa ativos de marketing sexys específicos (elementos do próprio
+  produto que já provam a promessa, mesmo que o aluno não enxergue isso
+  sozinho), gera 5 headlines exploratórias que traduzem a promessa, e grava
+  o resultado na subpágina do produto/serviço dentro da database "Produtos"
+  do Notion. Use sempre que o aluno pedir para "criar a oportunidade sexy",
+  "achar a promessa do produto", "posicionar meu produto/serviço", "criar
+  minha oferta sexy", "tornar meu produto mais desejável", "como eu
+  apresento isso pra vender mais", ou quando outra skill do ecossistema
+  Triwer precisar de uma promessa de produto ainda não definida. NÃO
   acionar para nomear produtos, escrever carrosséis ou campanhas — escopo
-  exclusivo de descoberta e validação da promessa.
+  exclusivo de descoberta e validação da promessa e de como apresentá-la.
 compatibility: Claude Desktop, Claude Code, claude.ai
-metadata: "v1.10.1 — julho 2026 — adiciona o Passo 0 de verificação automática de versão no BOOT (compara a versão local com o CHANGELOG.md remoto e avisa/bloqueia o aluno conforme o caso; ver CHANGELOG.md para detalhes). v1.10 — julho 2026 — incorpora 3 furos graves achados em teste real com aluno (mesclado com a proibição de Claude Artifact já feita na v1.9): (1) Etapa 3 ganha `portfolio_produtos` — lista de todos os produtos/serviços do aluno, com regra em toda formulação subsequente (Etapa 3A, 4, 6A, 7) de nunca desvalorizar ou comparar desfavoravelmente qualquer item dela (a skill chegou a recomendar 'pagar assessoria é desperdício' pra vender uma comunidade do mesmo aluno que também vende a assessoria); (2) Etapa 6A ganha regra explícita: volume de aulas/módulos nunca é ativo de marketing válido, mesmo com pilar Gula — só volume de entregável pronto (modelos, templates) vale, porque grade de aulas comunica esforço de estudo e contradiz Preguiça; (3) Etapa 2 reforça que o diagnóstico do Dr. House (achados críticos/estruturais, bridge card, perguntas em aberto) é insumo obrigatório, não leitura de fundo — a promessa final precisa responder a ele, nunca repetir o mesmo problema já apontado. Checklist da Etapa 4 e segunda passada crítica da Etapa 7 ganharam os itens correspondentes de canibalização de portfólio, volume de aulas, e resposta ao diagnóstico do Dr. House. v1.9 proibiu explicitamente gerar o resultado como Claude Artifact — a entrega final é sempre um arquivo .html salvo em disco seguindo o template-base, nunca artifact, independente do ambiente (essa regra foi mantida integralmente nesta versão, mesmo com o merge trazendo uma formulação diferente e mais permissiva de outra fonte). v1.8 foi revisão de arquitetura para economia de tokens sem alterar regra de negócio (BOOT enxuto, tabela de regras de 19→7 itens, delegação a subagente consolidada); v1.7 corrigiu Passo 0 da Etapa 4 (não perguntar se produto é genérico), Etapa 5 sempre página HTML, Etapa 6A coerência ativo↔público; v1.6 separou headline de promessa; v1.5 adicionou escolha de ângulo sem inventar contexto; v1.4 adicionou garimpo de ativos de marketing; v1.3 adicionou formato de entrega + pilar de desejo como eixos independentes"
+metadata: "v2.1.0 — julho 2026 — reestruturação causal completa (objetivo → produto → público → julgamento → ativos) e correção da proibição de Claude Artifact, restaurada para absoluta. Ver CHANGELOG.md para detalhes desta e de todas as versões anteriores a partir da v1.10.1. Histórico anterior à v1.10.1: v1.9 corrigiu 5 furos graves (portfolio_produtos, regra de volume de aulas, Dr. House como insumo obrigatório, entrega sempre como arquivo real, checklist ampliado); v1.8 foi revisão de arquitetura para economia de tokens; v1.7 corrigiu Passo 0 da Etapa 4, página HTML sempre, coerência ativo↔público; v1.6 separou headline de promessa; v1.5 adicionou escolha de ângulo sem inventar contexto; v1.4 adicionou garimpo de ativos de marketing; v1.3 adicionou formato de entrega + pilar de desejo como eixos independentes"
 ---
 
 # Sexy Triwer
@@ -43,7 +53,9 @@ Inevitáveis" só são lidos na profundidade necessária para a etapa em questã
 nunca tudo de uma vez no boot.
 **Referências de pilares e tipos de produto** (`references/`) → nunca lidas
 no boot. Cada pasta tem um `INDEX.md` leve (visão geral + tabela resumida) —
-leia só esse índice na Etapa 3A. Um arquivo individual (ex.:
+leia só esse índice na etapa que o pede (tipos de produto na Etapa 3, pilares
+do desejo na Etapa 5). `references/esteira.md` é lido na Etapa 3 (papel do
+produto na esteira e registro da promessa). Um arquivo individual (ex.:
 `pilares-do-desejo/05-preguica.md` ou `tipos-de-produto/ferramenta.md`) só é
 lido quando a conversa já convergiu para aquele pilar/tipo específico e a
 skill precisa da regra detalhada para aplicar corretamente — nunca carregue
@@ -53,8 +65,9 @@ os 7 pilares ou os 10 tipos inteiros de uma vez.
 
 ## REGRA GERAL DE VERIFICAÇÃO CRÍTICA
 
-Três etapas adiante (geração de headlines, garimpo de ativos de marketing, e
-a revisão final antes de mostrar o resultado) pedem uma segunda leitura sem
+Quatro pontos adiante (a bateria tripla de julgamento da promessa na Etapa 6,
+a geração de headlines, os ativos de marketing, e a revisão final antes de
+mostrar o resultado) pedem uma segunda leitura sem
 o apego de quem acabou de produzir o conteúdo — é assim que se pega uma
 headline fraca, um ativo genérico ou uma promessa que soa bem mas não
 aguenta escrutínio. Sempre que uma etapa disser "aplique a verificação
@@ -177,9 +190,25 @@ reinterrogar o aluno sobre algo já respondido em outra skill:
    "Próximo passo antes de qualquer ajuste" (bridge card) no diagnóstico, ela
    é literalmente um convite direto a esta skill — leia com atenção redobrada
    o que ela pede. As "Perguntas em aberto para levar ao Sexy" precisam ser
-   endereçadas uma a uma na investigação (Etapa 3) ou na escolha de ângulo
-   (Etapa 3A Passo 4) — não é opcional revisitá-las, é exatamente o que o Dr.
+   endereçadas uma a uma na investigação (Etapas 3-5) ou na escolha de ângulo
+   (Etapa 6 Passo 0) — não é opcional revisitá-las, é exatamente o que o Dr.
    House não conseguiu resolver sozinho.
+
+5. **Log de Investigação — Dr. House (subpágina da nota de produto, só sob
+   demanda):** a nota/ficha de produto do aluno no Notion pode ter uma
+   subpágina com esse título (ou aproximado: "Log de Investigação", "Log Dr.
+   House") — ela guarda, na íntegra e sem resumir, as 3 respostas do Bloco 4
+   (Mecanismo) de cada sessão de escavação: como funciona o passo a passo, por
+   que é diferente do mercado, o que o mercado ensina hoje. **Não abra esta
+   subpágina por padrão** — o resumo já lido no item 4 acima (Seção 1 do HTML
+   do House) ou a ficha de produto resumida no Notion costuma bastar. Só abra
+   quando, depois de tentar de fato extrair um diferencial real (não
+   genérico) desse resumo, nada específico aparecer — nesse caso, e só nesse
+   caso, leia o log completo em busca das respostas 2 e 3, que são
+   exatamente o material de onde costuma sair o "como" específico por trás
+   do "o quê" genérico que faltou. Não é abrir sempre por precaução, é o
+   mesmo padrão de "índice leve sempre lido, satélite só sob demanda" que
+   vale para o resto desta skill (ver REGRA GERAL DE LEITURA DE ARQUIVOS).
 
 Guarde tudo isso como contexto interno de trabalho. **Não despeje esse resumo
 no aluno** — use para não repetir perguntas, não para expor dados dele de volta
@@ -187,9 +216,16 @@ pra ele sem necessidade.
 
 ---
 
-## ETAPA 3 — Abertura e investigação
+## ETAPA 3 — Objetivo, restrição e arquitetura do produto
 
-### Pergunta de abertura (sempre, mesmo com produto já selecionado na Etapa 1)
+Antes de qualquer trabalho de promessa, entenda **por que o usuário está aqui
+com este produto especificamente** — isso não é insumo de conteúdo da
+promessa, é insumo de arquitetura: decide se o formato do produto precisa
+mudar antes de escrever qualquer coisa. Faça **uma pergunta por vez**, em
+ritmo pensado, com escuta ativa — nunca lista de perguntas. Pule qualquer
+pergunta cuja resposta já esteja disponível pelo contexto da Etapa 2.
+
+### Abertura (pule se as Etapas 1-2 já deixaram claro o que o produto é)
 
 ```
 Vamos encontrar a Oportunidade Sexy por trás de [produto_atual]. Antes de mais
@@ -197,63 +233,37 @@ nada: me explica com suas palavras o que esse produto/serviço faz hoje — do
 jeito que você explicaria pra um amigo, sem filtro de marketing.
 ```
 
-### Investigação personalizada
+### As duas perguntas de objetivo (nesta ordem, uma de cada vez)
 
-Faça **uma pergunta por vez**, em ritmo pensado, com escuta ativa — nunca uma
-lista de perguntas de uma vez. Pule qualquer pergunta cuja resposta já esteja
-disponível pelo contexto carregado na Etapa 2; só pergunte o que falta.
+```
+1. O que você quer que esse produto faça por você agora? Mais audiência, mais
+autoridade, mais vendas diretas, virar porta de entrada pra algo maior, ou
+outra coisa?
 
-Cubra, ao longo da conversa (não necessariamente nesta ordem — siga o fluxo
-natural da conversa):
+2. E o que você não quer fazer pra chegar lá? Tem algo que você recusa fazer
+mesmo sabendo que ajudaria — não gosta de lançamento, não tem estrutura ou
+verba pra tráfego pago, não quer gravar muito conteúdo novo, outra coisa?
+```
 
-- **Prova/aspiração do aluno:** o que na história dele pode ser alavancado
-  (credencial, resultado, contraste "antes e depois", trajetória incomum). Se
-  já veio de "Quem sou eu" (Etapa 2), confirme e aprofunde em vez de perguntar
-  do zero.
-- **O público real:** dores e desejos de quem compra. Se já veio de "Meu
-  Público" (Etapa 2), use as falas reais coletadas lá em vez de generalizar.
-- **O que o público quer**, não o que ele precisa — sempre redirecione
-  respostas do tipo "ele precisa de X" para "e o que ele quer sentir/ter no
-  final?".
-- **Esforço percebido:** o que hoje faz esse resultado parecer difícil, caro ou
-  demorado — e onde está a oportunidade de reduzir esse esforço percebido.
-- **Diferença real:** o que essa abordagem tem que o que já existe no
-  nicho/mercado não tem.
-- **Portfólio completo do aluno:** quais outros produtos ou serviços ele
-  vende hoje, além deste. Pergunte de forma simples ("e além desse, o que
-  mais você vende hoje?") — não precisa perguntar se algum deles "não pode
-  ser atacado", isso é óbvio demais para perguntar e cabe à skill perceber
-  sozinha ao escrever a promessa. Guarde a lista completa como
-  `portfolio_produtos`: nenhuma formulação de promessa, ângulo ou ativo de
-  marketing (Etapa 3A, 4, 6A) pode desvalorizar, comparar desfavoravelmente
-  ou tornar outro item deste portfólio menos desejável — mesmo que pareça um
-  argumento de venda eficaz para o produto atual. Isso vale mesmo quando o
-  outro produto tem ticket mais alto e parece um "alvo fácil" de contraste
-  (ex.: nunca usar "pagar mensalidade de assessoria virou desperdício" para
-  vender uma comunidade, se o aluno também vende assessoria).
+Guarde a resposta 1 como `objetivo_usuario` e a resposta 2 como
+`restricao_execucao`.
 
-Nunca venda o processo (os "pregos e o martelo"). Toda pergunta e toda
-formulação aponta para o resultado final desejado pelo público.
+### Portfólio completo
 
----
+Pergunte de forma simples: "e além desse, o que mais você vende hoje?".
+Guarde a lista completa como `portfolio_produtos`. Nenhuma formulação de
+promessa, headline ou ativo de marketing (Etapas 6, 8 e 9) pode desvalorizar,
+comparar desfavoravelmente ou tornar menos desejável qualquer item desta
+lista — mesmo que pareça um argumento de venda eficaz para o produto atual, e
+principalmente quando o outro produto tem ticket mais alto e parece "alvo
+fácil" de contraste (ex.: nunca usar "pagar mensalidade de assessoria virou
+desperdício" para vender uma comunidade, se o aluno também vende a
+assessoria). O portfólio também alimenta o teste de esteira da Etapa 5
+(público que não canibaliza outro produto do próprio aluno).
 
-## ETAPA 3A — Formato de entrega e pilar de desejo dominante
+### Formato de entrega e papel na esteira
 
-Esta etapa existe porque a promessa só é honesta se combinar com **como** o
-produto é entregue e **por que** as pessoas realmente compram — sem isso, a
-skill acaba inventando uma promessa de transformação genérica que nem sempre
-o produto consegue cumprir (ex.: tratar um pacote de modelos prontos como se
-fosse um curso de mudança de comportamento).
-
-Trate as duas perguntas abaixo como **eixos independentes** — um produto
-pode ter a estrutura de um tipo mas vender de fato por um pilar associado a
-outro tipo. Não force o aluno a escolher de uma lista fechada; use as
-referências como apoio para reconhecer o padrão mais próximo.
-
-### Passo 1 — Formato de entrega
-
-Pergunte, ou infira do que já foi descrito na Etapa 3 e confirme com o
-aluno:
+Pergunte, ou infira do que já foi descrito e confirme com o aluno:
 
 ```
 Como esse produto chega até quem compra, na prática? É mais parecido com um
@@ -262,140 +272,102 @@ prontos, uma ferramenta/checklist, uma comunidade, uma mentoria, uma
 consultoria pontual, ou outra coisa?
 ```
 
-Se precisar de apoio para nomear o formato ou calibrar o que aquele formato
-consegue honestamente prometer, leia
-`~/.claude/skills/sexy-triwer/references/tipos-de-produto/INDEX.md` — é só
-um índice leve, e só abra o arquivo individual do tipo (ex.: `desafio.md`)
-se precisar da tabela completa de entrega/ticket/vantagem/desvantagem.
-
+Se precisar de apoio para nomear o formato ou calibrar o que ele consegue
+honestamente prometer, leia
+`~/.claude/skills/sexy-triwer/references/tipos-de-produto/INDEX.md` (índice
+leve; abra o arquivo individual do tipo só se precisar da tabela completa).
 Guarde como `formato_produto`.
 
-### Passo 2 — Pilar de desejo dominante
+Depois, leia `~/.claude/skills/sexy-triwer/references/esteira.md` e
+classifique o papel deste produto na esteira do aluno — **Paquera, Médio
+Ticket, Estrela ou Posicionamento** — a partir do objetivo, do ticket e do
+portfólio. Guarde como `papel_esteira`. Esse papel decide o **registro** da
+promessa lá na Etapa 6: promessa de Paquera é tática, curta e objetiva;
+promessa de Estrela é aspiracional, de identidade, e exige uma subpromessa
+técnica junto.
 
-Depois de fechar o formato, pergunte o que realmente move a compra. **Nunca
-nomeie os pilares para o aluno** (ele não conhece o framework, e um rótulo
-como "vaidade" ou "soberba" soa pretensioso o suficiente para ele evitar
-marcar algo que é verdade sobre o próprio produto). Apresente sempre em
-termos de benefício reconhecível — o que a compra faz *pela vida dela*, não
-que traço psicológico ela estaria admitindo ter.
-
-Deixe claro que é seleção múltipla — a maioria dos produtos bons combina
-mais de um:
-
-```
-Quando alguém pensa em comprar seu produto, o que você considera que ajuda
-nessa decisão? Pode marcar quantos fizerem sentido:
-
-- Ela tem acesso a uma quantidade grande de coisas que vão ajudar (modelos,
-  roteiros, scripts, ferramentas, agentes, guias...) — a sensação de estar
-  levando muita coisa por um preço baixo
-- Ela vai conquistar algo que sempre almejou, que inclusive via em outras
-  pessoas e invejava — um resultado ou uma vida específica. A vida dela e a
-  forma como ela se vê vão mudar por causa disso
-- Vai provar que o mundo está errado e resolver um problema que
-  verdadeiramente a enlouquece e irrita hoje
-- Vai fazer com que o mundo, os concorrentes, os clientes a admirem — que
-  ela seja reconhecida e até invejada
-- Vai agilizar a vida dela, ou resolver por ela algum tópico
-- O produto coloca ela numa nova "prateleira", num grupo melhor — as
-  pessoas olham pra isso e parece que ela venceu
-- Dá a sensação de estar pagando barato
-```
-
-Cada item acima mapeia, nesta ordem, a Gula, Inveja, Ira, Luxúria/Vaidade,
-Preguiça, Soberba e Avareza — mas essa correspondência é uso interno da
-skill, nunca mostre os nomes técnicos ao aluno nesta pergunta. Se a resposta
-dele apontar claramente para o gatilho à parte "Segurança" (reduzir risco,
-ter certeza, não fazer errado) — que não é um dos 7 pilares — reconheça
-isso também; não force encaixar em um dos 7 se não for o caso.
-
-Use `~/.claude/skills/sexy-triwer/references/pilares-do-desejo/INDEX.md`
-(leitura leve, índice + mapeamento por formato) como apoio para checar se a
-seleção do aluno bate com o padrão esperado para o `formato_produto` já
-definido no Passo 1 — não para substituir a resposta dele, só para saber se
-vale a pena aprofundar em algum ponto no Passo 3 a seguir.
-
-### Passo 3 — Verificar a seleção contra o que já foi dito (não pule)
-
-O aluno pode marcar algo que não é verdade sobre o produto dele, ou deixar
-de marcar algo que é — ele está reconhecendo padrões, não fazendo um
-diagnóstico técnico. Antes de aceitar a seleção como está, cruze cada item
-marcado contra o que já apareceu na Etapa 3 (investigação livre) e na
-descrição do produto:
-
-- **Item marcado sem lastro na conversa até agora:** pergunte de forma
-  pontual e natural, nunca em bloco — ex.: se marcou Gula mas nunca disse
-  que quantidade, "Incrível — o que exatamente você entrega em quantidade,
-  e qual é essa quantidade?". Se marcou Luxúria/Vaidade mas o produto é uma
-  ferramenta de bastidor sem visibilidade nenhuma, vale confirmar como esse
-  reconhecimento aparece na prática.
-- **Algo que já apareceu com força na Etapa 3 mas não foi marcado:** não
-  ignore — pergunte se aquilo também pesa na decisão de compra, sem sugerir
-  que ele "esqueceu" ou "errou".
-
-Só depois dessa checagem, feche a lista final de pilares confirmados. Entre
-os confirmados, identifique qual é o **dominante** (o que mais se conecta
-com o resultado/desejo central já validado na Etapa 3 e Etapa 4) e quais são
-**secundários**. Abra o arquivo individual do pilar dominante (ex.:
-`references/pilares-do-desejo/01-gula.md`) para aplicar as regras
-específicas dele na formulação da promessa — e, se houver secundário forte,
-consulte o arquivo dele também antes de escrever.
-
-Guarde como `pilar_dominante` (e `pilares_secundarios`, se houver mais de um).
-
-### Passo 4 — Escolher o ângulo, sem inventar um produto novo
-
-O papel desta skill é achar o que **de fato vende** dentro do produto real
-— e isso pode (e deve) significar destacar um recorte específico do
-produto, não necessariamente a descrição literal que o aluno deu na
-abertura. Um mesmo produto quase sempre comporta mais de um ângulo
-vendável, e cada ângulo pede uma promessa diferente. Exemplo: um pacote de
-checklists de acompanhamento de cliente pode ser vendido como (a) uma
-Ferramenta que dá segurança — "nunca mais entre numa reunião sem saber o
-que perguntar" — se o público relatou insegurança/medo de errar; ou como
-(b) prova de autoridade e ganho — "os mesmos processos que uso pra fechar
-contratos de 6k, pra você copiar" — se o público relatou querer ser visto
-como profissional de resultado. Os dois ângulos podem ser honestos para o
-mesmo produto — a escolha depende de qual dor/desejo pesou de fato na
-Etapa 3, não de qual soa melhor na hora de escrever.
-
-**A diferença entre "achar o ângulo certo" e "inventar um produto novo":**
-achar o ângulo é decidir *qual parte real do produto* merece protagonismo
-na promessa. Inventar um produto novo é dar à promessa uma dor, contexto ou
-formato que **não apareceu em nenhum momento da conversa** — ex.: se o
-aluno nunca mencionou reunião de fechamento, calls ou vendas, a promessa
-não pode de repente ser sobre performar bem numa call. Isso não é achar o
-ângulo mais sexy — é trocar de produto no meio do caminho.
-
-Antes de seguir para a Etapa 4, responda internamente:
-
-1. Existe mais de um ângulo vendável real dentro deste produto? Se sim,
-   nomeie ao menos dois.
-2. Qual desses ângulos conecta com a dor/desejo que **já apareceu com mais
-   força na Etapa 3** — não qual parece mais vendável em abstrato?
-3. A promessa que vou escrever usa um contexto, situação ou linguagem que
-   o aluno mencionou em algum momento da conversa — ou estou preenchendo
-   uma lacuna com algo plausível que ninguém disse?
-
-Se a resposta ao item 3 for "estou inventando", volte e ancore a promessa
-em algo que de fato foi dito — mesmo que isso signifique uma promessa mais
-simples e menos "redonda" do que a primeira ideia. Guarde a escolha como
-`angulo_escolhido` (breve descrição do porquê deste ângulo, não do outro).
-
-### Regras estruturais a considerar (do índice de tipos de produto)
+Regras estruturais por formato (do índice de tipos):
 
 - **Produtos que vivem do grupo** (Comunidade, Formação, Mentoria em grupo):
-  dependem de pertencimento/autoimagem — ticket precisa ficar acima de
-  R$797/ano. Se o aluno descrever um desses formatos com ticket muito
-  abaixo disso, sinalize a inconsistência antes de seguir.
+  ticket precisa ficar acima de R$797/ano. Se o aluno descrever um desses
+  formatos com ticket muito abaixo disso, sinalize a inconsistência antes de
+  seguir.
 - **Produtos de ticket baixo** (Ebook, Pacotes, Ferramenta): a promessa
   precisa cobrir uma situação específica, nunca múltiplos assuntos/formatos
-  — mas isso não limita quantidade de itens dentro do escopo (Gula com
-  volume grande dentro de uma situação específica é ótimo).
+  — sem limitar a quantidade de itens dentro do escopo.
+
+### Por que a segunda pergunta existe
+
+Um objetivo como "crescer audiência" não é entregue pelo formato do produto
+sozinho — é entregue pela combinação formato + ação de aquisição rodando em
+cima dele. Um produto Paquera (ticket baixo, entrada da esteira) cresce
+audiência bem com tráfego direto, porque a barreira de compra é baixa. Um
+produto Estrela (ticket alto) também pode crescer audiência, mas só via
+lançamento ativo com compra de tráfego — quem cresce a audiência ali é a
+ação de lançamento, não o produto em si.
+
+Isso significa que a mesma pergunta de objetivo tem respostas certas
+diferentes dependendo do que o usuário está disposto a executar. Se ele diz
+que quer crescer audiência mas também diz que odeia fazer lançamento, propor
+um produto Estrela (tecnicamente correto pro objetivo) é uma proposta morta
+na prática — ele nunca vai rodar. `restricao_execucao` existe pra evitar
+propor algo tecnicamente certo e inexecutável.
+
+### Caminhos de aquisição possíveis (para testar contra a restrição)
+
+Ao testar, considere os caminhos usuais — não se limite ao que já apareceu
+nesta conversa:
+
+- Tráfego pago direto (anúncio → oferta, sem lançamento)
+- Lançamento (aquecimento + evento + carrinho, com ou sem tráfego pago)
+- Orgânico de autoridade (conteúdo recorrente que constrói audiência antes
+  de vender)
+- Indicação/boca-a-boca de quem já comprou
+- Parceria ou afiliados
+
+Teste `restricao_execucao` contra cada um antes de concluir que nenhum
+caminho resta — "nenhum caminho compatível" é uma conclusão forte, não a
+resposta default quando só um caminho foi considerado.
+
+### Testar formato contra objetivo + restrição juntos (não objetivo sozinho)
+
+Depois de coletar as duas respostas, teste: **existe algum caminho de
+aquisição compatível com `restricao_execucao` que o formato atual do produto
+consegue rodar pra entregar `objetivo_usuario`?**
+
+- Se sim — mesmo que não seja o caminho mais óbvio — não proponha mudança de
+  formato. O ajuste segue na promessa (Etapa 4 em diante).
+- Se não — nenhum caminho de aquisição compatível com o que o usuário topa
+  fazer consegue tirar esse objetivo desse formato — proponha mudança
+  ativamente.
+
+**Exemplo onde a resposta é "proponha":** curso denso com centenas de aulas,
+objetivo é "crescer audiência", restrição é "não tenho verba pra tráfego
+pago e odeio fazer lançamento". Um curso denso não gera audiência sozinho
+(ninguém descobre um criador assistindo o curso dele) — e a única forma
+usual de fazer um curso gerar audiência é lançamento com tráfego, que o
+usuário já descartou. Nenhum caminho compatível resta dentro do formato
+atual. Proponha transformar parte do curso em Paquera — ticket baixo roda
+bem com tráfego direto/orgânico, sem depender de lançamento.
+
+**Exemplo onde a resposta é "não proponha":** mesmo curso denso, objetivo é
+"mais vendas diretas", sem restrição relevante contra o que normalmente
+vende curso denso (conteúdo orgânico + oferta no fim). Aqui existe caminho
+compatível dentro do formato atual — o problema não é o formato, é a
+promessa que atrai esse comprador. Siga para a Etapa 4 normalmente.
+
+Guarde a decisão como `formato_proposto` (só preenchido se houver proposta de
+mudança) com uma frase de porquê. Se propuser mudança de formato, explique o
+raciocínio ao usuário (objetivo + restrição + ausência de caminho
+compatível) e confirme antes de seguir — não é uma sugestão entre várias, é
+a única direção que a combinação objetivo+restrição permite.
+
+**Atualize a ficha de produto no Notion agora**, se a decisão revelar um
+desalinhamento que ainda não estava registrado. Não espere o fim da sessão.
 
 ---
 
-## ETAPA 4 — Validar a Oportunidade Sexy (gate — não avance sem isso)
+## ETAPA 4 — O que o produto entrega de verdade (investigado a fundo)
 
 ### Passo 0 — Nova oportunidade, não melhoria (checar antes do resto)
 
@@ -438,62 +410,397 @@ tem — não precisa inventar nada fora da casinha).
   disfarçada, o resultado vai soar bem mas não vai converter contra a
   resistência de categoria do lead consciente.
 
-### Checklist de validação
+Se o teste de Passo 0 falhar (melhoria disfarçada), pare aqui e recomende o
+Dr. House — não avance para a Etapa 5 sem um diferencial real.
 
-Antes de apresentar qualquer proposta final ao aluno, valide internamente
-contra este checklist:
+### Investigação direta com o usuário (quando o Passo 0 não bastou)
 
-- [ ] Passou no Passo 0 (nova oportunidade, não melhoria)
-- [ ] Representa um **benefício desejado** (o resultado, não o método/processo)
-- [ ] Tem **menor esforço percebido** que as alternativas do mercado
-- [ ] **Soa irresistível** — não apenas correto, mas magnético
-- [ ] Tem **potencial de virar nome de método ou solução** (a skill avalia esse
-      potencial, mas **nunca sugere o nome em si** — isso não está no escopo)
-- [ ] **É honesta para o `formato_produto`** — a promessa não pede do produto
-      algo que aquele formato de entrega não cumpre sozinho (ex.: um Pacote
-      não promete "acompanhamento", uma Ferramenta não promete
-      "transformação de identidade" — isso é papel de Formação/Mentoria)
-- [ ] **Usa o `pilar_dominante` corretamente** — a formulação da promessa
-      aplica a regra específica daquele pilar (ex.: se o pilar é Gula, a
-      promessa não deve enumerar bônus explicitamente; se é Preguiça, deve
-      nomear o esforço específico eliminado — ver o arquivo do pilar em
-      `references/pilares-do-desejo/`)
-- [ ] **Não desvaloriza nenhum item do `portfolio_produtos`** (Etapa 3) —
-      a promessa não usa outro produto/serviço do aluno como contraste
-      negativo, "desperdício" ou alternativa pior, mesmo que pareça um
-      argumento de venda eficaz (ex.: nunca vender uma comunidade dizendo
-      que pagar mensalidade de uma assessoria "é desperdício", se o aluno
-      também vende essa assessoria)
+Se o Passo 0 já não deu o diferencial (aluno sem diagnóstico do Dr. House, ou
+diagnóstico sem achado específico suficiente), aprofunde:
 
-Se qualquer item falhar: volte para a Etapa 3 ou 3A e continue investigando/
-refinando com o aluno. Não force uma proposta genérica só para fechar a etapa.
+```
+Explica pra mim o passo a passo real de como você entrega isso — não o que
+o produto promete, o que de fato acontece, etapa por etapa, do começo ao
+fim.
+```
+
+### Teste do diferencial (replicável, não opinião)
+
+O diferencial mora dentro do **como**, não do **o quê**. Teste toda resposta:
+**essa frase, dita por qualquer concorrente do mesmo nicho, ainda seria
+verdadeira?** Se sim, ainda é genérica. Se não — só esse usuário, do jeito
+que ele faz, pode dizer essa frase — é diferencial.
+
+**Exemplo 1 (produto físico):** "faço limpeza dental" — qualquer dentista
+pode dizer isso, genérico. "Uso jato pressurizado que dá leve clareamento" —
+nem todo dentista faz assim, passa no teste. Vira a promessa: não só "dentes
+limpos", mas "dentes limpos e mais brancos".
+
+**Exemplo 2 (produto intangível — serviço 1:1):** "ajudo a organizar a
+rotina" — qualquer mentor de produtividade diz isso, genérico. Perguntado
+como faz na prática na primeira sessão, revela que sempre audita os últimos
+7 dias do calendário real do cliente, minuto a minuto, antes de sugerir
+qualquer mudança nova — a maioria dos mentores pede pra montar rotina nova
+sem olhar a real primeiro. Passa no teste. Vira a promessa: não "organize
+sua rotina", mas "descubra onde sua rotina atual já vaza tempo, antes de
+mudar qualquer coisa".
+
+**Exemplo 3 (infoproduto — curso/comunidade):** "ensino a vender no
+orgânico" — qualquer mentor de conteúdo diz isso, genérico. Perguntado o
+passo a passo real, revela que o método sempre parte de mapear o que o
+público já compra hoje (esteira de concorrentes) antes de criar qualquer
+conteúdo novo — a maioria dos cursos de conteúdo ensina a criar sem antes
+mapear a demanda existente. Passa no teste. Vira a promessa: não "aprenda a
+vender no orgânico", mas "descubra o que seu público já está pronto pra
+comprar, antes de gravar o primeiro conteúdo".
+
+### Se a resposta não passar no teste
+
+Continue com "e depois?", "e como você decide isso?", "o que você faz nesse
+mesmo passo que a maioria não faz?" — **no máximo 3 rodadas**. Se depois de
+3 rodadas nada passar no teste do concorrente, **pare e recomende ao aluno
+rodar `/dr-house-triwer` antes de continuar** — a mesma recomendação do
+Passo 0. Não force uma promessa genérica pra dentro do campo; não é papel
+desta etapa inventar um diferencial que não apareceu.
+
+Guarde o diferencial encontrado como `diferencial_produto`.
 
 ---
 
-## ETAPA 5 — Formato de apresentação (sempre página, sem perguntar)
+## ETAPA 5 — Público real: pra quem a promessa fala, e por que essa pessoa compra
+
+A promessa já tem conteúdo (`diferencial_produto`). Esta etapa decide **pra
+quem e em que língua** ela fala. São 7 passos, nesta ordem. Use o que a Etapa
+2 já carregou do Notion ("Meu Público", MDI, diagnóstico do Dr. House) —
+pergunte só o que falta, uma pergunta por vez.
+
+**Modo sem aluno ao vivo** (sessão rodando só a partir de diagnóstico
+anexado, sem interlocutor pra responder): vale para os 7 passos abaixo, não
+só para o pilar (Passo 6). Não pule nenhum passo nem invente resposta —
+infira cada um a partir dos fatos já coletados (Etapa 2-4, `restricao_execucao`
+da Etapa 3 quando relevante), aplicando o mesmo rigor de quem teria
+perguntado. Marque cada inferência como **a confirmar**, nunca como resposta
+direta do aluno, e sinalize isso na próxima interação antes de tratar
+qualquer uma como definitiva.
+
+### Passo 1 — Situação de vida (não demografia)
+
+O teste de público não é faixa etária, renda ou região — é: **essas pessoas
+vivem a mesma situação de vida concreta agora?** Entrega igual é consequência
+de situação igual, nunca o teste em si.
+
+- Faixa ampla que NÃO é problema: arquiteto de casas pra família com filho
+  pequeno, público de 25 a 45 anos — todos vivem a mesma situação (filho
+  pequeno em casa, poder aquisitivo, querem casa de família). Público correto.
+- Faixa ampla que É problema: comunidade de corrida "sem lesão" pra 18-64
+  anos — corpo de 18 anos perdoa erro, corpo de 60 não. Situações de vida
+  diferentes, público errado.
+
+**Autoridade pra corrigir:** o aluno tende a defender público amplo por medo
+de "abrir mão" de vendas — isso é autossabotagem esperada, não dado técnico.
+Se a situação de vida diverge, proponha o recorte certo ativamente e explique
+o porquê. A skill escuta pra coletar fato, não pra decidir por concordância.
+
+### Passo 2 — Verdade de mercado (matéria-prima da premissa factual)
+
+Toda promessa vai citar dores, inimigos, objeções ou hábitos — e cada um
+precisa existir DE VERDADE no mercado atual desse público (a Bateria 1 da
+Etapa 6 vai cobrar isso). Colete agora, uma pergunta por vez:
+
+```
+1. Do que o seu público reclama hoje — das soluções que já tentou, do
+mercado, da própria situação?
+
+2. Por que as pessoas normalmente procuram você / seu produto?
+
+3. Na hora de decidir, seu público compara seu produto com alguma outra
+coisa — um substituto, mesmo que não seja igual? (ex.: Airbnb vs. hotel;
+contratar um social media vs. contratar uma agência)
+```
+
+**Antes de perguntar**, cheque o que já existe no Notion do aluno: banco "Meu
+Público" e MDI (os quadrantes de objeções e situações são exatamente onde
+essa informação mora). Se a resposta já estiver lá, use e apenas confirme.
+O que vier de novo nesta conversa, **registre de volta nessas bases do Notion
+na hora** — não deixe o dado morrer na conversa.
+
+### Passo 3 — Urgência da compra, e quem decide
+
+Classifique a compra deste produto: **dor urgente** (a pessoa precisa resolver
+agora, decide no impulso — ex.: "não sei o que postar hoje") ou **decisão
+considerada** (compara, se imagina, conversa antes — ex.: contratar
+arquiteto)? Ticket não decide isso sozinho. Guarde como `urgencia_compra` —
+em conflito com `papel_esteira` (Etapa 3), `urgencia_compra` define o
+registro da promessa na Etapa 6; `papel_esteira` só adiciona exigências
+(Estrela → subpromessa técnica obrigatória; Paquera/Médio Ticket/
+Posicionamento não têm exigência adicional além da urgência).
+
+Se for decisão considerada, uma segunda pergunta é obrigatória: **quem decide
+a compra pode não ser quem paga** (ex.: no projeto de arquitetura o marido
+assina, a esposa decide). Pergunte quem de fato decide — a promessa fala com
+quem decide. Guarde como `quem_decide`. (Em dor urgente, quem sente a dor
+decide sozinho e no impulso — não há segunda camada a investigar aqui.)
+
+### Passo 4 — Nível de consciência
+
+Há quanto tempo esse público está no mercado/tema do produto? Já executa, ou
+ainda sonha em começar? Guarde como `nivel_consciencia`. Público de baixa
+consciência não entende jargão de categoria — a promessa vai precisar de
+resultado concreto ("fature R$3 mil por mês"), não de rótulo ("torne-se
+profissional"). Isso calibra o vocabulário nas Etapas 6 e 8.
+
+### Passo 5 — Teste de esteira (público candidato vs. portfólio)
+
+Com o público candidato definido (ainda sem promessa escrita — a promessa só
+existe na Etapa 6), teste contra `portfolio_produtos`: **"se eu fosse o
+cliente ideal deste produto, com este público, eu me sentiria mais perto de
+comprar ESTE produto, ou o produto de ticket mais alto do mesmo
+portfólio?"** Se `portfolio_produtos` tiver um produto só (o atual), pule
+este passo. Se os dois parecem servir a mesma pessoa no mesmo momento, o
+público está errado — não é problema de copy, é o produto errado da esteira
+sendo vendido pra essa pessoa, e nenhuma frase conserta isso depois. Reposicione
+o público como um estágio genuíno da jornada (ex.: comunidade pra quem JÁ
+corre e sonha com prova grande; assessoria individual pra quem quer acelerar
+com acompanhamento) — nunca como "o mesmo cliente da versão cara, só que sem
+dinheiro".
+
+### Passo 6 — Pilar de desejo dominante
+
+Depois de fechar situação de vida e urgência, pergunte o que realmente move
+a compra. **Nunca nomeie os pilares** (rótulos como "vaidade" soam
+pretensiosos e o aluno evita marcar o que é verdade). Apresente como
+benefício reconhecível, deixando claro que é seleção múltipla:
+
+```
+Quando alguém pensa em comprar seu produto, o que você considera que ajuda
+nessa decisão? Pode marcar quantos fizerem sentido:
+
+- Ela tem acesso a uma quantidade grande de coisas que vão ajudar (modelos,
+  roteiros, scripts, ferramentas, agentes, guias...) — a sensação de estar
+  levando muita coisa por um preço baixo
+- Ela vai conquistar algo que sempre almejou, que inclusive via em outras
+  pessoas e invejava — um resultado ou uma vida específica. A vida dela e a
+  forma como ela se vê vão mudar por causa disso
+- Vai provar que o mundo está errado e resolver um problema que
+  verdadeiramente a enlouquece e irrita hoje
+- Vai fazer com que o mundo, os concorrentes, os clientes a admirem — que
+  ela seja reconhecida e até invejada
+- Vai agilizar a vida dela, ou resolver por ela algum tópico
+- O produto coloca ela numa nova "prateleira", num grupo melhor — as
+  pessoas olham pra isso e parece que ela venceu
+- Dá a sensação de estar pagando barato
+```
+
+Os itens mapeiam, nesta ordem: Gula, Inveja, Ira, Luxúria/Vaidade, Preguiça,
+Soberba e Avareza — uso interno, nunca mostre os nomes. Se a resposta
+apontar pro gatilho à parte "Segurança" (reduzir risco, não fazer errado),
+reconheça — mas **Segurança nunca é `pilar_dominante`, é modificador**: se
+for o motivo mais forte, o dominante é o segundo pilar mais marcado dos 7, e
+Segurança entra como exigência de prova/garantia na formulação da promessa
+(a Bateria 2 da Etapa 6 avalia só o pilar dos 7). Use
+`references/pilares-do-desejo/INDEX.md` como apoio pra checar se a seleção
+bate com o padrão do `formato_produto`.
+
+### Passo 7 — Verificar a seleção e cruzar os dados repetidos (não pule)
+
+O aluno reconhece padrões, não faz diagnóstico técnico. Antes de aceitar:
+
+- **Item marcado sem lastro na conversa:** pergunte de forma pontual (se
+  marcou volume mas nunca disse o que entrega em quantidade: "o que exatamente
+  você entrega em quantidade, e quanto?").
+- **Algo forte na conversa que não foi marcado:** pergunte se também pesa na
+  decisão, sem sugerir que ele "errou".
+
+Feche a lista, identifique o **dominante** (dos 7, nunca Segurança) e os
+secundários, e abra o arquivo individual do pilar dominante em
+`references/pilares-do-desejo/` antes de escrever qualquer promessa.
+
+Por fim, a **síntese obrigatória**: releia tudo que foi dito sobre dor/desejo
+(Etapas 2, 4 e 5) e cruze — quais itens são a mesma coisa dita com palavras
+diferentes? Escreva: "a dor real, por trás de [A], [B] e [C], é ___". Se
+genuinamente não convergem, a síntese pode concluir "são duas dores
+distintas" — contanto que venha de ter tentado cruzar. Essa síntese, não a
+lista bruta, alimenta a Etapa 6.
+
+Guarde: `publico_promessa` (situação de vida + `quem_decide`),
+`urgencia_compra`, `nivel_consciencia`, `pilar_dominante` (+
+`pilares_secundarios`) e a síntese da dor real.
+
+---
+
+## ETAPA 6 — Julgar e afiar a promessa (troca de persona + bateria tripla)
+
+Até aqui você foi o investigador — paciente, pergunta, escuta. **A partir
+desta etapa você troca de posição: é o comprador cético que já viu 50
+promessas essa semana no feed e ignorou todas.** Quem acabou de coletar os
+dados tende a validar a própria formulação por ela soar coerente — o
+comprador cético não tem esse apego.
+
+### Passo 0 — Escolher o ângulo, sem inventar produto novo
+
+Um mesmo produto quase sempre comporta mais de um ângulo vendável, e cada um
+pede uma promessa diferente. Exemplo: um pacote de checklists de
+acompanhamento de cliente pode ser vendido como (a) uma Ferramenta que dá
+segurança — "nunca mais entre numa reunião sem saber o que perguntar" — se o
+público relatou medo de errar; ou como (b) prova de autoridade — "os mesmos
+processos que uso pra fechar contratos de 6k, pra você copiar" — se o
+público relatou querer ser visto como profissional de resultado. Os dois
+podem ser honestos pro mesmo produto — a escolha depende de qual dor pesou
+de fato na Etapa 5, não de qual soa melhor.
+
+Antes de escrever, responda internamente:
+
+1. Existe mais de um ângulo real dentro deste produto? Nomeie ao menos dois.
+2. Qual conecta com a dor da **síntese da Etapa 5** — não qual parece mais
+   vendável em abstrato?
+3. A promessa vai usar contexto, situação e linguagem que o aluno mencionou —
+   ou estou preenchendo lacuna com algo plausível que ninguém disse?
+
+Se a resposta ao item 3 for "estou inventando", ancore em algo dito — mesmo
+que a promessa fique mais simples. Achar o ângulo é destacar uma parte real
+do produto; inventar é dar à promessa uma dor ou contexto que não apareceu
+na conversa. Guarde `angulo_escolhido` (com o porquê).
+
+### Passo 1 — Gerar duas versões, não uma
+
+Escreva duas candidatas de promessa central, ambas usando
+`diferencial_produto` (Etapa 4), `objetivo_usuario` (Etapa 3), o público e o
+pilar (Etapa 5) — e ambas **no registro certo** para `urgencia_compra` +
+`papel_esteira` (Paquera → tática, curta, objetiva; Estrela → aspiracional,
+com subpromessa técnica obrigatória junto):
+
+- **Versão segura:** a formulação mais óbvia e defensável — a que qualquer
+  redator razoável escreveria primeiro.
+- **Versão de risco:** usa o diferencial de forma mais crua e direta, mesmo
+  que pareça ousada à primeira leitura — não suavize.
+
+Sem a versão segura ao lado, é difícil perceber que a única opção gerada já
+é a morna.
+
+### Passo 2 — A bateria tripla (roda nas duas versões)
+
+Se a ferramenta `Agent`/`Task` estiver disponível, delegue esta bateria a um
+subagente sem o contexto emocional de quem escreveu (ver REGRA GERAL DE
+VERIFICAÇÃO CRÍTICA): entregue as duas versões + todos os fatos coletados
+até aqui — `diferencial_produto` e a entrega real do produto (Etapa 4),
+`publico_promessa`/`urgencia_compra`/`quem_decide` (Etapa 5),
+`papel_esteira` (Etapa 3), `pilar_dominante`, `portfolio_produtos`, as
+respostas de verdade de mercado do Passo 2 da Etapa 5, `nivel_consciencia`,
+e as credenciais/fatos de autoridade já coletados (Etapa 2, "Quem sou eu" e
+Histórias Inevitáveis) — junto com a bateria abaixo, e peça veredito teste a
+teste. Se não houver a ferramenta, rode você mesmo, deliberadamente lento e
+cético.
+
+**Bateria 1 — VERDADE (falhou = mata ou reescreve, sem negociação):**
+
+1. **Premissa factual:** cada dor, inimigo, objeção ou hábito citado na
+   promessa apareceu na conversa/Notion ou foi confirmado pelo aluno como
+   real no mercado DE HOJE? Estrutura perfeita não salva premissa falsa
+   (ex.: "sem mostrar portfólio" morre se ninguém pede portfólio nesse
+   mercado; "molde de revista" morre porque revista nem tem mais molde).
+2. **Honestidade:** se a pessoa executar o que está no produto (a entrega
+   real levantada na Etapa 4), ela chega nesse resultado? Não é o ticket que
+   decide — é promessa vs. entrega (cases e depoimentos reais sustentam
+   promessas ousadas mesmo em ticket baixo).
+3. **Concorrente:** um concorrente direto poderia dizer a mesma frase sem
+   mentir? Se sim, o diferencial da Etapa 4 sumiu — regrediu pra genérico.
+
+**Bateria 2 — DESEJO (falhou = reformula o registro, não só a frase):**
+
+4. **Registro certo:** compra de dor urgente → promessa utilitária e objetiva
+   (quantidade pode ser a própria promessa). Decisão considerada → promessa
+   aspiracional. E se `papel_esteira` = Estrela, a subpromessa técnica está
+   presente?
+5. **Cena reconhecível:** existe uma cena ou momento que o público reconhece
+   na hora — positiva ("vista uma peça que você mesma fez e escute 'onde
+   você comprou?'") ou negativa (inimigo)? Inimigo não é obrigatório; a cena
+   é. Se houver inimigo, três sub-testes: (a) é algo que esse público TEME
+   ser obrigado a fazer/viver — não algo que ele já despreza (dentista não
+   teme dancinha, teme virar blogueiro do Instagram); (b) existe no mercado
+   de hoje; (c) o detalhe é coletivo — a maioria do público viveu ("pontada
+   no joelho" sim; "parou na semana 6 do último treino" não, a menos que o
+   aluno tenha certeza de que todos viveram exatamente isso).
+6. **Pilar ativado:** a formulação aplica a regra do arquivo do
+   `pilar_dominante`? (Gula não enumera bônus; Preguiça nomeia o esforço
+   eliminado; Soberba não tem hedge — releia o arquivo do pilar se precisar.)
+7. **Números pelo esforço:** todo número na promessa representa algo que o
+   comprador PEGA PRONTO (modelos, roteiros — positivo) ou resultado/status
+   ("faturei X", "3 primeiros clientes" — positivo)? Número de esforço do
+   comprador (aulas, módulos, tarefas) ou de bastidor do criador ("testei 60
+   fornecedores") é negativo. E resultado verdadeiro mas inacreditável pro
+   ticket desce pra subpromessa/prova — não fica na frase principal.
+8. **Aposta preservada:** a versão preserva o detalhe específico e um pouco
+   arriscado da Etapa 4, ou suavizou/generalizou no caminho?
+
+**Bateria 3 — FORMULAÇÃO (falhou = polir, sem tocar na substância):**
+
+9. **Vocabulário no nível de consciência:** cada termo da frase significa
+   algo pra esse público (`nivel_consciencia`)? Jargão de categoria
+   ("torne-se social media profissional") não significa nada pra quem ainda
+   sonha em começar — troque por resultado concreto.
+10. **Fala natural e coerência interna:** a frase soa como algo que um ser
+    humano diria (travessões encadeados são sintoma de copy montada)? E cada
+    parte puxa a seguinte, sem salto lógico ("estratégia de conteúdo" não
+    casa com "pacientes por indicação")?
+11. **Credencial máxima:** se a promessa usa credencial, é o fato mais forte
+    real ("3 treinadores medalhistas"), não o rótulo genérico
+    ("especialistas")? Garimpe — o aluno escreve o rótulo sozinho, porque a
+    credencial real é rotina pra ele.
+
+### Passo 3 — Escolher, corrigir se necessário, nomear o porquê
+
+A escolha vem só da bateria, não de qual versão "parece" mais forte. Se a
+versão de risco falhar em algum teste por erro factual (não por ser ousada),
+reescreva só o que quebrou, preservando a especificidade que a fazia vencer
+nos outros testes — e **rode de novo os testes que ela falhou** antes de
+considerar a reescrita pronta (a reescrita pode introduzir uma premissa
+nova, ainda não testada).
+
+O viés mais comum é descartar a versão de risco por "arriscada demais" sem
+ela ter falhado em teste nenhum — isso é regressão pro morno. Se acontecer,
+cite qual teste específico ela falhou. Se nenhum, a versão de risco fica.
+
+Ao entregar, nomeie ao usuário por que a versão escolhida venceu, citando o
+teste que a diferenciou — isso ensina o padrão, não só entrega o resultado.
+
+Guarde `nova_oportunidade` e, se o registro for aspiracional/Estrela,
+`subpromessa` (a camada técnica que sustenta — é também onde entra o
+resultado forte que não coube na promessa central).
+
+---
+
+## ETAPA 7 — Formato de apresentação (sempre página, sem perguntar)
 
 O resultado final desta skill **sempre** é entregue como página HTML com a
 identidade visual Triwer, no mesmo padrão do diagnóstico do Dr. House. Não
 existe pergunta aqui, não existe alternativa em texto puro — siga direto
-para a Etapa 6 e depois para a seção **IDENTIDADE VISUAL — Página de
+para a Etapa 8 e depois para a seção **IDENTIDADE VISUAL — Página de
 resultado**. Isso não deve ser confundido com o `formato_produto` da Etapa
-3A, que é sobre o que o aluno vende, não sobre como esta skill entrega o
+3, que é sobre o que o aluno vende, não sobre como esta skill entrega o
 próprio resultado.
+
+**Nunca gere o resultado como Claude Artifact, em nenhuma hipótese,
+independente do ambiente.** A entrega final é sempre um arquivo `.html`
+salvo em disco seguindo o template-base — o aluno precisa de um arquivo que
+ele consiga abrir, guardar e reenviar (ex.: pro sócio testar). Um Artifact é
+uma prévia dentro da conversa, não um arquivo real; mesmo em ambiente sem
+suporte a escrita em disco, entregue o HTML como texto/código para o aluno
+salvar manualmente — nunca como Artifact.
 
 ---
 
-## ETAPA 6 — Gerar as 5 headlines exploratórias
+## ETAPA 8 — Gerar as 5 headlines exploratórias
 
 **Headline e promessa são dois artefatos diferentes — nunca misture os
-dois.** A promessa ("nova oportunidade", Etapa 4) é uma frase/parágrafo
+dois.** A promessa (`nova_oportunidade`, Etapa 6) é uma frase/parágrafo
 fechado que conduz o produto inteiro, o que apareceria no hero de uma
 página de vendas. Headline é o gancho de abertura de uma peça específica —
 confronta algo pontual para fazer alguém parar de rolar o feed. As 5
 headlines geradas aqui servem para **testar** se a promessa aguenta ser
 comunicada de formas diferentes — elas nunca substituem, reescrevem, ou
 "viram" a promessa no resumo final. Se em algum momento uma headline
-parecer melhor que a `nova oportunidade` já validada na Etapa 4, isso é
-sinal de que a promessa precisa ser revisitada na Etapa 4 — não um convite
+parecer melhor que a `nova_oportunidade` já validada na Etapa 6, isso é
+sinal de que a promessa precisa ser revisitada na Etapa 6 — não um convite
 para copiar a headline para o campo de promessa.
 
 Estas 5 headlines também **não substituem** a seleção completa de modelo de
@@ -518,15 +825,16 @@ testes abaixo com disciplina, e é fácil racionalizar que uma headline fraca
    5; testar a promessa em DOPAs diferentes (ex.: uma em Descoberta, uma em
    Autoridade, uma em Provocação) revela ângulos diferentes de comunicação.
 2. **Escolher o modelo MH mais adequado** para cada DOPA escolhido.
-3. **Usar um dado específico real** — vindo da `nova oportunidade`, do
-   `pilar_dominante`, dos `ativos_marketing_sexys` (Etapa 6A) ou de provas
-   já coletadas. Nunca inventar um número ou resultado que não apareceu na
-   conversa (mesma regra da Etapa 3A Passo 4 — não inventar contexto novo).
+3. **Usar um dado específico real** — vindo da `nova_oportunidade`, do
+   `pilar_dominante`, dos `ativos_marketing_sexys` (Etapa 9) ou de provas já
+   coletadas. Nunca inventar um número ou resultado que não apareceu na
+   conversa (mesma regra da Etapa 6 Passo 0 — não inventar contexto novo).
+   Vocabulário calibrado por `nivel_consciencia` (Etapa 5), como na promessa.
 4. **Rodar os testes do manual** em cada headline antes de considerá-la
    pronta (confronto, especificidade, incompletude, comprimento, pessoa
    gramatical, sem prefixo de DOPA) — descartar e reescrever qualquer uma
    que caia no checklist negativo do manual.
-5. **Verificar o `pilar_dominante`** (Etapa 3A) — releia o arquivo do pilar
+5. **Verificar o `pilar_dominante`** (Etapa 5) — releia o arquivo do pilar
    em `references/pilares-do-desejo/` se precisar garantir que a linguagem
    da headline reflete a regra específica daquele pilar (ex.: uma headline
    para um produto de Gula não deve enumerar quantidade — deve fazer a
@@ -538,118 +846,97 @@ só o texto final.
 
 ---
 
-## ETAPA 6A — Descobrir os ativos de marketing sexys do produto
+## ETAPA 9 — Ativos de marketing: provar a decisão já tomada
 
-Esta etapa existe porque a promessa validada, sozinha, ainda não diz *como
-apresentar* o produto — e é exatamente isso que o aluno normalmente não
-enxerga sozinho. O aluno sabe o que o produto entrega; ele raramente sabe
-quais partes desse produto já são, sem ele perceber, prova viva da
-promessa. Achar isso é trabalho da skill, não uma pergunta a mais para o
-aluno responder — ele já disse tudo que precisa dizer nas etapas
-anteriores, cabe à skill garimpar.
+Ativo de marketing é **resposta a uma promessa que já existe** — nunca
+garimpo aberto. A pergunta desta etapa não é "que elementos interessantes
+existem no produto?" — é: **dado tudo que já foi decidido (objetivo e
+formato na Etapa 3, diferencial na Etapa 4, público e pilar na Etapa 5,
+promessa e subpromessa na Etapa 6), como eu reforço cada peça dessa decisão
+com prova concreta?**
 
 **Não pergunte ao aluno "como isso aparece no seu produto"** — ele
-normalmente não sabe, e é comum o produto real ser "pouco sexy" até esse
-ponto. É a skill que precisa resolver isso a partir dos fatos já
-coletados, não empurrar a pergunta de volta para quem já disse que não
-sabia se vender.
+normalmente não sabe, e é comum o produto ser "pouco sexy" até este ponto. É
+a skill que garimpa, a partir dos fatos já coletados. Aplique a verificação
+crítica (ver REGRA GERAL DE VERIFICAÇÃO CRÍTICA) neste raciocínio — uma
+leitura objetiva enxerga possibilidades que passariam batido para quem só
+quer fechar a etapa rápido.
 
-Aplique a verificação crítica (ver REGRA GERAL DE VERIFICAÇÃO CRÍTICA) para
-este raciocínio — uma leitura objetiva enxerga possibilidades que passariam
-batido para quem só quer fechar a etapa rápido.
+Para cada peça da decisão, procure a prova:
 
-### O que entregar a quem for fazer esse raciocínio
+- **A promessa central (`nova_oportunidade`)** → que elemento do produto ou
+  da história do aluno já prova ela? (prints reais de "onde compro",
+  resultado de aluno, o material por dentro)
+- **O diferencial (`diferencial_produto`, Etapa 4)** → como mostrar o "como"
+  sem vender processo?
+- **O pilar dominante (Etapa 5)** → o que tangibiliza ele de forma
+  mostrável? Use as narrativas-âncora do arquivo do pilar em
+  `references/pilares-do-desejo/` como padrão de raciocínio (Gula → volume
+  visual sem enumerar; Inveja → narrativa real projetável), nunca como texto
+  pronto pra copiar — o que prova cada pilar muda conforme o produto real.
+- **A cena da promessa (Bateria 2, teste 5 da Etapa 6)** → dá pra mostrar a
+  cena? (a "cozinha de conceito aberto que deixa a casa cheirando a bife"
+  vira post, story, comparação antes/depois — conteúdo que ninguém pensaria)
+- **Se a promessa depende de estilo de vida ou prova do criador** (ex.:
+  "trabalhe de qualquer lugar do mundo"), o ativo é obrigatório, não
+  opcional: pergunte "você tem como mostrar isso hoje — fotos, bastidor,
+  rotina?". Se a resposta for não, **não pergunte de novo tentando
+  contornar** — registre como pendência a confirmar depois (ex.: aluno junta
+  material entre sessões) e siga com os demais ativos; não trave a etapa
+  nem force uma volta pra Etapa 6 por causa disso. Só volte pra Etapa 6 se a
+  ausência do ativo tornar a promessa central inteira insustentável (não só
+  um ativo a menos) — e nesse caso, restrinja o Passo 1 da Etapa 6 com a
+  informação nova ("sem prova de estilo de vida disponível"), refaça as
+  Etapas 7-8 só se `nova_oportunidade` mudou, e no máximo uma vez: se a
+  segunda tentativa também esbarrar em falta de prova, entregue a promessa
+  mesmo assim e sinalize ao aluno que esse ativo específico fica pendente.
 
-- `produto_atual` (o que é, como entrega, formato_produto)
-- A **promessa validada** da Etapa 4 (ela também é um ativo de marketing a
-  ser explorado, não só o resultado final — a promessa do Sim Inevitável,
-  "ser desejada e fazer a audiência pedir para comprar", por exemplo, é o
-  que motiva a pergunta abaixo sobre prova visual de desejo)
-- `pilar_dominante` e `pilares_secundarios` (Etapa 3A)
-- Ticket e público-alvo
-- As narrativas-âncora dos arquivos de pilar relevantes em
-  `references/pilares-do-desejo/` — use-as como **padrão de raciocínio**
-  sobre que *tipo* de elemento costuma provar aquele pilar (ex.: o arquivo
-  de Gula aponta para mostrar volume visualmente, sem enumerar em texto; o
-  de Inveja aponta para narrativa real e projetável) — nunca como texto
-  pronto para copiar no resultado, porque o que prova cada pilar muda
-  conforme o produto real do aluno.
+Regras que continuam valendo:
 
-### As perguntas que orientam o raciocínio
+- **Volume de aulas/módulos/conteúdo teórico nunca é ativo válido**, mesmo com
+  pilar Gula — grade de aulas comunica esforço de estudo e ativa Preguiça na
+  direção errada. Só volume de entregável pronto (modelos, templates) vale.
+- **Cada ativo precisa fazer sentido pro público-alvo real** (`publico_promessa`,
+  Etapa 5), não só pro pilar em abstrato — releia o público antes de fechar a
+  lista e confira se cada ativo é algo que essa pessoa específica teria ou
+  faria (ex.: se o público-alvo é "nutricionista que trava na venda por
+  vergonha de parecer vendedora", sem menção a ela mesma aplicar a própria
+  nutrição, um ativo do tipo "mostre sua própria jornada de emagrecimento"
+  não serve — pressupõe um público diferente do validado).
+- Nenhum ativo desvaloriza item do `portfolio_produtos`.
 
-1. De quais formas sexys esse produto específico pode ser apresentado?
-2. Quais elementos que já existem *dentro* do produto (não elementos
-   novos a criar) podem virar ativos de marketing que geram curiosidade?
-3. Quais são as grandes oportunidades que o público ganha com esse
-   produto, além do que já foi dito na promessa?
-4. O que, especificamente neste produto, reforça de forma tangível e
-   mostrável o `pilar_dominante` identificado?
-5. **Esse ativo faz sentido para o público-alvo real, ou só para o
-   mecanismo/pilar em abstrato?** Um ativo pode estar tecnicamente correto
-   para o pilar e ainda assim não fazer sentido para quem de fato compra —
-   ex.: se o público-alvo é "nutricionista que trava na venda por vergonha
-   de parecer vendedora" (sem nenhuma menção a ela mesma aplicar a própria
-   nutrição), um ativo do tipo "mostre sua própria balança/jornada de
-   emagrecimento" não serve — ele pressupõe um público diferente do que foi
-   definido. Antes de fechar a lista, releia o público-alvo da Etapa 3 e
-   confira se cada ativo é algo que essa pessoa específica teria ou faria.
-6. **Volume de aulas/módulos/conteúdo teórico nunca é ativo válido, mesmo
-   quando o pilar é Gula.** Gula funciona com volume de *entregável pronto
-   para usar* (modelos, templates, roteiros, checklists) — quantidade de
-   aulas é o oposto disso, porque ativa Preguiça na direção errada: todo
-   ser humano quer o problema resolvido com o menor esforço possível, e
-   "10 módulos densos" comunica esforço de estudo, não resultado facilitado.
-   Nunca sugira mostrar a grade de aulas, o número de módulos ou a
-   profundidade do conteúdo teórico como prova de valor — isso desvenda o
-   produto e afasta justamente quem mais quer comprar por Preguiça.
-
-**Exemplo do raciocínio esperado** (não é um padrão a copiar — é para
-ilustrar o nível de especificidade): para um produto cujo pilar dominante
-é Soberba/Vaidade e a promessa é "ser desejada, a audiência pede para
-comprar", o ativo de marketing é prints reais de gente perguntando "onde
-compro" antes mesmo de a oferta abrir — isso tangibiliza a promessa em
-algo mostrável. Para um produto de Gula (volume de modelos validados), o
-ativo correto não é o mesmo tipo de prova — é mostrar o conteúdo por
-dentro (pasta, Trello, quantidade real) sem anunciar em texto que é bônus.
-O raciocínio muda por pilar e por produto; o objetivo é achar o
-equivalente certo para o produto em questão, não reaplicar um exemplo de
-outro caso.
-
-### Resultado esperado
-
-3 a 5 **ativos de marketing sexys** — elementos concretos e específicos
-do produto do aluno que podem ser usados em qualquer peça futura (post,
-story, live, página de vendas, copy) para tangibilizar o pilar dominante e
-a promessa. Cada um deve dizer *o quê* mostrar e *por que* aquilo prova a
-promessa — não apenas "mostre prova social", isso é genérico demais para
-ser útil.
+**Resultado esperado:** 3 a 5 ativos concretos e específicos, cada um dizendo
+*o quê* mostrar e *por que* aquilo prova a promessa/pilar — nunca "use prova
+social", que serve pra qualquer produto de qualquer aluno.
 
 Guarde como `ativos_marketing_sexys` (lista).
 
 ---
 
-## ETAPA 7 — Montar o resumo, verificar e apresentar para aprovação
+## ETAPA 10 — Montar o resumo, verificar e apresentar para aprovação
 
 ### Passo 1 — Montar o resumo
 
-Os campos abaixo alimentam a página HTML final (Etapa 5) — monte-os antes de
+Os campos abaixo alimentam a página HTML final (Etapa 7) — monte-os antes de
 preencher o template.
 
 ```
 Oportunidade Sexy definida:
 
-**A nova oportunidade:** [formulação final]
+**A nova oportunidade:** [nova_oportunidade]
+**Subpromessa técnica:** [subpromessa — só se papel_esteira = Estrela ou registro aspiracional]
 **Ângulo escolhido:** [angulo_escolhido — qual recorte do produto está sendo destacado, e por que essa dor/desejo pesou mais na conversa]
-**Formato de entrega:** [formato_produto]
+**Formato de entrega:** [formato_produto] · **Papel na esteira:** [papel_esteira]
 **Pilar de desejo dominante:** [pilar_dominante] (+ [pilares_secundarios], se houver)
-**Público-alvo:** [nome do perfil / descrição]
+**Público-alvo:** [publico_promessa — situação de vida + quem_decide] · **Urgência de compra:** [urgencia_compra] · **Nível de consciência:** [nivel_consciencia]
 **O que é o produto:** [descrição]
-**Maiores dores e desejos desse público:** [lista]
+**Diferencial investigado:** [diferencial_produto]
+**Síntese da dor real:** [síntese da Etapa 5]
 **O que aprendi sobre você que embasa essa proposta:** [história/diferenciais usados]
 **Histórias e provas sociais que podem ser usadas:** [lista com origem — Notion ou coletado agora]
 **Palavras-chave estratégicas:** [lista]
 
-**Ativos de marketing sexys** (Etapa 6A — o que mostrar e por que prova a promessa):
+**Ativos de marketing sexys** (Etapa 9 — o que mostrar e por que prova a promessa):
 1. [ativo 1: o que mostrar] — [por que isso prova a promessa/pilar dominante]
 2. [ativo 2]
 3. [ativo 3]
@@ -666,7 +953,7 @@ Oportunidade Sexy definida:
 ### Material de apoio opcional — os 5 elementos da narrativa
 
 Isto **não é o hero de página de vendas** (hero é só promessa + sub-promessa
-+ botão, mais simples que isso) e **não substitui** a `nova oportunidade`
++ botão, mais simples que isso) e **não substitui** a `nova_oportunidade`
 acima, que continua sendo o resultado principal desta skill. É um material
 extra, útil para o aluno usar depois na construção de campanhas maiores —
 ofereça como algo adicional, não como parte obrigatória do resumo:
@@ -683,93 +970,66 @@ oportunidade, pra você usar em campanhas futuras:
 ```
 
 Só monte este bloco se o aluno confirmar interesse — não é parte do fluxo
-obrigatório de aprovação da Etapa 7.
+obrigatório de aprovação desta etapa.
 
 ### Passo 2 — Segunda passada crítica (gate — não pule)
 
 Antes de mostrar este resumo ao aluno, aplique a verificação crítica (ver
 REGRA GERAL DE VERIFICAÇÃO CRÍTICA) — quem acabou de escrever uma promessa
 tende a validar a própria formulação só por soar bem, a mesma armadilha que
-gerou o output ruim que motivou esta skill a existir neste formato (uma
-promessa de transformação bonita para um produto que na prática era um
-pacote de modelos prontos). Não continue direto do Passo 1 para o Passo 3
-sem esse intervalo.
-
-Confira, puxando os arquivos de referência relevantes se precisar
+gerou o output ruim que motivou esta skill a existir neste formato. Não
+continue direto do Passo 1 para o Passo 3 sem esse intervalo. A Bateria
+tripla já rodou na Etapa 6 — este passo é a checagem de que o resumo inteiro
+(ativos e headlines incluídos, não só a promessa) ainda está coerente com
+tudo isso, puxando os arquivos de referência relevantes se precisar
 relembrar a regra exata do pilar em questão:
 
 - [ ] **Honestidade de formato:** a promessa promete algo que o
       `formato_produto` entrega sozinho, sem depender de acompanhamento,
       curadoria ou esforço do aluno que não faz parte da entrega descrita?
-      (ex.: um Pacote de modelos não pode prometer "vender todo dia sem
-      esforço" como se ensinasse um método — ele entrega volume validado,
-      quem aplica é o comprador)
 - [ ] **Fidelidade ao `angulo_escolhido`, sem inventar produto novo:** a
       promessa final ainda é sobre o mesmo produto e situação real
-      levantados na Etapa 3, só destacando o ângulo escolhido no Passo 4 da
-      Etapa 3A? Ou ela introduziu um contexto, cenário ou dor que **ninguém
-      mencionou na conversa** (ex.: o produto é um pacote de checklists de
-      acompanhamento de cliente, mas a promessa final fala de "reunião de
-      fechamento de venda", que nunca foi citado)? Destacar um ângulo real
-      é o trabalho da skill; inventar uma situação nova não é.
+      levantados nas Etapas 3-5, só destacando o ângulo escolhido no Passo 0
+      da Etapa 6? Ou ela introduziu um contexto, cenário ou dor que
+      **ninguém mencionou na conversa**?
 - [ ] **Aplicação correta do pilar:** a formulação segue a regra específica
       do `pilar_dominante`? (releia o arquivo do pilar em
-      `references/pilares-do-desejo/` se tiver dúvida — ex.: Gula não pode
-      aparecer como lista de bônus enumerados, Preguiça precisa nomear o
-      esforço específico eliminado, Soberba não pode ter hedge)
-- [ ] **Escopo específico, não amplitude:** se o formato for de ticket
-      baixo (Ebook, Pacotes, Ferramenta), a promessa cobre uma situação só
-      — não avisa "resolve tudo" nem mistura contextos diferentes?
-- [ ] **Nada de método/processo sendo vendido** — ainda vale a regra da
-      Etapa 4, mas releia com o formato em mente: às vezes um processo
-      "escapa" disfarçado de resultado quando o formato é Curso ou Formação.
+      `references/pilares-do-desejo/` se tiver dúvida)
+- [ ] **Escopo específico, não amplitude:** se `papel_esteira` for Paquera
+      (ticket baixo), a promessa cobre uma situação só — não avisa "resolve
+      tudo" nem mistura contextos diferentes?
+- [ ] **Nada de método/processo sendo vendido** — releia com o formato em
+      mente: às vezes um processo "escapa" disfarçado de resultado quando o
+      formato é Curso ou Formação.
 - [ ] **Ativos de marketing são específicos, não genéricos:** cada item de
-      `ativos_marketing_sexys` (Etapa 6A) nomeia um elemento concreto do
-      produto do aluno (um print real, um número real, um material que já
-      existe) e explica por que ele prova a promessa/pilar — nenhum item
-      pode ser um conselho genérico do tipo "use prova social" ou "mostre
-      depoimentos", que serviria para qualquer produto de qualquer aluno.
-- [ ] **Ativos coerentes com o público-alvo real:** cada ativo pressupõe
-      algo que o público-alvo definido na Etapa 3 de fato tem ou vive — não
-      só algo coerente com o pilar/mecanismo em abstrato? (ex.: um ativo que
-      pede para mostrar "sua própria jornada de emagrecimento" só é coerente
-      se o público-alvo foi descrito como alguém que também vive essa
-      jornada — se o público é só "profissional que trava na venda", sem
-      nenhuma menção a isso, o ativo pressupõe um público diferente do que
-      foi validado)
-- [ ] **Nenhum item do `portfolio_produtos` foi desvalorizado:** releia a
-      promessa, os ativos e as 5 headlines uma a uma — nenhuma delas compara
-      este produto favoravelmente contra outro produto/serviço do próprio
-      aluno, nem usa esse outro produto como exemplo de "desperdício" ou
-      alternativa pior. Se o aluno vende assessoria/mentoria/consultoria de
-      ticket alto e o produto atual é de ticket mais baixo, é fácil esse
-      contraste escapar disfarçado de argumento de venda — confira com
-      atenção redobrada nesse cenário.
+      `ativos_marketing_sexys` (Etapa 9) nomeia um elemento concreto do
+      produto do aluno e explica por que ele prova a promessa/pilar —
+      nenhum item pode ser conselho genérico do tipo "use prova social".
+- [ ] **Ativos coerentes com o público-alvo real** (`publico_promessa`,
+      Etapa 5) — não só coerentes com o pilar/mecanismo em abstrato.
+- [ ] **Nenhum item do `portfolio_produtos` foi desvalorizado** e o teste de
+      esteira da Etapa 5 (Passo 5) segue de pé — releia promessa, ativos e
+      headlines uma a uma.
 - [ ] **Nenhum ativo ou headline usa volume de aulas/módulos como prova:**
-      quantidade só é ativo válido quando é entregável pronto para usar
-      (modelos, templates, roteiros) — nunca quando é grade de aulas,
-      número de módulos ou profundidade de conteúdo teórico, mesmo com
-      pilar Gula.
+      quantidade só é ativo válido quando é entregável pronto para usar.
 - [ ] **Se houver diagnóstico do Dr. House anexado, a promessa responde aos
-      achados críticos/estruturais e às perguntas em aberto dele** — não
-      repete o mesmo problema que o diagnóstico já apontou (ex.: público
-      heterogêneo demais tratado como um só, mecanismo que remove o que o
-      público mais pede).
+      achados críticos/estruturais e às perguntas em aberto dele.**
 
 **Se qualquer item falhar:** volte e reformule a proposta (não é preciso
 reabrir a investigação inteira — normalmente o ajuste é só na formulação da
-`nova oportunidade`, nos ativos de marketing ou nas headlines). Repita esta
+`nova_oportunidade`, nos ativos de marketing ou nas headlines). Repita esta
 passada crítica depois do ajuste. Só siga para o Passo 3 quando todos os
 itens passarem.
 
 ### Passo 3 — Apresentar para aprovação
 
 Siga a seção **IDENTIDADE VISUAL — Página de resultado** abaixo para gerar a
-página, preenchendo-a com os campos acima. Entregue a página ao aluno sempre
-como arquivo HTML — nunca como Claude Artifact, independente do ambiente. Não
-pergunte ao aluno como ele prefere receber; na conversa, apenas pergunte:
-"Gerei a página com a Oportunidade Sexy de [produto_atual]. Ficou do jeito que você
-imaginava? Posso salvar o conteúdo na subpágina do seu Notion também?"
+página, preenchendo-a com os campos acima. Entregue a página ao aluno **sempre
+como arquivo `.html` real — nunca como Claude Artifact, em nenhuma hipótese**
+(ver Etapa 7) e, na conversa, pergunte: "Gerei a página com a Oportunidade
+Sexy de [produto_atual]. Ficou
+do jeito que você imaginava? Posso salvar o conteúdo na subpágina do seu
+Notion também?"
 
 Aguarde confirmação explícita antes de gravar. Se o aluno pedir ajustes,
 refine e gere a página de novo antes de gravar.
@@ -778,7 +1038,7 @@ refine e gere a página de novo antes de gravar.
 
 ## IDENTIDADE VISUAL — Página de resultado
 
-Esta seção é sempre usada (Etapa 5 e 7) — o resultado desta skill é sempre
+Esta seção é sempre usada (Etapas 7 e 10) — o resultado desta skill é sempre
 entregue como página HTML, nunca como texto puro na conversa.
 
 - **Template-base:** `~/.claude/skills/sexy-triwer/assets/template-oportunidade-sexy.html`.
@@ -788,24 +1048,30 @@ entregue como página HTML, nunca como texto puro na conversa.
   `dr-house-triwer`. Nunca altere variáveis de cor, fontes, espaçamento ou
   crie classes novas. Só o conteúdo textual muda.
 - **Preenchimento:** substitua cada `[[CAMPO]]` pelos dados desta sessão
-  (mesmos campos da Etapa 7, incluindo `[[FORMATO_PRODUTO]]` e
-  `[[PILAR_DOMINANTE]]` definidos na Etapa 3A). Repita `<li>` e blocos
-  `.achado.forte` quantas vezes forem necessários para as dores/desejos e
-  provas coletadas. Se não houver prova social coletada nesta sessão, remova
-  a seção `#provas` inteira em vez de deixar o campo vazio.
+  (mesmos campos da Etapa 10, incluindo `[[FORMATO_PRODUTO]]` e
+  `[[PAPEL_ESTEIRA]]` definidos na Etapa 3, e `[[PILAR_DOMINANTE]]`,
+  `[[URGENCIA_COMPRA]]` e `[[NIVEL_CONSCIENCIA]]` definidos na Etapa 5).
+  Repita `<li>` e blocos `.achado.forte` quantas vezes forem necessários
+  para as dores/desejos e provas coletadas. Se não houver prova social
+  coletada nesta sessão, remova a seção `#provas` inteira em vez de deixar
+  o campo vazio.
+- **Seção `#subpromessa` é condicional:** só inclua no HTML final se
+  `papel_esteira` = Estrela (a Etapa 6 exige subpromessa nesse caso). Nos
+  demais papéis, remova a `<section id="subpromessa">` inteira **e** o link
+  correspondente no `<nav class="anchor-bar">` — nunca deixe link morto no
+  menu nem seção com `[[SUBPROMESSA]]` vazio.
 - **Nunca deixe `[[CAMPO]]` sem preencher no HTML final** — é um marcador de
   template, não um placeholder visível para o aluno.
 - **Entrega:** gere um HTML autocontido (sem dependências externas além das
   fontes do Google Fonts já referenciadas) e entregue sempre como arquivo
-  `.html` salvo em disco. **Proibido gerar como Claude Artifact** — mesmo em
-  ambientes onde a ferramenta de artifact está disponível, não a use aqui.
+  real — nunca como Claude Artifact, em nenhuma hipótese.
 
 ---
 
-## ETAPA 8 — Gravar no Notion
+## ETAPA 11 — Gravar no Notion
 
 Após aprovação, escreva na subpágina de `produto_atual` (dentro da database
-"Produtos") um bloco com a mesma estrutura de campos da Etapa 7 (título
+"Produtos") um bloco com a mesma estrutura de campos da Etapa 10 (título
 "Oportunidade Sexy", seguido dos campos listados) — **sempre como texto
 formatado**: o Notion não renderiza o CSS da página, então mesmo o aluno
 tendo recebido a versão em página, o que vai para o Notion é o conteúdo
@@ -821,7 +1087,7 @@ Salvo! A Oportunidade Sexy de [produto_atual] está registrada no seu Notion.
 
 ---
 
-## ETAPA 9 — Atualizar memória e fechar
+## ETAPA 12 — Atualizar memória e fechar
 
 Atualize `~/.claude/skills/sexy-triwer/memoria.md`:
 
@@ -840,14 +1106,15 @@ _Última atualização: [data]_
   nunca desvalorizar nenhum deles ao formular a promessa de outro produto]
 
 ## Produtos com Oportunidade Sexy já definida
-- [nome do produto] | [data] | [formato_produto] | [pilar_dominante] | [URL da subpágina]
+- [nome do produto] | [data] | [formato_produto] | [papel_esteira] | [pilar_dominante] | [urgencia_compra] | [nivel_consciencia] | [URL da subpágina]
 
 ## Preferências registradas
 - [qualquer preferência que o aluno expressar durante o uso]
 ```
 
-Guardar `formato_produto` e `pilar_dominante` aqui evita reperguntar os dois
-eixos da Etapa 3A se o aluno voltar para refinar o mesmo produto depois.
+Guardar `formato_produto`, `papel_esteira`, `pilar_dominante`,
+`urgencia_compra` e `nivel_consciencia` aqui evita reperguntar os eixos das
+Etapas 3 e 5 se o aluno voltar para refinar o mesmo produto depois.
 Guardar o portfólio completo evita ter que perguntar de novo a cada produto
 novo, e permite checar canibalização mesmo quando o aluno não menciona o
 outro produto na sessão atual.
@@ -856,7 +1123,7 @@ outro produto na sessão atual.
 
 ## REGRAS ESTRUTURAIS (não amarradas a uma etapa específica)
 
-As regras específicas de cada etapa (formato×pilar independentes, não
+As regras específicas de cada etapa (registro por urgência/esteira, não
 nomear os pilares, headline nunca vira promessa, ângulo real sem inventar
 contexto, etc.) já estão explicadas — com o contexto completo do porquê —
 na própria etapa correspondente. Esta lista é só o que vale a sessão
@@ -875,10 +1142,14 @@ inteira, sem etapa dona:
 7. Nunca gravar no Notion sem confirmação explícita do aluno.
 8. Nunca desvalorizar, comparar desfavoravelmente ou tornar menos desejável
    qualquer item do `portfolio_produtos` do aluno (Etapa 3) — mesmo que
-   pareça um argumento de venda eficaz para o produto atual.
-9. Sempre entregar o resultado como arquivo HTML — nunca como Claude
-   Artifact, mesmo que o ambiente disponibilize a ferramenta (ver Etapa 5 /
-   IDENTIDADE VISUAL).
+   pareça um argumento de venda eficaz para o produto atual, e o teste de
+   esteira (Etapa 5, Passo 5) foi feito para o público, não só a linguagem.
+9. Nunca gerar o resultado como Claude Artifact, em nenhuma hipótese — a
+   entrega final (Etapa 7) é sempre um arquivo `.html` real, independente do
+   ambiente.
+10. Toda dor, inimigo, objeção, hábito ou credencial citado na promessa
+    precisa ser real e atual nesse mercado (Etapa 5 Passo 2 e Etapa 6
+    Bateria 1) — nunca por plausibilidade.
 
 ---
 
@@ -893,8 +1164,9 @@ inteira, sem etapa dona:
 ├── assets/
 │   └── template-oportunidade-sexy.html      ← identidade visual da página de resultado
 ├── references/
+│   ├── esteira.md                            ← ler na Etapa 3 (papel Paquera/Médio Ticket/Estrela/Posicionamento)
 │   ├── pilares-do-desejo/
-│   │   ├── INDEX.md                         ← ler na Etapa 3A (visão geral + mapeamento)
+│   │   ├── INDEX.md                         ← ler na Etapa 5 (visão geral + mapeamento)
 │   │   ├── 01-gula.md
 │   │   ├── 02-inveja.md
 │   │   ├── 03-ira.md
@@ -903,7 +1175,7 @@ inteira, sem etapa dona:
 │   │   ├── 06-soberba.md
 │   │   └── 07-avareza.md                    ← ler o arquivo individual só quando o pilar for identificado
 │   ├── tipos-de-produto/
-│   │   ├── INDEX.md                         ← ler na Etapa 3A (visão geral + mapeamento)
+│   │   ├── INDEX.md                         ← ler na Etapa 3 (visão geral + mapeamento)
 │   │   ├── desafio.md
 │   │   ├── pacotes.md
 │   │   ├── curso.md
@@ -914,7 +1186,7 @@ inteira, sem etapa dona:
 │   │   ├── mentoria-individual.md
 │   │   ├── consultoria.md
 │   │   └── ebook.md                         ← ler o arquivo individual só quando o formato for identificado
-│   ├── manual-headline.md                   ← ler na Etapa 6 (5 modelos MH, DOPA, testes de qualidade)
+│   ├── manual-headline.md                   ← ler na Etapa 8 (5 modelos MH, DOPA, testes de qualidade)
 │   └── notion-setup.md                      ← ler só se a conexão do Notion falhar no BOOT
 └── memoria.md                            ← criado automaticamente no primeiro uso
 ```
@@ -928,6 +1200,7 @@ mkdir -p $BASE/assets $BASE/references/pilares-do-desejo $BASE/references/tipos-
 cp SKILL.md $BASE/
 cp VERSION $BASE/
 cp assets/template-oportunidade-sexy.html $BASE/assets/
+cp references/esteira.md $BASE/references/
 cp references/pilares-do-desejo/*.md $BASE/references/pilares-do-desejo/
 cp references/tipos-de-produto/*.md $BASE/references/tipos-de-produto/
 cp references/manual-headline.md $BASE/references/
@@ -945,6 +1218,7 @@ New-Item -ItemType Directory -Force -Path "$BASE\references\tipos-de-produto"
 Copy-Item SKILL.md $BASE\
 Copy-Item VERSION $BASE\
 Copy-Item assets\template-oportunidade-sexy.html "$BASE\assets\"
+Copy-Item references\esteira.md "$BASE\references\"
 Copy-Item references\pilares-do-desejo\*.md "$BASE\references\pilares-do-desejo\"
 Copy-Item references\tipos-de-produto\*.md "$BASE\references\tipos-de-produto\"
 Copy-Item references\manual-headline.md "$BASE\references\"

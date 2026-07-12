@@ -1,7 +1,7 @@
 <!--
   TEMPLATE — Página de resultado da Sexy Triwer
   ================================================
-  Usado pela Etapa 7 do SKILL.md quando o aluno escolhe receber a
+  Usado pela Etapa 10 do SKILL.md quando o aluno escolhe receber a
   Oportunidade Sexy como página (em vez de texto na conversa).
 
   REGRA DE FIDELIDADE: o bloco <style> abaixo é a identidade visual
@@ -15,16 +15,21 @@
 
   Seções deste template (nessa ordem, todas obrigatórias exceto onde
   marcado "opcional"):
-  1. hero — nome do produto + "Oportunidade Sexy" + tags de formato/pilar
-     (FORMATO_PRODUTO e PILAR_DOMINANTE, definidos na Etapa 3A do SKILL.md)
+  1. hero — nome do produto + "Oportunidade Sexy" + tags de formato/papel
+     na esteira/pilar (FORMATO_PRODUTO, PAPEL_ESTEIRA e PILAR_DOMINANTE,
+     definidos na Etapa 3 e na Etapa 5 do SKILL.md)
   2. #oportunidade — a formulação final, em destaque (.callout)
-  3. #publico — público-alvo + dores/desejos (.checklist)
-  4. #provas — autoridade/prova social (.achado.forte) [opcional se não houver prova coletada]
-  5. #ativos — ativos de marketing sexys da Etapa 6A (.checklist) — o que
+  3. #subpromessa — a camada técnica que sustenta a promessa (.bridge-card)
+     [obrigatório só quando PAPEL_ESTEIRA = Estrela; omitir o <section>
+     inteiro nos demais papéis — ver Etapa 6 Passo 3 do SKILL.md]
+  4. #publico — público-alvo (situação de vida + urgência + nível de
+     consciência) + dores/desejos (.checklist)
+  5. #provas — autoridade/prova social (.achado.forte) [opcional se não houver prova coletada]
+  6. #ativos — ativos de marketing sexys da Etapa 9 (.checklist) — o que
      mostrar e por que prova a promessa/pilar dominante, específico do
      produto do aluno (nunca genérico)
-  6. #headlines — as 5 headlines exploratórias (.numlist)
-  7. footer
+  7. #headlines — as 5 headlines exploratórias (.numlist)
+  8. footer
 -->
 <!DOCTYPE html>
 <html lang="pt-BR">
@@ -317,6 +322,38 @@ section.block p strong { color: var(--ink); font-weight: 500; }
   font-family: var(--mono); font-size: 12px; color: var(--red-dark); font-weight: 700;
 }
 
+.contraste { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin: 20px 0; }
+@media (max-width: 640px) { .contraste { grid-template-columns: 1fr; } }
+.contraste-col {
+  border-radius: 8px;
+  padding: 24px;
+}
+.contraste-col.antes {
+  background: var(--card-bg);
+  border: 1px solid var(--rule);
+}
+.contraste-col.depois {
+  background: var(--ink);
+  border: 1px solid var(--gold-1);
+}
+.contraste-label {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+.contraste-col.antes .contraste-label { color: var(--muted); }
+.contraste-col.depois .contraste-label { color: var(--gold-2); }
+.contraste-col p {
+  font-size: 15px;
+  line-height: 1.6;
+  margin-bottom: 0;
+  max-width: 100%;
+}
+.contraste-col.antes p { color: var(--ink-soft); }
+.contraste-col.depois p { color: var(--gold-3); font-family: var(--serif); font-style: italic; }
+
 footer {
   background: var(--ink);
   padding: 36px 32px;
@@ -335,7 +372,12 @@ footer {
 
 <nav class="anchor-bar">
   <div class="anchor-bar-inner">
+    <a class="anchor-link" href="#antes-depois">Antes/Depois</a>
     <a class="anchor-link" href="#oportunidade">Oportunidade</a>
+    <!-- Inclua o link abaixo SÓ se a seção #subpromessa existir nesta página
+         (papel_esteira = Estrela). Remova esta linha nos demais papéis, junto
+         com a seção correspondente — nunca deixe link morto no menu. -->
+    <a class="anchor-link" href="#subpromessa">Subpromessa</a>
     <a class="anchor-link" href="#publico">Público</a>
     <a class="anchor-link" href="#provas">Provas</a>
     <a class="anchor-link" href="#ativos">Ativos</a>
@@ -353,10 +395,28 @@ footer {
       <span class="tag outline">[[DATA]]</span>
       <span class="tag outline">Sexy Triwer · Descoberta de Promessa</span>
       <span class="tag outline">Formato: [[FORMATO_PRODUTO]]</span>
+      <span class="tag outline">Papel na esteira: [[PAPEL_ESTEIRA]]</span>
       <span class="tag outline">Pilar: [[PILAR_DOMINANTE]]</span>
     </div>
   </div>
 </header>
+
+<section class="block" id="antes-depois">
+  <div class="container">
+    <div class="section-marker">O que mudou</div>
+    <h2>Como era <em>antes</em>, como fica <em>agora</em></h2>
+    <div class="contraste">
+      <div class="contraste-col antes">
+        <div class="contraste-label">Como era apresentado antes</div>
+        <p>[[COMO_ERA_ANTES — a frase literal ou o resumo de como o aluno descrevia o produto na abertura da Etapa 3/4, antes da investigação]]</p>
+      </div>
+      <div class="contraste-col depois">
+        <div class="contraste-label">A nova oportunidade</div>
+        <p>[[A_NOVA_OPORTUNIDADE — mesma formulação final que aparece no callout abaixo]]</p>
+      </div>
+    </div>
+  </div>
+</section>
 
 <section class="block" id="oportunidade">
   <div class="container">
@@ -364,6 +424,20 @@ footer {
     <h2>O que a gente vai <em>vender</em></h2>
     <div class="callout">
       <p>[[A_NOVA_OPORTUNIDADE — formulação final, uma ou duas frases, no tom que soa irresistível para o público]]</p>
+    </div>
+  </div>
+</section>
+
+<!-- Seção obrigatória só quando PAPEL_ESTEIRA = Estrela (Etapa 6 Passo 3 do SKILL.md).
+     Nos demais papéis (Paquera, Médio Ticket, Posicionamento), omita o <section> inteiro
+     — não deixe o bloco vazio nem com [[COLCHETE]] sem preencher. -->
+<section class="block alt" id="subpromessa">
+  <div class="container">
+    <div class="section-marker">A camada técnica</div>
+    <h2>Como isso <em>acontece</em> na prática</h2>
+    <div class="bridge-card">
+      <div class="bridge-label">Subpromessa</div>
+      <p>[[SUBPROMESSA — a camada mais concreta/mensurável que sustenta a promessa aspiracional acima, incluindo o resultado forte que não coube na frase principal]]</p>
     </div>
   </div>
 </section>
@@ -377,7 +451,11 @@ footer {
       <span class="bloco-title">Público-alvo</span>
       <span class="bloco-line"></span>
     </div>
-    <p>[[PUBLICO_ALVO — descrição de quem compra]]</p>
+    <p>[[PUBLICO_ALVO — situação de vida + quem decide, descrição de quem compra]]</p>
+    <div class="hero-meta" style="margin-bottom: 24px;">
+      <span class="tag outline">Urgência: [[URGENCIA_COMPRA]]</span>
+      <span class="tag outline">Nível de consciência: [[NIVEL_CONSCIENCIA]]</span>
+    </div>
 
     <div class="bloco-header">
       <span class="bloco-num">02</span>
@@ -409,7 +487,7 @@ footer {
 
 <section class="block alt" id="ativos">
   <div class="container">
-    <div class="section-marker">Ativos de marketing sexys</div>
+    <div class="section-marker">Ativos de marketing sexys — Etapa 9</div>
     <h2>O que <em>mostrar</em> para provar essa promessa</h2>
     <ul class="checklist">
       <li><strong>[[ATIVO_1 — o que mostrar]]</strong> [[POR_QUE_1 — por que isso prova a promessa/pilar dominante]]</li>

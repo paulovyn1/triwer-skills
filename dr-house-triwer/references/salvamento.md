@@ -60,6 +60,38 @@ dado novo.
 **Database de produto** (`produtos_db_url`)
 Se o produto diagnosticado nesta sessão ainda não está cadastrado, ou está desatualizado
 em relação ao que foi descrito na escavação (preço, formato, entregáveis), atualize.
+Mantenha esta nota resumida — é lida por várias skills (Sexy, carrossel-triwer,
+criar-aula-triwer), e cada uma paga o custo de token de ler ela inteira sempre que
+precisa de contexto de produto.
+
+**Log de Investigação — Dr. House (subpágina da nota de produto)**
+Crie ou atualize sempre, mesmo que a nota de produto em si não precise de mudança.
+Este log existe porque a Fase 1 (Bloco 4 — Mecanismo) coleta 3 respostas que a Seção 1
+do HTML resume ou descarta — em especial as respostas 2 ("por que é diferente do
+mercado") e 3 ("o que o mercado ensina hoje") raramente sobrevivem à compressão do
+resumo, mas são exatamente o material de onde a skill Sexy extrai diferencial de
+promessa (o "como" específico por trás do "o quê" genérico).
+
+Localize a subpágina a partir de `produtos_db_url` (a mesma URL usada acima, não uma
+navegação nova) — abra a entrada do produto diagnosticado nesta sessão e procure uma
+subpágina com esse título (ou aproximado: "Log de Investigação", "Log Dr. House"). Se
+não existir ainda, crie uma como subpágina dela. Registre, na íntegra e sem resumir, as
+3 respostas do Bloco 4 desta sessão — mesmo que pareçam repetir o que já foi dito em
+sessão anterior; cada sessão é um registro novo, não uma substituição. Se já existir log
+de sessão anterior, adicione a entrada nova ao final, com data, não sobrescreva.
+
+Formato de cada entrada:
+```
+## Sessão [data]
+**1. Como funciona (passo a passo):** [resposta literal do aluno]
+**2. Por que é diferente do mercado:** [resposta literal do aluno]
+**3. O que o mercado ensina hoje:** [resposta literal do aluno]
+```
+
+Esta subpágina não é lida por padrão por nenhuma skill — é consultada só quando o
+resumo da nota de produto não for suficiente (ex.: a skill Sexy, ao investigar
+diferencial de produto, abre este log só se o resumo não render uma promessa forte).
+Por isso pode ficar longa e detalhada sem custar token às leituras normais da ficha.
 
 ## Como escrever a atualização
 

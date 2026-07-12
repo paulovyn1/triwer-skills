@@ -18,6 +18,15 @@ frontmatter do `SKILL.md` (não duplicado aqui).
 
 ---
 
+## 1.2.0 - 2026-07-12
+- Adiciona seção "Log de Investigação — Dr. House" em `references/salvamento.md`:
+  cria/atualiza sempre uma subpágina da nota de produto (localizada via
+  `produtos_db_url`, sem navegação nova) registrando na íntegra as 3 respostas
+  do Bloco 4 (Mecanismo) de cada sessão — especialmente as respostas 2 e 3, que
+  o resumo do HTML costuma descartar e são exatamente o material de onde a
+  skill Sexy extrai diferencial de promessa. Append por sessão, nunca
+  sobrescreve. Consultado sob demanda pela skill Sexy, não lido por padrão.
+
 ## 1.1.1 - 2026-07-10
 - Adiciona verificação automática de versão no BOOT: a skill agora compara
   sua própria versão com a mais recente publicada neste arquivo e avisa o

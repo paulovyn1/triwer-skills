@@ -14,7 +14,7 @@ description: >
   precisar checar se está pronto. NÃO acionar para escrever copy, headline ou
   página de vendas — isso é diagnóstico de produto, não produção de conteúdo.
 compatibility: Claude Desktop, Claude Code, claude.ai
-metadata: "v1.1.1 — julho 2026 — adiciona verificação automática de versão no BOOT (ver CHANGELOG.md). v1.1 — julho 2026 — criada por Milena Camila (Triwer), adaptada ao padrão do ecossistema"
+metadata: "v1.2.0 — julho 2026 — adiciona Log de Investigação (references/salvamento.md): subpágina da nota de produto que guarda na íntegra as respostas do Bloco 4/Mecanismo, para a skill Sexy extrair diferencial de promessa sem depender do resumo do HTML (ver CHANGELOG.md). v1.1.1 — julho 2026 — adiciona verificação automática de versão no BOOT (ver CHANGELOG.md). v1.1 — julho 2026 — criada por Milena Camila (Triwer), adaptada ao padrão do ecossistema"
 ---
 
 # Dr. House — Agente Avaliador de Produto

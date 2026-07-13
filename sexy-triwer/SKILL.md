@@ -2,31 +2,21 @@
 name: sexy-triwer
 description: >
   Constrói e valida a Oportunidade Sexy do produto ou serviço do aluno — a
-  promessa específica, desejável e diferenciada por trás da oferta, com base no
-  método investigativo Sexy. Segue a sequência causal objetivo → produto →
-  público → julgamento → ativos: investiga o objetivo do aluno e o que ele
-  topa executar antes de mexer em formato, investiga o diferencial real do
-  produto (não a descrição de superfície), define o público pela situação de
-  vida vivida (não demografia) com teste de verdade de mercado, urgência de
-  compra, quem decide, nível de consciência e teste de esteira contra o
-  portfólio, e julga a promessa final com uma bateria tripla de verdade,
-  desejo e formulação — nunca aceita uma promessa só porque soa correta.
-  Conduz uma entrevista provocadora e personalizada (nunca genérica),
-  reaproveitando o que já existe no Notion do aluno (Meu Público, Quem sou
-  eu, Histórias Inevitáveis, MDI) para não repetir perguntas já respondidas,
-  garimpa ativos de marketing sexys específicos (elementos do próprio
-  produto que já provam a promessa, mesmo que o aluno não enxergue isso
-  sozinho), gera 5 headlines exploratórias que traduzem a promessa, e grava
-  o resultado na subpágina do produto/serviço dentro da database "Produtos"
-  do Notion. Use sempre que o aluno pedir para "criar a oportunidade sexy",
-  "achar a promessa do produto", "posicionar meu produto/serviço", "criar
-  minha oferta sexy", "tornar meu produto mais desejável", "como eu
-  apresento isso pra vender mais", ou quando outra skill do ecossistema
-  Triwer precisar de uma promessa de produto ainda não definida. NÃO
-  acionar para nomear produtos, escrever carrosséis ou campanhas — escopo
-  exclusivo de descoberta e validação da promessa e de como apresentá-la.
+  promessa específica, desejável e diferenciada por trás da oferta, seguindo
+  a sequência causal objetivo → produto → público → julgamento → ativos:
+  objetivo do aluno, diferencial real do produto, situação de vida real do
+  público (não demografia), e julgamento da promessa com bateria de verdade,
+  desejo e formulação. Conduz uma entrevista provocadora (nunca genérica),
+  reaproveitando o Notion do aluno, garimpa ativos de marketing do produto,
+  gera 5 headlines exploratórias e grava o resultado no Notion. Use quando o
+  aluno pedir para "criar a oportunidade sexy", "achar a promessa do
+  produto", "posicionar meu produto/serviço", "criar minha oferta sexy",
+  "tornar meu produto mais desejável", "como vender mais", ou quando outra
+  skill Triwer precisar de uma promessa ainda não definida. NÃO acionar para
+  nomear produtos, escrever carrosséis ou campanhas — escopo de descoberta e
+  validação da promessa.
 compatibility: Claude Desktop, Claude Code, claude.ai
-metadata: "v2.1.0 — julho 2026 — reestruturação causal completa (objetivo → produto → público → julgamento → ativos) e correção da proibição de Claude Artifact, restaurada para absoluta. Ver CHANGELOG.md para detalhes desta e de todas as versões anteriores a partir da v1.10.1. Histórico anterior à v1.10.1: v1.9 corrigiu 5 furos graves (portfolio_produtos, regra de volume de aulas, Dr. House como insumo obrigatório, entrega sempre como arquivo real, checklist ampliado); v1.8 foi revisão de arquitetura para economia de tokens; v1.7 corrigiu Passo 0 da Etapa 4, página HTML sempre, coerência ativo↔público; v1.6 separou headline de promessa; v1.5 adicionou escolha de ângulo sem inventar contexto; v1.4 adicionou garimpo de ativos de marketing; v1.3 adicionou formato de entrega + pilar de desejo como eixos independentes"
+metadata: "v2.1.1 — julho 2026 — corrige description do frontmatter (tinha crescido além do limite de 1024 caracteres do claude.ai, bloqueando instalação via upload; ver CHANGELOG.md). v2.1.0 — julho 2026 — reestruturação causal completa (objetivo → produto → público → julgamento → ativos) e correção da proibição de Claude Artifact, restaurada para absoluta. Ver CHANGELOG.md para detalhes desta e de todas as versões anteriores a partir da v1.10.1. Histórico anterior à v1.10.1: v1.9 corrigiu 5 furos graves (portfolio_produtos, regra de volume de aulas, Dr. House como insumo obrigatório, entrega sempre como arquivo real, checklist ampliado); v1.8 foi revisão de arquitetura para economia de tokens; v1.7 corrigiu Passo 0 da Etapa 4, página HTML sempre, coerência ativo↔público; v1.6 separou headline de promessa; v1.5 adicionou escolha de ângulo sem inventar contexto; v1.4 adicionou garimpo de ativos de marketing; v1.3 adicionou formato de entrega + pilar de desejo como eixos independentes"
 ---
 
 # Sexy Triwer

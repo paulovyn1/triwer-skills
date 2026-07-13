@@ -18,6 +18,15 @@ frontmatter do `SKILL.md` (não duplicado aqui).
 
 ---
 
+## 2.1.1 - 2026-07-12
+- Corrige `description` do frontmatter, que tinha crescido para ~1800
+  caracteres na reestruturação da v2.0.0/v2.1.0 e passou a ser rejeitada pelo
+  validador de upload do claude.ai (limite de 1024 caracteres) — um aluno
+  não conseguiu instalar a skill por causa disso. Descrição reescrita mais
+  enxuta (~1000 caracteres), mantendo a metodologia nova e as frases-gatilho.
+  Instalações já existentes não são afetadas — só quem ainda não instalou via
+  claude.ai precisava dessa correção.
+
 ## 2.1.0 - 2026-07-12
 - Template `assets/template-oportunidade-sexy.html` atualizado para os
   campos novos da v2.0.0: tag de `papel_esteira` no hero, seção

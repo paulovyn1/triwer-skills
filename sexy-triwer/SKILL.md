@@ -16,7 +16,7 @@ description: >
   nomear produtos, escrever carrosséis ou campanhas — escopo de descoberta e
   validação da promessa.
 compatibility: Claude Desktop, Claude Code, claude.ai
-metadata: "v2.1.1 — julho 2026 — corrige description do frontmatter (tinha crescido além do limite de 1024 caracteres do claude.ai, bloqueando instalação via upload; ver CHANGELOG.md). v2.1.0 — julho 2026 — reestruturação causal completa (objetivo → produto → público → julgamento → ativos) e correção da proibição de Claude Artifact, restaurada para absoluta. Ver CHANGELOG.md para detalhes desta e de todas as versões anteriores a partir da v1.10.1. Histórico anterior à v1.10.1: v1.9 corrigiu 5 furos graves (portfolio_produtos, regra de volume de aulas, Dr. House como insumo obrigatório, entrega sempre como arquivo real, checklist ampliado); v1.8 foi revisão de arquitetura para economia de tokens; v1.7 corrigiu Passo 0 da Etapa 4, página HTML sempre, coerência ativo↔público; v1.6 separou headline de promessa; v1.5 adicionou escolha de ângulo sem inventar contexto; v1.4 adicionou garimpo de ativos de marketing; v1.3 adicionou formato de entrega + pilar de desejo como eixos independentes"
+metadata: "v2.2.0 — julho 2026. Histórico completo de todas as versões em CHANGELOG.md (sibling deste arquivo) — não duplicado aqui para não fazer este campo crescer sem limite a cada versão (isso já causou a v2.1.1, quando o metadata + description passaram do limite de 1024 caracteres do claude.ai e bloquearam instalação)."
 ---
 
 # Sexy Triwer
@@ -616,6 +616,49 @@ Guarde: `publico_promessa` (situação de vida + `quem_decide`),
 `urgencia_compra`, `nivel_consciencia`, `pilar_dominante` (+
 `pilares_secundarios`) e a síntese da dor real.
 
+### Passo 8 — Teste de incompatibilidade entre os fatos do público (não pule)
+
+O Passo 7 cruza dor/desejo entre si para achar a síntese. Este passo é
+diferente: verifica se os fatos declarados sobre o público — quem ele é, o
+que já alcançou, como se comporta, o que sabe fazer (Etapas 3-5) — podem
+coexistir de verdade na mesma pessoa. Existem dois testes, não um só; rode
+os dois, porque cada um pega um tipo diferente de furo:
+
+1. **Incompatibilidade de definição/papel:** um fato declarado é um papel,
+   título ou competência que **por definição** pressupõe outro fato, e o
+   segundo fato contradiz isso. Ex.: "advogado que não entende de leis" —
+   ser advogado pressupõe entender de leis; se ele não entende, ou não é
+   advogado do jeito descrito, ou "não entender de leis" é outra coisa mais
+   específica (não confiar no que sabe, não saber aplicar num caso
+   pontual) que precisa ser nomeada com precisão, não deixada como está.
+
+2. **Incompatibilidade de plausibilidade de mercado:** um fato declarado
+   (resultado, ticket, faturamento, tempo de mercado) normalmente exige,
+   na prática real desse nicho, um comportamento ou competência mínima que
+   outro fato declarado nega. Ex.: "infoprodutor faturando R$15-20 mil/mês"
+   junto com "esquece de postar, não sabe com quem fala, se sente perdido
+   no próprio conteúdo" — sustentar esse faturamento como infoprodutor
+   normalmente exige alguma constância e domínio mínimo de conteúdo; a
+   combinação não é impossível (pode ter chegado lá por outro canal e só
+   agora estar perdendo o próprio conteúdo), mas é improvável o bastante
+   pra merecer confirmação antes de aceitar como está — mesmo padrão de
+   rigor do Passo 2 (verdade de mercado), agora aplicado aos fatos do
+   próprio público, não só às dores dele.
+
+Se qualquer um dos dois testes disparar, **não resolva sozinho por
+suposição** — volte ao aluno com a tensão nomeada, sem acusar de erro, e
+peça para precisar (ex.: "você descreveu esse público como infoprodutor que
+fatura 15-20 mil por mês, e também como alguém que esquece de postar e se
+sente perdido — isso me chamou atenção porque geralmente pra sustentar esse
+faturamento a pessoa já resolveu boa parte disso. O que exatamente ficou
+sem resolver, se o resto já está rodando?"). Só siga para a Etapa 6 depois
+que `publico_promessa` estiver livre de contradição — o ajuste pode ser
+separar em dois momentos da mesma pessoa, corrigir um dos fatos, ou
+confirmar que ambos são reais e a tensão é o próprio material da promessa.
+
+Guarde qualquer correção resultante de volta em `publico_promessa` e na
+síntese do Passo 7.
+
 ---
 
 ## ETAPA 6 — Julgar e afiar a promessa (troca de persona + bateria tripla)
@@ -881,6 +924,24 @@ Para cada peça da decisão, procure a prova:
   segunda tentativa também esbarrar em falta de prova, entregue a promessa
   mesmo assim e sinalize ao aluno que esse ativo específico fica pendente.
 
+**Antes de fechar a lista, teste a origem de cada ativo (não pule):** as 5
+lentes acima (promessa, diferencial, pilar, cena, estilo de vida) são
+ângulos de pergunta, não fontes — é comum um único fato real do produto
+responder a várias lentes ao mesmo tempo (ex.: a história de um cliente que
+prova a promessa, ilustra o pilar E é a cena, tudo junto). Se isso
+acontecer, **é um ativo só, reembalado várias vezes — não vira 3 ou 5
+itens da lista**, mesmo que cada reembalagem (print, narrativa longa,
+contraste antes/depois) pareça um formato diferente. Para cada item que for
+para a lista final, nomeie o fato-fonte bruto por trás dele (o evento, o
+cliente, o número, o print — não a lente usada para chegar lá); se dois
+itens compartilham o mesmo fato-fonte, mantenha só o mais forte dos dois e
+volte a garimpar um fato-fonte diferente para completar a lista — não force
+o mínimo de 3 subdividindo o mesmo fato em mais formatos de apresentação.
+Se, depois de garimpar todas as 5 lentes com essa disciplina, restar
+genuinamente só 1 ou 2 fatos-fonte reais no produto, entregue só esses —
+menos que 3 ativos honestos vale mais que 5 ativos que são o mesmo fato
+disfarçado.
+
 Regras que continuam valendo:
 
 - **Volume de aulas/módulos/conteúdo teórico nunca é ativo válido**, mesmo com
@@ -997,6 +1058,16 @@ relembrar a regra exata do pilar em questão:
       nenhum item pode ser conselho genérico do tipo "use prova social".
 - [ ] **Ativos coerentes com o público-alvo real** (`publico_promessa`,
       Etapa 5) — não só coerentes com o pilar/mecanismo em abstrato.
+- [ ] **Ativos vêm de fatos-fonte distintos, não do mesmo fato reembalado**
+      (ver teste de origem na Etapa 9): nomeie o fato-fonte bruto de cada
+      item da lista — se dois apontam para o mesmo evento/cliente/número só
+      formatado diferente (print, narrativa, contraste antes/depois do
+      mesmo caso), funde ou corta um, mesmo que isso deixe a lista com
+      menos de 3 itens.
+- [ ] **Fatos do público, cruzados, ainda são plausíveis** (ver Etapa 5
+      Passo 8): nenhuma combinação de papel/resultado declarado do público
+      contradiz, por definição ou por plausibilidade de mercado, outro fato
+      também declarado sobre ele?
 - [ ] **Nenhum item do `portfolio_produtos` foi desvalorizado** e o teste de
       esteira da Etapa 5 (Passo 5) segue de pé — releia promessa, ativos e
       headlines uma a uma.
@@ -1045,6 +1116,17 @@ entregue como página HTML, nunca como texto puro na conversa.
   para as dores/desejos e provas coletadas. Se não houver prova social
   coletada nesta sessão, remova a seção `#provas` inteira em vez de deixar
   o campo vazio.
+- **`[[VERSAO_SKILL]]` no rodapé:** preencha sempre com o conteúdo do
+  arquivo `VERSION` desta skill lido no BOOT (Passo 0) — não com a versão
+  que o aluno pensa ter, nem com um número fixo. Isso permite identificar,
+  em qualquer output reportado depois, se o problema já foi corrigido em
+  versão mais nova ou se o aluno estava desatualizado no momento da geração.
+- **Headlines (`#headlines`):** cada uma preenche dois campos separados,
+  não um só — `[[HEADLINE_N_MODELO]]` (ex.: "MH004 — Autoridade:") e
+  `[[HEADLINE_N_TEXTO]]` (o texto da headline entre aspas). Nunca junte os
+  dois num campo único de novo — o `<li>` do `.numlist` depende dessa
+  separação em dois elementos (`.headline-modelo` e `.headline-texto`) para
+  renderizar cada um em sua própria linha.
 - **Seção `#subpromessa` é condicional:** só inclua no HTML final se
   `papel_esteira` = Estrela (a Etapa 6 exige subpromessa nesse caso). Nos
   demais papéis, remova a `<section id="subpromessa">` inteira **e** o link

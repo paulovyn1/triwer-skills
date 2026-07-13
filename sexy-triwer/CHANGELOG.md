@@ -18,6 +18,47 @@ frontmatter do `SKILL.md` (não duplicado aqui).
 
 ---
 
+## 2.2.0 - 2026-07-13
+- Etapa 5, Passo 8 novo: teste de incompatibilidade entre os fatos
+  declarados do público (definição/papel — ex. "advogado que não entende de
+  leis" — e plausibilidade de mercado — ex. "infoprodutor faturando
+  R$15-20 mil/mês" junto com relato de comportamento de iniciante perdido).
+  Corrige caso real de teste de aluno onde a skill aceitou público
+  internamente contraditório sem questionar.
+- Etapa 9: teste de origem dos ativos de marketing — as 5 lentes de garimpo
+  (promessa, diferencial, pilar, cena, estilo de vida) são ângulos de
+  pergunta, não fontes; se várias lentes convergem para o mesmo fato bruto
+  do produto, é um ativo só reembalado, não 3-5 itens distintos. Corrige
+  caso real onde a lista de ativos era a mesma história de um cliente
+  reformulada 5 vezes (print, narrativa, contraste antes/depois etc.).
+- Etapa 10, Passo 2 (gate): dois itens novos na checklist de segunda
+  passada crítica, espelhando as duas correções acima.
+- Template `assets/template-oportunidade-sexy.html`:
+  - `#antes-depois` não repete mais a formulação completa da promessa —
+    agora recebe um resumo curto (manchete), evitando a mesma frase
+    aparecer duas vezes seguidas na página.
+  - Contraste do `.bridge-card` (seção `#subpromessa`) e do `.tag.outline`
+    reusado fora do `.hero` (seção `#publico`, tags de urgência/nível de
+    consciência) blindados com `!important`/regra de contexto — o texto
+    claro sobre fundo claro ficava ilegível (visível só ao selecionar).
+  - `.numlist` (headlines exploratórias) trocado de `display: grid` para
+    `display: flex`: o grid quebrava o texto palavra por palavra em qualquer
+    navegador quando o conteúdo do `<li>` misturava `<strong>` + texto solto
+    sem wrapper — causa raiz confirmada por teste isolado comparando as duas
+    abordagens lado a lado (grid quebrava, flex não). Cada `<li>` agora tem
+    um `<div>` com `.headline-modelo` (rótulo do modelo/DOPA) e
+    `.headline-texto` (a headline em si) em linhas separadas, não mais
+    inline — tentativa anterior de corrigir só com
+    `overflow-wrap/word-break/hyphens` não resolvia porque não era a causa.
+    Regra `.headline-modelo` também ganhou `font-weight: 700` explícito
+    (nunca existiu `.numlist li strong`, diferente de `.checklist li
+    strong` — o negrito do rótulo do modelo dependia só do `<strong>` sem
+    reforço de CSS, e sumia visualmente mesclado com o resto do texto).
+  - Rodapé agora inclui a versão da skill (`[[VERSAO_SKILL]]`, lida do
+    `VERSION` no BOOT) — permite identificar depois se um problema
+    reportado já foi corrigido em versão mais nova ou se o aluno gerou o
+    output já na versão com o furo.
+
 ## 2.1.1 - 2026-07-12
 - Corrige `description` do frontmatter, que tinha crescido para ~1800
   caracteres na reestruturação da v2.0.0/v2.1.0 e passou a ser rejeitada pelo

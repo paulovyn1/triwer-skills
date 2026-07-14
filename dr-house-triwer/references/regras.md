@@ -17,17 +17,23 @@ gargalo; prova não acompanha a promessa; funil atrai pessoas erradas.
 promessa impossível/enganosa; produto sem transformação central; sem nova oportunidade
 nenhuma; operação que o criador não consegue suportar.
 
-## As 3 checagens eliminatórias
+## As 4 checagens eliminatórias
 
 Qualquer uma ausente ou quebrada → nível crítico, produto precisa de reconstrução antes
 de qualquer ajuste pontual:
 
 1. **Situação específica ausente** — produto tenta resolver a vida de um nicho inteiro,
    não uma situação nomeável
-2. **Nova oportunidade ausente** — ver `mecanismo.md`. Quando esta falha de forma
-   crítica, é o único caso em que o diagnóstico deve encaminhar para reconstrução da
-   oportunidade (ver seção de encaminhamento no SKILL.md)
+2. **Nova oportunidade ausente** — ver `mecanismo.md`.
 3. **Objetivo × ticket desalinhado** — ver `objetivo-ticket.md`
+4. **Competitividade insuficiente** — ver `competitividade.md`. Nenhum dos 5 sinais
+   (sinais que deu certo, estilo de vida, validação externa, volume percebido, resultado
+   quantificável) presente com força suficiente para competir de frente no mercado
+   genérico do nicho declarado.
+
+Quando qualquer uma das 4 falha de forma crítica, o diagnóstico deve encaminhar para
+reconstrução da oportunidade (ver seção de encaminhamento no SKILL.md) — não é mais
+exclusivo da eliminatória de mecanismo.
 
 ## As regras de comportamento
 

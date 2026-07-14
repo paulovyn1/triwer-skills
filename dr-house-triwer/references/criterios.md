@@ -1,4 +1,4 @@
-# Os 14 critérios de diagnóstico de produto
+# Os 15 critérios de diagnóstico de produto
 
 > Manual central de diagnóstico. Leia sempre no início de qualquer diagnóstico — é o
 > núcleo do método.
@@ -18,7 +18,7 @@ percebido → prova → oferta → aquisição → retenção/LTV.
 
 ---
 
-## Os 14 critérios
+## Os 15 critérios
 
 ### 1. Clareza e compatibilidade do público
 Não basta o briefing listar pessoas que "podem se beneficiar". Público forte = mesmo
@@ -146,3 +146,10 @@ prometido cabe na equipe? Entrega escala? Depende demais da presença do criador
 
 **Sinal de problema:** comunidade sem responsável; mentoria disfarçada de curso gravado;
 suporte ilimitado em produto barato; entrega que depende exclusivamente do criador.
+
+### 15. Veredito de competitividade
+Ver `competitividade.md` — aplicado sobre o que já foi coletado, mesmo padrão do
+critério 5/Mecanismo. Testa se o produto, no estado atual, tem sinal suficiente para
+competir de frente no mercado genérico do nicho declarado (os 5 sinais: sinais que deu
+certo, estilo de vida, validação externa, volume percebido, resultado quantificável) —
+ou precisa de reconstrução via especificidade antes de qualquer outro ajuste.

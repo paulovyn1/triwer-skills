@@ -24,7 +24,8 @@ regredir pra versões piores já descartadas (ver histórico de decisão abaixo,
 | `{{STATUS_GERAL}}` | Um de: "Pronto para validar" / "Ajustes necessários" / "Reconstrução necessária" |
 | `{{DATA_HOJE}}` | Data por extenso, ex: "03 de julho de 2026" |
 | `{{DIAGNOSTICO_GERAL}}` | O parágrafo de diagnóstico geral (Fase 2) |
-| `{{BRIDGE_TEXTO}}` | Só se houver falha crítica de mecanismo — texto encaminhando pro Sexy |
+| `{{BRIDGE_TEXTO}}` | Sempre presente (pipeline padrão House → Sexy) — ver seção "O bridge para o Sexy" abaixo |
+| `{{VERSAO_SKILL}}` | Versão da skill que gerou este HTML — leia do arquivo `VERSION` (sibling do `SKILL.md`) no momento de gerar, nunca hardcode. Vai no rodapé, para auditoria futura do output |
 
 ## Blocos repetíveis (os comentários `<!-- X × N -->` no template marcam onde)
 
@@ -37,9 +38,9 @@ regredir pra versões piores já descartadas (ver histórico de decisão abaixo,
   simples dizendo que não foi identificado.
 - **`ACHADO` × N** — um card por critério com achado real, ordenado por gravidade
   (crítico → estrutural → ajuste fino). Classe e label seguem a tabela abaixo.
-- **`BRIDGE_CARD_SEXY`** — bloco inteiro, incluir só quando a eliminatória de mecanismo
-  falhou de forma crítica (ver SKILL.md § Encaminhamento). Remover a seção inteira
-  (incluindo os comentários) quando não se aplica.
+- **`BRIDGE_CARD_SEXY`** — bloco sempre incluído, nunca removido (pipeline padrão House →
+  Sexy — ver SKILL.md § Encaminhamento e "O bridge para o Sexy" abaixo). O que muda por
+  caso é só o texto de `{{BRIDGE_TEXTO}}`.
 - **`PERGUNTA` × N** — um `<li>` por pergunta em aberto.
 
 ### Tabela de gravidade → classe/label
@@ -52,6 +53,26 @@ regredir pra versões piores já descartadas (ver histórico de decisão abaixo,
 
 Pontos fortes não usam `.achado.forte` como card — eles vivem na lista `.checklist` da
 seção própria. O ícone `✓` já está embutido no CSS do `.checklist` (não precisa gerar).
+
+## O bridge para o Sexy — sempre presente, duas ramificações de texto
+
+O `BRIDGE_CARD_SEXY` deixou de ser condicional — a relação House → Sexy é
+pipeline padrão em 2 estágios (99% dos alunos vão do House pro Sexy), não
+algo que só aparece quando há falha crítica. O que muda é o conteúdo de
+`{{BRIDGE_TEXTO}}`:
+
+- **Se qualquer uma das 4 eliminatórias falhou** (situação específica,
+  mecanismo próprio, objetivo×ticket, competitividade — ver `regras.md`):
+  nomeie qual falhou e por que, e deixe claro que ajuste pontual não
+  resolve — o próximo passo é reconstruir a oportunidade com o Sexy antes
+  de qualquer outro ajuste fazer sentido.
+- **Se nenhuma eliminatória falhou:** não desapareça a seção — reforce que
+  quase sempre há refinamento de oferta a fazer, e que o próximo passo
+  natural é o Sexy deixar a oportunidade redonda (bônus, julgamento de
+  promessa, ativos de marketing), mesmo sem falha estrutural encontrada.
+
+Em nenhum dos dois casos explique como o Sexy funciona por dentro — só
+nomeie o encaminhamento.
 
 ## O radar (o único componente que exige cálculo, não é placeholder fixo)
 

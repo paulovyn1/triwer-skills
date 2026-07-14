@@ -30,8 +30,8 @@ complexo.
 
 ## Checagem eliminatória: Objetivo × Ticket
 
-Esta é uma das 3 checagens eliminatórias do diagnóstico (junto com Situação específica e
-Nova Oportunidade — ver `regras.md`). Falha quando:
+Esta é uma das 4 checagens eliminatórias do diagnóstico (junto com Situação específica,
+Nova Oportunidade e Competitividade — ver `regras.md`). Falha quando:
 
 1. **Contradição interna** — o criador declara mais de um objetivo/preço para o mesmo
    produto sem decidir (ex: "vendo por R$497, mas na promo R$97, depois quero R$997" —

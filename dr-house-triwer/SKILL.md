@@ -14,7 +14,7 @@ description: >
   precisar checar se está pronto. NÃO acionar para escrever copy, headline ou
   página de vendas — isso é diagnóstico de produto, não produção de conteúdo.
 compatibility: Claude Desktop, Claude Code, claude.ai
-metadata: "v1.2.0 — julho 2026 — adiciona Log de Investigação (references/salvamento.md): subpágina da nota de produto que guarda na íntegra as respostas do Bloco 4/Mecanismo, para a skill Sexy extrair diferencial de promessa sem depender do resumo do HTML (ver CHANGELOG.md). v1.1.1 — julho 2026 — adiciona verificação automática de versão no BOOT (ver CHANGELOG.md). v1.1 — julho 2026 — criada por Milena Camila (Triwer), adaptada ao padrão do ecossistema"
+metadata: "v1.3.0 — julho 2026 — adiciona veredito de competitividade (critério 15 / 4ª checagem eliminatória, references/competitividade.md), salvamento no Notion vira incremental por checkpoint ao longo da Fase 1/2 via HANDOFF para notion-zettelkasten-si, e encaminhamento ao Sexy deixa de ser condicional (ver CHANGELOG.md). v1.2.0 — julho 2026 — adiciona Log de Investigação (references/salvamento.md): subpágina da nota de produto que guarda na íntegra as respostas do Bloco 4/Mecanismo, para a skill Sexy extrair diferencial de promessa sem depender do resumo do HTML (ver CHANGELOG.md). v1.1.1 — julho 2026 — adiciona verificação automática de versão no BOOT (ver CHANGELOG.md). v1.1 — julho 2026 — criada por Milena Camila (Triwer), adaptada ao padrão do ecossistema"
 ---
 
 # Dr. House — Agente Avaliador de Produto
@@ -143,10 +143,14 @@ arquivos conforme a fase do diagnóstico, não todos de uma vez:
 
 - `references/conceitos.md` — fundamentos (o que torna um produto irresistível). Leia
   no início, ou quando o aluno pedir para entender o *porquê* de um achado.
-- `references/criterios.md` — os 14 critérios de diagnóstico. Leia sempre, é o núcleo
+- `references/criterios.md` — os 15 critérios de diagnóstico. Leia sempre, é o núcleo
   do método.
 - `references/mecanismo.md` — aprofunda o critério 5 (mecanismo próprio). Leia sempre
   que for avaliar se o método do aluno é realmente proprietário.
+- `references/competitividade.md` — aprofunda o critério 15 (veredito de
+  competitividade). Leia sempre que for avaliar se o produto tem sinal suficiente para
+  competir de frente no mercado genérico do nicho declarado — mesmo padrão operacional
+  de `mecanismo.md`, não do `conceitos.md` passivo.
 - `references/objetivo-ticket.md` — aprofunda o critério 10 (preço). Leia sempre que
   for avaliar se o ticket faz sentido.
 - `references/regras.md` — gravidade e guardrails de julgamento. Releia antes de
@@ -156,8 +160,9 @@ arquivos conforme a fase do diagnóstico, não todos de uma vez:
   o HTML. Explica quais placeholders preencher no template e como gerar o radar SVG.
 - `assets/template-diagnostico.html` — **não leia agora.** O esqueleto HTML pronto,
   aprovado, com a identidade visual completa — usado junto com o guia acima na Fase 3.
-- `references/salvamento.md` — **não leia agora.** Só na Fase 4, depois de gerar o
-  HTML. Carregar antes disso só ocupa contexto à toa.
+- `references/salvamento.md` — **não leia agora.** Só no primeiro checkpoint de
+  gravação, ao final do Bloco 1 da Fase 1 (ver "Checkpoints de gravação" abaixo).
+  Carregar antes disso só ocupa contexto à toa.
 
 ---
 
@@ -187,6 +192,34 @@ ter uma resposta real para cada uma antes de considerar o bloco completo.
 - O que você já fez na prática (com clientes, no seu próprio negócio, em qualquer
   contexto) que te fez achar que sabe resolver esse problema?
 
+**Sinais de competitividade (mesmo bloco, sequência obrigatória de 5 perguntas — ver
+`references/competitividade.md` antes de conduzir esta parte).** Nenhum sinal isolado
+substitui os outros 4; pergunte os 5 em sequência, aceitando "não tenho" em qualquer um
+sem travar a escavação:
+
+1. **Sinais que deu certo** — o único que exige hipótese por nicho antes de perguntar,
+   nunca pergunta genérica de "o que você tem pra mostrar". Primeiro pergunte pelo
+   símbolo do próprio nicho ("normalmente, o que as pessoas veem em um(a) [nicho
+   declarado] e têm a sensação de que essa pessoa tem sucesso?"), com 2-3 exemplos
+   literais pra ancorar a resposta (ex: shape para nutrição, imóvel assinado por
+   designer famoso para arquitetura). Se o aluno não souber responder, forme a própria
+   hipótese com conhecimento de mercado do nicho em vez de deixar a pergunta no vácuo —
+   só depois pergunte se o aluno especificamente tem esse símbolo hoje.
+2. **Estilo de vida** — como é a rotina, hábitos, lugares que frequenta; tem elementos
+   que o público associaria a "sucesso" (viagens, cuidado pessoal, ritmo de trabalho)?
+3. **Validação externa** — já saiu em jornal, revista, entrevista, ou foi convidado
+   pra podcast/evento grande do nicho?
+4. **Volume percebido** — quantos seguidores tem hoje, e em média quantos comentários
+   por post (a proporção importa tanto quanto o número absoluto — volume sem
+   engajamento real é o próprio sinal de alerta).
+5. **Resultado quantificável** — já atendeu clientes que são referência no nicho, ou
+   tem prints/números de resultado (faturamento, agenda cheia, casos) que possa
+   mostrar?
+
+**Checkpoint 1 de gravação:** ao fechar este bloco, leia `references/salvamento.md` (se
+ainda não leu) e aplique o checkpoint correspondente antes de seguir pro Bloco 2 — não
+espere a Fase 4 para começar a salvar.
+
 **Bloco 2 — Público e situação**
 - Para quem é esse produto — descreva o perfil.
 - Essa pessoa está vivendo o quê, especificamente, agora, quando decide buscar algo
@@ -195,11 +228,17 @@ ter uma resposta real para cada uma antes de considerar o bloco completo.
 - Existe mais de um tipo de pessoa que você imagina comprando isso? Se sim, quais são
   as diferenças entre eles (nível de experiência, orçamento, o que já tentaram)?
 
+**Checkpoint 2 de gravação:** ao fechar o Bloco 2, aplique o checkpoint em
+`references/salvamento.md` antes de seguir.
+
 **Bloco 3 — Promessa**
 - Qual é a promessa exata — a frase que você diria pra alguém sobre o que esse produto
   entrega?
 - Tem prazo? Qual?
 - O que essa promessa deixa de fora — o que ela explicitamente NÃO promete?
+
+**Checkpoint 3 de gravação:** ao fechar o Bloco 3, aplique o checkpoint em
+`references/salvamento.md` antes de seguir.
 
 **Bloco 4 — Mecanismo (sequência obrigatória de 3 perguntas, sempre as 3, nesta ordem)**
 1. Explica pra mim como funciona o seu método — o passo a passo, do começo ao fim.
@@ -216,17 +255,27 @@ que goste a modo indireto) que não sabe explicar exatamente como reconhece o qu
 funciona — isso é sinal de intuição não-transformada em método, e precisa aparecer no
 diagnóstico como tal, não ser contado como ponto forte.
 
+**Checkpoint 4 de gravação:** ao fechar o Bloco 4, aplique o checkpoint em
+`references/salvamento.md` — este é o checkpoint que sempre grava o Log de
+Investigação (as 3 respostas literais deste bloco), além de qualquer nota de conteúdo.
+
 **Bloco 5 — Produto e entrega**
 - Qual é o formato — curso gravado, ao vivo, consultoria, mentoria, outro?
 - Como é a estrutura — quantos módulos/sessões/semanas, o que tem em cada um?
 - Liste tudo que a pessoa recebe — cada material, bônus, ferramenta, acesso.
 - Quanto tempo de acesso ou quantas sessões, e por quanto tempo?
 
+**Checkpoint 5 de gravação:** ao fechar o Bloco 5, aplique o checkpoint em
+`references/salvamento.md` antes de seguir.
+
 **Bloco 6 — Preço**
 - Quanto custa (ou pretende custar)?
 - Existe variação — promoção de lançamento, parcelamento, preço que pretende cobrar
   depois?
 - Por que esse valor — o que te fez chegar nesse número?
+
+**Checkpoint 6 de gravação:** ao fechar o Bloco 6, aplique o checkpoint em
+`references/salvamento.md` antes de seguir.
 
 **Bloco 7 — Prova**
 - Você já vendeu ou aplicou isso? Para quem, quantas vezes?
@@ -235,18 +284,26 @@ diagnóstico como tal, não ser contado como ponto forte.
   curso gravado, a prova veio de curso gravado — ou veio de acompanhamento presencial,
   mentoria individual, outro contexto)?
 
+**Checkpoint 7 de gravação:** ao fechar o Bloco 7, aplique o checkpoint em
+`references/salvamento.md` — este é o checkpoint que mais provavelmente alimenta a
+base de histórias, se o aluno contou um caso real com resultado específico.
+
 **Bloco 8 — Aquisição**
 - Como você pretende atrair as pessoas pra esse produto — que tipo de conteúdo, que
   tema de aula/isca gratuita?
 - O que você acha que é o seu diferencial em relação a quem mais vende algo parecido?
 
+**Checkpoint 8 de gravação:** ao fechar o Bloco 8, aplique o checkpoint em
+`references/salvamento.md` — último checkpoint da Fase 1, antes de seguir para o
+diagnóstico.
+
 ### Depois de cobrir os blocos
 
-Releia tudo que você coletou contra as 3 checagens eliminatórias em `references/regras.md`
-(situação específica, mecanismo próprio, objetivo × ticket). Se qualquer uma delas ainda
-estiver rasa — mesmo depois de passar pelos 8 blocos — volte e aprofunde especificamente
-ali antes de seguir para o diagnóstico. As eliminatórias não podem fechar com resposta
-única ou superficial, custe o tempo que custar.
+Releia tudo que você coletou contra as 4 checagens eliminatórias em `references/regras.md`
+(situação específica, mecanismo próprio, objetivo × ticket, competitividade). Se qualquer
+uma delas ainda estiver rasa — mesmo depois de passar pelos 8 blocos — volte e aprofunde
+especificamente ali antes de seguir para o diagnóstico. As eliminatórias não podem fechar
+com resposta única ou superficial, custe o tempo que custar.
 
 ### Quando a resposta vier vaga
 
@@ -263,7 +320,7 @@ pergunta.
 
 ## Fase 2 — Aplicar o diagnóstico
 
-Com o insumo em mãos, aplique os 14 critérios de `references/criterios.md`, seguindo as
+Com o insumo em mãos, aplique os 15 critérios de `references/criterios.md`, seguindo as
 regras de `references/regras.md`. Antes de escrever qualquer coisa, releia essas regras
 — elas existem porque um diagnóstico apressado erra exatamente nesses pontos. As mais
 fáceis de esquecer no calor da análise:
@@ -283,6 +340,10 @@ fáceis de esquecer no calor da análise:
   do seu escopo, e o risco de ela ser desproporcional ao porte real do negócio do aluno
   é alto — você não tem informação suficiente para calibrar isso, o Sexy tem o contexto
   completo pra fazer essa recomendação depois.
+
+**Checkpoint 9 de gravação (último):** ao fechar o diagnóstico (veredito de
+competitividade + diagnóstico geral desta fase), aplique o checkpoint em
+`references/salvamento.md` antes de seguir para a Fase 3.
 
 ---
 
@@ -314,7 +375,7 @@ quê isso ajuda conversão, implementação ou retenção. Se não houver força
 não invente uma para suavizar.]
 
 ## Onde ajustar e oportunidades encontradas
-[Só os critérios onde há achado real — não os 14 sempre. Para cada um:]
+[Só os critérios onde há achado real — não os 15 sempre. Para cada um:]
 
 **[Nome do critério]**
 O que está acontecendo: [baseado no que o aluno disse]
@@ -336,7 +397,10 @@ precisam entrar no seu contexto). Em vez disso:
    destino final — isso duplica o CSS sem gastar tokens lendo ele.
 2. **Leia `references/template-html.md`** — o guia de quais placeholders `{{ASSIM}}`
    preencher e como gerar o radar SVG.
-3. **Edite só os placeholders** no arquivo copiado (busca-e-substituição de cada
+3. **Leia o arquivo `VERSION`** (sibling deste `SKILL.md`) e preencha
+   `{{VERSAO_SKILL}}` no rodapé com o valor lido — nunca hardcode um número. Isso
+   permite auditar depois com qual versão da skill um HTML específico foi gerado.
+4. **Edite só os placeholders** no arquivo copiado (busca-e-substituição de cada
    `{{PLACEHOLDER}}` pelo conteúdo desta sessão) — nunca reescreva o arquivo inteiro de
    memória.
 
@@ -347,26 +411,39 @@ definida.
 
 ## Fase 4 — Salvar o que foi descoberto no Notion do aluno
 
-Depois de entregar o HTML, leia `references/salvamento.md` — só agora, não antes. Esse
-arquivo explica como localizar o Workspace de Aluno no Notion e o que atualizar (viés,
-histórias, perfis de público, produto) com o que a escavação revelou de novo. Não pule
-essa fase: informação que só existe dentro desta conversa se perde se não for salva.
+O salvamento não é mais um passo único ao final — é incremental, por checkpoint, ao
+longo da Fase 1 e do fim da Fase 2 (ver `references/salvamento.md`, e os 9 checkpoints
+marcados dentro de cada bloco da Fase 1 e ao fim da Fase 2 acima). Se todos os
+checkpoints já dispararam ao longo da sessão, esta fase é só a conferência final: revise
+se algum checkpoint não pôde ser aplicado por falta de conexão com o Notion e, se
+houver, tente novamente agora ou avise o aluno o que precisa ser salvo manualmente. Não
+pule essa conferência: informação que só existe dentro desta conversa se perde se não
+for salva.
 
 ---
 
-## Encaminhamento quando o produto falha na base
+## Encaminhamento — sempre presente, nunca condicional
 
-Quando a checagem eliminatória de **mecanismo próprio** falhar de forma crítica — o
-produto não tem mecanismo real, é genérico do nicho disfarçado de método — o diagnóstico
-geral deve deixar claro que ajuste pontual não resolve, e a seção de perguntas em aberto
-deve apontar que o próximo passo é reconstruir a oportunidade com a skill **Sexy** antes
-de qualquer outro ajuste fazer sentido. Você não precisa (e não deve tentar) explicar
-como o Sexy funciona.
+A relação entre Dr. House e a skill **Sexy** é pipeline padrão em 2 estágios, não
+condicional: o House sempre aponta onde a oferta pode melhorar (quase sempre há algo), o
+Sexy é sempre o passo seguinte que deixa a oferta redonda. Isso vale para praticamente
+todo aluno — o encaminhamento ao Sexy nunca desaparece do HTML, mesmo quando nada falhou
+de forma crítica.
 
-Se as outras duas eliminatórias falharem (situação vaga, ou objetivo×ticket
-contraditório) mas o mecanismo estiver ok, isso ainda vai para o HTML como achado
-estrutural — só não precisa necessariamente do encaminhamento ao Sexy, já que a
-oportunidade em si existe.
+**Se qualquer uma das 4 checagens eliminatórias falhar de forma crítica** (situação
+específica ausente, mecanismo próprio ausente, objetivo×ticket desalinhado, ou
+competitividade insuficiente — ver `regras.md`) — nomeie qual falhou e por quê. O
+diagnóstico geral deve deixar claro que ajuste pontual não resolve, e a seção de
+perguntas em aberto deve apontar que o próximo passo é reconstruir a oportunidade com a
+skill Sexy antes de qualquer outro ajuste fazer sentido.
+
+**Se nenhuma das 4 eliminatórias falhar** — o encaminhamento ao Sexy continua presente,
+só muda o tom: reforce que quase sempre há refinamento de oferta a fazer (bônus,
+julgamento de promessa, ativos de marketing) mesmo sem falha estrutural, e que o próximo
+passo natural é o Sexy.
+
+Em nenhum dos dois casos você precisa (ou deve tentar) explicar como o Sexy funciona por
+dentro — só nomear o encaminhamento.
 
 ---
 
@@ -395,6 +472,7 @@ vago não ajuda tanto quanto "isso funciona porque X" ajuda. E não confunda "di
 │   ├── conceitos.md
 │   ├── criterios.md
 │   ├── mecanismo.md
+│   ├── competitividade.md
 │   ├── objetivo-ticket.md
 │   ├── regras.md
 │   ├── template-html.md
@@ -431,6 +509,7 @@ Copy-Item assets\template-diagnostico.html $BASE\assets\
 
 1. Complete o `/onboarding-triwer` antes, se ainda não fez
 2. Abra uma nova conversa e digite `/dr-house-triwer`
-3. Ao final, se o mecanismo do produto falhar, o Dr. House vai gerar um HTML
-   de diagnóstico — abra uma nova conversa com `/sexy-triwer` e anexe esse
-   arquivo para não precisar responder tudo de novo
+3. Ao final, o Dr. House vai gerar um HTML de diagnóstico — abra uma nova
+   conversa com `/sexy-triwer` e anexe esse arquivo para não precisar
+   responder tudo de novo (o encaminhamento ao Sexy é sempre o próximo
+   passo, não só quando algo falha)

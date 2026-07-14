@@ -1,6 +1,6 @@
 # Teste duro de mecanismo próprio
 
-> Critério 5 (Mecanismo) da lista de 14 — o mais sensível a erro de julgamento raso.
+> Critério 5 (Mecanismo) da lista de 15 — o mais sensível a erro de julgamento raso.
 > Leia sempre que for avaliar se o método do produto é realmente proprietário ou só um
 > nome bonito sobre o genérico.
 

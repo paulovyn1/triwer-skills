@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sessão de Brainstorm — Dexter</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:         #FFFCF4;
+  --bg-warm:    #F2EBDB;
+  --card-bg:    #FDFAF5;
+  --ink:        #2A0200;
+  --ink-soft:   #4A2418;
+  --muted:      #87672A;
+  --gold-1:     #B28431;
+  --gold-2:     #D5AE66;
+  --gold-3:     #F6EDDD;
+  --gold-gradient: linear-gradient(85.41deg, #B28431 -3.48%, #D5AE66 20.83%, #F6EDDD 52.17%, #D5AE66 79.18%, #B28431 100.25%);
+  --red:        #E52222;
+  --red-dark:   #C00000;
+  --rule:       #E1C3A1;
+  --serif:  'Libre Baskerville', Georgia, serif;
+  --sans:   'DM Sans', -apple-system, sans-serif;
+  --mono:   'Space Mono', monospace;
+  --tipo-paquera:        #87672A;
+  --tipo-paquera-bg:     #F6EDDD;
+  --tipo-acelerador:     #6B5B95;
+  --tipo-acelerador-bg:  #EFEDF5;
+  --tipo-estrela:        #C00000;
+  --tipo-estrela-bg:     #FBEAEA;
+  --tipo-acompanhamento: #3C6B2E;
+  --tipo-acompanhamento-bg: #EDF3E8;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--ink-soft);
+  font-family: var(--sans);
+  font-weight: 300;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+
+.container { max-width: 860px; margin: 0 auto; padding: 0 32px; }
+
+.anchor-bar {
+  position: sticky; top: 0; z-index: 100;
+  background: var(--ink);
+  border-bottom: 2px solid var(--gold-1);
+  padding: 0 16px;
+  overflow-x: auto;
+  white-space: nowrap;
+}
+.anchor-bar-inner { max-width: 860px; margin: 0 auto; display: flex; gap: 4px; }
+.anchor-link {
+  font-family: var(--mono);
+  font-size: 10.5px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--gold-3);
+  opacity: .68;
+  text-decoration: none;
+  padding: 14px 16px;
+  border-bottom: 3px solid transparent;
+  transition: opacity .15s, border-color .15s;
+  flex-shrink: 0;
+  display: inline-block;
+}
+.anchor-link:hover, .anchor-link:focus { opacity: 1; border-bottom-color: var(--gold-2); }
+
+.hero {
+  background: var(--ink);
+  background-image: radial-gradient(ellipse at top right, rgba(178,132,49,.18), transparent 60%);
+  color: var(--gold-3);
+  padding: 56px 32px 48px;
+}
+.hero-inner { max-width: 860px; margin: 0 auto; }
+.hero-brand {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 22px;
+  color: var(--gold-2);
+  margin-bottom: 28px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.hero-brand::before { content: '◆'; font-size: 13px; color: var(--gold-1); }
+.hero h1 {
+  font-family: var(--serif);
+  font-size: clamp(30px, 5vw, 46px);
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -.02em;
+  color: #FFFCF4;
+  margin-bottom: 14px;
+}
+.hero h1 em {
+  font-style: italic;
+  background: var(--gold-gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+.hero .hero-sub { font-size: 15px; color: var(--gold-3); opacity: .85; max-width: 620px; margin-bottom: 24px; }
+.hero-meta { display: flex; flex-wrap: wrap; gap: 8px; }
+.tag {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  padding: 5px 12px;
+  border-radius: 3px;
+  display: inline-block;
+}
+.tag.solid  { background: var(--gold-gradient); color: var(--ink); font-weight: 700; }
+.tag.outline { background: transparent; color: var(--gold-3); border: 1px solid rgba(246,237,221,.35); }
+
+section.block { padding: 48px 0; }
+section.block.alt { background: var(--bg-warm); }
+
+.section-marker {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: var(--gold-1);
+  margin-bottom: 18px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.section-marker::before { content: '//'; }
+
+section.block h2 {
+  font-family: var(--serif);
+  font-size: clamp(20px, 3vw, 28px);
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--ink);
+  margin-bottom: 18px;
+}
+section.block h2 em { font-style: italic; color: var(--red-dark); }
+section.block p { font-size: 15px; color: var(--ink-soft); margin-bottom: 16px; max-width: 720px; }
+section.block p strong { color: var(--ink); font-weight: 500; }
+
+.bloco-header { display: flex; align-items: center; gap: 16px; margin-bottom: 16px; margin-top: 36px; }
+.bloco-header:first-of-type { margin-top: 0; }
+.bloco-num {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--ink);
+  background: var(--gold-gradient);
+  font-weight: 700;
+  padding: 5px 12px;
+  border-radius: 3px;
+  flex-shrink: 0;
+}
+.bloco-title { font-family: var(--serif); font-size: 17px; font-weight: 700; color: var(--ink); }
+.bloco-line { flex: 1; height: 1px; background: var(--rule); }
+
+/* Cards de ideia */
+.ideia-card {
+  background: var(--card-bg);
+  border: 1px solid var(--rule);
+  border-radius: 10px;
+  padding: 28px 30px;
+  margin: 24px 0;
+  position: relative;
+}
+.ideia-num {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--gold-1);
+  margin-bottom: 6px;
+}
+.ideia-card h3 {
+  font-family: var(--serif);
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--ink);
+  margin-bottom: 16px;
+}
+
+.ideia-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px; }
+.pill {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  padding: 6px 14px;
+  border-radius: 999px;
+  font-weight: 700;
+  display: inline-block;
+}
+.pill.tipo-paquera        { background: var(--tipo-paquera-bg);        color: var(--tipo-paquera); }
+.pill.tipo-acelerador     { background: var(--tipo-acelerador-bg);     color: var(--tipo-acelerador); }
+.pill.tipo-estrela        { background: var(--tipo-estrela-bg);        color: var(--tipo-estrela); }
+.pill.tipo-acompanhamento { background: var(--tipo-acompanhamento-bg); color: var(--tipo-acompanhamento); }
+.pill.objetivo { background: var(--gold-3); color: var(--muted); }
+.pill.ticket    { background: transparent; color: var(--ink-soft); border: 1px solid var(--rule); }
+.pill.direcao   { background: var(--ink); color: var(--gold-3); }
+
+.ideia-campos { display: grid; grid-template-columns: 1fr; gap: 14px; }
+.campo { border-bottom: 1px solid var(--rule); padding-bottom: 14px; }
+.campo:last-child { border-bottom: none; padding-bottom: 0; }
+.campo-label {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--gold-1);
+  margin-bottom: 6px;
+}
+.campo p { font-size: 14px; color: var(--ink-soft); margin-bottom: 0; max-width: 100%; }
+
+.campo.nova-oportunidade {
+  background: var(--gold-3);
+  border-bottom: none;
+  border-left: 3px solid var(--gold-1);
+  padding: 14px 16px;
+  border-radius: 0 6px 6px 0;
+}
+.campo.nova-oportunidade .campo-label { color: var(--muted); }
+.campo.nova-oportunidade p { color: var(--ink); font-weight: 500; }
+
+.campo-grupo { margin-top: 6px; }
+.campo-grupo-titulo {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 14px;
+  color: var(--ink);
+  margin-bottom: 12px;
+}
+.campo-grupo .campo-subgrupo { display: grid; grid-template-columns: 1fr; gap: 14px; }
+
+.campo.ponto-atencao {
+  background: var(--tipo-estrela-bg);
+  border-left: 3px solid var(--tipo-estrela);
+  border-bottom: none;
+  padding: 12px 16px;
+  border-radius: 0 6px 6px 0;
+}
+.campo.ponto-atencao .campo-label { color: var(--tipo-estrela); }
+
+footer {
+  background: var(--ink);
+  padding: 36px 32px;
+  text-align: center;
+}
+.footer-brand {
+  font-family: var(--serif); font-style: italic; font-size: 18px;
+  background: var(--gold-gradient);
+  -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; color: transparent;
+  margin-bottom: 10px;
+}
+.footer-legal { font-family: var(--mono); font-size: 9px; letter-spacing: .04em; color: rgba(246,237,221,.6); line-height: 1.8; }
+</style>
+</head>
+<body>
+
+<nav class="anchor-bar">
+  <div class="anchor-bar-inner">
+    <a class="anchor-link" href="#contexto">Contexto</a>
+    <a class="anchor-link" href="#ideias">As 5 ideias</a>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="hero-inner">
+    <div class="hero-brand">Sim Inevitável</div>
+    <h1>Sessão de Brainstorm<br><em>Dexter</em></h1>
+    <p class="hero-sub">{{RESUMO_UMA_LINHA}}</p>
+    <div class="hero-meta">
+      <span class="tag solid">{{DATA_HOJE}}</span>
+      <span class="tag outline">Dexter · Agente de Brainstorm de Produto Novo</span>
+    </div>
+  </div>
+</header>
+
+<section class="block" id="contexto">
+  <div class="container">
+    <div class="section-marker">Seção 1</div>
+    <h2>Contexto <em>levantado</em></h2>
+
+    <!-- BLOCO_CONTEXTO × 4 — repetir este par para cada um dos 4 blocos da Fase 1,
+         nesta ordem fixa: 01 Conhecimento real · 02 Público candidato ·
+         03 Demanda validada · 04 Restrição de execução -->
+    <div class="bloco-header">
+      <span class="bloco-num">{{BLOCO_NUM}}</span>
+      <span class="bloco-title">{{BLOCO_TITULO}}</span>
+      <span class="bloco-line"></span>
+    </div>
+    <p>{{BLOCO_TEXTO}}</p>
+    <!-- /BLOCO_CONTEXTO -->
+
+  </div>
+</section>
+
+<section class="block alt" id="ideias">
+  <div class="container">
+    <div class="section-marker">Seção 2</div>
+    <h2>As <em>5 ideias</em></h2>
+
+    <!-- IDEIA × 5 — repetir este card para cada uma das 5 ideias geradas na Fase 2.
+         {{TIPO_CLASSE}} é uma de: tipo-paquera / tipo-acelerador / tipo-estrela /
+         tipo-acompanhamento, conforme o Tipo da ideia. -->
+    <div class="ideia-card">
+      <div class="ideia-num">Ideia {{IDEIA_NUM}}</div>
+      <h3>{{IDEIA_NOME}}</h3>
+
+      <div class="ideia-tags">
+        <span class="pill {{TIPO_CLASSE}}">{{IDEIA_TIPO}}</span>
+        <span class="pill objetivo">{{IDEIA_OBJETIVO}}</span>
+        <span class="pill ticket">Ticket {{IDEIA_TICKET}}</span>
+        <span class="pill direcao">{{IDEIA_DIRECAO}}</span>
+      </div>
+
+      <div class="ideia-campos">
+        <div class="campo">
+          <div class="campo-label">Formato</div>
+          <p>{{IDEIA_FORMATO}}</p>
+        </div>
+        <div class="campo">
+          <div class="campo-label">Público</div>
+          <p>{{IDEIA_PUBLICO}}</p>
+        </div>
+        <div class="campo">
+          <div class="campo-label">Esboço de promessa</div>
+          <p>{{IDEIA_PROMESSA}}</p>
+        </div>
+        <div class="campo nova-oportunidade">
+          <div class="campo-label">Nova oportunidade</div>
+          <p>{{IDEIA_NOVA_OPORTUNIDADE}}</p>
+        </div>
+
+        <!-- GRUPO_POR_QUE_FAZ_SENTIDO — Backlight + Cenário futuro + Viés.
+             Ver references/template-html.md, "Agrupamento visual dos campos". -->
+        <div class="campo-grupo">
+          <div class="campo-grupo-titulo">Por que essa ideia faz sentido</div>
+          <div class="campo-subgrupo">
+            <div class="campo">
+              <div class="campo-label">Backlight</div>
+              <p>{{IDEIA_BACKLIGHT}}</p>
+            </div>
+            <div class="campo">
+              <div class="campo-label">Cenário futuro</div>
+              <p>{{IDEIA_CENARIO_FUTURO}}</p>
+            </div>
+            <div class="campo">
+              <div class="campo-label">Viés</div>
+              <p>{{IDEIA_VIES}}</p>
+            </div>
+          </div>
+        </div>
+        <!-- /GRUPO_POR_QUE_FAZ_SENTIDO -->
+
+        <!-- GRUPO_DE_ONDE_ISSO_VEM — Lastro + Verdade existente + De onde vem. -->
+        <div class="campo-grupo">
+          <div class="campo-grupo-titulo">De onde isso vem</div>
+          <div class="campo-subgrupo">
+            <div class="campo">
+              <div class="campo-label">Lastro</div>
+              <p>{{IDEIA_LASTRO}}</p>
+            </div>
+            <div class="campo">
+              <div class="campo-label">Verdade existente</div>
+              <p>{{IDEIA_VERDADE_EXISTENTE}}</p>
+            </div>
+            <div class="campo">
+              <div class="campo-label">De onde vem</div>
+              <p>{{IDEIA_DE_ONDE_VEM}}</p>
+            </div>
+          </div>
+        </div>
+        <!-- /GRUPO_DE_ONDE_ISSO_VEM -->
+
+        <!-- CAMPO_PONTO_ATENCAO — incluir só se houver ponto de atenção real
+             para esta ideia; omitir o card inteiro se não houver. -->
+        <div class="campo ponto-atencao">
+          <div class="campo-label">Ponto de atenção</div>
+          <p>{{IDEIA_PONTO_ATENCAO}}</p>
+        </div>
+        <!-- /CAMPO_PONTO_ATENCAO -->
+      </div>
+    </div>
+    <!-- /IDEIA -->
+
+  </div>
+</section>
+
+<footer>
+  <div class="footer-brand">Sim Inevitável · Triwer</div>
+  <div class="footer-legal">
+    Desenvolvido por Milena Camila para o Sim Inevitável.<br>
+    Copyright © 2026 Triwer Marketing LTDA – Todos os direitos reservados.<br>
+    É proibida a reprodução total ou parcial de qualquer conteúdo ou metodologia presente.<br>
+    Gerado por Dexter v{{VERSAO_SKILL}}
+  </div>
+</footer>
+
+</body>
+</html>

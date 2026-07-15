@@ -38,6 +38,44 @@ registraram no Notion — rodar na ordem da tabela evita repetir perguntas.
 
 Três formas de instalar, dependendo de como você usa o Claude.
 
+### O que os instaladores fazem (leia antes de rodar)
+
+Todo instalador deste repositório (o de "tudo de uma vez" e os individuais)
+só baixa arquivos de texto (`.md`, `VERSION`) deste repositório **público**
+para `~/.claude/skills/<skill>/` (ou `%USERPROFILE%\.claude\skills\<skill>\`
+no Windows). Nenhum deles:
+
+- pede ou coleta credenciais;
+- envia dados para qualquer lugar;
+- sobrescreve `memoria.md` (seus dados pessoais dentro de cada skill).
+
+Rodar de novo no futuro só baixa de novo os arquivos cuja versão mudou —
+o instalador compara a versão instalada com a do repositório antes de
+sobrescrever qualquer coisa.
+
+Se o seu Claude (ou você) preferir inspecionar o script antes de rodar —
+recomendado, e o próprio Claude Code costuma sugerir isso por padrão diante
+de um comando que baixa e executa algo direto da internet — baixe primeiro
+e rode depois, em vez do atalho de uma linha só:
+
+**Mac / Linux**
+```bash
+curl -fsSL https://raw.githubusercontent.com/paulovyn1/triwer-skills/main/scripts/instalar-tudo-mac.sh -o instalar-tudo.sh
+# leia o arquivo instalar-tudo.sh antes de rodar
+bash instalar-tudo.sh
+```
+
+**Windows (PowerShell)**
+```powershell
+irm https://raw.githubusercontent.com/paulovyn1/triwer-skills/main/scripts/instalar-tudo-windows.ps1 -OutFile instalar-tudo.ps1
+# leia o arquivo instalar-tudo.ps1 antes de rodar
+.\instalar-tudo.ps1
+```
+
+Os comandos de uma linha só (`| bash` / `| iex`) abaixo continuam funcionando
+e fazem exatamente a mesma coisa — são só um atalho para quem já confia no
+repositório e não precisa inspecionar antes.
+
 ### Opção A — Tudo de uma vez (recomendado para Claude Code/Desktop)
 
 **Mac / Linux**

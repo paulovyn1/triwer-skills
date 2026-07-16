@@ -16,7 +16,7 @@ description: >
   nomear produtos, escrever carrosséis ou campanhas — escopo de descoberta e
   validação da promessa.
 compatibility: Claude Desktop, Claude Code, claude.ai
-metadata: "v2.2.0 — julho 2026. Histórico completo de todas as versões em CHANGELOG.md (sibling deste arquivo) — não duplicado aqui para não fazer este campo crescer sem limite a cada versão (isso já causou a v2.1.1, quando o metadata + description passaram do limite de 1024 caracteres do claude.ai e bloquearam instalação)."
+metadata: "v2.3.0 — julho 2026. Histórico completo de todas as versões em CHANGELOG.md (sibling deste arquivo) — não duplicado aqui para não fazer este campo crescer sem limite a cada versão (isso já causou a v2.1.1, quando o metadata + description passaram do limite de 1024 caracteres do claude.ai e bloquearam instalação)."
 ---
 
 # Sexy Triwer
@@ -554,52 +554,57 @@ corre e sonha com prova grande; assessoria individual pra quem quer acelerar
 com acompanhamento) — nunca como "o mesmo cliente da versão cara, só que sem
 dinheiro".
 
-### Passo 6 — Pilar de desejo dominante
+### Passo 6 — Pontuar os 7 pilares do desejo (0-10, calculado pela skill, nunca perguntado ao aluno)
 
-Depois de fechar situação de vida e urgência, pergunte o que realmente move
-a compra. **Nunca nomeie os pilares** (rótulos como "vaidade" soam
-pretensiosos e o aluno evita marcar o que é verdade). Apresente como
-benefício reconhecível, deixando claro que é seleção múltipla:
+**Não pergunte ao aluno o que pesa na decisão de compra, e nunca peça uma
+nota.** O aluno sempre se dá notas altas e não tem capacidade de avaliar
+com precisão o quanto cada pilar pesa de verdade — mesmo risco de
+autoavaliação já evitado noutra etapa desta skill (Etapa 4 Passo 0: "nunca
+pergunte ao aluno se o produto dele é genérico"). **A pontuação é
+julgamento da skill sobre o que o aluno já contou do produto**, nunca uma
+nota que ele atribui a si mesmo.
 
-```
-Quando alguém pensa em comprar seu produto, o que você considera que ajuda
-nessa decisão? Pode marcar quantos fizerem sentido:
+Leia `references/pilares-do-desejo/INDEX.md` (se ainda não leu nesta
+sessão) — os 7 pilares, o que cada um ativa, e o mapeamento por
+`formato_produto` para checar se a pontuação bate com o padrão esperado.
+Para cada um dos 7 — **nunca nomeie os pilares pro aluno** (uso interno) —
+procure evidência real nos dados já coletados nas Etapas 2-5 (objetivo,
+diferencial, dores, histórias, verdade de mercado, síntese do Passo 7
+anterior desta etapa). A nota (0-10) reflete a força e a quantidade de
+evidência encontrada para cada pilar, sempre citando o dado-fonte.
 
-- Ela tem acesso a uma quantidade grande de coisas que vão ajudar (modelos,
-  roteiros, scripts, ferramentas, agentes, guias...) — a sensação de estar
-  levando muita coisa por um preço baixo
-- Ela vai conquistar algo que sempre almejou, que inclusive via em outras
-  pessoas e invejava — um resultado ou uma vida específica. A vida dela e a
-  forma como ela se vê vão mudar por causa disso
-- Vai provar que o mundo está errado e resolver um problema que
-  verdadeiramente a enlouquece e irrita hoje
-- Vai fazer com que o mundo, os concorrentes, os clientes a admirem — que
-  ela seja reconhecida e até invejada
-- Vai agilizar a vida dela, ou resolver por ela algum tópico
-- O produto coloca ela numa nova "prateleira", num grupo melhor — as
-  pessoas olham pra isso e parece que ela venceu
-- Dá a sensação de estar pagando barato
-```
+Se a investigação já apontou pro gatilho à parte "Segurança" (reduzir
+risco, não fazer errado), reconheça — mas **Segurança nunca entra na
+pontuação dos 7 nem vira `pilar_dominante`**, é modificador: se for o
+motivo mais forte identificado, o dominante continua sendo o pilar dos 7
+com nota mais alta, e Segurança entra como exigência de prova/garantia na
+formulação da promessa (a Bateria 2 da Etapa 6 avalia só os pilares dos 7).
 
-Os itens mapeiam, nesta ordem: Gula, Inveja, Ira, Luxúria/Vaidade, Preguiça,
-Soberba e Avareza — uso interno, nunca mostre os nomes. Se a resposta
-apontar pro gatilho à parte "Segurança" (reduzir risco, não fazer errado),
-reconheça — mas **Segurança nunca é `pilar_dominante`, é modificador**: se
-for o motivo mais forte, o dominante é o segundo pilar mais marcado dos 7, e
-Segurança entra como exigência de prova/garantia na formulação da promessa
-(a Bateria 2 da Etapa 6 avalia só o pilar dos 7). Use
-`references/pilares-do-desejo/INDEX.md` como apoio pra checar se a seleção
-bate com o padrão do `formato_produto`.
+**Regra travada: sem evidência real nos dados já coletados, a nota é 0 —
+nunca um número intermediário "de cortesia".** Não ter dado é um dado: se
+nada na conversa aponta pra Ira, por exemplo, isso significa que esse
+produto genuinamente não ativa esse gatilho hoje, não que a skill "não
+soube avaliar". Zero é resultado válido, não lacuna a disfarçar.
 
-### Passo 7 — Verificar a seleção e cruzar os dados repetidos (não pule)
+Guarde esta pontuação como `pontuacao_pilares_antes` (dicionário dos 7
+pilares com nota + o dado-fonte que justifica cada uma). Esta pontuação
+não é gravada agora — ela é arquivada na Etapa 6, junto do resto do estado
+antigo do produto, no momento em que `nova_oportunidade` é definida e a
+ficha de produto está prestes a ser reescrita (ver "Arquivar o estado
+antigo do produto" na Etapa 6).
 
-O aluno reconhece padrões, não faz diagnóstico técnico. Antes de aceitar:
+### Passo 7 — Cruzar os dados repetidos (não pule)
 
-- **Item marcado sem lastro na conversa:** pergunte de forma pontual (se
-  marcou volume mas nunca disse o que entrega em quantidade: "o que exatamente
-  você entrega em quantidade, e quanto?").
-- **Algo forte na conversa que não foi marcado:** pergunte se também pesa na
-  decisão, sem sugerir que ele "errou".
+Releia a pontuação do Passo 6 contra o resto da conversa — não é pergunta
+nova ao aluno, é checagem interna da própria skill:
+
+- **Pilar com nota alta mas evidência fraca:** releia o dado-fonte citado.
+  Se ele não sustenta de verdade a nota atribuída, corrija a nota antes de
+  seguir — não force a evidência pra justificar um número já escrito.
+- **Algo forte na conversa que não gerou nota correspondente em nenhum dos
+  7:** confira se não é um sinal de "Segurança" (modificador, não pilar) ou
+  se a evidência foi de fato perdida na varredura do Passo 6 — se for
+  evidência real, ajuste a nota do pilar correspondente.
 
 Feche a lista, identifique o **dominante** (dos 7, nunca Segurança) e os
 secundários, e abra o arquivo individual do pilar dominante em
@@ -772,9 +777,11 @@ cético.
    ("torne-se social media profissional") não significa nada pra quem ainda
    sonha em começar — troque por resultado concreto.
 10. **Fala natural e coerência interna:** a frase soa como algo que um ser
-    humano diria (travessões encadeados são sintoma de copy montada)? E cada
-    parte puxa a seguinte, sem salto lógico ("estratégia de conteúdo" não
-    casa com "pacientes por indicação")?
+    humano diria (travessões encadeados são sintoma de copy montada;
+    paralelismo de oposição — "X, mas Y", "não é A, é B" — é a mesma
+    muleta, proibido sempre, ver REGRAS ESTRUTURAIS)? E cada parte puxa a
+    seguinte, sem salto lógico ("estratégia de conteúdo" não casa com
+    "pacientes por indicação")?
 11. **Credencial máxima:** se a promessa usa credencial, é o fato mais forte
     real ("3 treinadores medalhistas"), não o rótulo genérico
     ("especialistas")? Garimpe — o aluno escreve o rótulo sozinho, porque a
@@ -800,14 +807,104 @@ Guarde `nova_oportunidade` e, se o registro for aspiracional/Estrela,
 `subpromessa` (a camada técnica que sustenta — é também onde entra o
 resultado forte que não coube na promessa central).
 
+### Passo 4 — Arquivar o estado antigo do produto (antes de qualquer campo ser reescrito)
+
+Antes de reescrever qualquer campo estrutural da ficha (promessa, público,
+ativos, headlines, bio — Etapas 7-11 seguintes), copie a ficha de produto
+**completa, como está agora**, para uma nota de histórico na subpágina do
+produto (formato "Produto — v1 (antes da Sexy)", incrementando o número se
+já existir uma versão anterior arquivada). Depois disso, edite a ficha
+original livremente ao longo das próximas etapas — a nota de histórico já
+preserva o snapshot inteiro, não precisa decidir campo a campo o que vale
+arquivar.
+
+Inclua nesse snapshot também `pontuacao_pilares_antes` (Etapa 5, Passo 6)
+— a pontuação 0-10 dos 7 pilares com o dado-fonte de cada nota.
+
+Se o Notion não estiver disponível nesta sessão, guarde em `memoria.md`
+como fallback temporário e tente arquivar assim que a conexão voltar.
+
 ---
 
-## ETAPA 7 — Formato de apresentação (sempre página, sem perguntar)
+## ETAPA 7 — Bônus: criar o que o produto ainda não tem, não procurar o que falta
+
+Bônus estrutural (Âncora e Gula) não é achado na investigação — é
+**criado** pela skill a partir do pilar dominante, do público real e das
+credenciais já coletadas, e depois validado com o aluno se é executável.
+Mesmo espírito de "vender o quadro na parede, não os pregos e o martelo"
+que abre esta skill: não pergunte ao aluno "o que você tem de valioso pra
+oferecer" esperando ele inventar sozinho — a skill filtra e propõe, o
+aluno só confirma.
+
+Leia `references/bonus.md` (os 3 tipos, com exemplos reais e o teste de
+dispensa do Gula) antes de gerar qualquer proposta.
+
+### Passo 1 — Bônus Âncora (sempre obrigatório, sem exceção)
+
+Pergunta-guia: o que essa pessoa específica (dado `pilar_dominante` da
+Etapa 5) pagaria caro, isoladamente, se existisse à parte? Normalmente é
+acesso direto a quem tem a credencial real já coletada (Etapa 2/Quem sou
+eu, Etapa 3) — o mesmo padrão do hot seat mensal do Sim Inevitável: uma
+mentoria individual custaria R$12.000, um encontro mensal incluso é bônus
+âncora puro.
+
+Gere 1-2 propostas já calibradas por `formato_produto` e ticket (Etapa 3)
+— nunca proponha algo impraticável pro porte do negócio do aluno (ex.:
+sessão ao vivo semanal pra quem vende só curso gravado sem estrutura de
+suporte). Apresente ao aluno pra confirmar execução, não como pergunta
+aberta.
+
+**Nunca dispensável.** Se nenhuma proposta parecer executável na primeira
+rodada, gere outra — não avance pra Etapa 8 sem um Bônus Âncora definido.
+
+### Passo 2 — Bônus Gula (dispensável só se o produto já É Gula)
+
+**Teste de dispensa primeiro:** confira `pontuacao_pilares_antes` (Etapa
+5, Passo 6). Se Gula já tiver nota alta ali (o produto central já entrega
+volume percebido sozinho — ex.: dezenas de modelos prontos), **este bônus
+é dispensado** — criar um em cima seria redundante, a regra já está
+satisfeita pelo produto em si. Se Gula ficou com nota baixa ou 0, o bônus
+não está dispensado.
+
+Pergunta-guia (se não dispensado): o que soma volume percebido, pronto pra
+usar, sem duplicar o que já é aula? **Nunca proponha mais aula, módulo ou
+conteúdo teórico como resposta** — mesma regra já usada na Etapa 10 de
+Ativos ("volume de aulas nunca é ativo válido, mesmo com pilar Gula").
+Pense em entregável pronto: modelos, moldes, fichas técnicas, templates,
+scripts — algo que o comprador usa direto, não estuda antes de usar.
+
+Gere 1-2 propostas calibradas do mesmo jeito que o Passo 1, e priorize uma
+que também reforce a objeção real já coletada (Etapa 5, Passo 2), se
+houver uma clara — reforça dois ângulos com um só bônus.
+
+### Passo 3 — Bônus Reativo (só com objeção real, já coberto pela Etapa 10)
+
+Este tipo já é coberto pela Etapa 10 (Ativos de Marketing) — não duplique
+aqui. Só use este passo pra confirmar que a objeção real coletada na Etapa
+5 (Passo 2) tem, ou não, um bônus reativo correspondente: se houver uma
+objeção nomeada e nenhuma resposta a ela na estrutura central do produto,
+sinalize como candidato a bônus reativo (nunca destaque visual — só
+aparece pra quem carrega aquela objeção específica, mesmo padrão do caso
+VA que reduziu reembolso em 50%). Se a objeção já é respondida pela
+entrega central (ex.: suporte incluso), não force um bônus reativo
+redundante.
+
+### Guardar o resultado
+
+Guarde `bonus_ancora`, `bonus_gula` (ou marcado como dispensado, com o
+motivo — nota de Gula alta no "antes"), e `bonus_reativo` (se houver). Cada
+um com a proposta + o porquê ela foi calibrada pro pilar/público/ticket
+deste produto específico, pra alimentar o resumo final (Etapa 13) e o
+segundo cálculo da roda de pilares "depois" (Etapa 12).
+
+---
+
+## ETAPA 8 — Formato de apresentação (sempre página, sem perguntar)
 
 O resultado final desta skill **sempre** é entregue como página HTML com a
 identidade visual Triwer, no mesmo padrão do diagnóstico do Dr. House. Não
 existe pergunta aqui, não existe alternativa em texto puro — siga direto
-para a Etapa 8 e depois para a seção **IDENTIDADE VISUAL — Página de
+para a Etapa 9 e depois para a seção **IDENTIDADE VISUAL — Página de
 resultado**. Isso não deve ser confundido com o `formato_produto` da Etapa
 3, que é sobre o que o aluno vende, não sobre como esta skill entrega o
 próprio resultado.
@@ -822,7 +919,7 @@ salvar manualmente — nunca como Artifact.
 
 ---
 
-## ETAPA 8 — Gerar as 5 headlines exploratórias
+## ETAPA 9 — Gerar as 5 headlines exploratórias
 
 **Headline e promessa são dois artefatos diferentes — nunca misture os
 dois.** A promessa (`nova_oportunidade`, Etapa 6) é uma frase/parágrafo
@@ -859,7 +956,7 @@ testes abaixo com disciplina, e é fácil racionalizar que uma headline fraca
    Autoridade, uma em Provocação) revela ângulos diferentes de comunicação.
 2. **Escolher o modelo MH mais adequado** para cada DOPA escolhido.
 3. **Usar um dado específico real** — vindo da `nova_oportunidade`, do
-   `pilar_dominante`, dos `ativos_marketing_sexys` (Etapa 9) ou de provas já
+   `pilar_dominante`, dos `ativos_marketing_sexys` (Etapa 10) ou de provas já
    coletadas. Nunca inventar um número ou resultado que não apareceu na
    conversa (mesma regra da Etapa 6 Passo 0 — não inventar contexto novo).
    Vocabulário calibrado por `nivel_consciencia` (Etapa 5), como na promessa.
@@ -879,7 +976,7 @@ só o texto final.
 
 ---
 
-## ETAPA 9 — Ativos de marketing: provar a decisão já tomada
+## ETAPA 10 — Ativos de marketing: provar a decisão já tomada
 
 Ativo de marketing é **resposta a uma promessa que já existe** — nunca
 garimpo aberto. A pergunta desta etapa não é "que elementos interessantes
@@ -964,11 +1061,72 @@ Guarde como `ativos_marketing_sexys` (lista).
 
 ---
 
-## ETAPA 10 — Montar o resumo, verificar e apresentar para aprovação
+## ETAPA 11 — Aplicação Prática: Bio do Instagram
+
+Esta etapa roda **depois** da Etapa 10 (Ativos) — a bio herda
+`ativos_marketing_sexys` já garimpado como fonte de prova. Rodando antes,
+a bio fica pobre em prova específica (sem número ou prova nomeada
+disponível, a etapa marca "a confirmar com o aluno").
+
+Só a Bio está pronta nesta etapa. Destaques do Instagram ainda não tem
+régua de conteúdo validada — quando fechar, entra aqui como um segundo
+artefato desta mesma etapa, sem precisar renumerar de novo.
+
+### Dois subagentes, não um — Gerador e Verificador
+
+Se a ferramenta `Agent`/`Task` estiver disponível, delegue em duas
+instâncias separadas — nunca a mesma instância faz os dois papéis, e o
+Verificador nunca vê as regras do Gerador (ver
+`references/bio-gerador.md` e `references/bio-verificador.md` para o
+porquê). Se não houver a ferramenta, rode você mesmo os dois papéis em
+sequência, mas com a mesma separação de contexto: ao verificar, releia a
+bio como se nunca tivesse visto o pacote de fatos.
+
+### O ciclo
+
+1. Monte o pacote de entrada (10 campos brutos + 3 conclusões fechadas —
+   ver `references/bio-gerador.md`) a partir do que já foi coletado nas
+   Etapas 2-10.
+2. Chame o Gerador (instância A) com o pacote + `bio-gerador.md` → bio v1.
+3. Chame o Verificador (instância nova, só vê a bio v1 pura, texto sem
+   contexto) com `bio-verificador.md` → avaliação.
+4. Se reprovado: volte pra **mesma** instância A do Gerador (ela lembra o
+   que escreveu, ajusta em cima da crítica — não reescreve do zero) → bio
+   v2.
+5. Chame o Verificador em **outra instância nova** (nunca lembra da
+   rodada anterior) → segunda avaliação.
+6. Se reprovado de novo: **pare** — leve a bio v2 + a crítica direto para
+   o aluno julgar, em vez de insistir numa 3ª rodada automática. Máximo 2
+   tentativas de Gerador, 2 de Verificador, por bio.
+7. Se aprovado em qualquer rodada: só o resultado final volta para o
+   resumo (Etapa 13).
+
+**Modo sem aluno ao vivo** (ver definição na Etapa 5): se não houver
+interlocutor pra julgar uma bio reprovada duas vezes (passo 6), não trave
+a etapa — entregue a bio v2 marcada como **a confirmar**, junto com a
+crítica do Verificador, para o aluno julgar na próxima interação. Nunca
+force uma 3ª rodada automática só porque não há aluno presente agora.
+
+Guarde o resultado como `bio_instagram`.
+
+---
+
+## ETAPA 12 — Recálculo "depois" da roda de pilares (pendente)
+
+> Ainda não escrita — depende de Bônus (Etapa 7) + Ativos (Etapa 10) + Bio
+> (Etapa 11) + Destaques (quando a régua de conteúdo fechar, ver PRD Sexy
+> — Novo output da Oportunidade Sexy). Cada ponto de elevação do "depois"
+> precisa apontar pra um bônus/ativo/bio/destaque concreto gerado nas
+> etapas anteriores — nunca nota solta "melhorada" sem lastro (mesma regra
+> já travada para o "antes" na Etapa 5, Passo 6).
+
+---
+
+## ETAPA 13 — Montar o resumo, verificar e apresentar para aprovação
 
 ### Passo 1 — Montar o resumo
 
-Os campos abaixo alimentam a página HTML final (Etapa 7) — monte-os antes de
+Os campos abaixo alimentam a página HTML final (Etapa 8) — monte-os antes de
 preencher o template.
 
 ```
@@ -987,11 +1145,24 @@ Oportunidade Sexy definida:
 **Histórias e provas sociais que podem ser usadas:** [lista com origem — Notion ou coletado agora]
 **Palavras-chave estratégicas:** [lista]
 
-**Ativos de marketing sexys** (Etapa 9 — o que mostrar e por que prova a promessa):
+**Bônus** (Etapa 7 — o que a Sexy criou e por que):
+**Âncora:** [bonus_ancora — a proposta + o porquê pro pilar/público/ticket deste produto]
+**Gula:** [bonus_gula, ou "dispensado — produto já É Gula (nota X no antes)"]
+**Reativo:** [bonus_reativo, se houver — qual objeção neutraliza]
+
+**Ativos de marketing sexys** (Etapa 10 — o que mostrar e por que prova a promessa):
 1. [ativo 1: o que mostrar] — [por que isso prova a promessa/pilar dominante]
 2. [ativo 2]
 3. [ativo 3]
 (4-5, se houver)
+
+**Bio do Instagram** (Etapa 11 — `bio_instagram`):
+[nome pesquisável + linhas da bio — aprovada pelo Verificador, OU, se
+reprovada nas 2 tentativas (passo 6 da Etapa 11), a v2 marcada
+explicitamente como "a confirmar com você" + a crítica do Verificador
+na íntegra logo abaixo, para o aluno julgar. Nunca apresentar uma bio
+reprovada como se fosse aprovada — a marcação "a confirmar" e a crítica
+são parte obrigatória do resumo nesse caso, não opcionais.]
 
 **Headlines exploratórias:**
 1. [headline 1]
@@ -1053,13 +1224,13 @@ relembrar a regra exata do pilar em questão:
       mente: às vezes um processo "escapa" disfarçado de resultado quando o
       formato é Curso ou Formação.
 - [ ] **Ativos de marketing são específicos, não genéricos:** cada item de
-      `ativos_marketing_sexys` (Etapa 9) nomeia um elemento concreto do
+      `ativos_marketing_sexys` (Etapa 10) nomeia um elemento concreto do
       produto do aluno e explica por que ele prova a promessa/pilar —
       nenhum item pode ser conselho genérico do tipo "use prova social".
 - [ ] **Ativos coerentes com o público-alvo real** (`publico_promessa`,
       Etapa 5) — não só coerentes com o pilar/mecanismo em abstrato.
 - [ ] **Ativos vêm de fatos-fonte distintos, não do mesmo fato reembalado**
-      (ver teste de origem na Etapa 9): nomeie o fato-fonte bruto de cada
+      (ver teste de origem na Etapa 10): nomeie o fato-fonte bruto de cada
       item da lista — se dois apontam para o mesmo evento/cliente/número só
       formatado diferente (print, narrativa, contraste antes/depois do
       mesmo caso), funde ou corta um, mesmo que isso deixe a lista com
@@ -1073,8 +1244,27 @@ relembrar a regra exata do pilar em questão:
       headlines uma a uma.
 - [ ] **Nenhum ativo ou headline usa volume de aulas/módulos como prova:**
       quantidade só é ativo válido quando é entregável pronto para usar.
+- [ ] **Bônus Âncora existe e é executável** pro porte real do negócio do
+      aluno (Etapa 7, Passo 1) — nunca dispensado.
+- [ ] **Bônus Gula existe, ou foi dispensado com motivo citando a nota do
+      "antes"** (Etapa 7, Passo 2) — nunca dispensado por preguiça de
+      propor, só por `pontuacao_pilares_antes` sustentar a dispensa.
 - [ ] **Se houver diagnóstico do Dr. House anexado, a promessa responde aos
       achados críticos/estruturais e às perguntas em aberto dele.**
+- [ ] **Bio coerente com o `pilar_dominante`:** `bio_instagram` (Etapa 11)
+      respeita o limite de 150 caracteres (máximo 3 linhas), o Bloco 5 usa
+      o Sinal de Competitividade de maior peso disponível no dossiê (não
+      um binário fixo de 2 opções), a escolha entre caso nomeado e número
+      agregado respeita o `pilar_dominante` (nomeado vence em Vaidade/
+      Soberba/Inveja — mercado de exclusividade; agregado pode vencer em
+      Avareza ou prova de confiabilidade/redução de risco), a prova nunca
+      é história/depoimento narrado (sempre frase única e afiada), e não
+      confunde resultado da criadora com resultado de cliente?
+- [ ] **Nenhum paralelismo de oposição em nenhum texto final** (promessa,
+      headlines, ativos, bio) — releia cada um: corta ao meio numa vírgula/
+      conjunção e cada metade sozinha ainda faz sentido em oposição à
+      outra? Se sim, é copy montada (ver REGRAS ESTRUTURAIS), reescreva
+      como frase única antes de entregar.
 
 **Se qualquer item falhar:** volte e reformule a proposta (não é preciso
 reabrir a investigação inteira — normalmente o ajuste é só na formulação da
@@ -1087,7 +1277,7 @@ itens passarem.
 Siga a seção **IDENTIDADE VISUAL — Página de resultado** abaixo para gerar a
 página, preenchendo-a com os campos acima. Entregue a página ao aluno **sempre
 como arquivo `.html` real — nunca como Claude Artifact, em nenhuma hipótese**
-(ver Etapa 7) e, na conversa, pergunte: "Gerei a página com a Oportunidade
+(ver Etapa 8) e, na conversa, pergunte: "Gerei a página com a Oportunidade
 Sexy de [produto_atual]. Ficou
 do jeito que você imaginava? Posso salvar o conteúdo na subpágina do seu
 Notion também?"
@@ -1103,13 +1293,18 @@ Esta seção é sempre usada (Etapas 7 e 10) — o resultado desta skill é semp
 entregue como página HTML, nunca como texto puro na conversa.
 
 - **Template-base:** `~/.claude/skills/sexy-triwer/assets/template-oportunidade-sexy.html`.
-  Parta sempre desse arquivo — nunca gere a página do zero.
+  Parta sempre desse arquivo — nunca gere a página do zero. **Copie o
+  arquivo via comando de terminal para o destino final — não o leia
+  inteiro.** O bloco `<style>` tem centenas de linhas de CSS que não
+  precisam entrar no contexto; o comando de cópia duplica tudo sem custo de
+  token. Depois de copiado, edite só os placeholders `[[CAMPO]]` no arquivo
+  de destino.
 - **Fidelidade obrigatória:** o bloco `<style>` do template (cores, fontes,
   nomes de classe) é a identidade visual Triwer, a mesma usada pelo
   `dr-house-triwer`. Nunca altere variáveis de cor, fontes, espaçamento ou
   crie classes novas. Só o conteúdo textual muda.
 - **Preenchimento:** substitua cada `[[CAMPO]]` pelos dados desta sessão
-  (mesmos campos da Etapa 10, incluindo `[[FORMATO_PRODUTO]]` e
+  (mesmos campos da Etapa 13, incluindo `[[FORMATO_PRODUTO]]` e
   `[[PAPEL_ESTEIRA]]` definidos na Etapa 3, e `[[PILAR_DOMINANTE]]`,
   `[[URGENCIA_COMPRA]]` e `[[NIVEL_CONSCIENCIA]]` definidos na Etapa 5).
   Repita `<li>` e blocos `.achado.forte` quantas vezes forem necessários
@@ -1132,6 +1327,15 @@ entregue como página HTML, nunca como texto puro na conversa.
   demais papéis, remova a `<section id="subpromessa">` inteira **e** o link
   correspondente no `<nav class="anchor-bar">` — nunca deixe link morto no
   menu nem seção com `[[SUBPROMESSA]]` vazio.
+- **`[[BIO_INSTAGRAM]]`:** preenche com `bio_instagram` (Etapa 11) — a
+  bio aprovada, ou, se reprovada 2x (Etapa 11, passo 6), a v2 com aviso
+  visível de "a confirmar com você" e a crítica do Verificador junto,
+  nunca apresentada como se fosse a versão final. **Pendente de
+  template:** o `assets/template-oportunidade-sexy.html` ainda não tem
+  este placeholder nem a seção visual correspondente — até esse trabalho
+  de template ser feito, inclua a bio como bloco de texto simples dentro
+  de `#provas` ou
+  seção equivalente já existente no template, sem inventar CSS novo.
 - **Nunca deixe `[[CAMPO]]` sem preencher no HTML final** — é um marcador de
   template, não um placeholder visível para o aluno.
 - **Entrega:** gere um HTML autocontido (sem dependências externas além das
@@ -1140,10 +1344,10 @@ entregue como página HTML, nunca como texto puro na conversa.
 
 ---
 
-## ETAPA 11 — Gravar no Notion
+## ETAPA 14 — Gravar no Notion
 
 Após aprovação, escreva na subpágina de `produto_atual` (dentro da database
-"Produtos") um bloco com a mesma estrutura de campos da Etapa 10 (título
+"Produtos") um bloco com a mesma estrutura de campos da Etapa 13 (título
 "Oportunidade Sexy", seguido dos campos listados) — **sempre como texto
 formatado**: o Notion não renderiza o CSS da página, então mesmo o aluno
 tendo recebido a versão em página, o que vai para o Notion é o conteúdo
@@ -1159,7 +1363,7 @@ Salvo! A Oportunidade Sexy de [produto_atual] está registrada no seu Notion.
 
 ---
 
-## ETAPA 12 — Atualizar memória e fechar
+## ETAPA 15 — Atualizar memória e fechar
 
 Atualize `~/.claude/skills/sexy-triwer/memoria.md`:
 
@@ -1217,11 +1421,36 @@ inteira, sem etapa dona:
    pareça um argumento de venda eficaz para o produto atual, e o teste de
    esteira (Etapa 5, Passo 5) foi feito para o público, não só a linguagem.
 9. Nunca gerar o resultado como Claude Artifact, em nenhuma hipótese — a
-   entrega final (Etapa 7) é sempre um arquivo `.html` real, independente do
+   entrega final (Etapa 8) é sempre um arquivo `.html` real, independente do
    ambiente.
 10. Toda dor, inimigo, objeção, hábito ou credencial citado na promessa
     precisa ser real e atual nesse mercado (Etapa 5 Passo 2 e Etapa 6
     Bateria 1) — nunca por plausibilidade.
+11. Nunca preencher ausência de dado por plausibilidade. Dois casos, nunca
+    confundir:
+    - **Lacuna de investigação:** a skill ainda não perguntou, ou a
+      resposta do aluno não cobriu o necessário (ex.: preço sem
+      justificativa suficiente pra avaliar). Nomeie o que falta e
+      pergunte — a ausência aqui é um problema de coleta a resolver.
+    - **Pontuação sobre o que o produto/oferta já é hoje** (ex.: pilares
+      do desejo no "antes" da roda — Etapa 5): nunca dar nota que não
+      seja sustentada por dado real coletado nas etapas anteriores. Se
+      não há dado, a nota é sempre 0 — não ter dado é um dado, o produto
+      genuinamente não ativa aquele gatilho hoje.
+12. **Paralelismo de texto é proibido em qualquer output final desta
+    skill** (promessa central — Etapa 6, headlines — Etapa 9, ativos de
+    marketing — Etapa 10, bio — Etapa 11) — **principalmente o de
+    oposição**: nunca escreva uma frase na estrutura "X, mas Y" / "não é
+    A, é B" / qualquer construção espelhada onde a força do texto depende
+    da simetria entre duas metades em vez da especificidade do conteúdo.
+    Mesma família do teste de "travessões encadeados são sintoma de copy
+    montada" (Bateria 3, Etapa 6, teste 10) — mas mais amplo: travessão é
+    um sintoma específico, paralelismo de oposição é o padrão inteiro por
+    trás dele. Teste: se a frase corta ao meio numa vírgula/conjunção e
+    cada metade sozinha ainda faz sentido em oposição à outra, é
+    paralelismo — reescreva como frase única, sem contraste espelhado
+    (correção de Milena, 2026-07-15, aplicada primeiro na Etapa 11/Bio e
+    estendida aqui para toda a skill).
 
 ---
 
@@ -1258,7 +1487,10 @@ inteira, sem etapa dona:
 │   │   ├── mentoria-individual.md
 │   │   ├── consultoria.md
 │   │   └── ebook.md                         ← ler o arquivo individual só quando o formato for identificado
-│   ├── manual-headline.md                   ← ler na Etapa 8 (5 modelos MH, DOPA, testes de qualidade)
+│   ├── manual-headline.md                   ← ler na Etapa 9 (5 modelos MH, DOPA, testes de qualidade)
+│   ├── bonus.md                              ← ler na Etapa 7 (Âncora, Gula, Reativo — exemplos reais e teste de dispensa)
+│   ├── bio-gerador.md                        ← ler na Etapa 11, só pelo subagente Gerador
+│   ├── bio-verificador.md                    ← ler na Etapa 11, só pelo subagente Verificador (nunca vê bio-gerador.md)
 │   └── notion-setup.md                      ← ler só se a conexão do Notion falhar no BOOT
 └── memoria.md                            ← criado automaticamente no primeiro uso
 ```
@@ -1276,6 +1508,9 @@ cp references/esteira.md $BASE/references/
 cp references/pilares-do-desejo/*.md $BASE/references/pilares-do-desejo/
 cp references/tipos-de-produto/*.md $BASE/references/tipos-de-produto/
 cp references/manual-headline.md $BASE/references/
+cp references/bonus.md $BASE/references/
+cp references/bio-gerador.md $BASE/references/
+cp references/bio-verificador.md $BASE/references/
 cp references/notion-setup.md $BASE/references/
 ```
 
@@ -1294,6 +1529,9 @@ Copy-Item references\esteira.md "$BASE\references\"
 Copy-Item references\pilares-do-desejo\*.md "$BASE\references\pilares-do-desejo\"
 Copy-Item references\tipos-de-produto\*.md "$BASE\references\tipos-de-produto\"
 Copy-Item references\manual-headline.md "$BASE\references\"
+Copy-Item references\bonus.md "$BASE\references\"
+Copy-Item references\bio-gerador.md "$BASE\references\"
+Copy-Item references\bio-verificador.md "$BASE\references\"
 Copy-Item references\notion-setup.md "$BASE\references\"
 ```
 

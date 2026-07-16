@@ -77,6 +77,13 @@ promessa no resumo final da sexy-triwer.
 - **Sem prefixo editorial:** nunca expor o DOPA ou a intenção na própria
   headline ("PROVOCAÇÃO —", "Post de valor:"). O DOPA é o objetivo interno,
   não texto visível.
+- **Sem paralelismo de oposição:** a headline não pode depender de duas
+  metades espelhadas em contraste ("X, mas Y", "não é A, é B") pra
+  funcionar — teste: corta ao meio numa vírgula/conjunção e cada metade
+  sozinha ainda faz sentido em oposição à outra? Se sim, é copy montada,
+  reescreva como frase única (proibido em qualquer output desta skill, ver
+  REGRAS ESTRUTURAIS do `SKILL.md`; diferente do MH008, que usa contraste
+  temporal passado→presente como trajetória, não frase espelhada).
 
 ### Checklist negativo — reprovar se qualquer item for verdadeiro
 
@@ -87,3 +94,4 @@ promessa no resumo final da sexy-triwer.
 - [ ] Número grande sem credencial que o ancore
 - [ ] Três ou mais referências simultâneas (figuras, conceitos, promessas)
 - [ ] Tom de quem ensina ("você deve") em vez de quem viveu ("eu fiz")
+- [ ] Paralelismo de oposição ("X, mas Y" / "não é A, é B") em vez de frase única

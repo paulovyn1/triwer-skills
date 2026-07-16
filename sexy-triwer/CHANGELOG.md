@@ -18,6 +18,47 @@ frontmatter do `SKILL.md` (não duplicado aqui).
 
 ---
 
+## 2.3.0 - 2026-07-16
+- `references/bio-gerador.md` corrigido em 7 pontos, encontrados testando
+  a Etapa 11 (Bio) de ponta a ponta pela primeira vez contra o ciclo
+  Gerador→Verificador:
+  - Viés magnético (`vies-triwer`/`prisma-si`) não bloqueia mais a etapa —
+    o insumo real dos Blocos 3/4 é `nova_oportunidade` (Etapa 6), viés
+    externo vira reforço opcional. A maioria dos alunos nunca passou por
+    `vies-triwer` quando chega na Sexy.
+  - Bloco 5 (prova de autoridade) usa os 5 Sinais de Competitividade (já
+    coletados em outra etapa da mesma skill) em vez do binário A/B —
+    dentro do mesmo sinal, nomeado vs. agregado agora depende do
+    `pilar_dominante` (Vaidade/Soberba/Inveja → nomeado vence; Avareza/
+    confiabilidade → agregado pode vencer).
+  - 3 linhas é teto, nunca meta — nunca força 3ª linha diluída quando 2
+    linhas já cobrem os 5 blocos.
+  - Fusão de 2+ blocos na mesma linha vira oração única com conectivo,
+    nunca duas frases separadas por ponto (mesmo defeito de paralelismo,
+    subtipo novo).
+  - Bloco 1 (nome pesquisável) calibrado por `nivel_consciencia`
+    (categoria só se o público já a nomeia; senão sintoma/situação), usa
+    profissão-resultado nunca técnica/método específico, e nunca leva
+    adjetivo de diferencial empilhado.
+  - Prova de autoridade nunca narra evento único e passado — 3
+    transformações gramaticais testáveis (sujeito 1ª pessoa, quantificador
+    plural-genérico, tempo presente/gerúndio) generalizam qualquer caso
+    singular em capacidade replicável.
+  - Construção "hora de + substantivo + infinitivo cru" banida (agramatical
+    sem reflexivo) ao fundir blocos — preferir verbo conjugado direto.
+- `SKILL.md`, Etapa 13 (gate) e Etapa 14/template: item de checagem da bio
+  sincronizado com as regras acima (não mais "nomeado vs. agregado" cego).
+  Resumo final e preenchimento do HTML agora preveem explicitamente o caso
+  de bio reprovada 2x — sempre entregue como rascunho "a confirmar" com a
+  crítica do Verificador junto, nunca como se fosse aprovada.
+- Testado em 6 rodadas Gerador→Verificador (2 casos reais reaproveitados
+  de `dexter-triwer`, 1 caso real de produto Sexy já documentado, 1 caso
+  real de sessão Sexy anterior) — todas as correções de arquitetura
+  confirmadas corrigindo o próprio defeito que motivou cada uma; qualidade
+  de prosa sob compressão de caracteres continua sendo o gargalo real, por
+  isso a decisão de sempre entregar a bio (aprovada ou não) como material
+  para curadoria humana final, nunca como saída definitiva sem revisão.
+
 ## 2.2.0 - 2026-07-13
 - Etapa 5, Passo 8 novo: teste de incompatibilidade entre os fatos
   declarados do público (definição/papel — ex. "advogado que não entende de

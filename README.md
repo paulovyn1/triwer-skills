@@ -93,12 +93,13 @@ curl -fsSL https://raw.githubusercontent.com/paulovyn1/triwer-skills/main/script
 irm https://raw.githubusercontent.com/paulovyn1/triwer-skills/main/scripts/instalar-tudo-windows.ps1 | iex
 ```
 
-Instala (ou atualiza) as 11 skills originais do pipeline em sequência. Rodar
-de novo no futuro só atualiza o que tiver versão nova.
+Instala (ou atualiza) 12 das 13 skills em sequência (todas, exceto
+`dexter-triwer`). Rodar de novo no futuro só atualiza o que tiver versão
+nova.
 
-> `leitura-ativa` e `dexter-triwer` ainda não entraram no script de "tudo de
-> uma vez" — instale-as separadamente pela Opção B (ou C, no caso da
-> `dexter-triwer`) até o script ser atualizado.
+> `dexter-triwer` ainda não entrou no script de "tudo de uma vez" porque
+> ainda não tem instalador individual publicado — instale-a separadamente
+> pela Opção C até o instalador ser criado.
 
 ### Opção B — Uma skill por vez
 

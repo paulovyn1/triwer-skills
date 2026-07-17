@@ -11,7 +11,7 @@
 # cada skill nunca é sobrescrito.
 #
 # O que este script faz (leia antes de rodar):
-#   - Baixa, um de cada vez, os 11 instaladores individuais abaixo do
+#   - Baixa, um de cada vez, os 12 instaladores individuais abaixo do
 #     repositório público https://github.com/paulovyn1/triwer-skills e
 #     salva cada um em arquivo temporário (%TEMP%) antes de rodar -- nada
 #     é executado sem primeiro existir em disco, então dá pra abrir e ler
@@ -49,7 +49,8 @@ $INSTALLERS = @(
     @{ Name = "MDI"; Path = "main/scripts/instalar-mdi-windows.ps1" },
     @{ Name = "Carrossel"; Path = "main/scripts/instalar-carrossel-windows.ps1" },
     @{ Name = "CTA"; Path = "main/scripts/instalar-cta-windows.ps1" },
-    @{ Name = "Notion Zettelkasten"; Path = "main/scripts/instalar-zettelkasten-windows.ps1" }
+    @{ Name = "Notion Zettelkasten"; Path = "main/scripts/instalar-zettelkasten-windows.ps1" },
+    @{ Name = "Leitura Ativa"; Path = "main/scripts/instalar-leitura-ativa-windows.ps1" }
 )
 
 $TOTAL = $INSTALLERS.Count

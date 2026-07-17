@@ -13,7 +13,7 @@
 # cada skill nunca é sobrescrito.
 #
 # O que este script faz (leia antes de rodar):
-#   - Baixa, um de cada vez, os 11 instaladores individuais abaixo do
+#   - Baixa, um de cada vez, os 12 instaladores individuais abaixo do
 #     repositório público https://github.com/paulovyn1/triwer-skills e
 #     salva cada um num arquivo temporário antes de rodar -- nada é
 #     executado sem primeiro existir em disco, então dá pra abrir e ler
@@ -60,6 +60,7 @@ INSTALLERS=(
     "Carrossel|main/scripts/instalar-carrossel-mac.sh"
     "CTA|main/scripts/instalar-cta-mac.sh"
     "Notion Zettelkasten|main/scripts/instalar-zettelkasten-mac.sh"
+    "Leitura Ativa|main/scripts/instalar-leitura-ativa-mac.sh"
 )
 
 TOTAL=${#INSTALLERS[@]}

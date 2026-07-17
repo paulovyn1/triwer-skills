@@ -93,13 +93,8 @@ curl -fsSL https://raw.githubusercontent.com/paulovyn1/triwer-skills/main/script
 irm https://raw.githubusercontent.com/paulovyn1/triwer-skills/main/scripts/instalar-tudo-windows.ps1 | iex
 ```
 
-Instala (ou atualiza) 12 das 13 skills em sequência (todas, exceto
-`dexter-triwer`). Rodar de novo no futuro só atualiza o que tiver versão
-nova.
-
-> `dexter-triwer` ainda não entrou no script de "tudo de uma vez" porque
-> ainda não tem instalador individual publicado — instale-a separadamente
-> pela Opção C até o instalador ser criado.
+Instala (ou atualiza) as 13 skills em sequência. Rodar de novo no futuro só
+atualiza o que tiver versão nova.
 
 ### Opção B — Uma skill por vez
 
@@ -116,9 +111,10 @@ curl -fsSL https://raw.githubusercontent.com/paulovyn1/triwer-skills/main/script
 irm https://raw.githubusercontent.com/paulovyn1/triwer-skills/main/scripts/instalar-<skill>-windows.ps1 | iex
 ```
 
-Troque `<skill>` por: `onboarding`, `drhouse`, `oraculo`, `sexy`, `prisma`,
-`historias`, `mdi`, `carrossel`, `cta`, `zettelkasten`, `leitura-ativa`. A
-`estilo-forge` tem instalador próprio, num caminho diferente:
+Troque `<skill>` por: `onboarding`, `dexter`, `drhouse`, `oraculo`, `sexy`,
+`prisma`, `historias`, `mdi`, `carrossel`, `cta`, `zettelkasten`,
+`leitura-ativa`. A `estilo-forge` tem instalador próprio, num caminho
+diferente:
 
 ```bash
 curl -fsSL https://raw.githubusercontent.com/paulovyn1/triwer-skills/main/estilo-forge/scripts/instalar-mac.sh | bash
@@ -126,11 +122,6 @@ curl -fsSL https://raw.githubusercontent.com/paulovyn1/triwer-skills/main/estilo
 ```powershell
 irm https://raw.githubusercontent.com/paulovyn1/triwer-skills/main/estilo-forge/scripts/instalar-windows.ps1 | iex
 ```
-
-> **dexter-triwer** ainda não tem instalador individual publicado — por
-> enquanto, instale via Opção C (baixe/clone o repositório e copie a pasta
-> `dexter-triwer/` manualmente, como descrito em "Instalação manual"
-> abaixo).
 
 ### Opção C — claude.ai (upload manual, sem terminal)
 

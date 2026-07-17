@@ -13,7 +13,7 @@
 # cada skill nunca é sobrescrito.
 #
 # O que este script faz (leia antes de rodar):
-#   - Baixa, um de cada vez, os 12 instaladores individuais abaixo do
+#   - Baixa, um de cada vez, os 13 instaladores individuais abaixo do
 #     repositório público https://github.com/paulovyn1/triwer-skills e
 #     salva cada um num arquivo temporário antes de rodar -- nada é
 #     executado sem primeiro existir em disco, então dá pra abrir e ler
@@ -51,6 +51,7 @@ fi
 INSTALLERS=(
     "Onboarding|main/scripts/instalar-onboarding-mac.sh"
     "Estilo Forge|main/estilo-forge/scripts/instalar-mac.sh"
+    "Dexter (brainstorm de produto)|main/scripts/instalar-dexter-mac.sh"
     "Dr. House (avaliação)|main/scripts/instalar-drhouse-mac.sh"
     "Oráculo (público)|main/scripts/instalar-oraculo-mac.sh"
     "Sexy (promessa)|main/scripts/instalar-sexy-mac.sh"
@@ -113,7 +114,7 @@ echo ""
 echo "  2. Siga o fluxo — ele configura seu Notion e libera as outras skills"
 echo ""
 echo "  3. Ordem recomendada de uso depois do onboarding:"
-echo "     estilo-forge → dr-house-triwer → oraculo-triwer → sexy-triwer →"
-echo "     prisma-triwer → historias-triwer (contínua) → mdi-triwer →"
-echo "     carrossel-triwer → cta-triwer"
+echo "     estilo-forge → dexter-triwer (sem produto) OU dr-house-triwer"
+echo "     (com produto) → oraculo-triwer → sexy-triwer → prisma-triwer →"
+echo "     historias-triwer (contínua) → mdi-triwer → carrossel-triwer → cta-triwer"
 echo ""

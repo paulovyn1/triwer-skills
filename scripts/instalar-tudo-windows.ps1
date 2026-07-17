@@ -11,7 +11,7 @@
 # cada skill nunca é sobrescrito.
 #
 # O que este script faz (leia antes de rodar):
-#   - Baixa, um de cada vez, os 12 instaladores individuais abaixo do
+#   - Baixa, um de cada vez, os 13 instaladores individuais abaixo do
 #     repositório público https://github.com/paulovyn1/triwer-skills e
 #     salva cada um em arquivo temporário (%TEMP%) antes de rodar -- nada
 #     é executado sem primeiro existir em disco, então dá pra abrir e ler
@@ -41,6 +41,7 @@ Write-Host ""
 $INSTALLERS = @(
     @{ Name = "Onboarding"; Path = "main/scripts/instalar-onboarding-windows.ps1" },
     @{ Name = "Estilo Forge"; Path = "main/estilo-forge/scripts/instalar-windows.ps1" },
+    @{ Name = "Dexter (brainstorm de produto)"; Path = "main/scripts/instalar-dexter-windows.ps1" },
     @{ Name = "Dr. House (avaliação)"; Path = "main/scripts/instalar-drhouse-windows.ps1" },
     @{ Name = "Oráculo (público)"; Path = "main/scripts/instalar-oraculo-windows.ps1" },
     @{ Name = "Sexy (promessa)"; Path = "main/scripts/instalar-sexy-windows.ps1" },
@@ -116,7 +117,7 @@ Write-Host ""
 Write-Host "  2. Siga o fluxo — ele configura seu Notion e libera as outras skills"
 Write-Host ""
 Write-Host "  3. Ordem recomendada de uso depois do onboarding:"
-Write-Host "     estilo-forge -> dr-house-triwer -> oraculo-triwer -> sexy-triwer ->"
-Write-Host "     prisma-triwer -> historias-triwer (continua) -> mdi-triwer ->"
-Write-Host "     carrossel-triwer -> cta-triwer"
+Write-Host "     estilo-forge -> dexter-triwer (sem produto) OU dr-house-triwer"
+Write-Host "     (com produto) -> oraculo-triwer -> sexy-triwer -> prisma-triwer ->"
+Write-Host "     historias-triwer (continua) -> mdi-triwer -> carrossel-triwer -> cta-triwer"
 Write-Host ""

@@ -1,5 +1,5 @@
-﻿# =============================================================
-# Triwer Skills — Instalador do oraculo-triwer (Windows/PowerShell)
+# =============================================================
+# Triwer Skills — Instalador do dexter-triwer (Windows/PowerShell)
 # =============================================================
 #
 # O que este script faz (leia antes de rodar):
@@ -15,8 +15,8 @@ $ErrorActionPreference = "Stop"
 
 $REPO = "https://raw.githubusercontent.com/paulovyn1/triwer-skills/main"
 $SKILLS_DIR = "$env:USERPROFILE\.claude\skills"
-$ORACULO_DIR = "$SKILLS_DIR\oraculo-triwer"
-$VERSION_FILE = "$ORACULO_DIR\VERSION"
+$DEXTER_DIR = "$SKILLS_DIR\dexter-triwer"
+$VERSION_FILE = "$DEXTER_DIR\VERSION"
 
 function Write-Color($text, $color = "White") {
     Write-Host $text -ForegroundColor $color
@@ -35,14 +35,14 @@ function Download-File($remotePath, $localPath) {
 
 Write-Host ""
 Write-Color "╔══════════════════════════════════════╗" "Blue"
-Write-Color "║   Triwer Skills — oraculo-triwer     ║" "Blue"
+Write-Color "║   Triwer Skills — dexter-triwer      ║" "Blue"
 Write-Color "╚══════════════════════════════════════╝" "Blue"
 Write-Host ""
 
 # Buscar versão disponível
 Write-Color "→ Verificando versão disponível..." "Yellow"
 try {
-    $REMOTE_VERSION = (Invoke-WebRequest -Uri "$REPO/oraculo-triwer/VERSION" -UseBasicParsing).Content.Trim()
+    $REMOTE_VERSION = (Invoke-WebRequest -Uri "$REPO/dexter-triwer/VERSION" -UseBasicParsing).Content.Trim()
 } catch {
     Write-Color "✗ Não foi possível conectar ao repositório. Verifique sua conexão." "Red"
     exit 1
@@ -74,15 +74,17 @@ Write-Host ""
 
 # Criar estrutura de pastas
 Write-Color "→ Criando pastas..." "Yellow"
-New-Item -ItemType Directory -Force -Path "$ORACULO_DIR\referencias" | Out-Null
+New-Item -ItemType Directory -Force -Path "$DEXTER_DIR\references","$DEXTER_DIR\assets" | Out-Null
 
 # Baixar arquivos principais
-Write-Color "→ Baixando oraculo-triwer..." "Yellow"
-Download-File "oraculo-triwer/SKILL.md" "$ORACULO_DIR\SKILL.md"
-Download-File "oraculo-triwer/referencias/orientacoes-publico.md" "$ORACULO_DIR\referencias\orientacoes-publico.md"
+Write-Color "→ Baixando dexter-triwer..." "Yellow"
+Download-File "dexter-triwer/SKILL.md" "$DEXTER_DIR\SKILL.md"
+Download-File "dexter-triwer/references/metodologia.md" "$DEXTER_DIR\references\metodologia.md"
+Download-File "dexter-triwer/references/template-html.md" "$DEXTER_DIR\references\template-html.md"
+Download-File "dexter-triwer/assets/template-dexter.html" "$DEXTER_DIR\assets\template-dexter.html"
 
 # memoria.md: nunca sobrescrever se já existir
-if (-not (Test-Path "$ORACULO_DIR\memoria.md")) {
+if (-not (Test-Path "$DEXTER_DIR\memoria.md")) {
     Write-Color "   ↳ memoria.md será criado no primeiro uso" "White"
 } else {
     Write-Color "   ↳ memoria.md mantido (seus dados pessoais)" "White"
@@ -105,8 +107,5 @@ Write-Color "  Próximos passos:" "Blue"
 Write-Host "  1. Complete o /onboarding-triwer antes, se ainda não fez"
 Write-Host ""
 Write-Host "  2. Abra uma nova conversa"
-Write-Color "     e digite: /oraculo-triwer" "Yellow"
-Write-Host ""
-Write-Host "  3. Tenha em mãos, se possível, uma planilha (.xlsx/.csv) de"
-Write-Host "     pesquisa com alunos/clientes."
+Write-Color "     e digite: /dexter-triwer" "Yellow"
 Write-Host ""

@@ -3,6 +3,14 @@
 # =============================================================
 # Triwer Skills — Instalador do prisma-triwer (Mac e Linux)
 # =============================================================
+#
+# O que este script faz (leia antes de rodar):
+#   - Baixa arquivos de texto (.md, VERSION) do repositório público
+#     https://github.com/paulovyn1/triwer-skills para ~/.claude/skills/
+#   - Não coleta credenciais nem envia dados para lugar nenhum; não executa
+#     nada além de gravar esses arquivos em disco.
+#   - Nunca sobrescreve memoria.md (seus dados pessoais ficam intactos).
+#   - Rodar de novo só baixa de novo o que tiver versão nova.
 
 set -e
 

@@ -9,6 +9,17 @@
 # Rodar de novo a qualquer momento atualiza só o que tiver versão nova
 # (mesmo comportamento dos instaladores individuais). memoria.md pessoal de
 # cada skill nunca é sobrescrito.
+#
+# O que este script faz (leia antes de rodar):
+#   - Baixa, um de cada vez, os 13 instaladores individuais abaixo do
+#     repositório público https://github.com/paulovyn1/triwer-skills e
+#     salva cada um em arquivo temporário (%TEMP%) antes de rodar -- nada
+#     é executado sem primeiro existir em disco, então dá pra abrir e ler
+#     qualquer um deles antes ou durante a instalação.
+#   - Cada instalador baixado só grava arquivos de texto (.md, VERSION) em
+#     %USERPROFILE%\.claude\skills\<skill>\. Não coleta credenciais, não
+#     envia dados para lugar nenhum.
+#   - Nunca sobrescreve memoria.md (seus dados pessoais ficam intactos).
 
 $ErrorActionPreference = "Stop"
 
@@ -30,6 +41,7 @@ Write-Host ""
 $INSTALLERS = @(
     @{ Name = "Onboarding"; Path = "main/scripts/instalar-onboarding-windows.ps1" },
     @{ Name = "Estilo Forge"; Path = "main/estilo-forge/scripts/instalar-windows.ps1" },
+    @{ Name = "Dexter (brainstorm de produto)"; Path = "main/scripts/instalar-dexter-windows.ps1" },
     @{ Name = "Dr. House (avaliação)"; Path = "main/scripts/instalar-drhouse-windows.ps1" },
     @{ Name = "Oráculo (público)"; Path = "main/scripts/instalar-oraculo-windows.ps1" },
     @{ Name = "Sexy (promessa)"; Path = "main/scripts/instalar-sexy-windows.ps1" },
@@ -38,7 +50,8 @@ $INSTALLERS = @(
     @{ Name = "MDI"; Path = "main/scripts/instalar-mdi-windows.ps1" },
     @{ Name = "Carrossel"; Path = "main/scripts/instalar-carrossel-windows.ps1" },
     @{ Name = "CTA"; Path = "main/scripts/instalar-cta-windows.ps1" },
-    @{ Name = "Notion Zettelkasten"; Path = "main/scripts/instalar-zettelkasten-windows.ps1" }
+    @{ Name = "Notion Zettelkasten"; Path = "main/scripts/instalar-zettelkasten-windows.ps1" },
+    @{ Name = "Leitura Ativa"; Path = "main/scripts/instalar-leitura-ativa-windows.ps1" }
 )
 
 $TOTAL = $INSTALLERS.Count
@@ -49,29 +62,19 @@ foreach ($installer in $INSTALLERS) {
     $CURRENT++
     Write-Color "[$CURRENT/$TOTAL] $($installer.Name)" "Blue"
 
-    # Cada instalador individual roda num processo powershell.exe FILHO, isolado,
-    # via -EncodedCommand (Base64 de UTF-16). Isso evita tres problemas reais:
-    # (1) rodar via Invoke-Expression no mesmo escopo fazia cada instalador
-    # redefinir $REPO com um valor diferente do deste script, "vazando" para as
-    # iteracoes seguintes do loop e quebrando as URLs de download; (2) um
-    # "exit 0"/"exit 1" dentro do instalador individual (ex.: quando a skill ja
-    # esta na versao mais recente) encerraria este script inteiro, nao so
-    # aquele item do loop; (3) gravar o script baixado num arquivo .ps1 em
-    # disco e rodar via -File exige que o PowerShell 5.1 detecte a codificacao
-    # certa (sem BOM ele assume o codepage ANSI do sistema, corrompendo
-    # caracteres especiais e ate quebrando o parser) -- -EncodedCommand evita
-    # esse problema por completo, sem tocar em disco.
+    # Cada instalador individual e baixado para um arquivo .ps1 real em
+    # %TEMP% (os .ps1 do repo ja sao salvos com BOM, entao o PowerShell 5.1
+    # detecta a codificacao certa via -File sem precisar de -EncodedCommand).
+    # Rodar via "powershell.exe -File" num processo FILHO ainda garante que:
+    # (1) $REPO definido dentro do instalador nao vaza para as proximas
+    # iteracoes deste loop, porque cada processo filho tem seu proprio escopo;
+    # (2) um "exit 0"/"exit 1" dentro do instalador individual encerra so o
+    # processo filho, nao este script inteiro.
+    $tempScript = Join-Path $env:TEMP "triwer-instalador-$($installer.Name -replace '[^a-zA-Z0-9]', '')-$PID.ps1"
     try {
-        $scriptContent = (Invoke-WebRequest -Uri "$REPO/$($installer.Path)" -UseBasicParsing).Content
-        # Os .ps1 individuais sao salvos com BOM (necessario para rodarem sozinhos
-        # via -File, ver comentario acima). Aqui o BOM sobrevive dentro da string
-        # e, colado direto no inicio do -EncodedCommand, faz o parser tentar
-        # executar "<BOM>#" como comando antes de reconhecer o comentario --
-        # remover antes de codificar.
-        $scriptContent = $scriptContent.TrimStart([char]0xFEFF)
-        $encodedCommand = [Convert]::ToBase64String([System.Text.Encoding]::Unicode.GetBytes($scriptContent))
+        Invoke-WebRequest -Uri "$REPO/$($installer.Path)" -OutFile $tempScript -UseBasicParsing
 
-        & powershell.exe -NoProfile -ExecutionPolicy Bypass -EncodedCommand $encodedCommand
+        & powershell.exe -NoProfile -ExecutionPolicy Bypass -File $tempScript
         if ($LASTEXITCODE -ne 0) {
             throw "instalador retornou codigo $LASTEXITCODE"
         }
@@ -80,6 +83,10 @@ foreach ($installer in $INSTALLERS) {
         Write-Color "Falha ao instalar: $($installer.Name) - $($_.Exception.Message)" "Red"
         Write-Host ""
         $FAILED += $installer.Name
+    } finally {
+        if (Test-Path $tempScript) {
+            Remove-Item $tempScript -Force -ErrorAction SilentlyContinue
+        }
     }
 }
 
@@ -110,7 +117,7 @@ Write-Host ""
 Write-Host "  2. Siga o fluxo — ele configura seu Notion e libera as outras skills"
 Write-Host ""
 Write-Host "  3. Ordem recomendada de uso depois do onboarding:"
-Write-Host "     estilo-forge -> dr-house-triwer -> oraculo-triwer -> sexy-triwer ->"
-Write-Host "     prisma-triwer -> historias-triwer (continua) -> mdi-triwer ->"
-Write-Host "     carrossel-triwer -> cta-triwer"
+Write-Host "     estilo-forge -> dexter-triwer (sem produto) OU dr-house-triwer"
+Write-Host "     (com produto) -> oraculo-triwer -> sexy-triwer -> prisma-triwer ->"
+Write-Host "     historias-triwer (continua) -> mdi-triwer -> carrossel-triwer -> cta-triwer"
 Write-Host ""

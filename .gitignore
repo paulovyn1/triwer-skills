@@ -21,3 +21,7 @@ dist/
 # Zips de cada skill para upload manual no claude.ai (Claude Desktop) —
 # distribuídos aos alunos fora do GitHub, não fazem diferença pro funcionamento da skill
 *.zip
+
+# Planejamento interno (sistema "superpowers"/GSD) — não é skill de aluno,
+# não pertence a este repositório público. Mantido só localmente.
+docs/superpowers/

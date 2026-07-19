@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # =============================================================
-# estilo-forge — Instalador (Mac e Linux)
+# Triwer Skills — Instalador do dexter-triwer (Mac e Linux)
 # =============================================================
 #
 # O que este script faz (leia antes de rodar):
@@ -16,9 +16,9 @@ set -e
 
 REPO="https://raw.githubusercontent.com/paulovyn1/triwer-skills/main"
 SKILLS_DIR="$HOME/.claude/skills"
-FORGE_DIR="$SKILLS_DIR/estilo-forge"
-VERSION_URL="$REPO/estilo-forge/VERSION"
-VERSION_FILE="$FORGE_DIR/VERSION"
+DEXTER_DIR="$SKILLS_DIR/dexter-triwer"
+VERSION_URL="$REPO/dexter-triwer/VERSION"
+VERSION_FILE="$DEXTER_DIR/VERSION"
 
 # Cores
 GREEN='\033[0;32m'
@@ -29,7 +29,7 @@ NC='\033[0m'
 
 echo ""
 echo -e "${BLUE}╔══════════════════════════════════════╗${NC}"
-echo -e "${BLUE}║          estilo-forge                ║${NC}"
+echo -e "${BLUE}║   Triwer Skills — dexter-triwer      ║${NC}"
 echo -e "${BLUE}╚══════════════════════════════════════╝${NC}"
 echo ""
 
@@ -83,14 +83,22 @@ download_file() {
 
 # Criar estrutura de pastas
 echo -e "${YELLOW}→ Criando pastas...${NC}"
-mkdir -p "$FORGE_DIR/references"
+mkdir -p "$DEXTER_DIR/references"
+mkdir -p "$DEXTER_DIR/assets"
 
-# Baixar arquivos
-echo -e "${YELLOW}→ Baixando estilo-forge...${NC}"
-download_file "estilo-forge/SKILL.md" "$FORGE_DIR/SKILL.md"
-download_file "estilo-forge/references/analysis-framework.md" "$FORGE_DIR/references/analysis-framework.md"
-download_file "estilo-forge/references/skill-template.md" "$FORGE_DIR/references/skill-template.md"
-download_file "estilo-forge/references/universal-anti-ia.md" "$FORGE_DIR/references/universal-anti-ia.md"
+# Baixar arquivos principais
+echo -e "${YELLOW}→ Baixando dexter-triwer...${NC}"
+download_file "dexter-triwer/SKILL.md" "$DEXTER_DIR/SKILL.md"
+download_file "dexter-triwer/references/metodologia.md" "$DEXTER_DIR/references/metodologia.md"
+download_file "dexter-triwer/references/template-html.md" "$DEXTER_DIR/references/template-html.md"
+download_file "dexter-triwer/assets/template-dexter.html" "$DEXTER_DIR/assets/template-dexter.html"
+
+# memoria.md: nunca sobrescrever se já existir
+if [ ! -f "$DEXTER_DIR/memoria.md" ]; then
+    echo -e "   ↳ memoria.md será criado no primeiro uso"
+else
+    echo -e "   ↳ memoria.md mantido (seus dados pessoais)"
+fi
 
 # Salvar versão instalada
 echo "$REMOTE_VERSION" > "$VERSION_FILE"
@@ -106,12 +114,8 @@ echo -e "${GREEN}║   Versão: $REMOTE_VERSION$(printf '%*s' $((29 - ${#REMOTE_
 echo -e "${GREEN}╚══════════════════════════════════════╝${NC}"
 echo ""
 echo -e "  ${BLUE}Próximos passos:${NC}"
-echo -e "  1. Abra uma nova conversa no Claude Code ou Claude Desktop"
-echo -e "     e digite: ${YELLOW}/estilo-forge${NC}"
+echo -e "  1. Complete o /onboarding-triwer antes, se ainda não fez"
 echo ""
-echo -e "  2. O onboarding iniciará automaticamente e vai te guiar"
-echo -e "     na criação da sua skill de estilo personalizada."
-echo ""
-echo -e "  As skills geradas (estilo-[nome]) ficam em ~/.claude/skills/"
-echo -e "  e nunca são alteradas por atualizações do estilo-forge."
+echo -e "  2. Abra uma nova conversa"
+echo -e "     e digite: ${YELLOW}/dexter-triwer${NC}"
 echo ""

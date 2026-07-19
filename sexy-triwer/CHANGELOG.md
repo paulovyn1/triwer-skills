@@ -18,6 +18,77 @@ frontmatter do `SKILL.md` (não duplicado aqui).
 
 ---
 
+## 2.5.0 - 2026-07-17
+- **Etapa 10 (Ativos de Marketing) recalibrada** — mudança de princípio, não
+  só ajuste de regra. A etapa antiga produzia exibição de credencial
+  (prints, depoimentos, bastidores de atendimento), que Milena identificou
+  como insuficiente: "essas coisas sozinhas não constroem marketing nenhum,
+  ou pessoas boas sempre superariam pessoas ruins, o que sabemos que não é
+  o caso." Prova nunca é o ativo — é munição de um argumento.
+  - Nova pergunta geradora: "com o que eu tenho de insumo, como reforço a
+    `nova_oportunidade`? Com qual narrativa?" em vez de "que prova eu
+    mostro?"
+  - **6 narrativas nomeadas** (doutrina Triwer já aplicada com alunos,
+    formalizada nesta sessão): contraste comportamental, crítica de
+    mercado, já chegou lá, estilo de vida ambiente, estar do outro lado,
+    já estive no seu lugar — cada uma com teste de elegibilidade próprio.
+    A narrativa "estar do outro lado" exige assimetria de acesso (posição
+    adicional ao produto principal, nunca a posição de acesso sendo o
+    próprio produto).
+  - Testadas contra 3 casos reais de mentorados (Mavi, Luan, Júlio) —
+    nenhum caso usa uma narrativa só, a etapa garimpa candidatos pra
+    várias categorias no mesmo dossiê.
+  - Mesma arquitetura de dois subagentes de Bio/Destaques
+    (`references/ativos-gerador.md`, `references/ativos-verificador.md`) —
+    Verificador testa "isso defende uma tese, ou é só exibição de
+    credencial?", cego ao fato-fonte e à narrativa escolhida.
+  - Teste de unicidade do fato-fonte mantido da versão anterior (um fato
+    real não vira múltiplos itens da lista, mesmo servindo a narrativas
+    diferentes).
+
+---
+
+## 2.4.0 - 2026-07-16
+- Etapa 11 ganha o segundo artefato que faltava: **Destaques do Instagram**
+  (`destaques_instagram`), completando a lacuna anunciada desde a criação
+  da etapa. Processo testado em 2 casos reais (Vitor, Marina/taróloga)
+  antes de virar regra na skill:
+  - Mesma arquitetura de dois subagentes da Bio (Gerador/Verificador
+    cego), novos arquivos `references/destaques-gerador.md` e
+    `references/destaques-verificador.md`.
+  - Candidatos a destaque vêm de duas vias (basta passar em uma): tática
+    que o espectador replica sozinho, OU fato do público que quebra uma
+    crença comum — a segunda via aparece com mais frequência na Etapa 5
+    (perfil de público), mas pode estar em qualquer etapa, não só nos
+    Ativos de Marketing (Etapa 10). Um teste real ignorando essa segunda
+    via produziu um destaque fraco e rejeitado antes de a lacuna ser
+    corrigida.
+  - **Pacote de entrada do Gerador precisa da transcrição/resposta bruta
+    das Etapas 4, 5, 6 e 10** — a fala literal do aluno, não só os campos
+    já resumidos (`diferencial_produto`, `pilar_dominante`,
+    `ativos_marketing_sexys`). Enviar só os campos fechados produz um
+    Gerador que erra por falta de matéria-prima, não por falta de
+    raciocínio — o achado mais forte do caso Marina estava dentro de uma
+    frase de exemplo que o campo resumido da mesma etapa não guardava.
+    Passo 0 do ciclo (SKILL.md) agora exige confirmar isso antes de
+    montar o pacote.
+  - Teste de lacuna de curiosidade no Verificador: título reprova se soar
+    como conclusão fechada ou genérico demais pra gerar pergunta
+    específica — nunca avalia limite de caractere ou estrutura, só o
+    efeito da leitura. O Verificador recebe sempre a lista completa de
+    títulos da rodada (nunca só os reformulados), pra também detectar se
+    dois títulos da mesma lista viraram a mesma pergunta com palavras
+    diferentes.
+  - Limite de 15 caracteres por título, com técnica de contagem em 3
+    blocos parelhos de 5 (mesma lógica da regra 8 da Bio, adaptada pro
+    limite menor).
+  - 3 destaques é alvo, nunca obrigação — confirmado em teste real que
+    forçar um terceiro mecanismo fraco é pior que entregar 2 fortes.
+  - `[[DESTAQUES_INSTAGRAM]]` documentado na seção de template do HTML
+    final, mesma situação de "pendente de template" já registrada pra
+    `[[BIO_INSTAGRAM]]` — sem isso, o artefato rodava mas nunca chegava
+    na página entregue ao aluno.
+
 ## 2.3.0 - 2026-07-16
 - `references/bio-gerador.md` corrigido em 7 pontos, encontrados testando
   a Etapa 11 (Bio) de ponta a ponta pela primeira vez contra o ciclo

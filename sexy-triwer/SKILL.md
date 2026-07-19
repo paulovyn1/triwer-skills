@@ -53,19 +53,45 @@ os 7 pilares ou os 10 tipos inteiros de uma vez.
 
 ---
 
-## REGRA GERAL DE VERIFICAÇÃO CRÍTICA
+## REGRA GERAL DE VERIFICAÇÃO CRÍTICA — e o protocolo Gerador/Verificador
 
-Quatro pontos adiante (a bateria tripla de julgamento da promessa na Etapa 6,
-a geração de headlines, os ativos de marketing, e a revisão final antes de
-mostrar o resultado) pedem uma segunda leitura sem
-o apego de quem acabou de produzir o conteúdo — é assim que se pega uma
-headline fraca, um ativo genérico ou uma promessa que soa bem mas não
-aguenta escrutínio. Sempre que uma etapa disser "aplique a verificação
-crítica": se o ambiente atual tiver a ferramenta `Agent`/`Task` disponível,
-delegue a um subagente à parte — ele não tem o contexto emocional de quem
-escreveu e corta sem dó o que precisa ser cortado. Se não houver essa
-ferramenta, faça você mesmo, mas de forma deliberadamente lenta e cética —
-nunca pule direto do rascunho para a apresentação.
+Vários pontos adiante pedem uma segunda leitura sem o apego de quem acabou
+de produzir o conteúdo — é assim que se pega uma headline fraca, um ativo
+genérico ou uma promessa que soa bem mas não aguenta escrutínio. Sempre que
+uma etapa disser "aplique a verificação crítica" (bateria da Etapa 6, gate
+da Etapa 14): se o ambiente tiver a ferramenta `Agent`/`Task`, delegue a um
+subagente à parte — ele não tem o contexto emocional de quem escreveu e
+corta sem dó. Se não houver, faça você mesmo, deliberadamente lento e
+cético — nunca pule direto do rascunho para a apresentação.
+
+As etapas que produzem texto final (9 — ativos, 10 — headlines, 11 — bio e
+destaques, 12 — hero de página de vendas) usam a forma mais forte disso, o
+**protocolo Gerador/Verificador**. As regras abaixo valem para as cinco;
+cada etapa lista só o que é específico dela (pacote de entrada, arquivos,
+o que o Verificador testa):
+
+1. **Duas instâncias, papéis nunca fundidos.** O Gerador lê só o arquivo
+   `*-gerador.md` da etapa; o Verificador lê só o `*-verificador.md` e
+   recebe o texto final puro — nunca o arquivo do Gerador, o raciocínio, o
+   dossiê nem rótulo interno (modelo/DOPA/categoria/fato-fonte). Sem
+   `Agent`/`Task`, rode você mesmo os dois papéis em sequência, com a mesma
+   separação: ao verificar, releia o texto como se nunca tivesse visto o
+   processo de criação.
+2. **A mensagem de delegação carrega tudo.** O subagente não herda este
+   SKILL.md — envie o arquivo de referência do papel + o pacote listado na
+   etapa, senão o output sai genérico por falta de contexto, não por falta
+   de capacidade.
+3. **Ciclo com teto.** Gerador (instância A) → v1 → Verificador (instância
+   nova) → se reprovar, a MESMA instância A ajusta só o que foi apontado,
+   preservando o aprovado → v2 → Verificador em OUTRA instância nova,
+   sempre com a lista/artefato completo da rodada (nunca só o reformulado)
+   → se reprovar de novo, pare: leve a v2 + a crítica pro aluno julgar.
+   Máximo 2 gerações e 2 verificações por artefato — nunca 3ª rodada
+   automática.
+4. **Modo sem aluno ao vivo** (ver definição na Etapa 5): v2 reprovada não
+   trava a etapa — entregue-a marcada como **a confirmar**, com a crítica
+   do Verificador junto. No resumo (Etapa 14), nunca apresente artefato
+   reprovado como se fosse aprovado.
 
 ---
 
@@ -77,25 +103,11 @@ nunca pule direto do rascunho para a apresentação.
    com a ferramenta de acesso à web disponível no ambiente atual (`WebFetch`
    no Claude Code/Desktop; navegação/busca nativa no claude.ai). Se não
    conseguir acessar (sem internet, sem ferramenta, timeout etc.), não
-   mencione nada e siga para o passo 1.
-
-   Se conseguir, leia a entrada mais recente (primeira do arquivo) do
-   CHANGELOG remoto e compare com a versão local:
-   - **Igual:** siga para o passo 1 sem dizer nada.
-   - **Remota mais nova, sem tag `[CRITICAL]`:** avise em uma linha, ex.:
-     "💡 Há uma versão nova da sexy-triwer disponível (v[local] → v[remota]).
-     Não é obrigatório atualizar agora, mas recomendo rodar o instalador
-     quando puder." Depois siga para o passo 1 normalmente — **não bloqueie**.
-   - **Remota mais nova, com tag `[CRITICAL]`:** pare aqui. Explique em 2-3
-     linhas, com base no resumo da entrada do CHANGELOG, por que essa versão
-     tem uma correção importante e não deve continuar sendo usada, e informe
-     como atualizar:
-     - **Claude Code/Desktop:** `irm https://raw.githubusercontent.com/paulovyn1/triwer-skills/main/scripts/instalar-sexy-windows.ps1 | iex` (Windows) ou `curl -fsSL https://raw.githubusercontent.com/paulovyn1/triwer-skills/main/scripts/instalar-sexy-mac.sh | bash` (Mac/Linux).
-     - **claude.ai (Skills nativo):** baixar o `.zip` mais recente e reenviar
-       em Settings → Capabilities → Skills → Upload skill.
-     Aguarde o aluno confirmar que atualizou antes de seguir para o passo 1.
-     Se ele insistir em prosseguir mesmo assim, atenda, mas deixe registrado
-     que não é o recomendado.
+   mencione nada e siga para o passo 1. Se a entrada mais recente (primeira)
+   do CHANGELOG remoto for igual à versão local, siga para o passo 1 sem
+   dizer nada. **Só se a remota for mais nova:** leia e siga
+   `references/atualizacao-versao.md` (aviso de uma linha, ou bloqueio se a
+   entrada tiver tag `[CRITICAL]`).
 
 1. **Onboarding:** tente ler `~/.claude/skills/onboarding-triwer/memoria.md`.
    Se não existir ou não tiver `onboarding_completo: true`, exiba: "Antes de
@@ -138,6 +150,21 @@ subpágina, existente ou recém-criada) para o restante da sessão.
 existente. Se optar por refinar, leia a Oportunidade Sexy salva na subpágina
 antes de continuar, para não repetir a investigação inteira.
 
+### Documento-hub da sessão
+
+Crie agora uma subpágina dentro da subpágina de `produto_atual` (mesma
+estrutura Notion já usada por esta skill, nunca mecanismo paralelo),
+nomeada "Sexy — Rascunho de Sessão [data]". É rascunho de processo, não
+output que o aluno vê — descartável/arquivável depois que a Etapa 15 grava
+o resultado final.
+
+Cada etapa a partir daqui **acrescenta** seu fato bruto relevante nesta
+página conforme é coletado — sempre append, nunca substituição do conteúdo
+anterior. Isso resolve o problema de etapas que coletam um fato cedo (ex.:
+vivência pessoal, Etapa 5 Passo 9) mas só usam esse fato bem mais adiante
+(Etapas 9 e 10) — o dado fica documentado e auditável, não apenas na
+memória da conversa.
+
 ---
 
 ## ETAPA 2 — Carregar contexto já existente (silencioso, não exibir ao aluno)
@@ -164,41 +191,28 @@ reinterrogar o aluno sobre algo já respondido em outra skill:
    prova social ou aspiração para este produto. Não abra páginas individuais
    ainda — só na Etapa 4, se forem de fato usadas.
 
-4. **Diagnóstico do Dr. House (se o aluno anexar um HTML):** a skill
-   `dr-house-triwer` gera um diagnóstico em HTML pensado justamente para ser
-   anexado nesta conversa. Se o aluno trouxer esse arquivo, leia as duas
+4. **Diagnóstico do Dr. House (se o aluno anexar um HTML):** leia as duas
    seções — "Contexto do produto" (os 8 blocos já levantados: criador,
    público, promessa, mecanismo, produto, preço, prova, aquisição) e
-   "Diagnóstico" (pontos fortes, onde ajustar, achados por critério, perguntas
-   em aberto). **Isto não é leitura de fundo, é insumo obrigatório da
-   promessa:** se o diagnóstico apontar um achado crítico ou estrutural (ex.:
-   "o mecanismo remove o que o público mais pede", "a prova usada é de um
-   contexto de entrega diferente", "o público é heterogêneo demais para o
-   mesmo formato ao vivo"), a Oportunidade Sexy final **precisa responder a
-   esse achado** — nunca escrever uma promessa que repete ou ignora o mesmo
-   problema que o Dr. House já sinalizou como crítico. Se houver uma seção
-   "Próximo passo antes de qualquer ajuste" (bridge card) no diagnóstico, ela
-   é literalmente um convite direto a esta skill — leia com atenção redobrada
-   o que ela pede. As "Perguntas em aberto para levar ao Sexy" precisam ser
-   endereçadas uma a uma na investigação (Etapas 3-5) ou na escolha de ângulo
-   (Etapa 6 Passo 0) — não é opcional revisitá-las, é exatamente o que o Dr.
-   House não conseguiu resolver sozinho.
+   "Diagnóstico". **Não é leitura de fundo, é insumo obrigatório da
+   promessa:** todo achado crítico ou estrutural do diagnóstico (ex.: "o
+   mecanismo remove o que o público mais pede") precisa ser respondido pela
+   Oportunidade Sexy final — nunca escreva uma promessa que repete ou ignora
+   o problema que o House já sinalizou. O bridge card ("Próximo passo antes
+   de qualquer ajuste"), se existir, é um convite direto a esta skill —
+   leia com atenção redobrada. As "Perguntas em aberto para levar ao Sexy"
+   precisam ser endereçadas uma a uma (Etapas 3-5, ou Etapa 6 Passo 0) — é
+   exatamente o que o House não conseguiu resolver sozinho.
 
 5. **Log de Investigação — Dr. House (subpágina da nota de produto, só sob
-   demanda):** a nota/ficha de produto do aluno no Notion pode ter uma
-   subpágina com esse título (ou aproximado: "Log de Investigação", "Log Dr.
-   House") — ela guarda, na íntegra e sem resumir, as 3 respostas do Bloco 4
-   (Mecanismo) de cada sessão de escavação: como funciona o passo a passo, por
-   que é diferente do mercado, o que o mercado ensina hoje. **Não abra esta
-   subpágina por padrão** — o resumo já lido no item 4 acima (Seção 1 do HTML
-   do House) ou a ficha de produto resumida no Notion costuma bastar. Só abra
-   quando, depois de tentar de fato extrair um diferencial real (não
-   genérico) desse resumo, nada específico aparecer — nesse caso, e só nesse
-   caso, leia o log completo em busca das respostas 2 e 3, que são
-   exatamente o material de onde costuma sair o "como" específico por trás
-   do "o quê" genérico que faltou. Não é abrir sempre por precaução, é o
-   mesmo padrão de "índice leve sempre lido, satélite só sob demanda" que
-   vale para o resto desta skill (ver REGRA GERAL DE LEITURA DE ARQUIVOS).
+   demanda):** guarda, na íntegra, as 3 respostas do Bloco 4 (Mecanismo) de
+   cada sessão de escavação. **Não abra por padrão** — o resumo do item 4
+   ou a ficha de produto costuma bastar. Só abra quando, depois de tentar
+   de fato extrair um diferencial real (não genérico) desse resumo, nada
+   específico aparecer — aí leia as respostas 2 e 3, que é de onde costuma
+   sair o "como" específico por trás do "o quê" genérico que faltou. Mesmo
+   padrão "índice leve sempre, satélite só sob demanda" da REGRA GERAL DE
+   LEITURA DE ARQUIVOS.
 
 Guarde tudo isso como contexto interno de trabalho. **Não despeje esse resumo
 no aluno** — use para não repetir perguntas, não para expor dados dele de volta
@@ -286,71 +300,40 @@ Regras estruturais por formato (do índice de tipos):
   precisa cobrir uma situação específica, nunca múltiplos assuntos/formatos
   — sem limitar a quantidade de itens dentro do escopo.
 
-### Por que a segunda pergunta existe
-
-Um objetivo como "crescer audiência" não é entregue pelo formato do produto
-sozinho — é entregue pela combinação formato + ação de aquisição rodando em
-cima dele. Um produto Paquera (ticket baixo, entrada da esteira) cresce
-audiência bem com tráfego direto, porque a barreira de compra é baixa. Um
-produto Estrela (ticket alto) também pode crescer audiência, mas só via
-lançamento ativo com compra de tráfego — quem cresce a audiência ali é a
-ação de lançamento, não o produto em si.
-
-Isso significa que a mesma pergunta de objetivo tem respostas certas
-diferentes dependendo do que o usuário está disposto a executar. Se ele diz
-que quer crescer audiência mas também diz que odeia fazer lançamento, propor
-um produto Estrela (tecnicamente correto pro objetivo) é uma proposta morta
-na prática — ele nunca vai rodar. `restricao_execucao` existe pra evitar
-propor algo tecnicamente certo e inexecutável.
-
-### Caminhos de aquisição possíveis (para testar contra a restrição)
-
-Ao testar, considere os caminhos usuais — não se limite ao que já apareceu
-nesta conversa:
-
-- Tráfego pago direto (anúncio → oferta, sem lançamento)
-- Lançamento (aquecimento + evento + carrinho, com ou sem tráfego pago)
-- Orgânico de autoridade (conteúdo recorrente que constrói audiência antes
-  de vender)
-- Indicação/boca-a-boca de quem já comprou
-- Parceria ou afiliados
-
-Teste `restricao_execucao` contra cada um antes de concluir que nenhum
-caminho resta — "nenhum caminho compatível" é uma conclusão forte, não a
-resposta default quando só um caminho foi considerado.
-
 ### Testar formato contra objetivo + restrição juntos (não objetivo sozinho)
 
-Depois de coletar as duas respostas, teste: **existe algum caminho de
-aquisição compatível com `restricao_execucao` que o formato atual do produto
-consegue rodar pra entregar `objetivo_usuario`?**
+Um objetivo como "crescer audiência" não é entregue pelo formato sozinho —
+é entregue por formato + ação de aquisição rodando em cima dele (Paquera
+cresce com tráfego direto porque a barreira de compra é baixa; Estrela só
+cresce audiência via lançamento ativo com tráfego — quem cresce ali é a
+ação, não o produto). A mesma pergunta de objetivo tem respostas certas
+diferentes dependendo do que o usuário topa executar — `restricao_execucao`
+existe pra evitar propor algo tecnicamente certo e inexecutável.
 
-- Se sim — mesmo que não seja o caminho mais óbvio — não proponha mudança de
-  formato. O ajuste segue na promessa (Etapa 4 em diante).
-- Se não — nenhum caminho de aquisição compatível com o que o usuário topa
-  fazer consegue tirar esse objetivo desse formato — proponha mudança
-  ativamente.
+Teste: **existe algum caminho de aquisição compatível com
+`restricao_execucao` que o formato atual consegue rodar pra entregar
+`objetivo_usuario`?** Considere os caminhos usuais antes de concluir que
+nenhum resta — tráfego pago direto, lançamento, orgânico de autoridade,
+indicação/boca-a-boca, parceria/afiliados. "Nenhum caminho compatível" é
+conclusão forte, não a resposta default quando só um caminho foi
+considerado.
 
-**Exemplo onde a resposta é "proponha":** curso denso com centenas de aulas,
-objetivo é "crescer audiência", restrição é "não tenho verba pra tráfego
-pago e odeio fazer lançamento". Um curso denso não gera audiência sozinho
-(ninguém descobre um criador assistindo o curso dele) — e a única forma
-usual de fazer um curso gerar audiência é lançamento com tráfego, que o
-usuário já descartou. Nenhum caminho compatível resta dentro do formato
-atual. Proponha transformar parte do curso em Paquera — ticket baixo roda
-bem com tráfego direto/orgânico, sem depender de lançamento.
+- **Existe caminho** (mesmo que não o mais óbvio): não proponha mudança de
+  formato — o ajuste segue na promessa (Etapa 4 em diante). Ex.: curso
+  denso + objetivo "mais vendas diretas", sem restrição contra orgânico +
+  oferta — o problema é a promessa, não o formato.
+- **Não existe:** proponha mudança ativamente. Ex.: curso denso + "crescer
+  audiência" + "sem verba de tráfego, odeio lançamento" — curso denso não
+  gera audiência sozinho (ninguém descobre um criador assistindo o curso
+  dele) e o único caminho usual (lançamento com tráfego) foi descartado;
+  proponha transformar parte do curso em Paquera, que roda com tráfego
+  direto/orgânico.
 
-**Exemplo onde a resposta é "não proponha":** mesmo curso denso, objetivo é
-"mais vendas diretas", sem restrição relevante contra o que normalmente
-vende curso denso (conteúdo orgânico + oferta no fim). Aqui existe caminho
-compatível dentro do formato atual — o problema não é o formato, é a
-promessa que atrai esse comprador. Siga para a Etapa 4 normalmente.
-
-Guarde a decisão como `formato_proposto` (só preenchido se houver proposta de
-mudança) com uma frase de porquê. Se propuser mudança de formato, explique o
-raciocínio ao usuário (objetivo + restrição + ausência de caminho
-compatível) e confirme antes de seguir — não é uma sugestão entre várias, é
-a única direção que a combinação objetivo+restrição permite.
+Guarde a decisão como `formato_proposto` (só preenchido se houver proposta
+de mudança) com uma frase de porquê. Se propuser mudança, explique o
+raciocínio ao usuário (objetivo + restrição + ausência de caminho) e
+confirme antes de seguir — não é uma sugestão entre várias, é a única
+direção que a combinação objetivo+restrição permite.
 
 **Atualize a ficha de produto no Notion agora**, se a decisão revelar um
 desalinhamento que ainda não estava registrado. Não espere o fim da sessão.
@@ -421,12 +404,7 @@ O diferencial mora dentro do **como**, não do **o quê**. Teste toda resposta:
 verdadeira?** Se sim, ainda é genérica. Se não — só esse usuário, do jeito
 que ele faz, pode dizer essa frase — é diferencial.
 
-**Exemplo 1 (produto físico):** "faço limpeza dental" — qualquer dentista
-pode dizer isso, genérico. "Uso jato pressurizado que dá leve clareamento" —
-nem todo dentista faz assim, passa no teste. Vira a promessa: não só "dentes
-limpos", mas "dentes limpos e mais brancos".
-
-**Exemplo 2 (produto intangível — serviço 1:1):** "ajudo a organizar a
+**Exemplo 1 (produto intangível — serviço 1:1):** "ajudo a organizar a
 rotina" — qualquer mentor de produtividade diz isso, genérico. Perguntado
 como faz na prática na primeira sessão, revela que sempre audita os últimos
 7 dias do calendário real do cliente, minuto a minuto, antes de sugerir
@@ -435,7 +413,7 @@ sem olhar a real primeiro. Passa no teste. Vira a promessa: não "organize
 sua rotina", mas "descubra onde sua rotina atual já vaza tempo, antes de
 mudar qualquer coisa".
 
-**Exemplo 3 (infoproduto — curso/comunidade):** "ensino a vender no
+**Exemplo 2 (infoproduto — curso/comunidade):** "ensino a vender no
 orgânico" — qualquer mentor de conteúdo diz isso, genérico. Perguntado o
 passo a passo real, revela que o método sempre parte de mapear o que o
 público já compra hoje (esteira de concorrentes) antes de criar qualquer
@@ -460,12 +438,12 @@ Guarde o diferencial encontrado como `diferencial_produto`.
 ## ETAPA 5 — Público real: pra quem a promessa fala, e por que essa pessoa compra
 
 A promessa já tem conteúdo (`diferencial_produto`). Esta etapa decide **pra
-quem e em que língua** ela fala. São 7 passos, nesta ordem. Use o que a Etapa
+quem e em que língua** ela fala. São 9 passos, nesta ordem. Use o que a Etapa
 2 já carregou do Notion ("Meu Público", MDI, diagnóstico do Dr. House) —
 pergunte só o que falta, uma pergunta por vez.
 
 **Modo sem aluno ao vivo** (sessão rodando só a partir de diagnóstico
-anexado, sem interlocutor pra responder): vale para os 7 passos abaixo, não
+anexado, sem interlocutor pra responder): vale para os 9 passos abaixo, não
 só para o pilar (Passo 6). Não pule nenhum passo nem invente resposta —
 infira cada um a partir dos fatos já coletados (Etapa 2-4, `restricao_execucao`
 da Etapa 3 quando relevante), aplicando o mesmo rigor de quem teria
@@ -569,8 +547,7 @@ sessão) — os 7 pilares, o que cada um ativa, e o mapeamento por
 `formato_produto` para checar se a pontuação bate com o padrão esperado.
 Para cada um dos 7 — **nunca nomeie os pilares pro aluno** (uso interno) —
 procure evidência real nos dados já coletados nas Etapas 2-5 (objetivo,
-diferencial, dores, histórias, verdade de mercado, síntese do Passo 7
-anterior desta etapa). A nota (0-10) reflete a força e a quantidade de
+diferencial, dores, histórias, verdade de mercado). A nota (0-10) reflete a força e a quantidade de
 evidência encontrada para cada pilar, sempre citando o dado-fonte.
 
 Se a investigação já apontou pro gatilho à parte "Segurança" (reduzir
@@ -664,6 +641,32 @@ confirmar que ambos são reais e a tensão é o próprio material da promessa.
 Guarde qualquer correção resultante de volta em `publico_promessa` e na
 síntese do Passo 7.
 
+### Passo 9 — Vivência pessoal: o aluno já esteve no lugar do próprio público?
+
+Com o público fechado (`publico_promessa`), pergunte se o aluno já viveu a
+mesma situação que o público vive hoje — isso resgata material forte pra
+Ativos de Marketing (Etapa 9, categoria de acesso privilegiado) de forma
+muito mais direta que garimpo tardio. **Duas perguntas separadas, nunca
+compostas na mesma mensagem** — perguntar as duas juntas tende a gerar
+resumo; perguntar separado, pedindo detalhe na segunda, tende a gerar
+descrição real:
+
+1. "Você também já esteve no lugar que seu público está hoje?"
+2. Só depois da resposta: "Como foi?" — pede o detalhe, onde moram os
+   medos, problemas enfrentados e soluções encontradas.
+
+**Antes de aceitar "não" como resposta final, cruze contra o que já foi
+dito nas Etapas 2-5** — é comum o aluno já ter vivido a posição do próprio
+público sem rotular isso como tal (ex.: alguém que pratica a própria
+profissão-alvo há anos e viveu o processo completo que hoje ensina também
+conta, não é preciso ter sido "leigo" primeiro). Só aceite esfera vazia
+depois desse cruzamento — não é falha de busca ter vindo vazia de verdade,
+mas é erro aceitar vazio sem checar.
+
+Grave a resposta bruta (não classificada ainda) no documento-hub da sessão
+(Etapa 1) para reaproveitar na Etapa 9 — nunca pergunte de novo o que já
+foi respondido aqui.
+
 ---
 
 ## ETAPA 6 — Julgar e afiar a promessa (troca de persona + bateria tripla)
@@ -717,88 +720,20 @@ Sem a versão segura ao lado, é difícil perceber que a única opção gerada j
 
 ### Passo 2 — A bateria tripla (roda nas duas versões)
 
-Se a ferramenta `Agent`/`Task` estiver disponível, delegue esta bateria a um
+Leia `references/bateria-julgamento.md` — os 11 testes (Verdade, Desejo,
+Formulação) e o pacote de contexto que o executor precisa ter em mãos. Se a
+ferramenta `Agent`/`Task` estiver disponível, delegue esta bateria a um
 subagente sem o contexto emocional de quem escreveu (ver REGRA GERAL DE
-VERIFICAÇÃO CRÍTICA): entregue as duas versões + todos os fatos coletados
-até aqui — `diferencial_produto` e a entrega real do produto (Etapa 4),
-`publico_promessa`/`urgencia_compra`/`quem_decide` (Etapa 5),
-`papel_esteira` (Etapa 3), `pilar_dominante`, `portfolio_produtos`, as
-respostas de verdade de mercado do Passo 2 da Etapa 5, `nivel_consciencia`,
-e as credenciais/fatos de autoridade já coletados (Etapa 2, "Quem sou eu" e
-Histórias Inevitáveis) — junto com a bateria abaixo, e peça veredito teste a
-teste. Se não houver a ferramenta, rode você mesmo, deliberadamente lento e
-cético.
-
-**Bateria 1 — VERDADE (falhou = mata ou reescreve, sem negociação):**
-
-1. **Premissa factual:** cada dor, inimigo, objeção ou hábito citado na
-   promessa apareceu na conversa/Notion ou foi confirmado pelo aluno como
-   real no mercado DE HOJE? Estrutura perfeita não salva premissa falsa
-   (ex.: "sem mostrar portfólio" morre se ninguém pede portfólio nesse
-   mercado; "molde de revista" morre porque revista nem tem mais molde).
-2. **Honestidade:** se a pessoa executar o que está no produto (a entrega
-   real levantada na Etapa 4), ela chega nesse resultado? Não é o ticket que
-   decide — é promessa vs. entrega (cases e depoimentos reais sustentam
-   promessas ousadas mesmo em ticket baixo).
-3. **Concorrente:** um concorrente direto poderia dizer a mesma frase sem
-   mentir? Se sim, o diferencial da Etapa 4 sumiu — regrediu pra genérico.
-
-**Bateria 2 — DESEJO (falhou = reformula o registro, não só a frase):**
-
-4. **Registro certo:** compra de dor urgente → promessa utilitária e objetiva
-   (quantidade pode ser a própria promessa). Decisão considerada → promessa
-   aspiracional. E se `papel_esteira` = Estrela, a subpromessa técnica está
-   presente?
-5. **Cena reconhecível:** existe uma cena ou momento que o público reconhece
-   na hora — positiva ("vista uma peça que você mesma fez e escute 'onde
-   você comprou?'") ou negativa (inimigo)? Inimigo não é obrigatório; a cena
-   é. Se houver inimigo, três sub-testes: (a) é algo que esse público TEME
-   ser obrigado a fazer/viver — não algo que ele já despreza (dentista não
-   teme dancinha, teme virar blogueiro do Instagram); (b) existe no mercado
-   de hoje; (c) o detalhe é coletivo — a maioria do público viveu ("pontada
-   no joelho" sim; "parou na semana 6 do último treino" não, a menos que o
-   aluno tenha certeza de que todos viveram exatamente isso).
-6. **Pilar ativado:** a formulação aplica a regra do arquivo do
-   `pilar_dominante`? (Gula não enumera bônus; Preguiça nomeia o esforço
-   eliminado; Soberba não tem hedge — releia o arquivo do pilar se precisar.)
-7. **Números pelo esforço:** todo número na promessa representa algo que o
-   comprador PEGA PRONTO (modelos, roteiros — positivo) ou resultado/status
-   ("faturei X", "3 primeiros clientes" — positivo)? Número de esforço do
-   comprador (aulas, módulos, tarefas) ou de bastidor do criador ("testei 60
-   fornecedores") é negativo. E resultado verdadeiro mas inacreditável pro
-   ticket desce pra subpromessa/prova — não fica na frase principal.
-8. **Aposta preservada:** a versão preserva o detalhe específico e um pouco
-   arriscado da Etapa 4, ou suavizou/generalizou no caminho?
-
-**Bateria 3 — FORMULAÇÃO (falhou = polir, sem tocar na substância):**
-
-9. **Vocabulário no nível de consciência:** cada termo da frase significa
-   algo pra esse público (`nivel_consciencia`)? Jargão de categoria
-   ("torne-se social media profissional") não significa nada pra quem ainda
-   sonha em começar — troque por resultado concreto.
-10. **Fala natural e coerência interna:** a frase soa como algo que um ser
-    humano diria (travessões encadeados são sintoma de copy montada;
-    paralelismo de oposição — "X, mas Y", "não é A, é B" — é a mesma
-    muleta, proibido sempre, ver REGRAS ESTRUTURAIS)? E cada parte puxa a
-    seguinte, sem salto lógico ("estratégia de conteúdo" não casa com
-    "pacientes por indicação")?
-11. **Credencial máxima:** se a promessa usa credencial, é o fato mais forte
-    real ("3 treinadores medalhistas"), não o rótulo genérico
-    ("especialistas")? Garimpe — o aluno escreve o rótulo sozinho, porque a
-    credencial real é rotina pra ele.
+VERIFICAÇÃO CRÍTICA): entregue as duas versões + o pacote de contexto listado
+no arquivo, junto com o próprio arquivo, e peça veredito teste a teste. Se
+não houver a ferramenta, rode você mesmo, deliberadamente lento e cético,
+seguindo o mesmo arquivo.
 
 ### Passo 3 — Escolher, corrigir se necessário, nomear o porquê
 
-A escolha vem só da bateria, não de qual versão "parece" mais forte. Se a
-versão de risco falhar em algum teste por erro factual (não por ser ousada),
-reescreva só o que quebrou, preservando a especificidade que a fazia vencer
-nos outros testes — e **rode de novo os testes que ela falhou** antes de
-considerar a reescrita pronta (a reescrita pode introduzir uma premissa
-nova, ainda não testada).
-
-O viés mais comum é descartar a versão de risco por "arriscada demais" sem
-ela ter falhado em teste nenhum — isso é regressão pro morno. Se acontecer,
-cite qual teste específico ela falhou. Se nenhum, a versão de risco fica.
+A escolha vem só da bateria, não de qual versão "parece" mais forte — ver
+"Depois de rodar a bateria" em `references/bateria-julgamento.md` para como
+tratar reprovação por erro factual vs. descarte por "parecer arriscada".
 
 Ao entregar, nomeie ao usuário por que a versão escolhida venceu, citando o
 teste que a diferenciou — isso ensina o padrão, não só entrega o resultado.
@@ -824,6 +759,22 @@ Inclua nesse snapshot também `pontuacao_pilares_antes` (Etapa 5, Passo 6)
 Se o Notion não estiver disponível nesta sessão, guarde em `memoria.md`
 como fallback temporário e tente arquivar assim que a conexão voltar.
 
+### Passo 5 — Agente avaliador: consistência e piso mínimo do documento-hub
+
+Com `nova_oportunidade` fechada — ela é o norte de tudo, por isso a
+checagem roda só agora, não antes — delegue a um subagente novo (se
+`Agent`/`Task` disponível; senão, rode você mesmo com o mesmo rigor) a
+leitura do documento-hub inteiro (Etapa 1 em diante), seguindo
+`references/avaliador-hub.md` — as 3 checagens (inconsistência, piso
+mínimo, recruzamento antes de declarar lacuna). Envie o hub completo + o
+próprio arquivo na delegação.
+
+Do retorno: se faltar de verdade, após o recruzamento, situação de vida
+concreta, desejo/aversão do público ou `nova_oportunidade` no hub, volte ao
+aluno antes de seguir para a Etapa 7. Risco de posicionamento (Y) e fato
+bruto de esfera só bloqueiam depois da Etapa 9 rodar as próprias
+perguntas — aqui viram pendência sinalizada, não bloqueio.
+
 ---
 
 ## ETAPA 7 — Bônus: criar o que o produto ainda não tem, não procurar o que falta
@@ -836,66 +787,31 @@ que abre esta skill: não pergunte ao aluno "o que você tem de valioso pra
 oferecer" esperando ele inventar sozinho — a skill filtra e propõe, o
 aluno só confirma.
 
-Leia `references/bonus.md` (os 3 tipos, com exemplos reais e o teste de
-dispensa do Gula) antes de gerar qualquer proposta.
+Leia `references/bonus.md` (os 3 tipos, pergunta-guia e regras de criação
+de cada um, exemplos reais, teste de dispensa do Gula) antes de gerar
+qualquer proposta. Depois:
 
-### Passo 1 — Bônus Âncora (sempre obrigatório, sem exceção)
+1. **Âncora (nunca dispensável):** gere 1-2 propostas calibradas por
+   `pilar_dominante`, `formato_produto` e ticket — nunca algo impraticável
+   pro porte do negócio do aluno (ex.: sessão ao vivo semanal pra quem
+   vende só curso gravado sem estrutura de suporte). Apresente pra
+   confirmar execução, não como pergunta aberta. Se nenhuma proposta for
+   executável, gere outra — não avance pra Etapa 8 sem Âncora definido.
+2. **Gula:** rode primeiro o teste de dispensa (`bonus.md`) contra
+   `pontuacao_pilares_antes` — nota de Gula já alta no "antes" dispensa o
+   bônus. Se não dispensado, gere 1-2 propostas com as mesmas calibrações
+   do Âncora, priorizando uma que também reforce a objeção real da Etapa 5
+   (Passo 2), se houver uma clara — dois ângulos num só bônus.
+3. **Reativo (condicional):** só confirme se a objeção real coletada tem,
+   ou não, resposta na estrutura central do produto. Sem resposta →
+   candidato a bônus reativo (nunca destaque visual). Já respondida (ex.:
+   suporte incluso) → não force um reativo redundante. Não duplique o que
+   a Etapa 9 já cobre.
 
-Pergunta-guia: o que essa pessoa específica (dado `pilar_dominante` da
-Etapa 5) pagaria caro, isoladamente, se existisse à parte? Normalmente é
-acesso direto a quem tem a credencial real já coletada (Etapa 2/Quem sou
-eu, Etapa 3) — o mesmo padrão do hot seat mensal do Sim Inevitável: uma
-mentoria individual custaria R$12.000, um encontro mensal incluso é bônus
-âncora puro.
-
-Gere 1-2 propostas já calibradas por `formato_produto` e ticket (Etapa 3)
-— nunca proponha algo impraticável pro porte do negócio do aluno (ex.:
-sessão ao vivo semanal pra quem vende só curso gravado sem estrutura de
-suporte). Apresente ao aluno pra confirmar execução, não como pergunta
-aberta.
-
-**Nunca dispensável.** Se nenhuma proposta parecer executável na primeira
-rodada, gere outra — não avance pra Etapa 8 sem um Bônus Âncora definido.
-
-### Passo 2 — Bônus Gula (dispensável só se o produto já É Gula)
-
-**Teste de dispensa primeiro:** confira `pontuacao_pilares_antes` (Etapa
-5, Passo 6). Se Gula já tiver nota alta ali (o produto central já entrega
-volume percebido sozinho — ex.: dezenas de modelos prontos), **este bônus
-é dispensado** — criar um em cima seria redundante, a regra já está
-satisfeita pelo produto em si. Se Gula ficou com nota baixa ou 0, o bônus
-não está dispensado.
-
-Pergunta-guia (se não dispensado): o que soma volume percebido, pronto pra
-usar, sem duplicar o que já é aula? **Nunca proponha mais aula, módulo ou
-conteúdo teórico como resposta** — mesma regra já usada na Etapa 10 de
-Ativos ("volume de aulas nunca é ativo válido, mesmo com pilar Gula").
-Pense em entregável pronto: modelos, moldes, fichas técnicas, templates,
-scripts — algo que o comprador usa direto, não estuda antes de usar.
-
-Gere 1-2 propostas calibradas do mesmo jeito que o Passo 1, e priorize uma
-que também reforce a objeção real já coletada (Etapa 5, Passo 2), se
-houver uma clara — reforça dois ângulos com um só bônus.
-
-### Passo 3 — Bônus Reativo (só com objeção real, já coberto pela Etapa 10)
-
-Este tipo já é coberto pela Etapa 10 (Ativos de Marketing) — não duplique
-aqui. Só use este passo pra confirmar que a objeção real coletada na Etapa
-5 (Passo 2) tem, ou não, um bônus reativo correspondente: se houver uma
-objeção nomeada e nenhuma resposta a ela na estrutura central do produto,
-sinalize como candidato a bônus reativo (nunca destaque visual — só
-aparece pra quem carrega aquela objeção específica, mesmo padrão do caso
-VA que reduziu reembolso em 50%). Se a objeção já é respondida pela
-entrega central (ex.: suporte incluso), não force um bônus reativo
-redundante.
-
-### Guardar o resultado
-
-Guarde `bonus_ancora`, `bonus_gula` (ou marcado como dispensado, com o
-motivo — nota de Gula alta no "antes"), e `bonus_reativo` (se houver). Cada
-um com a proposta + o porquê ela foi calibrada pro pilar/público/ticket
-deste produto específico, pra alimentar o resumo final (Etapa 13) e o
-segundo cálculo da roda de pilares "depois" (Etapa 12).
+Guarde `bonus_ancora`, `bonus_gula` (ou dispensado, com o motivo citando a
+nota do "antes") e `bonus_reativo` (se houver) — cada um com a proposta +
+o porquê da calibração pro pilar/público/ticket deste produto, pra
+alimentar o resumo final (Etapa 14) e o recálculo "depois" (Etapa 13).
 
 ---
 
@@ -919,7 +835,125 @@ salvar manualmente — nunca como Artifact.
 
 ---
 
-## ETAPA 9 — Gerar as 5 headlines exploratórias
+## ETAPA 9 — Ativos de marketing: narrativa que reforça a oportunidade
+
+Ativo de marketing **nunca é exibição de credencial** (print, depoimento,
+bastidor de atendimento mostrado cru) — pessoa boa não vende sozinha por
+ser boa, o mercado está cheio de gente boa que não vende. Prova nunca é o
+ativo — é munição de um argumento, nunca o troféu exibido sozinho.
+
+**Princípio-mãe: o aluno nunca sabe apontar o próprio ativo** — se soubesse,
+já estaria usando. Nunca pergunte "como isso aparece no seu produto" ou
+"qual é o seu ativo" — toda pergunta desta etapa pede relato bruto de
+rotina/fato, nunca pede o ativo pronto. É a skill que identifica o ativo
+depois, cruzando a resposta contra as 4 categorias (ver
+`references/ativos-gerador.md`).
+
+**Pré-requisito:** a Pergunta 0 (vivência pessoal) já deveria ter sido
+coletada logo após a Etapa 5 (ver Etapa 5, Passo 9) e estar registrada no
+documento-hub da sessão (Etapa 1). Se por algum motivo não foi coletada
+ainda (sessão retomada de um ponto que pulou isso), colete agora antes de
+seguir, na mesma forma de duas perguntas separadas descrita na Etapa 5.
+
+### Passo 1 — As 4 perguntas de garimpo (conversa principal, uma por vez)
+
+Estas perguntas ficam **sempre na conversa principal**, nunca em
+`AskUserQuestion` (ruim para pergunta aberta) nem delegadas a subagente — a
+conversa principal é guardiã do contexto e grava cada resposta no
+documento-hub assim que chega, antes de seguir para a próxima. Cada
+pergunta mira uma esfera diferente — uma pergunta só é cega pras esferas
+que não mira (ex.: perguntar só sobre "rotina" de forma genérica nunca
+resgata algo como "dia de fechamento de meta com a equipe", porque isso é
+rotina de gestão, não de entrega).
+
+1. **Esfera de entrega/atendimento** — reaproveite o que a Etapa 4 já
+   coletou (`diferencial_produto`, passo a passo real de entrega); só
+   pergunte de novo se aquele relato foi raso demais para render fato
+   nomeável:
+   ```
+   Explica pra mim como é o dia a dia de você entregando isso pro
+   cliente — o passo a passo real, sem filtrar.
+   ```
+2. **Esfera de gestão/bastidor do negócio**, calibrada pelo público já
+   coletado (Etapa 5):
+   ```
+   Hoje, como funciona sua rotina fixa de trabalho por trás da entrega —
+   o que você faz toda semana pra isso rodar?
+   ```
+3. **Esfera pessoal/vida fora do trabalho:**
+   ```
+   O que da sua rotina pessoal — ambiente, lugares, hábito — você
+   mostraria sem pensar duas vezes, mesmo sem ligação direta com o
+   produto?
+   ```
+4. **Risco de posicionamento — sempre com exemplo-ponte, nunca pergunta
+   aberta sozinha** (sem o exemplo, o aluno não sabe responder):
+   ```
+   Com o que você não quer ser confundido? Alguns nichos não podem ser
+   vistos de um certo jeito — programadores que falam com mercado
+   tradicional precisam mostrar trabalho formal, não curso online, senão
+   perdem credibilidade. Quem fala de comida saudável acessível não pode
+   mostrar ingrediente muito diferente, senão vira "cozinha só para
+   rico". No seu caso, quais são as coisas que você não quer ser
+   confundido ou visto como?
+   ```
+   Esta resposta define o risco (Y) usado na categoria 1 de
+   `ativos-gerador.md`.
+
+**Critério de parada — resposta superficial:** se qualquer uma das 4
+perguntas (ou a Pergunta 0 já coletada na Etapa 5) vier numa frase só, sem
+fato nomeável (sem ação concreta, sem contexto, sem nome de coisa/lugar/
+pessoa), não insista reformulando a mesma pergunta. Pare e diga:
+```
+Você está me respondendo de forma muito direta e superficial, quer voltar
+e continuar mais tarde? Para o processo ter sucesso preciso que você me
+forneça detalhes e informações completas.
+```
+Registre a resposta (mesmo que curta) no documento-hub e siga — não trave
+a sessão inteira por causa de 1 pergunta fraca, mas não force identificação
+de ativo em cima de fato raso.
+
+Grave cada resposta no documento-hub assim que chegar (append, nunca
+substituição).
+
+### Passo 2 — Funil de 3 estágios (Gerador → Verificador → Gerador consolida)
+
+Protocolo Gerador/Verificador (ver regras gerais), com um estágio extra de
+consolidação:
+
+1. **Estágio 1 (Gerador, instância A):** recebe o documento-hub inteiro
+   (não só as respostas desta etapa) + `references/ativos-gerador.md` e
+   roda as 4 categorias, cruzando fatos já coletados antes de declarar
+   qualquer categoria vazia.
+2. **Estágio 2 (Verificador, instância nova, `ativos-verificador.md`):**
+   recebe os candidatos em prosa, sem fato-fonte nem categoria pretendida,
+   aprova/reprova e dá nota de convicção 1-10 aos aprovados.
+3. **Estágio 3 (Gerador, mesma instância A):** recebe só os aprovados +
+   notas, ordena (nota + especificidade + cobertura das 4 categorias) e
+   entrega a lista final — mínimo 2 ativos, sem teto. Nunca elimina
+   candidato só por compartilhar fato-fonte com outro aprovado (um fato
+   pode gerar múltiplos usos válidos). Menos de 2 aprovados → seção de
+   sugestões em vez de ativo fraco (ver `ativos-gerador.md`, "Se sobrarem
+   menos de 2 aprovados").
+
+Guarde `ativos_marketing_sexys` (lista de fatos-fonte, cada um com 1+ usos
+em parágrafo corrido — formato em `ativos-gerador.md`) — vai pro resumo da
+Etapa 14; fato-fonte bruto e nota do Verificador ficam como registro
+interno. Casos de fronteira (volume de aulas nunca é ativo, servir ao
+público real, nunca desvalorizar portfólio, nunca inventar fato): seção
+"Regras que continuam valendo" de `ativos-gerador.md`.
+
+---
+
+## ETAPA 10 — Gerar as 5 headlines exploratórias
+
+Esta etapa roda **depois** da Etapa 9 (Ativos) — o Gerador herda
+`ativos_marketing_sexys` já garimpado e a vivência pessoal do documento-hub
+(Etapa 5, Passo 9) como fonte do dado específico de cada headline. Rodando
+antes, como acontecia na ordem anterior desta skill, o Gerador não tinha
+munição real e caía em dado específico genérico ou solto do resto da
+sessão — a mesma promessa testada com fórmulas corretas mas sem lastro no
+que só esse aluno tem.
 
 **Headline e promessa são dois artefatos diferentes — nunca misture os
 dois.** A promessa (`nova_oportunidade`, Etapa 6) é uma frase/parágrafo
@@ -936,193 +970,144 @@ para copiar a headline para o campo de promessa.
 Estas 5 headlines também **não substituem** a seleção completa de modelo de
 headline (MH001-MH016) que o `carrossel-triwer` faz na hora de gerar o
 slide 01 de um carrossel de verdade — são o mesmo sistema de modelos
-(versão enxuta, 5 dos 16), aplicado aqui com o propósito estreito de testar
-a promessa, não de produzir a peça final.
+(versão enxuta, recorte específico pra Sexy), aplicado aqui com o
+propósito estreito de testar a promessa, não de produzir a peça final.
 
-### Como gerar
+### Gerador e Verificador (protocolo nas regras gerais)
 
-Use o processo real do manual de headline da Triwer — não fórmulas
-inventadas. Leia `~/.claude/skills/sexy-triwer/references/manual-headline.md`
-(5 modelos consolidados, os 4 DOPA, e os testes de qualidade) antes de
-escrever qualquer headline.
+Rode o protocolo Gerador/Verificador (ver REGRA GERAL DE VERIFICAÇÃO
+CRÍTICA). Específico desta etapa:
 
-Aplique a verificação crítica (ver REGRA GERAL DE VERIFICAÇÃO CRÍTICA) antes
-de considerar as 5 headlines prontas — gerar headline bem exige aplicar os
-testes abaixo com disciplina, e é fácil racionalizar que uma headline fraca
-"já está boa" logo depois de escrevê-la.
+- **Pacote do Gerador:** `nova_oportunidade` (Etapa 6), `pilar_dominante` e
+  `nivel_consciencia` (Etapa 5), `ativos_marketing_sexys` completo (Etapa
+  9, com fato-fonte bruto, não só o parágrafo final) e a vivência pessoal
+  bruta do documento-hub (Etapa 5, Passo 9) + `references/manual-headline.md`
+  (modelos consolidados, os 4 DOPA, testes de qualidade, exemplos reais).
+- **O Gerador** escolhe o DOPA de cada headline (não precisa ser o mesmo
+  nas 5 — DOPAs diferentes revelam ângulos diferentes de comunicação), o
+  modelo MH mais adequado, e o dado específico de cada headline **a partir
+  de um ativo já aprovado ou da vivência pessoal — nunca solto do resto da
+  sessão, nunca inventado** (mesma regra da Etapa 6 Passo 0), conferindo o
+  `pilar_dominante` antes de fechar → 5 headlines v1, identificadas por
+  modelo, DOPA e qual ativo/vivência a alimentou.
+- **O Verificador** (`references/headlines-verificador.md`) recebe só o
+  texto puro das 5, sem modelo/DOPA/ativo-fonte anexado, e aplica os testes
+  — aprova/reprova cada uma citando o teste que falhou.
+- Reprovações, teto de 2 rodadas e modo sem aluno ao vivo: protocolo geral.
 
-1. **Escolher o DOPA de cada headline** — não precisa ser o mesmo DOPA nas
-   5; testar a promessa em DOPAs diferentes (ex.: uma em Descoberta, uma em
-   Autoridade, uma em Provocação) revela ângulos diferentes de comunicação.
-2. **Escolher o modelo MH mais adequado** para cada DOPA escolhido.
-3. **Usar um dado específico real** — vindo da `nova_oportunidade`, do
-   `pilar_dominante`, dos `ativos_marketing_sexys` (Etapa 10) ou de provas já
-   coletadas. Nunca inventar um número ou resultado que não apareceu na
-   conversa (mesma regra da Etapa 6 Passo 0 — não inventar contexto novo).
-   Vocabulário calibrado por `nivel_consciencia` (Etapa 5), como na promessa.
-4. **Rodar os testes do manual** em cada headline antes de considerá-la
-   pronta (confronto, especificidade, incompletude, comprimento, pessoa
-   gramatical, sem prefixo de DOPA) — descartar e reescrever qualquer uma
-   que caia no checklist negativo do manual.
-5. **Verificar o `pilar_dominante`** (Etapa 5) — releia o arquivo do pilar
-   em `references/pilares-do-desejo/` se precisar garantir que a linguagem
-   da headline reflete a regra específica daquele pilar (ex.: uma headline
-   para um produto de Gula não deve enumerar quantidade — deve fazer a
-   pessoa sentir que está descobrindo uma vantagem).
-
-Entregue as 5 headlines já identificadas por modelo e DOPA usado (ex.:
-"MH004 — Autoridade"), para que o aluno entenda a lógica de cada uma, não
-só o texto final.
-
----
-
-## ETAPA 10 — Ativos de marketing: provar a decisão já tomada
-
-Ativo de marketing é **resposta a uma promessa que já existe** — nunca
-garimpo aberto. A pergunta desta etapa não é "que elementos interessantes
-existem no produto?" — é: **dado tudo que já foi decidido (objetivo e
-formato na Etapa 3, diferencial na Etapa 4, público e pilar na Etapa 5,
-promessa e subpromessa na Etapa 6), como eu reforço cada peça dessa decisão
-com prova concreta?**
-
-**Não pergunte ao aluno "como isso aparece no seu produto"** — ele
-normalmente não sabe, e é comum o produto ser "pouco sexy" até este ponto. É
-a skill que garimpa, a partir dos fatos já coletados. Aplique a verificação
-crítica (ver REGRA GERAL DE VERIFICAÇÃO CRÍTICA) neste raciocínio — uma
-leitura objetiva enxerga possibilidades que passariam batido para quem só
-quer fechar a etapa rápido.
-
-Para cada peça da decisão, procure a prova:
-
-- **A promessa central (`nova_oportunidade`)** → que elemento do produto ou
-  da história do aluno já prova ela? (prints reais de "onde compro",
-  resultado de aluno, o material por dentro)
-- **O diferencial (`diferencial_produto`, Etapa 4)** → como mostrar o "como"
-  sem vender processo?
-- **O pilar dominante (Etapa 5)** → o que tangibiliza ele de forma
-  mostrável? Use as narrativas-âncora do arquivo do pilar em
-  `references/pilares-do-desejo/` como padrão de raciocínio (Gula → volume
-  visual sem enumerar; Inveja → narrativa real projetável), nunca como texto
-  pronto pra copiar — o que prova cada pilar muda conforme o produto real.
-- **A cena da promessa (Bateria 2, teste 5 da Etapa 6)** → dá pra mostrar a
-  cena? (a "cozinha de conceito aberto que deixa a casa cheirando a bife"
-  vira post, story, comparação antes/depois — conteúdo que ninguém pensaria)
-- **Se a promessa depende de estilo de vida ou prova do criador** (ex.:
-  "trabalhe de qualquer lugar do mundo"), o ativo é obrigatório, não
-  opcional: pergunte "você tem como mostrar isso hoje — fotos, bastidor,
-  rotina?". Se a resposta for não, **não pergunte de novo tentando
-  contornar** — registre como pendência a confirmar depois (ex.: aluno junta
-  material entre sessões) e siga com os demais ativos; não trave a etapa
-  nem force uma volta pra Etapa 6 por causa disso. Só volte pra Etapa 6 se a
-  ausência do ativo tornar a promessa central inteira insustentável (não só
-  um ativo a menos) — e nesse caso, restrinja o Passo 1 da Etapa 6 com a
-  informação nova ("sem prova de estilo de vida disponível"), refaça as
-  Etapas 7-8 só se `nova_oportunidade` mudou, e no máximo uma vez: se a
-  segunda tentativa também esbarrar em falta de prova, entregue a promessa
-  mesmo assim e sinalize ao aluno que esse ativo específico fica pendente.
-
-**Antes de fechar a lista, teste a origem de cada ativo (não pule):** as 5
-lentes acima (promessa, diferencial, pilar, cena, estilo de vida) são
-ângulos de pergunta, não fontes — é comum um único fato real do produto
-responder a várias lentes ao mesmo tempo (ex.: a história de um cliente que
-prova a promessa, ilustra o pilar E é a cena, tudo junto). Se isso
-acontecer, **é um ativo só, reembalado várias vezes — não vira 3 ou 5
-itens da lista**, mesmo que cada reembalagem (print, narrativa longa,
-contraste antes/depois) pareça um formato diferente. Para cada item que for
-para a lista final, nomeie o fato-fonte bruto por trás dele (o evento, o
-cliente, o número, o print — não a lente usada para chegar lá); se dois
-itens compartilham o mesmo fato-fonte, mantenha só o mais forte dos dois e
-volte a garimpar um fato-fonte diferente para completar a lista — não force
-o mínimo de 3 subdividindo o mesmo fato em mais formatos de apresentação.
-Se, depois de garimpar todas as 5 lentes com essa disciplina, restar
-genuinamente só 1 ou 2 fatos-fonte reais no produto, entregue só esses —
-menos que 3 ativos honestos vale mais que 5 ativos que são o mesmo fato
-disfarçado.
-
-Regras que continuam valendo:
-
-- **Volume de aulas/módulos/conteúdo teórico nunca é ativo válido**, mesmo com
-  pilar Gula — grade de aulas comunica esforço de estudo e ativa Preguiça na
-  direção errada. Só volume de entregável pronto (modelos, templates) vale.
-- **Cada ativo precisa fazer sentido pro público-alvo real** (`publico_promessa`,
-  Etapa 5), não só pro pilar em abstrato — releia o público antes de fechar a
-  lista e confira se cada ativo é algo que essa pessoa específica teria ou
-  faria (ex.: se o público-alvo é "nutricionista que trava na venda por
-  vergonha de parecer vendedora", sem menção a ela mesma aplicar a própria
-  nutrição, um ativo do tipo "mostre sua própria jornada de emagrecimento"
-  não serve — pressupõe um público diferente do validado).
-- Nenhum ativo desvaloriza item do `portfolio_produtos`.
-
-**Resultado esperado:** 3 a 5 ativos concretos e específicos, cada um dizendo
-*o quê* mostrar e *por que* aquilo prova a promessa/pilar — nunca "use prova
-social", que serve pra qualquer produto de qualquer aluno.
-
-Guarde como `ativos_marketing_sexys` (lista).
+Entregue as 5 headlines identificadas por modelo e DOPA usado (ex.: "MH004
+— Autoridade"), para o aluno entender a lógica de cada uma, não só o texto
+final.
 
 ---
 
 ## ETAPA 11 — Aplicação Prática: Bio do Instagram
 
-Esta etapa roda **depois** da Etapa 10 (Ativos) — a bio herda
+Esta etapa roda **depois** da Etapa 9 (Ativos) — a bio herda
 `ativos_marketing_sexys` já garimpado como fonte de prova. Rodando antes,
 a bio fica pobre em prova específica (sem número ou prova nomeada
 disponível, a etapa marca "a confirmar com o aluno").
 
-Só a Bio está pronta nesta etapa. Destaques do Instagram ainda não tem
-régua de conteúdo validada — quando fechar, entra aqui como um segundo
-artefato desta mesma etapa, sem precisar renumerar de novo.
+### Gerador e Verificador (protocolo nas regras gerais)
 
-### Dois subagentes, não um — Gerador e Verificador
-
-Se a ferramenta `Agent`/`Task` estiver disponível, delegue em duas
-instâncias separadas — nunca a mesma instância faz os dois papéis, e o
-Verificador nunca vê as regras do Gerador (ver
-`references/bio-gerador.md` e `references/bio-verificador.md` para o
-porquê). Se não houver a ferramenta, rode você mesmo os dois papéis em
-sequência, mas com a mesma separação de contexto: ao verificar, releia a
-bio como se nunca tivesse visto o pacote de fatos.
-
-### O ciclo
+Rode o protocolo Gerador/Verificador (ver REGRA GERAL DE VERIFICAÇÃO
+CRÍTICA). Específico desta etapa:
 
 1. Monte o pacote de entrada (10 campos brutos + 3 conclusões fechadas —
-   ver `references/bio-gerador.md`) a partir do que já foi coletado nas
-   Etapas 2-10.
-2. Chame o Gerador (instância A) com o pacote + `bio-gerador.md` → bio v1.
-3. Chame o Verificador (instância nova, só vê a bio v1 pura, texto sem
-   contexto) com `bio-verificador.md` → avaliação.
-4. Se reprovado: volte pra **mesma** instância A do Gerador (ela lembra o
-   que escreveu, ajusta em cima da crítica — não reescreve do zero) → bio
-   v2.
-5. Chame o Verificador em **outra instância nova** (nunca lembra da
-   rodada anterior) → segunda avaliação.
-6. Se reprovado de novo: **pare** — leve a bio v2 + a crítica direto para
-   o aluno julgar, em vez de insistir numa 3ª rodada automática. Máximo 2
-   tentativas de Gerador, 2 de Verificador, por bio.
-7. Se aprovado em qualquer rodada: só o resultado final volta para o
-   resumo (Etapa 13).
-
-**Modo sem aluno ao vivo** (ver definição na Etapa 5): se não houver
-interlocutor pra julgar uma bio reprovada duas vezes (passo 6), não trave
-a etapa — entregue a bio v2 marcada como **a confirmar**, junto com a
-crítica do Verificador, para o aluno julgar na próxima interação. Nunca
-force uma 3ª rodada automática só porque não há aluno presente agora.
+   tabela em `references/bio-gerador.md`) a partir do que já foi coletado
+   nas Etapas 2-10.
+2. Gerador (instância A) com o pacote + `bio-gerador.md` → bio v1.
+3. Verificador (instância nova, só a bio pura, texto sem contexto) com
+   `bio-verificador.md` → avaliação.
+4. Reprovações, teto de 2 rodadas e modo sem aluno ao vivo: protocolo
+   geral. Aprovado em qualquer rodada → só o resultado final volta pro
+   resumo (Etapa 14).
 
 Guarde o resultado como `bio_instagram`.
 
+### Segundo artefato — Destaques do Instagram
+
+Mesmo protocolo, com `destaques-gerador.md`/`destaques-verificador.md`. A
+diferença está no pacote e no que o Verificador testa:
+
+- **Pacote do Gerador: a transcrição/resposta bruta das Etapas 4, 5, 6 e
+  10 inteiras**, nunca só os campos resumidos (`diferencial_produto`,
+  `pilar_dominante`, `ativos_marketing_sexys`) — o fato que vira destaque
+  costuma morar numa frase literal do aluno que a síntese descartou.
+  **Confirme antes de delegar** que tem a fala literal em mãos; se só
+  tiver os campos fechados, releia essas etapas na conversa primeiro —
+  pular isso é o modo de falha mais comum da etapa (caso real em
+  `destaques-gerador.md`, seção "Pacote de entrada").
+- **O Gerador** aplica o gate de elegibilidade (Via A/B + mecanismo
+  distinto), o reexame de rejeitados e o limite de 15 caracteres — tudo em
+  `destaques-gerador.md`, não é trabalho da conversa principal.
+- **O Verificador** testa lacuna de curiosidade ("esse título sozinho, sem
+  contexto, deixa uma pergunta específica em aberto, ou já entrega a
+  conclusão?") e compara a lista inteira por redundância — por isso toda
+  rodada recebe a lista completa, mesmo os títulos que não mudaram.
+- **Alvo é 3 destaques, nunca obrigação** — se o material só sustentar 2
+  mecanismos fortes e distintos, entregue 2. Confirmado em teste real,
+  mais de uma vez: um terceiro fraco forçado é pior que menos com
+  qualidade.
+
+Guarde `destaques_instagram` (lista de títulos; fato-fonte e crença
+quebrada ficam documentados internamente — só o título final vai pro
+resumo da Etapa 14).
+
 ---
 
-## ETAPA 12 — Recálculo "depois" da roda de pilares (pendente)
+## ETAPA 12 — Hero da página de vendas (headline + subheadline)
 
-> Ainda não escrita — depende de Bônus (Etapa 7) + Ativos (Etapa 10) + Bio
-> (Etapa 11) + Destaques (quando a régua de conteúdo fechar, ver PRD Sexy
-> — Novo output da Oportunidade Sexy). Cada ponto de elevação do "depois"
-> precisa apontar pra um bônus/ativo/bio/destaque concreto gerado nas
-> etapas anteriores — nunca nota solta "melhorada" sem lastro (mesma regra
-> já travada para o "antes" na Etapa 5, Passo 6).
+Simulação de como a `nova_oportunidade` se apresentaria na primeira dobra
+de uma página de vendas — hero é **só headline + subheadline + botão**,
+nunca a narrativa completa da página (dor, mecanismo, prova social, preço
+ficam fora do escopo desta skill). Não confundir com as 5 headlines
+exploratórias da Etapa 10: aquelas testam a promessa em formato de gancho
+de post (fisgar quem rola o feed sem intenção); esta testa a mesma
+promessa em formato de headline de conversão (o visitante já chegou
+querendo saber do produto).
+
+### Gerador e Verificador (protocolo nas regras gerais)
+
+Rode o protocolo Gerador/Verificador (ver REGRA GERAL DE VERIFICAÇÃO
+CRÍTICA). Específico desta etapa:
+
+- **Pacote do Gerador:** `nova_oportunidade` e `subpromessa` (Etapa 6),
+  `papel_esteira` (Etapa 3), `diferencial_produto` completo (Etapa 4 —
+  texto integral, não resumo de uma frase nem nome do produto),
+  `urgencia_compra` e `publico_promessa` (Etapa 5), `ativos_marketing_sexys`
+  (Etapa 9) + `references/hero-gerador.md` (classificação de registro,
+  testes de honestidade/credibilidade e status/esforço, fórmula de
+  headline). `diferencial_produto` é obrigatório — sem ele o Gerador tende
+  a inventar o inimigo da headline a partir do nome do produto em vez do
+  mecanismo real (ver "Erro real já cometido" em `hero-gerador.md`).
+- **O Gerador** primeiro classifica o registro da promessa (dor urgente/
+  utilitário vs. decisão considerada/aspiracional, e dentro deste,
+  Paquera vs. Estrela) antes de escrever qualquer texto — a fórmula muda
+  inteira conforme o registro. Gera 2 propostas de hero, nunca 1 (mesma
+  promessa em dois ângulos diferentes, nunca duas variações superficiais
+  da mesma frase).
+- **O Verificador** (`references/hero-verificador.md`) recebe só o texto
+  puro das propostas, sem o registro anexado, e aplica os 8 testes —
+  aprova/reprova cada uma citando o teste que falhou.
+- Reprovações, teto de 2 rodadas e modo sem aluno ao vivo: protocolo geral.
+
+Guarde `hero_pagina_vendas` (as propostas aprovadas, com registro
+identificado) — vai pro resumo da Etapa 14.
 
 ---
 
-## ETAPA 13 — Montar o resumo, verificar e apresentar para aprovação
+## ETAPA 13 — Recálculo "depois" da roda de pilares (pendente)
+
+> Ainda não escrita — depende de Bônus (Etapa 7) + Ativos (Etapa 9) + Bio
+> e Destaques (Etapa 11, ambos os artefatos já escritos). Cada ponto de
+> elevação do "depois" precisa apontar pra um bônus/ativo/bio/destaque
+> concreto gerado nas etapas anteriores — nunca nota solta "melhorada" sem
+> lastro (mesma regra já travada para o "antes" na Etapa 5, Passo 6).
+
+---
+
+## ETAPA 14 — Montar o resumo, verificar e apresentar para aprovação
 
 ### Passo 1 — Montar o resumo
 
@@ -1150,11 +1135,15 @@ Oportunidade Sexy definida:
 **Gula:** [bonus_gula, ou "dispensado — produto já É Gula (nota X no antes)"]
 **Reativo:** [bonus_reativo, se houver — qual objeção neutraliza]
 
-**Ativos de marketing sexys** (Etapa 10 — o que mostrar e por que prova a promessa):
-1. [ativo 1: o que mostrar] — [por que isso prova a promessa/pilar dominante]
-2. [ativo 2]
-3. [ativo 3]
-(4-5, se houver)
+**Ativos de marketing sexys** (Etapa 9 — narrativa que reforça a oportunidade, mínimo 2, sem teto):
+1. [parágrafo corrido — nomeia a categoria em linguagem natural, explica o
+   porquê, dá a instrução prática, tudo amarrado; ver formato de saída em
+   `ativos-gerador.md`]
+2. (repita para cada ativo aprovado; quando um fato-fonte tiver mais de 1
+   uso, cada uso é seu próprio parágrafo)
+(Se o funil não bateu o piso de 2, ver "Se sobrarem menos de 2 aprovados"
+em `ativos-gerador.md` — inclua aqui a seção "o que reforçaria a
+oportunidade, ainda não disponível hoje" em vez de forçar ativo fraco.)
 
 **Bio do Instagram** (Etapa 11 — `bio_instagram`):
 [nome pesquisável + linhas da bio — aprovada pelo Verificador, OU, se
@@ -1164,35 +1153,40 @@ na íntegra logo abaixo, para o aluno julgar. Nunca apresentar uma bio
 reprovada como se fosse aprovada — a marcação "a confirmar" e a crítica
 são parte obrigatória do resumo nesse caso, não opcionais.]
 
+**Destaques do Instagram** (Etapa 11 — `destaques_instagram`):
+1. [título 1, ≤15 caracteres] — [fato-fonte + crença que quebra, uma frase]
+2. [título 2]
+(3, se o gate sustentou um terceiro mecanismo distinto — nunca forçado)
+[Mesma regra da Bio se algum título ficou na v2 reprovada: marcar "a
+confirmar com você" + crítica do Verificador, nunca apresentar como
+aprovado.]
+
 **Headlines exploratórias:**
 1. [headline 1]
 2. [headline 2]
 3. [headline 3]
 4. [headline 4]
 5. [headline 5]
+
+**Hero da página de vendas** (Etapa 12 — `hero_pagina_vendas`, registro
+identificado + 2 propostas aprovadas):
+1. [Headline] / [Subheadline] / [Linha de suporte, se houver]
+2. [Headline] / [Subheadline] / [Linha de suporte, se houver]
+[Mesma regra da Bio/Destaques se alguma proposta ficou na v2 reprovada:
+marcar "a confirmar com você" + crítica do Verificador, nunca apresentar
+como aprovada.]
 ```
 
 ### Material de apoio opcional — os 5 elementos da narrativa
 
-Isto **não é o hero de página de vendas** (hero é só promessa + sub-promessa
-+ botão, mais simples que isso) e **não substitui** a `nova_oportunidade`
-acima, que continua sendo o resultado principal desta skill. É um material
-extra, útil para o aluno usar depois na construção de campanhas maiores —
-ofereça como algo adicional, não como parte obrigatória do resumo:
-
-```
-Se quiser, também já deixo esboçada a narrativa completa por trás dessa
-oportunidade, pra você usar em campanhas futuras:
-
-**1. A nova oportunidade:** [mesma formulação da promessa acima]
-**2. O que prova/gera curiosidade:** [história, resultado, depoimento ou elemento do produto que sustenta a novidade]
-**3. Por que o jeito atual não funciona:** [explicação que desculpabiliza o lead — por que o que ele tenta hoje falha, sem culpá-lo]
-**4. Cenário futuro positivo:** [como fica a vida dele depois da solução — descrito de forma que ele consiga se imaginar]
-**5. Cenário futuro negativo:** [como fica a vida dele se decidir não comprar]
-```
-
-Só monte este bloco se o aluno confirmar interesse — não é parte do fluxo
-obrigatório de aprovação desta etapa.
+Só monte se o aluno confirmar interesse — não é parte obrigatória do
+resumo e **não substitui** a `nova_oportunidade` nem o hero de página de
+vendas (Etapa 12). É esboço de narrativa pra campanhas futuras, em 5
+campos: (1) a nova oportunidade (mesma formulação da promessa), (2) o que
+prova/gera curiosidade, (3) por que o jeito atual não funciona
+(desculpabiliza o lead, nunca o culpa), (4) cenário futuro positivo
+(descrito pra ele se imaginar), (5) cenário futuro negativo (se decidir
+não comprar).
 
 ### Passo 2 — Segunda passada crítica (gate — não pule)
 
@@ -1209,6 +1203,17 @@ relembrar a regra exata do pilar em questão:
 - [ ] **Honestidade de formato:** a promessa promete algo que o
       `formato_produto` entrega sozinho, sem depender de acompanhamento,
       curadoria ou esforço do aluno que não faz parte da entrega descrita?
+- [ ] **Segurança clínica/de risco, se o produto for de saúde, terapia,
+      finanças ou qualquer área com risco real de dano:** nenhum item do
+      resumo (promessa, ativos, headlines) sugere, mesmo implicitamente,
+      que uma avaliação/diagnóstico profissional obrigatório é dispensável
+      ou substituível pelo diferencial do aluno? Releia cada ativo de
+      `ativos_marketing_sexys` isoladamente com essa lente — um ativo pode
+      passar no teste de "narrativa, não credencial" (Etapa 9) e ainda
+      assim minimizar risco real se a frase de exemplo não deixar claro
+      que o cuidado profissional completo continua acontecendo sempre.
+      Reformule qualquer item que falhar aqui antes de seguir, mesmo que
+      isso enfraqueça o gancho.
 - [ ] **Fidelidade ao `angulo_escolhido`, sem inventar produto novo:** a
       promessa final ainda é sobre o mesmo produto e situação real
       levantados nas Etapas 3-5, só destacando o ângulo escolhido no Passo 0
@@ -1223,18 +1228,18 @@ relembrar a regra exata do pilar em questão:
 - [ ] **Nada de método/processo sendo vendido** — releia com o formato em
       mente: às vezes um processo "escapa" disfarçado de resultado quando o
       formato é Curso ou Formação.
-- [ ] **Ativos de marketing são específicos, não genéricos:** cada item de
-      `ativos_marketing_sexys` (Etapa 10) nomeia um elemento concreto do
-      produto do aluno e explica por que ele prova a promessa/pilar —
-      nenhum item pode ser conselho genérico do tipo "use prova social".
-- [ ] **Ativos coerentes com o público-alvo real** (`publico_promessa`,
-      Etapa 5) — não só coerentes com o pilar/mecanismo em abstrato.
-- [ ] **Ativos vêm de fatos-fonte distintos, não do mesmo fato reembalado**
-      (ver teste de origem na Etapa 10): nomeie o fato-fonte bruto de cada
-      item da lista — se dois apontam para o mesmo evento/cliente/número só
-      formatado diferente (print, narrativa, contraste antes/depois do
-      mesmo caso), funde ou corta um, mesmo que isso deixe a lista com
-      menos de 3 itens.
+- [ ] **Cada ativo é narrativa em parágrafo corrido que reforça a
+      `nova_oportunidade`** — nomeia a categoria em linguagem natural,
+      explica o porquê, dá instrução prática executável; nunca prova/
+      print/depoimento exibido cru, nunca campos rotulados, nunca conselho
+      genérico tipo "use prova social" (formato e regras:
+      `ativos-gerador.md`). E coerente com o `publico_promessa` real, não
+      só com o pilar em abstrato.
+- [ ] **Usos múltiplos do mesmo fato-fonte são legítimos — nunca corte por
+      "duplicidade"** (regra vigente de `ativos-gerador.md`); mas dois
+      itens que fazem a MESMA afirmação só reescrita são um uso só —
+      funda-os. Se fundir levar a lista abaixo do piso de 2, use a seção
+      de sugestões de `ativos-gerador.md` em vez de forçar ativo fraco.
 - [ ] **Fatos do público, cruzados, ainda são plausíveis** (ver Etapa 5
       Passo 8): nenhuma combinação de papel/resultado declarado do público
       contradiz, por definição ou por plausibilidade de mercado, outro fato
@@ -1251,15 +1256,14 @@ relembrar a regra exata do pilar em questão:
       propor, só por `pontuacao_pilares_antes` sustentar a dispensa.
 - [ ] **Se houver diagnóstico do Dr. House anexado, a promessa responde aos
       achados críticos/estruturais e às perguntas em aberto dele.**
-- [ ] **Bio coerente com o `pilar_dominante`:** `bio_instagram` (Etapa 11)
-      respeita o limite de 150 caracteres (máximo 3 linhas), o Bloco 5 usa
-      o Sinal de Competitividade de maior peso disponível no dossiê (não
-      um binário fixo de 2 opções), a escolha entre caso nomeado e número
-      agregado respeita o `pilar_dominante` (nomeado vence em Vaidade/
-      Soberba/Inveja — mercado de exclusividade; agregado pode vencer em
-      Avareza ou prova de confiabilidade/redução de risco), a prova nunca
-      é história/depoimento narrado (sempre frase única e afiada), e não
-      confunde resultado da criadora com resultado de cliente?
+- [ ] **Bio e Destaques entregues como a Etapa 11 fechou:** versão
+      aprovada pelo Verificador, ou v2 marcada "a confirmar" com a crítica
+      junto — nunca reprovado apresentado como aprovado. A coerência fina
+      (150 caracteres, escolha do Sinal de Competitividade, nomeado vs.
+      agregado pelo pilar, prova nunca narrada, resultado da criadora ≠
+      de cliente) já foi testada lá — não re-audite de memória aqui; em
+      dúvida sobre uma regra exata, a fonte é `bio-gerador.md`, nunca uma
+      reformulação sua.
 - [ ] **Nenhum paralelismo de oposição em nenhum texto final** (promessa,
       headlines, ativos, bio) — releia cada um: corta ao meio numa vírgula/
       conjunção e cada metade sozinha ainda faz sentido em oposição à
@@ -1289,65 +1293,25 @@ refine e gere a página de novo antes de gravar.
 
 ## IDENTIDADE VISUAL — Página de resultado
 
-Esta seção é sempre usada (Etapas 7 e 10) — o resultado desta skill é sempre
-entregue como página HTML, nunca como texto puro na conversa.
+Esta seção é sempre usada (Etapas 8 e 13) — o resultado desta skill é sempre
+entregue como página HTML, nunca como texto puro na conversa, **nunca como
+Claude Artifact em nenhuma hipótese** (ver Etapa 8).
 
-- **Template-base:** `~/.claude/skills/sexy-triwer/assets/template-oportunidade-sexy.html`.
-  Parta sempre desse arquivo — nunca gere a página do zero. **Copie o
-  arquivo via comando de terminal para o destino final — não o leia
-  inteiro.** O bloco `<style>` tem centenas de linhas de CSS que não
-  precisam entrar no contexto; o comando de cópia duplica tudo sem custo de
-  token. Depois de copiado, edite só os placeholders `[[CAMPO]]` no arquivo
-  de destino.
-- **Fidelidade obrigatória:** o bloco `<style>` do template (cores, fontes,
-  nomes de classe) é a identidade visual Triwer, a mesma usada pelo
-  `dr-house-triwer`. Nunca altere variáveis de cor, fontes, espaçamento ou
-  crie classes novas. Só o conteúdo textual muda.
-- **Preenchimento:** substitua cada `[[CAMPO]]` pelos dados desta sessão
-  (mesmos campos da Etapa 13, incluindo `[[FORMATO_PRODUTO]]` e
-  `[[PAPEL_ESTEIRA]]` definidos na Etapa 3, e `[[PILAR_DOMINANTE]]`,
-  `[[URGENCIA_COMPRA]]` e `[[NIVEL_CONSCIENCIA]]` definidos na Etapa 5).
-  Repita `<li>` e blocos `.achado.forte` quantas vezes forem necessários
-  para as dores/desejos e provas coletadas. Se não houver prova social
-  coletada nesta sessão, remova a seção `#provas` inteira em vez de deixar
-  o campo vazio.
-- **`[[VERSAO_SKILL]]` no rodapé:** preencha sempre com o conteúdo do
-  arquivo `VERSION` desta skill lido no BOOT (Passo 0) — não com a versão
-  que o aluno pensa ter, nem com um número fixo. Isso permite identificar,
-  em qualquer output reportado depois, se o problema já foi corrigido em
-  versão mais nova ou se o aluno estava desatualizado no momento da geração.
-- **Headlines (`#headlines`):** cada uma preenche dois campos separados,
-  não um só — `[[HEADLINE_N_MODELO]]` (ex.: "MH004 — Autoridade:") e
-  `[[HEADLINE_N_TEXTO]]` (o texto da headline entre aspas). Nunca junte os
-  dois num campo único de novo — o `<li>` do `.numlist` depende dessa
-  separação em dois elementos (`.headline-modelo` e `.headline-texto`) para
-  renderizar cada um em sua própria linha.
-- **Seção `#subpromessa` é condicional:** só inclua no HTML final se
-  `papel_esteira` = Estrela (a Etapa 6 exige subpromessa nesse caso). Nos
-  demais papéis, remova a `<section id="subpromessa">` inteira **e** o link
-  correspondente no `<nav class="anchor-bar">` — nunca deixe link morto no
-  menu nem seção com `[[SUBPROMESSA]]` vazio.
-- **`[[BIO_INSTAGRAM]]`:** preenche com `bio_instagram` (Etapa 11) — a
-  bio aprovada, ou, se reprovada 2x (Etapa 11, passo 6), a v2 com aviso
-  visível de "a confirmar com você" e a crítica do Verificador junto,
-  nunca apresentada como se fosse a versão final. **Pendente de
-  template:** o `assets/template-oportunidade-sexy.html` ainda não tem
-  este placeholder nem a seção visual correspondente — até esse trabalho
-  de template ser feito, inclua a bio como bloco de texto simples dentro
-  de `#provas` ou
-  seção equivalente já existente no template, sem inventar CSS novo.
-- **Nunca deixe `[[CAMPO]]` sem preencher no HTML final** — é um marcador de
-  template, não um placeholder visível para o aluno.
-- **Entrega:** gere um HTML autocontido (sem dependências externas além das
-  fontes do Google Fonts já referenciadas) e entregue sempre como arquivo
-  real — nunca como Claude Artifact, em nenhuma hipótese.
+Leia `references/preenchimento-html.md` quando chegar a hora de montar o
+HTML final — template-base, regra de fidelidade visual, e o preenchimento
+campo a campo de cada placeholder `[[CAMPO]]` (ativos, headlines,
+subpromessa condicional, bio, destaques, versão no rodapé). **O hero de
+página de vendas (Etapa 12, `hero_pagina_vendas`) ainda não tem seção
+correspondente no template HTML** — apresente-o só no resumo da Etapa 14,
+nunca invente um bloco novo no HTML sem esse placeholder existir
+fisicamente no template.
 
 ---
 
-## ETAPA 14 — Gravar no Notion
+## ETAPA 15 — Gravar no Notion
 
 Após aprovação, escreva na subpágina de `produto_atual` (dentro da database
-"Produtos") um bloco com a mesma estrutura de campos da Etapa 13 (título
+"Produtos") um bloco com a mesma estrutura de campos da Etapa 14 (título
 "Oportunidade Sexy", seguido dos campos listados) — **sempre como texto
 formatado**: o Notion não renderiza o CSS da página, então mesmo o aluno
 tendo recebido a versão em página, o que vai para o Notion é o conteúdo
@@ -1363,7 +1327,7 @@ Salvo! A Oportunidade Sexy de [produto_atual] está registrada no seu Notion.
 
 ---
 
-## ETAPA 15 — Atualizar memória e fechar
+## ETAPA 16 — Atualizar memória e fechar
 
 Atualize `~/.claude/skills/sexy-triwer/memoria.md`:
 
@@ -1438,19 +1402,16 @@ inteira, sem etapa dona:
       não há dado, a nota é sempre 0 — não ter dado é um dado, o produto
       genuinamente não ativa aquele gatilho hoje.
 12. **Paralelismo de texto é proibido em qualquer output final desta
-    skill** (promessa central — Etapa 6, headlines — Etapa 9, ativos de
-    marketing — Etapa 10, bio — Etapa 11) — **principalmente o de
-    oposição**: nunca escreva uma frase na estrutura "X, mas Y" / "não é
-    A, é B" / qualquer construção espelhada onde a força do texto depende
-    da simetria entre duas metades em vez da especificidade do conteúdo.
-    Mesma família do teste de "travessões encadeados são sintoma de copy
-    montada" (Bateria 3, Etapa 6, teste 10) — mas mais amplo: travessão é
-    um sintoma específico, paralelismo de oposição é o padrão inteiro por
-    trás dele. Teste: se a frase corta ao meio numa vírgula/conjunção e
+    skill** (promessa — Etapa 6, ativos — Etapa 9, headlines — Etapa 10,
+    bio e destaques — Etapa 11, hero de página de vendas — Etapa 12) —
+    **principalmente o de oposição**: nunca
+    escreva frase na estrutura "X, mas Y" / "não é A, é B" / construção
+    espelhada onde a força depende da simetria entre metades em vez da
+    especificidade do conteúdo. Travessões encadeados (Bateria 3, teste
+    10) são um sintoma disso; o paralelismo de oposição é o padrão inteiro
+    por trás. Teste: se a frase corta ao meio numa vírgula/conjunção e
     cada metade sozinha ainda faz sentido em oposição à outra, é
-    paralelismo — reescreva como frase única, sem contraste espelhado
-    (correção de Milena, 2026-07-15, aplicada primeiro na Etapa 11/Bio e
-    estendida aqui para toda a skill).
+    paralelismo — reescreva como frase única, sem contraste espelhado.
 
 ---
 
@@ -1487,52 +1448,51 @@ inteira, sem etapa dona:
 │   │   ├── mentoria-individual.md
 │   │   ├── consultoria.md
 │   │   └── ebook.md                         ← ler o arquivo individual só quando o formato for identificado
-│   ├── manual-headline.md                   ← ler na Etapa 9 (5 modelos MH, DOPA, testes de qualidade)
+│   ├── manual-headline.md                   ← ler na Etapa 10, só pelo subagente Gerador (modelos MH, DOPA, testes de qualidade, exemplos reais)
 │   ├── bonus.md                              ← ler na Etapa 7 (Âncora, Gula, Reativo — exemplos reais e teste de dispensa)
 │   ├── bio-gerador.md                        ← ler na Etapa 11, só pelo subagente Gerador
 │   ├── bio-verificador.md                    ← ler na Etapa 11, só pelo subagente Verificador (nunca vê bio-gerador.md)
+│   ├── destaques-gerador.md                  ← ler na Etapa 11, só pelo subagente Gerador
+│   ├── destaques-verificador.md              ← ler na Etapa 11, só pelo subagente Verificador (nunca vê destaques-gerador.md)
+│   ├── ativos-gerador.md                     ← ler na Etapa 9, só pelo subagente Gerador
+│   ├── ativos-verificador.md                 ← ler na Etapa 9, só pelo subagente Verificador (nunca vê ativos-gerador.md)
+│   ├── formatos-de-conteudo.md               ← ler na Etapa 9, só pelo Gerador, quando faltar veículo/formato pronto pra uma categoria
+│   ├── headlines-verificador.md              ← ler na Etapa 10, só pelo subagente Verificador (nunca vê manual-headline.md)
+│   ├── hero-gerador.md                       ← ler na Etapa 12, só pelo subagente Gerador
+│   ├── hero-verificador.md                   ← ler na Etapa 12, só pelo subagente Verificador (nunca vê hero-gerador.md)
+│   ├── bateria-julgamento.md                 ← ler na Etapa 6, Passo 2 (bateria tripla Verdade/Desejo/Formulação)
+│   ├── avaliador-hub.md                      ← ler na Etapa 6, Passo 5, pelo subagente avaliador do documento-hub
+│   ├── preenchimento-html.md                 ← ler na Etapa 8/14 (preenchimento do template HTML final)
+│   ├── atualizacao-versao.md                 ← ler no BOOT, só se a versão remota for mais nova
 │   └── notion-setup.md                      ← ler só se a conexão do Notion falhar no BOOT
 └── memoria.md                            ← criado automaticamente no primeiro uso
 ```
+
+Os comandos abaixo copiam `assets/` e `references/` **inteiros, de forma
+recursiva** — nunca voltar ao modelo de lista arquivo a arquivo, que já
+causou instalação incompleta mais de uma vez (arquivo novo esquecido na
+lista). A remoção prévia das duas pastas no destino garante que arquivo
+revogado não sobrevive de instalações antigas; `memoria.md` fica na raiz e
+é preservado.
 
 ### Mac/Linux
 
 ```bash
 BASE=~/.claude/skills/sexy-triwer
-mkdir -p $BASE/assets $BASE/references/pilares-do-desejo $BASE/references/tipos-de-produto
-
-cp SKILL.md $BASE/
-cp VERSION $BASE/
-cp assets/template-oportunidade-sexy.html $BASE/assets/
-cp references/esteira.md $BASE/references/
-cp references/pilares-do-desejo/*.md $BASE/references/pilares-do-desejo/
-cp references/tipos-de-produto/*.md $BASE/references/tipos-de-produto/
-cp references/manual-headline.md $BASE/references/
-cp references/bonus.md $BASE/references/
-cp references/bio-gerador.md $BASE/references/
-cp references/bio-verificador.md $BASE/references/
-cp references/notion-setup.md $BASE/references/
+mkdir -p "$BASE"
+cp SKILL.md VERSION "$BASE"/
+rm -rf "$BASE/assets" "$BASE/references"
+cp -r assets references "$BASE"/
 ```
 
 ### Windows
 
 ```powershell
 $BASE = "$env:USERPROFILE\.claude\skills\sexy-triwer"
-New-Item -ItemType Directory -Force -Path "$BASE\assets"
-New-Item -ItemType Directory -Force -Path "$BASE\references\pilares-do-desejo"
-New-Item -ItemType Directory -Force -Path "$BASE\references\tipos-de-produto"
-
-Copy-Item SKILL.md $BASE\
-Copy-Item VERSION $BASE\
-Copy-Item assets\template-oportunidade-sexy.html "$BASE\assets\"
-Copy-Item references\esteira.md "$BASE\references\"
-Copy-Item references\pilares-do-desejo\*.md "$BASE\references\pilares-do-desejo\"
-Copy-Item references\tipos-de-produto\*.md "$BASE\references\tipos-de-produto\"
-Copy-Item references\manual-headline.md "$BASE\references\"
-Copy-Item references\bonus.md "$BASE\references\"
-Copy-Item references\bio-gerador.md "$BASE\references\"
-Copy-Item references\bio-verificador.md "$BASE\references\"
-Copy-Item references\notion-setup.md "$BASE\references\"
+New-Item -ItemType Directory -Force -Path $BASE | Out-Null
+Copy-Item SKILL.md,VERSION $BASE\
+Remove-Item -Recurse -Force "$BASE\assets","$BASE\references" -ErrorAction SilentlyContinue
+Copy-Item -Recurse assets,references $BASE\
 ```
 
 ### Após instalar

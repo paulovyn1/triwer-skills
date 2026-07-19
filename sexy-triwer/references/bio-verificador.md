@@ -9,7 +9,7 @@ contexto — a mesma coisa que um seguidor real veria ao abrir o perfil.
 **Por quê:** se o Verificador visse as regras do Gerador, pararia de
 simular "aluno real que não sabe de nada disso" e passaria a auditar
 processo — perderia exatamente o ganho que motiva ter dois subagentes
-separados (ver `Verificação por interpretação revela mais que nota`).
+separados.
 
 ## O que você recebe
 

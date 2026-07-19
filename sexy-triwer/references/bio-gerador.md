@@ -24,12 +24,11 @@ A estrutura de 5 blocos + 3 testes nomeados vem da aula real "05 — Viés
 na vitrine" do Sim Inevitável, não é invenção desta skill — **nunca
 reformule os blocos ou nomes de teste sem reconferir contra essa aula.**
 O Bloco 5 (prova de autoridade) usa a taxonomia dos **5 Sinais de
-Competitividade** (já coletados/observáveis em outra etapa desta mesma
-skill, ver `Os 5 sinais de competitividade que decidem se o produto
-precisa de reconstrução antes do público` no vault de metodologia) em vez
-do binário A/B da aula — a aula fala só de A/B porque seu escopo é bio
-isoladamente; a skill tem acesso a um dado mais rico, coletado em outra
-etapa da mesma investigação, e deve usá-lo. As regras técnicas de
+Competitividade** (observáveis nos fatos já coletados nas Etapas 2-5 e nos
+`ativos_marketing_sexys`, enviados no pacote de entrada) em vez do binário
+A/B da aula — a aula fala só de A/B porque seu escopo é bio isoladamente;
+a skill tem um dado mais rico, coletado na mesma investigação, e deve
+usá-lo. As regras técnicas de
 julgamento (seção seguinte) são complementares — filtram a qualidade de
 cada bloco depois de escrito, nunca substituem a estrutura de 5 blocos.
 
@@ -84,9 +83,7 @@ outro). Certo: "Nunca mais coma por impulso e emagreça naturalmente"
 linha em voz alta sem pausa — se soa como duas frases que alguém diria
 em momentos diferentes, reescreva com conectivo unindo numa oração só.
 Ponto final só separa LINHAS diferentes da bio, nunca aparece NO MEIO de
-uma linha que já fundiu blocos (ver `Blocos fundidos na mesma linha
-viram uma única oração, nunca duas frases coladas por ponto` no vault de
-metodologia).
+uma linha que já fundiu blocos.
 
 **Nunca use a construção "hora de/do/da + substantivo + verbo no
 infinitivo" ao fundir blocos — é sistematicamente agramatical nessa
@@ -98,9 +95,7 @@ inserir o reflexivo — "hora do seu perfil SE provar"; (b) preferível na
 maioria dos casos — abandonar "hora de" e conjugar o verbo direto no
 presente: "seu perfil já prova isso" / "agora seu perfil prova com suas
 histórias". Prefira a rota (b) por padrão — menos palavras, verbo ativo,
-soa mais como fala real (ver `A construção "hora de + substantivo +
-infinitivo cru" quebra a frase ao fundir blocos` no vault de
-metodologia).
+soa mais como fala real.
 
 ### Bloco 1 — Nome pesquisável
 
@@ -137,10 +132,9 @@ alta o bastante pra nomear categoria. Ex.: quem quer aprender a fazer
 joia busca "Designer de Joias" ou "Joalheria" (profissão/resultado);
 "Modelagem em Cera" é a técnica interna que o produto ensina, jargão de
 processo que só importa depois que o cliente já decidiu a categoria —
-nunca pertence ao nome (ver `Nome pesquisável usa a profissão-resultado,
-nunca a técnica ou método específico` no vault de metodologia). Teste:
-essa palavra é o que o cliente É/QUER SER, ou é COMO o produto entrega
-isso por dentro? Se for o "como", não vai no Bloco 1.
+nunca pertence ao nome. Teste: essa palavra é o que o cliente É/QUER SER,
+ou é COMO o produto entrega isso por dentro? Se for o "como", não vai no
+Bloco 1.
 
 Erro comum: usar a categoria profissional correta e verificável (não é
 jargão, não cai na regra 11) só porque parece "mais profissional", sem
@@ -149,9 +143,7 @@ categoria. Isso também cria redundância se a mesma categoria aparecer de
 novo no Bloco 5 como credencial (ex.: nome = "Design de Interiores | Bia"
 + Bloco 5 = "Formada em Design de Interiores" repete a mesma palavra 2x
 sem ganhar nada) — sinal de que o nome escolheu a categoria num público
-que ainda não pensa nesses termos (ver `Nome pesquisável usa categoria
-profissional só quando o nível de consciência do público já a reconhece`
-no vault de metodologia).
+que ainda não pensa nesses termos.
 
 **O Bloco 1 é SÓ [palavra de busca calibrada acima] + marca/nome — nunca
 acrescente um segundo qualificador tentando embutir o diferencial ali
@@ -161,9 +153,7 @@ Marina" — certo). O diferencial já tem lugar certo, os Blocos 2-4; forçar
 um adjetivo de diferencial no nome infla o campo sem ganhar busca real,
 porque ninguém digita o adjetivo junto com a categoria/sintoma. Teste: se
 a palavra extra não é literalmente o que o cliente digitaria JUNTO com a
-categoria/sintoma na busca do Instagram, ela não pertence ao Bloco 1 (ver
-`Bloco 1 fica só categoria + marca, o diferencial mora nas linhas
-seguintes` no vault de metodologia).
+categoria/sintoma na busca do Instagram, ela não pertence ao Bloco 1.
 
 Exemplo real forte: "Conteúdo que vende | Triwer" — pesquisa por
 "conteúdo" já entrega o perfil.
@@ -341,9 +331,9 @@ Mais 3 campos de conclusão já fechada: `diferencial_produto`,
 `nova_oportunidade` (Etapa 6) — alimenta direto os Blocos 3 e 4, é o
 insumo primário destes blocos, não um pré-requisito externo. Se existir,
 inclua também o viés fechado em `vies-triwer`/`prisma-si` (opcional,
-reforça o Bloco 4) e os **5 Sinais de Competitividade** já observados no
-dossiê do produto (Etapa de investigação de competitividade) — alimentam
-o Bloco 5.
+reforça o Bloco 4) e os **5 Sinais de Competitividade** observáveis nos
+fatos já coletados (credenciais da Etapa 2, diferencial da Etapa 4,
+`ativos_marketing_sexys` da Etapa 10) — alimentam o Bloco 5.
 
 ## Regras técnicas de julgamento (filtram cada bloco depois de escrito)
 
@@ -360,40 +350,29 @@ pergunta aberta tipo "quer ajustar?".
    número natural. Vaidade/Soberba/Ira/Inveja geralmente não — ali o
    tangível é cena ou capacidade, não quantidade.
 3. **O Sinal de Competitividade de maior peso disponível vence o de
-   menor peso** no Bloco 5 (ordem: sinais que deu certo > estilo de vida
-   > validação externa > volume percebido > resultado quantificável) —
+   menor peso** no Bloco 5 (ordem de peso: seção do Bloco 5 acima) —
    nunca escolha o sinal mais fácil/rápido de escrever (ex.: número
-   agregado) quando um sinal de peso maior (ex.: caso nomeado, cliente
-   reconhecido, validação externa) também está disponível no dossiê.
+   agregado) quando um de peso maior também está disponível no dossiê.
    **Dentro do mesmo sinal, a escolha entre prova nomeada específica
    (QUEM validou) e número agregado (QUANTOS validaram) depende do
    `pilar_dominante`, não é regra cega:**
-   - **Pilar dominante Vaidade, Soberba ou Inveja** (mercado vendido por
-     exclusividade — o comprador quer acesso a algo que nem todo mundo
-     tem, não quer ser "mais um"): nome/caso nomeado/ineditismo vence
-     número agregado, mesmo quando o agregado é grande e real. Um número
-     alto aqui pode até enfraquecer a prova (sinaliza "qualquer um
-     entra"). Exemplo real da aula: "1ª Palestrante de Liderança
-     Feminina" vence "+50.000 alunos" — a cliente não busca quantidade de
-     palcos, busca ser vista, subir a UM palco que nem todo mundo sobe.
-   - **Pilar dominante Avareza, ou prova que serve para reduzir medo/
-     risco** (mercado vendido por confiabilidade/replicabilidade — o
-     comprador quer evidência de que funciona sempre, não é sorte de um
-     caso isolado): número agregado pode vencer nome isolado. Exemplo
-     real: "+1.100 investidores" (Rafael Toniolo), "+300 motoristas
-     regularizados" (Adriano Mesquita) — aqui volume é a prova certa.
-   Confira `pilar_dominante` antes de aplicar "nomeado > agregado" como
-   padrão fixo — ver `Exclusividade vence volume no Bloco 5 quando o
-   pilar dominante é Vaidade/Soberba/Inveja` no vault de metodologia.
-   **Exceção condicional, independente do pilar:** a precedência de sinal
-   de maior peso só vale se ele conseguir ser formulado como frase única,
-   direta e útil (ver regra da seção do Bloco 5 acima) — nunca como
-   história/depoimento narrado. Se o único fato disponível para o sinal
-   de maior peso só rende narrativa (não uma afirmação afiada), e existe
-   uma credencial formal simples de menor peso mas já pronta (ex.:
-   "Formada em Design de Interiores"), a credencial formal simples vence
-   — bio bem formulada com prova "mais fraca" é melhor que bio "mais
-   forte" na teoria mas capenga na prática.
+   - **Vaidade, Soberba ou Inveja** (mercado de exclusividade — o
+     comprador não quer ser "mais um"): caso nomeado/ineditismo vence
+     número agregado, mesmo grande e real — número alto aqui pode até
+     enfraquecer a prova (sinaliza "qualquer um entra"). Exemplo real da
+     aula: "1ª Palestrante de Liderança Feminina" vence "+50.000 alunos"
+     — a cliente busca subir a UM palco que nem todo mundo sobe.
+   - **Avareza, ou prova que reduz medo/risco** (mercado de
+     confiabilidade/replicabilidade): número agregado pode vencer nome
+     isolado. Exemplos reais: "+1.100 investidores" (Rafael Toniolo),
+     "+300 motoristas regularizados" (Adriano Mesquita).
+   **Exceção condicional, independente do pilar:** a precedência só vale
+   se o sinal de maior peso couber em frase única, direta e útil — nunca
+   como história/depoimento narrado. Se o único fato do sinal mais forte
+   só rende narrativa e existe uma credencial formal simples já pronta
+   (ex.: "Formada em Design de Interiores"), a credencial simples vence —
+   bio bem formulada com prova "mais fraca" é melhor que bio "mais forte"
+   na teoria mas capenga na prática.
 4. **Nunca confundir de QUEM é o resultado** — número da própria criadora
    (credencial) vs. número de cliente (prova social) precisam estar
    explicitamente diferenciados, nunca ambíguos.
@@ -513,9 +492,7 @@ Nunca mais cobre barato. Acho com você o PREÇO PERFEITO pra vender muito e ain
 
 **Marina** (reescrita direta por Milena, 2026-07-16, corrigindo uma
 tentativa do Gerador que soava conceitual/propaganda vazia em vez de
-oportunidade sentida — ver a comparação completa em `A frase de viés
-precisa soar como oportunidade sentida, não conceito abstrato de
-exclusividade` no vault de metodologia):
+oportunidade sentida):
 ```
 Nutricionista | Marina
 Nunca mais coma por impulso e emagreça naturalmente

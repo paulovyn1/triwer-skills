@@ -16,7 +16,7 @@ description: >
   nomear produtos, escrever carrosséis ou campanhas — escopo de descoberta e
   validação da promessa.
 compatibility: Claude Desktop, Claude Code, claude.ai
-metadata: "v2.6.0 — julho 2026. Histórico completo de todas as versões em CHANGELOG.md (sibling deste arquivo) — não duplicado aqui para não fazer este campo crescer sem limite a cada versão (isso já causou a v2.1.1, quando o metadata + description passaram do limite de 1024 caracteres do claude.ai e bloquearam instalação)."
+metadata: "v2.6.1 — julho 2026. Histórico completo de todas as versões em CHANGELOG.md (sibling deste arquivo) — não duplicado aqui para não fazer este campo crescer sem limite a cada versão (isso já causou a v2.1.1, quando o metadata + description passaram do limite de 1024 caracteres do claude.ai e bloquearam instalação)."
 ---
 
 # Sexy Triwer

@@ -18,6 +18,20 @@ frontmatter do `SKILL.md` (não duplicado aqui).
 
 ---
 
+## 2.6.1 - 2026-07-20
+- **`references/preenchimento-html.md` — instrução de montagem do HTML
+  agora cobre os dois casos de disponibilidade de execução de código**, não
+  só o caminho feliz (Claude Code/Desktop com terminal). Antes, o arquivo
+  só descrevia "copie via comando de terminal" sem alternativa — em
+  qualquer ambiente sem essa capability ativada (o que pode acontecer no
+  claude.ai, se a capability de execução de código/criação de arquivos
+  estiver desligada), a instrução simplesmente não era executável. Agora:
+  com execução de código, segue a cópia por terminal sem ler o `<style>`
+  inteiro; sem execução de código, lê o template uma vez mas trata o
+  `<style>` como conteúdo opaco a preservar byte a byte, nunca reescrito.
+
+---
+
 ## 2.6.0 - 2026-07-20
 - **Contrato de dados formalizado para o novo output HTML** — todos os
   objetos e coleções que o template já usa (`perfil_criador`,

@@ -8,11 +8,35 @@ REGRAS ESTRUTURAIS no SKILL.md).
 ## Template-base
 
 `~/.claude/skills/sexy-triwer/assets/template-oportunidade-sexy.html`. Parta
-sempre desse arquivo — nunca gere a página do zero. **Copie o arquivo via
-comando de terminal para o destino final — não o leia inteiro.** O bloco
-`<style>` tem centenas de linhas de CSS que não precisam entrar no contexto;
-o comando de cópia duplica tudo sem custo de token. Depois de copiado, edite
-só os placeholders `[[CAMPO]]` no arquivo de destino.
+sempre desse arquivo — nunca gere a página do zero, em nenhum ambiente.
+
+**Com execução de código disponível** (Claude Code, Claude Desktop, ou
+claude.ai com a capability de execução de código/criação de arquivos
+ativada — o ambiente roda a skill dentro de um sandbox com acesso real ao
+`assets/template-oportunidade-sexy.html`, igual nos três produtos, desde
+que a capability esteja ligada): copie o arquivo via comando de
+terminal/script para o destino final — **não o leia inteiro antes de
+copiar.** O bloco `<style>` tem centenas de linhas de CSS que não precisam
+entrar no contexto; o comando de cópia duplica tudo sem custo de token.
+Depois de copiado, edite só os placeholders `[[CAMPO]]` no arquivo de
+destino (find-and-replace direto no arquivo, sem reabrir o `<style>` pra
+revisão).
+
+**Sem execução de código disponível** (a capability estar desligada em
+algum ambiente, ou ter caído no meio de uma sessão): não há como copiar um
+arquivo em disco sem passar pelo contexto da conversa. Nesse caso, leia o
+template uma única vez, mas trate o bloco `<style>` como **conteúdo opaco a
+preservar byte a byte** — nunca o reescreva, resuma ou "explique" de volta.
+Gere a página de saída como texto/código para o aluno copiar e salvar
+manualmente (mesma regra de "nunca vire Artifact" da Etapa 8), fazendo só a
+substituição literal de cada `[[CAMPO]]` pelo valor correspondente,
+preservando o restante do arquivo — HTML, `<style>` e `<script>` —
+caractere por caractere. Se o ambiente também não permitir gerar um bloco
+de código desse tamanho de uma vez, sinalize a limitação ao aluno em vez de
+reconstruir o template de memória.
+
+Em qualquer um dos dois caminhos, a regra abaixo (Fidelidade obrigatória)
+vale sem exceção.
 
 ## Fidelidade obrigatória
 

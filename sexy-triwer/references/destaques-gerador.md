@@ -8,10 +8,10 @@ e passaria a auditar processo — o mesmo motivo que já separa Gerador e
 Verificador na Etapa 11 (Bio).
 
 **Leia este arquivo na Etapa 11 (Aplicação Prática)**, como segundo
-artefato, depois de já ter `ativos_marketing_sexys` (Etapa 10) — mas os
+artefato, depois de já ter `ativos_marketing_sexys` (Etapa 9) — mas os
 candidatos a Destaque não vêm só dali. Ver "Onde procurar candidatos"
 abaixo: candidatos fortes aparecem em qualquer uma das Etapas 4, 5, 6 e
-10, não só na Etapa 10.
+9, não só na Etapa 9.
 
 ## Fonte deste método
 
@@ -258,7 +258,7 @@ genérico/tendência, não de uma história específica de um único evento.
 estrutura de equação.
 
 **Caso Marina** (tarot individual): dois destaques aprovados, os dois via
-B (fato do público), nenhum veio da Etapa 10 (Ativos de Marketing) —
+B (fato do público), nenhum veio da Etapa 9 (Ativos de Marketing) —
 reforça por que a Via B e a releitura completa da Etapa 5 importam tanto
 quanto os Ativos.
 - Fato: pensar demais sozinha deixa a cliente mais perdida, não mais

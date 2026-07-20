@@ -30,9 +30,9 @@ contra o hub inteiro, não só contra o público:
 - O que o público deseja e o que não gosta, claramente definido —
   calibração transversal pras 4 categorias de Ativos.
 - Ao menos 1 risco de posicionamento (Y) identificado — se a Pergunta 4 da
-  Etapa 10 ainda não rodou, sinalize como pendência, não como falha.
+  Etapa 9 ainda não rodou, sinalize como pendência, não como falha.
 - Ao menos 1 fato bruto de qualquer esfera (entrega, gestão, pessoal,
-  vivência) — se as Perguntas da Etapa 10 ainda não rodaram, idem:
+  vivência) — se as Perguntas da Etapa 9 ainda não rodaram, idem:
   pendência, não falha.
 
 ## Checagem 3 — Recruzamento antes de declarar lacuna

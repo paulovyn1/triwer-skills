@@ -16,7 +16,7 @@ description: >
   nomear produtos, escrever carrosséis ou campanhas — escopo de descoberta e
   validação da promessa.
 compatibility: Claude Desktop, Claude Code, claude.ai
-metadata: "v2.3.0 — julho 2026. Histórico completo de todas as versões em CHANGELOG.md (sibling deste arquivo) — não duplicado aqui para não fazer este campo crescer sem limite a cada versão (isso já causou a v2.1.1, quando o metadata + description passaram do limite de 1024 caracteres do claude.ai e bloquearam instalação)."
+metadata: "v2.6.0 — julho 2026. Histórico completo de todas as versões em CHANGELOG.md (sibling deste arquivo) — não duplicado aqui para não fazer este campo crescer sem limite a cada versão (isso já causou a v2.1.1, quando o metadata + description passaram do limite de 1024 caracteres do claude.ai e bloquearam instalação)."
 ---
 
 # Sexy Triwer
@@ -59,16 +59,16 @@ Vários pontos adiante pedem uma segunda leitura sem o apego de quem acabou
 de produzir o conteúdo — é assim que se pega uma headline fraca, um ativo
 genérico ou uma promessa que soa bem mas não aguenta escrutínio. Sempre que
 uma etapa disser "aplique a verificação crítica" (bateria da Etapa 6, gate
-da Etapa 14): se o ambiente tiver a ferramenta `Agent`/`Task`, delegue a um
+da Etapa 15): se o ambiente tiver a ferramenta `Agent`/`Task`, delegue a um
 subagente à parte — ele não tem o contexto emocional de quem escreveu e
 corta sem dó. Se não houver, faça você mesmo, deliberadamente lento e
 cético — nunca pule direto do rascunho para a apresentação.
 
 As etapas que produzem texto final (9 — ativos, 10 — headlines, 11 — bio e
-destaques, 12 — hero de página de vendas) usam a forma mais forte disso, o
-**protocolo Gerador/Verificador**. As regras abaixo valem para as cinco;
-cada etapa lista só o que é específico dela (pacote de entrada, arquivos,
-o que o Verificador testa):
+destaques, 12 — hero de página de vendas, 13 — simulação de ManyChat) usam
+a forma mais forte disso, o **protocolo Gerador/Verificador**. As regras
+abaixo valem para as seis; cada etapa lista só o que é específico dela
+(pacote de entrada, arquivos, o que o Verificador testa):
 
 1. **Duas instâncias, papéis nunca fundidos.** O Gerador lê só o arquivo
    `*-gerador.md` da etapa; o Verificador lê só o `*-verificador.md` e
@@ -90,8 +90,48 @@ o que o Verificador testa):
    automática.
 4. **Modo sem aluno ao vivo** (ver definição na Etapa 5): v2 reprovada não
    trava a etapa — entregue-a marcada como **a confirmar**, com a crítica
-   do Verificador junto. No resumo (Etapa 14), nunca apresente artefato
+   do Verificador junto. No resumo (Etapa 15), nunca apresente artefato
    reprovado como se fosse aprovado.
+5. **Parecer do Verificador vira dado persistido, não só decisão
+   descartada após o ciclo.** Das seis etapas do protocolo, quatro têm
+   bloco recolhível de feedback no HTML final — `nova_oportunidade` (Etapa
+   6), `bio_instagram`/`destaques_instagram` (Etapa 11, um parecer só pros
+   dois), `hero_pagina_vendas` (Etapa 12) e `manychat_simulado` (Etapa
+   13). Guarde o parecer da rodada final (a que decidiu aprovado ou "a
+   confirmar") nesse formato:
+
+   ```json
+   {
+     "feedbacks_verificadores": {
+       "nova_oportunidade": { "status": "aprovado | a_confirmar", "parecer": "", "tentativas": 0 },
+       "bio_destaques": { "status": "aprovado | a_confirmar", "parecer": "", "tentativas": 0 },
+       "hero_pagina_vendas": { "status": "aprovado | a_confirmar", "parecer": "", "tentativas": 0 },
+       "manychat": { "status": "aprovado | a_confirmar", "parecer": "", "tentativas": 0 }
+     }
+   }
+   ```
+
+   - Guarde um parecer curto mesmo quando aprovado — explique brevemente
+     por que passou (nunca só "aprovado"), pro aluno entender o padrão
+     aplicado, não só o resultado.
+   - Quando `a_confirmar`, preserve a crítica integral do Verificador,
+     exigida pela regra 4 acima — nunca resuma ou suavize a reprovação.
+   - `tentativas` é o número de rodadas Gerador→Verificador que de fato
+     rodaram (1 ou 2, nunca 3 — teto da regra 3).
+   - O parecer contém só conclusão, critérios aplicados e correções
+     necessárias — nunca raciocínio interno ou cadeia de pensamento do
+     Verificador exposta ao aluno.
+   - **Não crie `feedback_verificador_bonus` nem `feedback_verificador_ativos`
+     nem `feedback_verificador_headlines`** — Ativos (Etapa 9), Headlines
+     (Etapa 10) e Bônus (Etapa 7) não têm bloco de feedback correspondente
+     no template HTML hoje; o parecer desses continua interno (usado só
+     pra decidir aprovação), sem virar campo persistido.
+   - Alimenta `[[FEEDBACK_VERIFICADOR_NOVA_OPORTUNIDADE]]`,
+     `[[FEEDBACK_VERIFICADOR_BIO_DESTAQUES]]`,
+     `[[FEEDBACK_VERIFICADOR_HERO_PAGINA_VENDAS]]` e
+     `[[FEEDBACK_VERIFICADOR_MANYCHAT]]` no HTML — cada um dentro do
+     bloco recolhível `<details>` da seção correspondente, nunca exibido
+     aberto por padrão.
 
 ---
 
@@ -155,7 +195,7 @@ antes de continuar, para não repetir a investigação inteira.
 Crie agora uma subpágina dentro da subpágina de `produto_atual` (mesma
 estrutura Notion já usada por esta skill, nunca mecanismo paralelo),
 nomeada "Sexy — Rascunho de Sessão [data]". É rascunho de processo, não
-output que o aluno vê — descartável/arquivável depois que a Etapa 15 grava
+output que o aluno vê — descartável/arquivável depois que a Etapa 16 grava
 o resultado final.
 
 Cada etapa a partir daqui **acrescenta** seu fato bruto relevante nesta
@@ -218,6 +258,57 @@ Guarde tudo isso como contexto interno de trabalho. **Não despeje esse resumo
 no aluno** — use para não repetir perguntas, não para expor dados dele de volta
 pra ele sem necessidade.
 
+### Perfil do Criador — coleta agora, consolidação na Etapa 15
+
+Os itens 1-5 acima alimentam um objeto único, `perfil_criador`, que o HTML
+final usa diretamente (seção `#publico`, aba Produto — `[[CRIADOR_RESUMO]]`
+e campos irmãos). Não escreva o objeto fechado ainda — nesta etapa você só
+tem "Quem sou eu" e Histórias, ainda falta `diferencial_produto` (Etapa 4) e
+`ativos_marketing_sexys`/`prova_principal` (Etapa 9). Guarde os fatos brutos
+com a fonte anotada (Notion, onboarding, História Inevitável ou conversa
+atual) no documento-hub à medida que chegam; o objeto só fecha no Passo 1 da
+Etapa 15, quando todas as etapas fonte já rodaram:
+
+```json
+{
+  "perfil_criador": {
+    "resumo": "",
+    "bio": "",
+    "autoridade": "",
+    "historia": "",
+    "diferencial": "",
+    "prova_principal": "",
+    "origem_prova_principal": "",
+    "provas_sociais_com_origem": [
+      { "prova": "", "origem": "", "uso_estrategico": "" }
+    ]
+  }
+}
+```
+
+Regras de preenchimento:
+
+- `resumo`: síntese curta do posicionamento da pessoa — não confunda com
+  `resumo` de produto (`A_NOVA_OPORTUNIDADE_RESUMO`), este é sobre quem ela é.
+- `bio`: quem é o Criador no contexto profissional (item 1 acima).
+- `autoridade`: só fatos verificáveis já coletados — nunca complete com
+  adjetivo não sustentado por um fato concreto.
+- `historia`: o fato biográfico mais relevante pra esta oportunidade
+  especificamente (pode não ser o mais impressionante em abstrato).
+- `diferencial`: o que a pessoa faz ou enxerga de forma particular — puxe de
+  `diferencial_produto` (Etapa 4) quando o diferencial for indissociável de
+  como ela executa, não invente um segundo diferencial separado.
+- `prova_principal`: a evidência mais forte relacionada ao `produto_atual`
+  desta sessão, não a prova mais forte da carreira inteira se não for
+  relevante aqui.
+- `origem_prova_principal`: sempre um destes quatro — Notion, onboarding,
+  História Inevitável, ou conversa atual. Nunca deixe implícito.
+- `provas_sociais_com_origem`: cada item preserva sua fonte individualmente —
+  nunca funda proveniências diferentes num só item.
+- **Ausência de prova é representada explicitamente** (ex.: `prova_principal:
+  "nenhuma prova forte coletada nesta sessão"`), nunca preenchida com copy
+  genérica tipo "profissional dedicado e experiente".
+
 ---
 
 ## ETAPA 3 — Objetivo, restrição e arquitetura do produto
@@ -236,6 +327,12 @@ Vamos encontrar a Oportunidade Sexy por trás de [produto_atual]. Antes de mais
 nada: me explica com suas palavras o que esse produto/serviço faz hoje — do
 jeito que você explicaria pra um amigo, sem filtro de marketing.
 ```
+
+Guarde a resposta como `descricao_produto` — é a entrega real do produto,
+nunca a promessa (`nova_oportunidade`, Etapa 6 — vem depois e é outra coisa:
+o que o produto **entrega de fato**, não o benefício que a Sexy formula em
+cima disso). Alimenta `[[PRODUTO_ENTREGA]]` no HTML final (Etapa 15/Notion).
+Registre no documento-hub da sessão assim que coletado.
 
 ### As duas perguntas de objetivo (nesta ordem, uma de cada vez)
 
@@ -592,11 +689,14 @@ Por fim, a **síntese obrigatória**: releia tudo que foi dito sobre dor/desejo
 diferentes? Escreva: "a dor real, por trás de [A], [B] e [C], é ___". Se
 genuinamente não convergem, a síntese pode concluir "são duas dores
 distintas" — contanto que venha de ter tentado cruzar. Essa síntese, não a
-lista bruta, alimenta a Etapa 6.
+lista bruta, alimenta a Etapa 6. Guarde-a com o nome canônico
+`sintese_dor_real` — é uma síntese, nunca a cópia das três dores brutas
+lado a lado. Alimenta `[[SINTESE_DOR_REAL]]` no HTML final.
 
 Guarde: `publico_promessa` (situação de vida + `quem_decide`),
 `urgencia_compra`, `nivel_consciencia`, `pilar_dominante` (+
-`pilares_secundarios`) e a síntese da dor real.
+`pilares_secundarios`) e `sintese_dor_real`. Registre no documento-hub da
+sessão assim que fechado.
 
 ### Passo 8 — Teste de incompatibilidade entre os fatos do público (não pule)
 
@@ -737,10 +837,24 @@ tratar reprovação por erro factual vs. descarte por "parecer arriscada".
 
 Ao entregar, nomeie ao usuário por que a versão escolhida venceu, citando o
 teste que a diferenciou — isso ensina o padrão, não só entrega o resultado.
+Guarde o parecer desta rodada em `feedbacks_verificadores.nova_oportunidade`
+(ver REGRA GERAL DE VERIFICAÇÃO CRÍTICA, item 5) — a bateria tripla é o
+Verificador desta etapa, mesmo sem o par Gerador/Verificador nomeado assim
+explicitamente.
 
 Guarde `nova_oportunidade` e, se o registro for aspiracional/Estrela,
 `subpromessa` (a camada técnica que sustenta — é também onde entra o
 resultado forte que não coube na promessa central).
+
+Com a promessa fechada, reúna `palavras_chave_estrategicas` — os termos que
+`diferencial_produto` (Etapa 4), `sintese_dor_real` (Etapa 5), `pilar_dominante`
+e a própria `nova_oportunidade` sustentam de fato nesta sessão, nunca
+vocabulário genérico de marketing ("transformação", "resultado real",
+"método comprovado") que não veio de um dado coletado. Cada termo precisa
+apontar pra algo que apareceu na investigação — se não conseguir citar de
+onde um termo vem, ele não entra na lista. Alimenta
+`[[PALAVRAS_CHAVE_ESTRATEGICAS]]` no HTML final. Registre no documento-hub
+assim que fechado.
 
 ### Passo 4 — Arquivar o estado antigo do produto (antes de qualquer campo ser reescrito)
 
@@ -811,7 +925,22 @@ qualquer proposta. Depois:
 Guarde `bonus_ancora`, `bonus_gula` (ou dispensado, com o motivo citando a
 nota do "antes") e `bonus_reativo` (se houver) — cada um com a proposta +
 o porquê da calibração pro pilar/público/ticket deste produto, pra
-alimentar o resumo final (Etapa 14) e o recálculo "depois" (Etapa 13).
+alimentar o resumo final (Etapa 15) e o recálculo "depois" (Etapa 14).
+
+**Os três são campos de texto únicos — nunca crie sub-campos separados**
+(ex.: `bonus_ancora_porque`, `bonus_gula_justificativa`,
+`bonus_reativo_objecao`): a proposta e a justificativa vivem juntas, no
+mesmo texto corrido de cada campo. Se `bonus_gula` for dispensado, o
+próprio texto do campo registra o motivo e a nota que sustenta a dispensa
+— não crie um campo booleano ou de status à parte. Se `bonus_reativo` não
+se aplicar (objeção já respondida na estrutura central), represente isso
+no próprio campo (ex.: "não aplicável — a objeção X já é respondida por Y
+na entrega") em vez de omitir o campo silenciosamente ou inventar um
+reativo só pra preencher o card. Não existe Verificador equivalente para
+esta etapa — não crie `feedback_verificador_bonus`.
+
+Mapeamento pro HTML: `[[BONUS_ANCORA]]`, `[[BONUS_GULA]]`,
+`[[BONUS_REATIVO]]`.
 
 ---
 
@@ -938,10 +1067,42 @@ consolidação:
 
 Guarde `ativos_marketing_sexys` (lista de fatos-fonte, cada um com 1+ usos
 em parágrafo corrido — formato em `ativos-gerador.md`) — vai pro resumo da
-Etapa 14; fato-fonte bruto e nota do Verificador ficam como registro
+Etapa 15; fato-fonte bruto e nota do Verificador ficam como registro
 interno. Casos de fronteira (volume de aulas nunca é ativo, servir ao
 público real, nunca desvalorizar portfólio, nunca inventar fato): seção
 "Regras que continuam valendo" de `ativos-gerador.md`.
+
+### Contrato de dados
+
+```json
+{
+  "ativos_marketing_sexys": [
+    { "texto": "", "pilar_relacionado": "", "fato_fonte": "", "status": "aprovado | sugestao" }
+  ]
+}
+```
+
+- `texto`: o parágrafo corrido pronto (Estágio 3) — nunca separe em título +
+  corpo; o próprio texto nomeia a categoria em linguagem natural.
+- `pilar_relacionado`: qual dos 7 pilares este ativo reforça — normalmente
+  o `pilar_dominante`, mas um ativo pode reforçar um secundário.
+- `fato_fonte`: o fato bruto por trás (registro interno, nunca exposto ao
+  aluno como rótulo — mesma regra do Verificador, que recebe o texto sem
+  esse rótulo anexado).
+- `status`: `aprovado` (passou pelo funil de 3 estágios) ou `sugestao`
+  (funil não bateu o piso de 2 — ver "Se sobrarem menos de 2 aprovados" em
+  `ativos-gerador.md`).
+
+Sem teto de itens — o funil entrega quantos ativos aprovados existirem.
+Mapeamento pro HTML: os 5 primeiros aprovados alimentam
+`[[ATIVO_1_TEXTO]]` a `[[ATIVO_5_TEXTO]]` (composição principal, seção
+`#ativos`); itens a partir do sexto alimentam `[[ATIVO_6_TEXTO]]` a
+`[[ATIVO_10_TEXTO]]` (cards de "Recurso adicional", mesma seção). Esses
+slots numerados são **renderização, nunca estado canônico** — a lista real
+é `ativos_marketing_sexys` inteira; o HTML só repete o card
+`.extra-asset` conforme a quantidade real de itens aprovados a partir do
+sexto (ver `references/preenchimento-html.md` para o teto físico atual do
+template e como sinalizar se a lista ultrapassar os slots disponíveis).
 
 ---
 
@@ -999,6 +1160,27 @@ Entregue as 5 headlines identificadas por modelo e DOPA usado (ex.: "MH004
 — Autoridade"), para o aluno entender a lógica de cada uma, não só o texto
 final.
 
+### Contrato de dados
+
+```json
+{
+  "headlines_exploratorias": [
+    { "modelo": "", "texto": "" }
+  ]
+}
+```
+
+`modelo` guarda a identificação completa (ex.: "MH004 — Autoridade"); o
+DOPA já vem embutido no próprio `modelo`, não é campo separado — evita
+duplicar a mesma informação em dois lugares do contrato. Ativo/vivência-
+fonte de cada headline fica como registro interno (mesma regra do
+Verificador, que nunca vê essa proveniência), não entra no objeto persistido.
+
+Mapeamento pro HTML: `HEADLINE_1_MODELO`/`HEADLINE_1_TEXTO` até
+`HEADLINE_5_MODELO`/`HEADLINE_5_TEXTO` — sempre nos dois campos separados,
+nunca concatenados (o `.headline-modelo` e o corpo do post são elementos
+visuais distintos no template).
+
 ---
 
 ## ETAPA 11 — Aplicação Prática: Bio do Instagram
@@ -1021,9 +1203,13 @@ CRÍTICA). Específico desta etapa:
    `bio-verificador.md` → avaliação.
 4. Reprovações, teto de 2 rodadas e modo sem aluno ao vivo: protocolo
    geral. Aprovado em qualquer rodada → só o resultado final volta pro
-   resumo (Etapa 14).
+   resumo (Etapa 15).
 
-Guarde o resultado como `bio_instagram`.
+Guarde o resultado como `bio_instagram` (texto único, alimenta
+`[[BIO_INSTAGRAM]]`) e o parecer final em
+`feedbacks_verificadores.bio_destaques` (compartilhado com Destaques
+abaixo — um parecer só cobre os dois artefatos desta etapa, não dois
+separados).
 
 ### Segundo artefato — Destaques do Instagram
 
@@ -1052,7 +1238,39 @@ diferença está no pacote e no que o Verificador testa:
 
 Guarde `destaques_instagram` (lista de títulos; fato-fonte e crença
 quebrada ficam documentados internamente — só o título final vai pro
-resumo da Etapa 14).
+resumo da Etapa 15).
+
+### Contrato de dados
+
+```json
+{
+  "destaques_instagram": [
+    {
+      "titulo": "",
+      "fato_fonte": "",
+      "crenca_que_quebra": "",
+      "texto_explicativo": "",
+      "status": "aprovado | a_confirmar"
+    }
+  ]
+}
+```
+
+- `titulo`: ≤15 caracteres, o que aparece no destaque em si.
+- `fato_fonte`/`crenca_que_quebra`: registro interno (nunca exposto ao
+  Verificador nem ao aluno como rótulo).
+- `texto_explicativo`: derivado de fato-fonte + crença quebrada — nunca
+  invente conteúdo novo além do que os dois já sustentam. Alimenta
+  `[[DESTAQUE_N_TEXTO]]`.
+- `status`: `aprovado`, ou `a_confirmar` se ficou reprovado na v2 (mesma
+  regra da Bio — nunca apresentado como se fosse aprovado).
+
+Sem teto forçado de 3 — alvo é 3, mas 2 com qualidade vale mais que 3 com
+um fraco forçado (regra já vigente acima). Mapeamento pro HTML:
+`DESTAQUE_1_TITULO`/`DESTAQUE_1_TEXTO` até `DESTAQUE_3_TITULO`/
+`DESTAQUE_3_TEXTO` — se houver só 2 destaques aprovados, o terceiro card
+não é preenchido com filler; ver `references/preenchimento-html.md` para
+como omitir o terceiro card sem quebrar o layout.
 
 ---
 
@@ -1093,21 +1311,164 @@ CRÍTICA). Específico desta etapa:
 - Reprovações, teto de 2 rodadas e modo sem aluno ao vivo: protocolo geral.
 
 Guarde `hero_pagina_vendas` (as propostas aprovadas, com registro
-identificado) — vai pro resumo da Etapa 14.
+identificado) e o parecer final em
+`feedbacks_verificadores.hero_pagina_vendas` — vai pro resumo da Etapa 15.
+
+### Contrato de dados
+
+```json
+{
+  "hero_pagina_vendas": [
+    {
+      "opcao": "A",
+      "registro": "",
+      "headline": "",
+      "subheadline": "",
+      "linha_suporte": "",
+      "por_que_funciona": "",
+      "status": "aprovado | a_confirmar"
+    },
+    {
+      "opcao": "B",
+      "registro": "",
+      "headline": "",
+      "subheadline": "",
+      "linha_suporte": "",
+      "por_que_funciona": "",
+      "status": "aprovado | a_confirmar"
+    }
+  ]
+}
+```
+
+Sempre 2 opções (A e B), nunca 1. `linha_suporte` é preservada mesmo que o
+HTML ainda não a exiba fisicamente — faz parte do contrato do Gerador e
+volta no resumo da Etapa 15/Notion. `por_que_funciona` é o registro do
+porquê da escolha (ver "nomeie por que a versão venceu", mesmo princípio
+da Etapa 6 Passo 3) — informação interna/resumo, não vira placeholder no
+HTML hoje. Não crie CTA dinâmico — o HTML usa CTA visual estático.
+
+Mapeamento pro HTML: `HERO_PAGINA_VENDAS_A_HEADLINE`,
+`HERO_PAGINA_VENDAS_A_SUBHEADLINE`, `HERO_PAGINA_VENDAS_B_HEADLINE`,
+`HERO_PAGINA_VENDAS_B_SUBHEADLINE`.
 
 ---
 
-## ETAPA 13 — Recálculo "depois" da roda de pilares (pendente)
+## ETAPA 13 — Simulação de fluxo ManyChat (roteiro de venda)
 
-> Ainda não escrita — depende de Bônus (Etapa 7) + Ativos (Etapa 9) + Bio
-> e Destaques (Etapa 11, ambos os artefatos já escritos). Cada ponto de
-> elevação do "depois" precisa apontar pra um bônus/ativo/bio/destaque
-> concreto gerado nas etapas anteriores — nunca nota solta "melhorada" sem
-> lastro (mesma regra já travada para o "antes" na Etapa 5, Passo 6).
+Simula como a `nova_oportunidade` se desdobraria numa conversa de venda
+no direct do Instagram — **roteiro de mensagens (texto), nunca JSON
+importável**, nunca com tags/UTM/custom fields reais. É mockup de
+apresentação pro aluno visualizar a promessa em ação numa conversa, não
+um fluxo pronto pra publicar. Escopo desta skill é só o **framework de
+VENDA** (não captação) — se o aluno quiser o fluxo real, publicável, isso
+é trabalho da skill irmã `manychat-flow-writer`, fora do escopo da Sexy.
+
+### Gerador e Verificador (protocolo nas regras gerais)
+
+Rode o protocolo Gerador/Verificador (ver REGRA GERAL DE VERIFICAÇÃO
+CRÍTICA). Específico desta etapa:
+
+- **Pacote do Gerador:** `nova_oportunidade` e `subpromessa` (Etapa 6),
+  `diferencial_produto` (Etapa 4), `publico_promessa` (Etapa 5),
+  `ativos_marketing_sexys` (Etapa 9), `bonus_ancora`/`bonus_gula` (Etapa
+  7), `hero_pagina_vendas` (Etapa 12, usado como fonte do "gatilho" que
+  leva ao fluxo) + `references/manychat-gerador.md` (framework de 9
+  blocos de conteúdo, adaptado do `manychat-flow-writer` sem blocos
+  técnicos de automação).
+- **O Gerador** monta 1 roteiro único (não múltiplas propostas, diferente
+  de Headlines/Hero) — saudação, aquecimento, permissão, demonstração,
+  prova social, pitch, CTA triplo, entrega, fallbacks. Nunca inventa
+  prova social ou preço — se o dossiê não sustentar um bloco, sinaliza a
+  lacuna em vez de forçar. **Cada bloco é salvo como variável própria**
+  (`manychat_saudacao`, `manychat_aquecimento`, `manychat_permissao`,
+  `manychat_demonstracao`, `manychat_prova_social`, `manychat_pitch`,
+  `manychat_cta`, `manychat_entrega`, `manychat_fallback_duvida`,
+  `manychat_fallback_nao_quero`) — nunca um texto único corrido, porque o
+  preenchimento do template HTML (Etapa 8/15) lê campo a campo.
+- **O Verificador** (`references/manychat-verificador.md`) recebe as 10
+  variáveis (texto puro de cada bloco, sem rótulo de fonte) e aplica os
+  10 testes sobre o roteiro como um todo — aprova/reprova citando o teste
+  que falhou.
+- Reprovações, teto de 2 rodadas e modo sem aluno ao vivo: protocolo geral.
+
+Guarde `manychat_simulado` como a **coleção das 10 variáveis de bloco**
+acima (não um texto corrido separado delas) e o parecer final em
+`feedbacks_verificadores.manychat` — vai pro resumo da Etapa 15.
 
 ---
 
-## ETAPA 14 — Montar o resumo, verificar e apresentar para aprovação
+## ETAPA 14 — Recálculo "depois" da roda de pilares
+
+Com Bônus (Etapa 7), Ativos (Etapa 9), Bio e Destaques (Etapa 11), Hero
+(Etapa 12) e ManyChat (Etapa 13) já escritos, recalcule a nota "depois" dos
+mesmos 7 pilares pontuados no "antes" (Etapa 5, Passo 6). Este recálculo
+alimenta o radar visual (`#ativos` no HTML) e é a prova concreta, não
+decorativa, de que a Oportunidade Sexy elevou o produto.
+
+**Regra travada, sem exceção:** a nota "depois" nunca sobe sem lastro. Toda
+elevação precisa apontar pra um bônus, ativo, bio/destaque, headline, hero
+ou entrega concreta gerada nas Etapas 6-13 — nunca uma nota "melhorada"
+solta. Se um pilar não recebeu nenhum reforço concreto nessas etapas, a
+nota "depois" **permanece igual à nota "antes"**, mesmo que isso deixe o
+radar com pontas iguais. Não aumente nota só para o gráfico ficar bonito —
+uma estrela desigual e honesta vale mais que uma redonda e inventada. A
+nota "antes" (Etapa 5, Passo 6) nunca é alterada silenciosamente aqui — se
+o recálculo revelar que ela estava errada, isso é bug a corrigir na origem
+(volte à Etapa 5), não um ajuste silencioso nesta etapa.
+
+### Contrato de dados
+
+```json
+{
+  "pontuacao_pilares_depois": {
+    "pilar_1": { "nota": 0, "justificativa": "", "fontes_elevacao": [] },
+    "pilar_2": { "nota": 0, "justificativa": "", "fontes_elevacao": [] },
+    "pilar_3": { "nota": 0, "justificativa": "", "fontes_elevacao": [] },
+    "pilar_4": { "nota": 0, "justificativa": "", "fontes_elevacao": [] },
+    "pilar_5": { "nota": 0, "justificativa": "", "fontes_elevacao": [] },
+    "pilar_6": { "nota": 0, "justificativa": "", "fontes_elevacao": [] },
+    "pilar_7": { "nota": 0, "justificativa": "", "fontes_elevacao": [] }
+  }
+}
+```
+
+Uma entrada por pilar dos 7 (mesmas chaves de `pontuacao_pilares_antes`,
+nunca um subconjunto) — a doutrina desta skill trabalha com os 7 pilares
+sempre como grupo completo, o radar do HTML usa os mesmos 7, sem seleção
+nem corte para os "mais fortes". Cada entrada:
+
+- `nota`: 0-10, igual à regra do "antes" — sem evidência real, a nota não
+  muda (fica igual à do "antes"), nunca um número intermediário de cortesia.
+- `justificativa`: cita o que causou a mudança — nunca "melhorou com a
+  Sexy" genérico. Ex.: "subiu de 6 para 9: Bônus Âncora (Etapa 7) entrega
+  acompanhamento semanal que não existia antes, resolvendo a Preguiça
+  identificada como dominante."
+- `fontes_elevacao`: lista dos artefatos concretos que sustentam a subida
+  (ex.: `["bonus_ancora", "ativos_marketing_sexys[2]"]`) — nunca vazia
+  numa nota que subiu.
+
+### Mapeamento para o HTML
+
+```text
+EIXO_N_LABEL        ← nome do pilar (pilar_1 = Gula, pilar_2 = Inveja, ... — mesma ordem de pilares-do-desejo/INDEX.md)
+EIXO_N_NOTA_ANTES   ← pontuacao_pilares_antes[pilar_N]
+EIXO_N_NOTA_DEPOIS  ← pontuacao_pilares_depois[pilar_N].nota
+```
+
+O template tem 7 slots (`EIXO_1` a `EIXO_7`, cada um com `_LABEL`,
+`_NOTA_ANTES` e `_NOTA_DEPOIS`) — mapeamento direto 1:1 com os 7 pilares,
+sem seleção nem corte. Se um projeto futuro do template reduzir esse
+número, sinalize a limitação em vez de descartar pilares silenciosamente
+(ver `references/preenchimento-html.md`); nunca invente um slot que não
+existe fisicamente no template.
+
+Guarde `pontuacao_pilares_depois` — vai pro resumo da Etapa 15 e para o
+Notion na Etapa 16. Registre no documento-hub assim que fechado.
+
+---
+
+## ETAPA 15 — Montar o resumo, verificar e apresentar para aprovação
 
 ### Passo 1 — Montar o resumo
 
@@ -1117,29 +1478,42 @@ preencher o template.
 ```
 Oportunidade Sexy definida:
 
+**Perfil do Criador** (`perfil_criador`, consolidado agora — ver Etapa 2):
+[resumo] · [bio] · [autoridade] · [historia] · [diferencial]
+**Prova principal:** [prova_principal] — fonte: [origem_prova_principal]
+**Provas sociais utilizáveis:** [provas_sociais_com_origem — cada uma com
+sua origem, nunca fundidas]
+(Se não houve prova coletada nesta sessão, escreva isso explicitamente —
+nunca preencha com copy genérica.)
+
 **A nova oportunidade:** [nova_oportunidade]
 **Subpromessa técnica:** [subpromessa — só se papel_esteira = Estrela ou registro aspiracional]
 **Ângulo escolhido:** [angulo_escolhido — qual recorte do produto está sendo destacado, e por que essa dor/desejo pesou mais na conversa]
 **Formato de entrega:** [formato_produto] · **Papel na esteira:** [papel_esteira]
 **Pilar de desejo dominante:** [pilar_dominante] (+ [pilares_secundarios], se houver)
 **Público-alvo:** [publico_promessa — situação de vida + quem_decide] · **Urgência de compra:** [urgencia_compra] · **Nível de consciência:** [nivel_consciencia]
-**O que é o produto:** [descrição]
+**O que o produto entrega:** [descricao_produto]
 **Diferencial investigado:** [diferencial_produto]
-**Síntese da dor real:** [síntese da Etapa 5]
-**O que aprendi sobre você que embasa essa proposta:** [história/diferenciais usados]
-**Histórias e provas sociais que podem ser usadas:** [lista com origem — Notion ou coletado agora]
-**Palavras-chave estratégicas:** [lista]
+**Síntese da dor real:** [sintese_dor_real]
+**Palavras-chave estratégicas:** [palavras_chave_estrategicas]
+[Feedback do Verificador da promessa — `feedbacks_verificadores.nova_oportunidade`,
+recolhível: status + parecer.]
+
+**Pontuação dos 7 pilares, antes e depois** (Etapa 5 Passo 6 + Etapa 14):
+[tabela ou lista: pilar | nota antes | nota depois | justificativa da
+elevação, quando houver. Pilares sem elevação real mostram a mesma nota
+nos dois lados — nunca oculte isso nem arredonde pra cima.]
 
 **Bônus** (Etapa 7 — o que a Sexy criou e por que):
 **Âncora:** [bonus_ancora — a proposta + o porquê pro pilar/público/ticket deste produto]
 **Gula:** [bonus_gula, ou "dispensado — produto já É Gula (nota X no antes)"]
 **Reativo:** [bonus_reativo, se houver — qual objeção neutraliza]
 
-**Ativos de marketing sexys** (Etapa 9 — narrativa que reforça a oportunidade, mínimo 2, sem teto):
+**Ativos de marketing sexys** (Etapa 9 — `ativos_marketing_sexys`, narrativa que reforça a oportunidade, mínimo 2, sem teto):
 1. [parágrafo corrido — nomeia a categoria em linguagem natural, explica o
    porquê, dá a instrução prática, tudo amarrado; ver formato de saída em
    `ativos-gerador.md`]
-2. (repita para cada ativo aprovado; quando um fato-fonte tiver mais de 1
+2. (repita para cada ativo `aprovado`; quando um fato-fonte tiver mais de 1
    uso, cada uso é seu próprio parágrafo)
 (Se o funil não bateu o piso de 2, ver "Se sobrarem menos de 2 aprovados"
 em `ativos-gerador.md` — inclua aqui a seção "o que reforçaria a
@@ -1154,28 +1528,47 @@ reprovada como se fosse aprovada — a marcação "a confirmar" e a crítica
 são parte obrigatória do resumo nesse caso, não opcionais.]
 
 **Destaques do Instagram** (Etapa 11 — `destaques_instagram`):
-1. [título 1, ≤15 caracteres] — [fato-fonte + crença que quebra, uma frase]
+1. [título 1, ≤15 caracteres] — [texto_explicativo, derivado de fato-fonte + crença que quebra]
 2. [título 2]
 (3, se o gate sustentou um terceiro mecanismo distinto — nunca forçado)
-[Mesma regra da Bio se algum título ficou na v2 reprovada: marcar "a
+[Mesma regra da Bio se algum título ficou `a_confirmar`: marcar "a
 confirmar com você" + crítica do Verificador, nunca apresentar como
 aprovado.]
+[Feedback do Verificador (Bio + Destaques, parecer único) —
+`feedbacks_verificadores.bio_destaques`, recolhível.]
 
-**Headlines exploratórias:**
-1. [headline 1]
-2. [headline 2]
-3. [headline 3]
-4. [headline 4]
-5. [headline 5]
+**Headlines exploratórias** (Etapa 10 — `headlines_exploratorias`):
+1. [modelo 1] — [texto 1]
+2. [modelo 2] — [texto 2]
+3. [modelo 3] — [texto 3]
+4. [modelo 4] — [texto 4]
+5. [modelo 5] — [texto 5]
 
 **Hero da página de vendas** (Etapa 12 — `hero_pagina_vendas`, registro
-identificado + 2 propostas aprovadas):
-1. [Headline] / [Subheadline] / [Linha de suporte, se houver]
-2. [Headline] / [Subheadline] / [Linha de suporte, se houver]
-[Mesma regra da Bio/Destaques se alguma proposta ficou na v2 reprovada:
+identificado + 2 propostas):
+1. [Headline A] / [Subheadline A] / [Linha de suporte A, se houver]
+2. [Headline B] / [Subheadline B] / [Linha de suporte B, se houver]
+[Mesma regra da Bio/Destaques se alguma proposta ficou `a_confirmar`:
 marcar "a confirmar com você" + crítica do Verificador, nunca apresentar
 como aprovada.]
+[Feedback do Verificador — `feedbacks_verificadores.hero_pagina_vendas`, recolhível.]
+
+**Simulação de fluxo ManyChat** (Etapa 13 — `manychat_simulado`, roteiro
+de venda, 10 blocos):
+[apresente as 10 variáveis (`manychat_saudacao` até
+`manychat_fallback_nao_quero`) em sequência de conversa, como o aluno
+leria no direct — nunca como lista de campos técnicos. Se algum bloco
+ficou sinalizado como lacuna (ex.: sem prova social real disponível),
+mostre a lacuna explicitamente em vez de omitir silenciosamente. Mesma
+regra de reprovação: se ficou "a confirmar" após 2 rodadas, marcar
+assim, nunca apresentar como aprovado.]
+[Feedback do Verificador — `feedbacks_verificadores.manychat`, recolhível.]
 ```
+
+Nenhum campo acima duplica outro — `descricao_produto` (o que entrega) e
+`nova_oportunidade` (a promessa) continuam informações distintas mesmo
+lado a lado; `perfil_criador.diferencial` e `diferencial_produto` também
+são apresentados uma vez cada, nunca repetidos com palavras diferentes.
 
 ### Material de apoio opcional — os 5 elementos da narrativa
 
@@ -1299,25 +1692,47 @@ Claude Artifact em nenhuma hipótese** (ver Etapa 8).
 
 Leia `references/preenchimento-html.md` quando chegar a hora de montar o
 HTML final — template-base, regra de fidelidade visual, e o preenchimento
-campo a campo de cada placeholder `[[CAMPO]]` (ativos, headlines,
-subpromessa condicional, bio, destaques, versão no rodapé). **O hero de
-página de vendas (Etapa 12, `hero_pagina_vendas`) ainda não tem seção
-correspondente no template HTML** — apresente-o só no resumo da Etapa 14,
-nunca invente um bloco novo no HTML sem esse placeholder existir
-fisicamente no template.
+campo a campo de cada placeholder `[[CAMPO]]` (perfil do Criador, produto,
+pilares antes/depois, bônus, ativos, headlines, bio, destaques, hero de
+página de vendas, ManyChat, feedbacks dos verificadores, versão no
+rodapé). O template já tem seção física para todos os artefatos desta
+skill — antes de montar qualquer bloco novo, confirme no arquivo de
+referência que o placeholder existe fisicamente; se um artefato futuro
+ainda não tiver seção correspondente, apresente-o só no resumo da Etapa
+15/Notion, nunca invente um bloco novo no HTML sem o placeholder existir.
 
 ---
 
-## ETAPA 15 — Gravar no Notion
+## ETAPA 16 — Gravar no Notion
 
 Após aprovação, escreva na subpágina de `produto_atual` (dentro da database
-"Produtos") um bloco com a mesma estrutura de campos da Etapa 14 (título
+"Produtos") um bloco com a mesma estrutura de campos da Etapa 15 (título
 "Oportunidade Sexy", seguido dos campos listados) — **sempre como texto
 formatado**: o Notion não renderiza o CSS da página, então mesmo o aluno
 tendo recebido a versão em página, o que vai para o Notion é o conteúdo
 estruturado em texto. Se a subpágina já tiver uma Oportunidade Sexy anterior
 (caso de refinamento — Etapa 1), substitua o bloco antigo por este, não
 duplique.
+
+Nada do que segue é informação nova além do que a Etapa 15 já monta — é a
+mesma estrutura, só listada aqui pra garantir que nenhum objeto novo desta
+skill fique de fora do registro permanente do aluno:
+
+- `perfil_criador` (Etapa 2/15) — o perfil usado na proposta.
+- `descricao_produto` (Etapa 3).
+- `sintese_dor_real` e `palavras_chave_estrategicas` (Etapa 5/6).
+- `provas_sociais_com_origem` (Etapa 2/15) — provas com origem preservada.
+- `pontuacao_pilares_antes` e `pontuacao_pilares_depois`, com as
+  justificativas de elevação (Etapa 5/14).
+- `feedbacks_verificadores` relevantes — inclua pelo menos o status
+  (aprovado/a_confirmar); o parecer completo pode ir resumido aqui, desde
+  que a versão íntegra já tenha sido mostrada ao aluno no resumo.
+- `hero_pagina_vendas`, as duas opções (A e B).
+- As coleções já existentes: `ativos_marketing_sexys`,
+  `headlines_exploratorias`, `destaques_instagram`, `bio_instagram`,
+  `manychat_simulado`, `bonus_ancora`/`bonus_gula`/`bonus_reativo`.
+
+O conteúdo do Notion continua sendo texto formatado, nunca HTML.
 
 Confirme ao aluno após salvar:
 
@@ -1327,7 +1742,7 @@ Salvo! A Oportunidade Sexy de [produto_atual] está registrada no seu Notion.
 
 ---
 
-## ETAPA 16 — Atualizar memória e fechar
+## ETAPA 17 — Atualizar memória e fechar
 
 Atualize `~/.claude/skills/sexy-triwer/memoria.md`:
 
@@ -1403,8 +1818,8 @@ inteira, sem etapa dona:
       genuinamente não ativa aquele gatilho hoje.
 12. **Paralelismo de texto é proibido em qualquer output final desta
     skill** (promessa — Etapa 6, ativos — Etapa 9, headlines — Etapa 10,
-    bio e destaques — Etapa 11, hero de página de vendas — Etapa 12) —
-    **principalmente o de oposição**: nunca
+    bio e destaques — Etapa 11, hero de página de vendas — Etapa 12,
+    simulação de ManyChat — Etapa 13) — **principalmente o de oposição**: nunca
     escreva frase na estrutura "X, mas Y" / "não é A, é B" / construção
     espelhada onde a força depende da simetria entre metades em vez da
     especificidade do conteúdo. Travessões encadeados (Bateria 3, teste
@@ -1460,9 +1875,11 @@ inteira, sem etapa dona:
 │   ├── headlines-verificador.md              ← ler na Etapa 10, só pelo subagente Verificador (nunca vê manual-headline.md)
 │   ├── hero-gerador.md                       ← ler na Etapa 12, só pelo subagente Gerador
 │   ├── hero-verificador.md                   ← ler na Etapa 12, só pelo subagente Verificador (nunca vê hero-gerador.md)
+│   ├── manychat-gerador.md                   ← ler na Etapa 13, só pelo subagente Gerador
+│   ├── manychat-verificador.md               ← ler na Etapa 13, só pelo subagente Verificador (nunca vê manychat-gerador.md)
 │   ├── bateria-julgamento.md                 ← ler na Etapa 6, Passo 2 (bateria tripla Verdade/Desejo/Formulação)
 │   ├── avaliador-hub.md                      ← ler na Etapa 6, Passo 5, pelo subagente avaliador do documento-hub
-│   ├── preenchimento-html.md                 ← ler na Etapa 8/14 (preenchimento do template HTML final)
+│   ├── preenchimento-html.md                 ← ler na Etapa 8/15 (preenchimento do template HTML final)
 │   ├── atualizacao-versao.md                 ← ler no BOOT, só se a versão remota for mais nova
 │   └── notion-setup.md                      ← ler só se a conexão do Notion falhar no BOOT
 └── memoria.md                            ← criado automaticamente no primeiro uso

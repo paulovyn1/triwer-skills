@@ -7,7 +7,7 @@ de julgar o efeito do texto e passaria a auditar processo — o oposto do
 que faz esse desenho funcionar.
 
 **Leia este arquivo na Etapa 11 (Aplicação Prática — Bio)**, depois de já
-ter `ativos_marketing_sexys` (Etapa 10) — a bio herda prova concreta dali,
+ter `ativos_marketing_sexys` (Etapa 9) — a bio herda prova concreta dali,
 nunca roda antes. **O insumo que alimenta os Blocos 3 e 4 é `nova_oportunidade`
 (Etapa 6), não um viés externo de outra skill.** A própria Sexy já constrói
 o diferencial/corte específico do aluno na Etapa 6 — o Bloco 4 é essa
@@ -322,7 +322,7 @@ A conversa principal monta este pacote antes de chamar o Gerador. São os
 | Dor/objeção nas palavras do cliente | Etapa 5, Passo 2 |
 | O que o mercado oferece e por que falha | Etapa 4 (teste do concorrente) + Etapa 5 Passo 2 |
 | Credenciais e histórico | Etapa 2 ("Quem sou eu", Histórias Inevitáveis) |
-| Resultados/depoimentos reais | Etapa 2 + `ativos_marketing_sexys` (Etapa 10) |
+| Resultados/depoimentos reais | Etapa 2 + `ativos_marketing_sexys` (Etapa 9) |
 | Estágio de consciência | `nivel_consciencia` (Etapa 5, Passo 4) |
 | Urgência da compra | `urgencia_compra` (Etapa 5, Passo 3) |
 
@@ -333,7 +333,7 @@ insumo primário destes blocos, não um pré-requisito externo. Se existir,
 inclua também o viés fechado em `vies-triwer`/`prisma-si` (opcional,
 reforça o Bloco 4) e os **5 Sinais de Competitividade** observáveis nos
 fatos já coletados (credenciais da Etapa 2, diferencial da Etapa 4,
-`ativos_marketing_sexys` da Etapa 10) — alimentam o Bloco 5.
+`ativos_marketing_sexys` da Etapa 9) — alimentam o Bloco 5.
 
 ## Regras técnicas de julgamento (filtram cada bloco depois de escrito)
 

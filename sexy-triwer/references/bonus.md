@@ -47,7 +47,7 @@ redundante, a regra já está satisfeita pelo produto em si.
 
 **Como criar (se não dispensado):** o que soma volume percebido sem
 duplicar o que a oferta central já comunica? **Nunca aula, módulo ou
-conteúdo teórico** — mesma regra da Etapa 10 de Ativos ("volume de aulas
+conteúdo teórico** — mesma regra da Etapa 9 de Ativos ("volume de aulas
 nunca é ativo válido, mesmo com pilar Gula"). Pense em entregável pronto:
 modelos, moldes, fichas técnicas, templates, scripts — algo que o
 comprador usa direto, não estuda antes de usar.
@@ -64,7 +64,7 @@ são necessárias — o produto já satisfaz o pilar sozinho.
 venda. Diferente de Âncora e Gula, não é estrutural — só existe quando há
 uma objeção identificada (Etapa 5, Passo 2).
 
-**Regra:** já coberto pela Etapa 10 (Ativos de Marketing) — não duplique.
+**Regra:** já coberto pela Etapa 9 (Ativos de Marketing) — não duplique.
 Se houver uma objeção nomeada sem resposta na estrutura central do
 produto, é candidato a bônus reativo. Nunca com destaque visual — fica
 disponível só para quem lê até o fim e carrega aquela objeção específica,

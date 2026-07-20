@@ -18,6 +18,45 @@ frontmatter do `SKILL.md` (não duplicado aqui).
 
 ---
 
+## 2.6.0 - 2026-07-20
+- **Contrato de dados formalizado para o novo output HTML** — todos os
+  objetos e coleções que o template já usa (`perfil_criador`,
+  `descricao_produto`, `sintese_dor_real`, `palavras_chave_estrategicas`,
+  `pontuacao_pilares_depois`, `feedbacks_verificadores`,
+  `headlines_exploratorias`, `destaques_instagram`, `hero_pagina_vendas`,
+  `ativos_marketing_sexys`, `bonus_*`) agora têm schema explícito na etapa
+  onde são produzidos, eliminando reinterpretação de texto solto na hora
+  de preencher o template.
+- **Etapa 14 (recálculo "depois" da roda de pilares) escrita** — estava
+  pendente desde a introdução da Etapa 13 (ManyChat). Regra travada: nota
+  "depois" nunca sobe sem apontar pra um bônus/ativo/bio/destaque/hero
+  concreto gerado nas Etapas 6-13; sem lastro, a nota permanece igual à
+  do "antes".
+- **`references/preenchimento-html.md` reescrito** para bater com o
+  template real (7 slots de eixo com nota antes/depois, seções de Criador,
+  Hero, ManyChat, Bônus e feedbacks recolhíveis dos Verificadores — nenhum
+  desses existia na versão anterior do arquivo).
+- **Correção de numeração desatualizada em referências** —
+  `ativos-gerador.md`, `bio-gerador.md`, `destaques-gerador.md`,
+  `bonus.md` e `avaliador-hub.md` ainda apontavam pra Etapa 10 como a
+  etapa de Ativos de Marketing; a introdução da Etapa 13 (ManyChat, v2.5.x)
+  empurrou Ativos pra Etapa 9 no `SKILL.md` sem propagar a mudança pras
+  referências internas.
+- Radar do template passou de 5 para 7 eixos (mapeamento 1:1 com os 7
+  pilares do desejo, sem seleção nem corte).
+- **[CRITICAL] Template HTML corrigido para ficar de fato autocontido** —
+  todos os ícones do mockup de Instagram, os ícones/conector do fluxo
+  ManyChat e a imagem do notebook na página de vendas ainda referenciavam
+  caminhos relativos (`assets/instagram/*.svg`, `figma-assets/*`) de uma
+  pasta de trabalho que nunca fazia parte da skill instalada — quebrava a
+  imagem pra todo aluno, em qualquer sessão. Todos os assets agora estão
+  embutidos como `data:` URI dentro do próprio arquivo. Removida também
+  uma tag `<script>` carregando `anime.min.js` via CDN sem nenhuma chamada
+  correspondente no arquivo (dependência morta, sem efeito, mas gerava
+  requisição de rede desnecessária).
+
+---
+
 ## 2.5.0 - 2026-07-17
 - **Etapa 10 (Ativos de Marketing) recalibrada** — mudança de princípio, não
   só ajuste de regra. A etapa antiga produzia exibição de credencial

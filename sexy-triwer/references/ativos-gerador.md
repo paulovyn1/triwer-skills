@@ -4,10 +4,10 @@ Este arquivo é lido **só pelo subagente Gerador**, nunca pelo Verificador — 
 Verificador precisa simular alguém que nunca viu o dossiê e julga só o efeito
 do ativo pronto (ver `ativos-verificador.md`).
 
-**Leia este arquivo na Etapa 10**, depois de já ter `nova_oportunidade`
+**Leia este arquivo na Etapa 9**, depois de já ter `nova_oportunidade`
 (Etapa 6), `diferencial_produto` (Etapa 4), `pilar_dominante` (Etapa 5) e o
 **documento-hub da sessão** (criado na Etapa 1, alimentado em cada etapa,
-já auditado pelo subagente avaliador após a Etapa 6 — ver Etapa 10 do
+já auditado pelo subagente avaliador após a Etapa 6 — ver Etapa 9 do
 `SKILL.md`) — ativo de marketing é sempre resposta a uma promessa que já
 existe, nunca garimpo aberto sem direção.
 
@@ -35,7 +35,7 @@ Gerador (você) que cruza esse relato contra as 4 categorias abaixo.
 
 **As 5 perguntas de coleta não são responsabilidade deste subagente** —
 elas rodam na conversa principal, antes de você ser invocado (Pergunta 0
-logo após a Etapa 5; Perguntas 1-4 no início da Etapa 10, antes da
+logo após a Etapa 5; Perguntas 1-4 no início da Etapa 9, antes da
 delegação). Você recebe as respostas já coletadas no documento-hub. Se
 alguma pergunta não foi feita ou a resposta ficou vaga demais para virar
 fato-fonte, **não invente** — registre como lacuna na saída (ver "Formato
@@ -249,7 +249,7 @@ aluno — embutido na frase corrida, nunca como lista ou campo à parte.
 1. **Leia o documento-hub inteiro** (Etapa 1 em diante) — histórico do
    aluno, diferencial (Etapa 4), pilar dominante e público (Etapa 5),
    promessa (Etapa 6), e as respostas às 5 perguntas de coleta (Pergunta 0
-   pós-Etapa 5; Perguntas 1-4 no início da Etapa 10).
+   pós-Etapa 5; Perguntas 1-4 no início da Etapa 9).
 2. **Rode a categoria 1:** identifique X (posicionamento almejado, deriva
    da `nova_oportunidade`) e Y (risco, resposta à Pergunta 4). Procure, nas
    respostas às 5 perguntas, fatos que defendam X contra Y.

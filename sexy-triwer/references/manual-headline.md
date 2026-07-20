@@ -88,7 +88,26 @@ fato tem, não force as 6 se só 3-4 categorias renderam ativo aprovado.
    mas depende do que o ativo/vivência sustenta.
 3. **Escolher o modelo MH mais adequado** à categoria do ativo (ou à
    vivência pessoal) e ao DOPA — tabela acima.
-4. **Aplicar a fórmula do modelo** com o dado do ativo/vivência escolhido.
+4. **Aplicar a fórmula do modelo literalmente** — substitua as variáveis
+   da fórmula (`[resultado]`, `[ação oposta ao padrão]` etc.) pelos dados
+   reais, palavra por palavra. **Nunca escreva uma frase livre que "tem o
+   espírito" do modelo e depois rotule com o ID dele.** Teste mecânico
+   antes de aceitar a headline: reescreva a fórmula do modelo escolhido
+   substituindo cada colchete pelo trecho correspondente da sua headline
+   — se algum colchete não tiver correspondente claro na frase (a
+   estrutura gramatical não bate, não só o conteúdo), o modelo está
+   errado para essa headline. Nesse caso, ou (a) troque para outro
+   modelo que a estrutura realmente sustente, ou (b) declare "sem
+   modelo" (opção já prevista, ver seção final deste manual) — nunca
+   force o rótulo do modelo numa frase que não segue a fórmula dele. Ex.:
+   "Estive 20 anos como designer de joias antes de virar professora
+   disso" **não é** MH001 (`Eu só [resultado] porque/quando [ação oposta
+   ao padrão]`) — é narrativa de trajetória livre, sem a estrutura causal
+   "eu só X porque Y". A aplicação correta de MH001 ao mesmo fato-fonte
+   seria algo como "Eu só vendi pra Gloria Coelho porque faço a
+   modelagem em cera" — resultado (vendi pra cliente de peso) + causa
+   que é a ação oposta ao padrão do mercado (faço em cera, não como a
+   maioria).
 5. **Rodar os testes abaixo** antes de considerar a headline pronta.
 
 Repita até ter 5 headlines, cada uma alimentada por um ativo/vivência

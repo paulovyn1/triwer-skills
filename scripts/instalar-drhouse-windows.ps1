@@ -1,4 +1,4 @@
-﻿# =============================================================
+# =============================================================
 # Triwer Skills — Instalador do dr-house-triwer (Windows/PowerShell)
 # =============================================================
 #
@@ -82,11 +82,14 @@ Download-File "dr-house-triwer/SKILL.md" "$DRHOUSE_DIR\SKILL.md"
 Download-File "dr-house-triwer/references/conceitos.md" "$DRHOUSE_DIR\references\conceitos.md"
 Download-File "dr-house-triwer/references/criterios.md" "$DRHOUSE_DIR\references\criterios.md"
 Download-File "dr-house-triwer/references/mecanismo.md" "$DRHOUSE_DIR\references\mecanismo.md"
+Download-File "dr-house-triwer/references/competitividade.md" "$DRHOUSE_DIR\references\competitividade.md"
 Download-File "dr-house-triwer/references/objetivo-ticket.md" "$DRHOUSE_DIR\references\objetivo-ticket.md"
 Download-File "dr-house-triwer/references/regras.md" "$DRHOUSE_DIR\references\regras.md"
 Download-File "dr-house-triwer/references/template-html.md" "$DRHOUSE_DIR\references\template-html.md"
 Download-File "dr-house-triwer/references/salvamento.md" "$DRHOUSE_DIR\references\salvamento.md"
 Download-File "dr-house-triwer/assets/template-diagnostico.html" "$DRHOUSE_DIR\assets\template-diagnostico.html"
+Download-File "dr-house-triwer/assets/hero-diagnosticador.b64.txt" "$DRHOUSE_DIR\assets\hero-diagnosticador.b64.txt"
+Download-File "dr-house-triwer/assets/corpo-biometrico.b64.txt" "$DRHOUSE_DIR\assets\corpo-biometrico.b64.txt"
 
 # memoria.md: nunca sobrescrever se já existir
 if (-not (Test-Path "$DRHOUSE_DIR\memoria.md")) {

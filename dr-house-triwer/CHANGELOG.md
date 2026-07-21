@@ -18,6 +18,18 @@ frontmatter do `SKILL.md` (não duplicado aqui).
 
 ---
 
+## 1.4.1 - 2026-07-21
+- Refina o template HTML V2 com tratamento de bordas em glassmorphism nas superfícies principais, sem alterar o contrato de conteúdo da skill.
+- Corrige o painel biométrico para manter o ECG em loop e os gauges de clareza, aderência e especificidade com o comportamento original.
+- Ignora rascunhos, previews gerados e testes locais para manter o push da skill focado nos arquivos necessários ao uso final.
+
+
+## 1.4.0 - 2026-07-20
+- Promove o template HTML V2 para `assets/template-diagnostico.html`, substituindo o modelo anterior no output oficial da skill.
+- Adiciona assets base64 fixos para hero e painel biometrico, usados na montagem autocontida do HTML final.
+- Atualiza `references/template-html.md` com o contrato V2: anamnese em ficha, painel biometrico, envelope do diagnostico, carrossel de achados e encaminhamento para Sexy.
+- Bloco 1 passa a coletar nome do criador e especialidade curta, exigidos pela faixa de identificacao do V2.
+
 ## 1.3.0 - 2026-07-14
 - Adiciona **veredito de competitividade** — critério 15 e 4ª checagem
   eliminatória (`references/competitividade.md`, novo): testa se o produto

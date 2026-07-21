@@ -49,9 +49,10 @@ for skill in "${SKILLS[@]}"; do
 
     # Copia excluindo dados pessoais (memoria.md) e scripts próprios (não
     # fazem sentido dentro do zip de upload manual).
-    rsync -a --exclude 'memoria.md' --exclude 'scripts' --exclude '.git' \
+    rsync -a --exclude 'memoria.md' --exclude 'scripts' --exclude '.git' --exclude '_draft-redesign' \
         "$skill_path/" "$temp_dir/" 2>/dev/null || \
         cp -r "$skill_path/." "$temp_dir/"
+    rm -rf "$temp_dir/_draft-redesign"
 
     (cd "$temp_dir" && zip -rq "$zip_path" .)
     rm -rf "$temp_dir"

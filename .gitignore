@@ -25,3 +25,7 @@ dist/
 # Planejamento interno (sistema "superpowers"/GSD) — não é skill de aluno,
 # não pertence a este repositório público. Mantido só localmente.
 docs/superpowers/
+# Rascunhos e previews gerados das skills — manter só localmente
+**/_draft-redesign/
+**/_test-output/
+dr-house-triwer/tests/

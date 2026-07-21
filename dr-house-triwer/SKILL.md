@@ -14,7 +14,7 @@ description: >
   precisar checar se está pronto. NÃO acionar para escrever copy, headline ou
   página de vendas — isso é diagnóstico de produto, não produção de conteúdo.
 compatibility: Claude Desktop, Claude Code, claude.ai
-metadata: "v1.3.0 — julho 2026 — adiciona veredito de competitividade (critério 15 / 4ª checagem eliminatória, references/competitividade.md), salvamento no Notion vira incremental por checkpoint ao longo da Fase 1/2 via HANDOFF para notion-zettelkasten-si, e encaminhamento ao Sexy deixa de ser condicional (ver CHANGELOG.md). v1.2.0 — julho 2026 — adiciona Log de Investigação (references/salvamento.md): subpágina da nota de produto que guarda na íntegra as respostas do Bloco 4/Mecanismo, para a skill Sexy extrair diferencial de promessa sem depender do resumo do HTML (ver CHANGELOG.md). v1.1.1 — julho 2026 — adiciona verificação automática de versão no BOOT (ver CHANGELOG.md). v1.1 — julho 2026 — criada por Milena Camila (Triwer), adaptada ao padrão do ecossistema"
+metadata: "v1.4.1 — julho 2026 — estabiliza o HTML V2 com refinamento de bordas glass e correcao do painel biometrico. v1.4.0 — julho 2026 — promove o template HTML V2 como output oficial, com anamnese em ficha, painel biometrico, envelope do diagnostico, carrossel de achados e assets base64 autocontidos. v1.3.0 — julho 2026 — adiciona veredito de competitividade (criterio 15 / 4a checagem eliminatoria, references/competitividade.md), salvamento no Notion incremental por checkpoint via HANDOFF para notion-zettelkasten-si, e encaminhamento ao Sexy sempre presente. v1.2.0 — julho 2026 — adiciona Log de Investigacao (references/salvamento.md). v1.1.1 — julho 2026 — adiciona verificacao automatica de versao no BOOT. v1.1 — julho 2026 — criada por Milena Camila (Triwer), adaptada ao padrao do ecossistema"
 ---
 
 # Dr. House — Agente Avaliador de Produto
@@ -157,7 +157,7 @@ arquivos conforme a fase do diagnóstico, não todos de uma vez:
   escrever o diagnóstico final, mesmo que já tenha lido antes na sessão — é fácil
   esquecer uma regra no meio da análise.
 - `references/template-html.md` — **não leia agora.** Só na Fase 3, na hora de gerar
-  o HTML. Explica quais placeholders preencher no template e como gerar o radar SVG.
+  o HTML. Explica o contrato V2 de placeholders, blocos repetiveis e assets fixos.
 - `assets/template-diagnostico.html` — **não leia agora.** O esqueleto HTML pronto,
   aprovado, com a identidade visual completa — usado junto com o guia acima na Fase 3.
 - `references/salvamento.md` — **não leia agora.** Só no primeiro checkpoint de
@@ -188,6 +188,8 @@ fazer todas literalmente se o aluno já respondeu de forma espontânea, mas voc�
 ter uma resposta real para cada uma antes de considerar o bloco completo.
 
 **Bloco 1 — Quem é o criador e de onde vem o que ele sabe**
+- Qual é o seu nome, como deve aparecer no diagnóstico?
+- Qual rótulo curto descreve sua especialidade ou nicho principal?
 - Qual sua profissão ou área de atuação, e há quanto tempo você atua nela?
 - O que você já fez na prática (com clientes, no seu próprio negócio, em qualquer
   contexto) que te fez achar que sabe resolver esse problema?
@@ -353,60 +355,25 @@ O diagnóstico final não é entregue como texto solto no chat — é gerado com
 HTML autocontido, pensado para o aluno abrir uma nova conversa com a skill Sexy levando
 esse arquivo como contexto (assim o Sexy não precisa perguntar tudo de novo).
 
-O HTML tem duas seções, nesta ordem:
+O HTML usa o modelo visual V2: hero com asset fixo, anamnese em ficha, painel biometrico, diagnostico geral em envelope, achados em carrossel e encaminhamento para a skill Sexy. A entrega continua sendo um arquivo HTML autocontido, nao texto solto no chat.
 
-### Seção 1 — Contexto do produto
+Antes de preencher o HTML, organize o conteudo em quatro grupos:
 
-Um resumo estruturado de tudo que foi coletado na Fase 1, organizado pelos mesmos 8
-blocos (criador, público e situação, promessa, mecanismo, produto e entrega, preço,
-prova, aquisição). Escreva como resumo direto do que o aluno disse, não como análise —
-essa seção é matéria-prima para a próxima conversa, não veredicto.
+1. **Anamnese do produto** — fatos objetivos dos 8 blocos da Fase 1, escritos como materia-prima. Nao transforme essa parte em analise longa.
+2. **Sinais vitais do produto** — leitura sintetica dos 4 pilares do V2: Publico e situacao, Promessa, Mecanismo, Prova e preco.
+3. **Diagnostico e achados** — veredito geral, achados por criterio real, gravidade e impacto.
+4. **Encaminhamento** — bridge obrigatorio para Sexy e perguntas em aberto.
 
-### Seção 2 — Diagnóstico
+O esqueleto visual ja existe e esta aprovado. Nao recrie CSS ou estrutura do zero, e nao leia `assets/template-diagnostico.html` inteiro. Em vez disso:
 
-```
-## Diagnóstico geral
-[1 parágrafo: coerente e pronto para validar / bom mas com pontos a trabalhar /
-estruturalmente confuso / prematuro para vender na promessa atual]
+1. **Copie o arquivo primeiro, via comando de terminal** (`cp`, `Copy-Item` ou equivalente) para o destino final.
+2. **Leia `references/template-html.md`** — ele e o contrato V2 completo de placeholders, blocos repetiveis e assets fixos.
+3. **Leia o arquivo `VERSION`** (sibling deste `SKILL.md`) e preencha `{{VERSAO_SKILL}}` no rodape com o valor lido, nunca hardcode.
+4. **Leia os assets base64 fixos** em `assets/hero-diagnosticador.b64.txt` e `assets/corpo-biometrico.b64.txt`, e use-os para preencher `{{HERO_PORTRAIT_SRC}}` e `{{CORPO_BIOMETRICO_SRC}}` como data URIs JPEG.
+5. **Edite so os placeholders e blocos repetiveis** no arquivo copiado. Duplique/remova blocos marcados por comentarios HTML conforme a quantidade real de fatos, etapas, achados e perguntas.
+6. **Confira que nenhum `{{PLACEHOLDER}}` sobrou** no HTML final antes de entregar.
 
-## Pontos fortes
-[Só forças claramente sustentadas pelo que o aluno disse — com uma linha de por
-quê isso ajuda conversão, implementação ou retenção. Se não houver força real,
-não invente uma para suavizar.]
-
-## Onde ajustar e oportunidades encontradas
-[Só os critérios onde há achado real — não os 15 sempre. Para cada um:]
-
-**[Nome do critério]**
-O que está acontecendo: [baseado no que o aluno disse]
-Por que importa: [impacto em conversão, implementação, retenção ou operação]
-Gravidade: [ajuste fino | problema estrutural | problema crítico]
-
-[Sem "ajuste recomendado" — o achado e o impacto bastam. A correção fica pro Sexy.]
-
-## Perguntas em aberto para levar ao Sexy
-[O que ficou sem resposta clara mesmo após a escavação, ou o que precisa de decisão
-antes de qualquer ajuste fazer sentido]
-```
-
-O esqueleto visual já existe e está aprovado — não recrie CSS ou estrutura do zero, e
-não leia `assets/template-diagnostico.html` inteiro (ele tem ~300 linhas de CSS que não
-precisam entrar no seu contexto). Em vez disso:
-
-1. **Copie o arquivo primeiro, via comando de terminal** (`cp` ou equivalente) para o
-   destino final — isso duplica o CSS sem gastar tokens lendo ele.
-2. **Leia `references/template-html.md`** — o guia de quais placeholders `{{ASSIM}}`
-   preencher e como gerar o radar SVG.
-3. **Leia o arquivo `VERSION`** (sibling deste `SKILL.md`) e preencha
-   `{{VERSAO_SKILL}}` no rodapé com o valor lido — nunca hardcode um número. Isso
-   permite auditar depois com qual versão da skill um HTML específico foi gerado.
-4. **Edite só os placeholders** no arquivo copiado (busca-e-substituição de cada
-   `{{PLACEHOLDER}}` pelo conteúdo desta sessão) — nunca reescreva o arquivo inteiro de
-   memória.
-
-Pergunte ao aluno onde salvar, ou use a pasta de outputs do projeto se houver convenção
-definida.
-
+Pergunte ao aluno onde salvar, ou use a pasta de outputs do projeto se houver convencao definida.
 ---
 
 ## Fase 4 — Salvar o que foi descoberto no Notion do aluno
@@ -478,6 +445,8 @@ vago não ajuda tanto quanto "isso funciona porque X" ajuda. E não confunda "di
 │   ├── template-html.md
 │   └── salvamento.md
 └── assets/
+    ├── corpo-biometrico.b64.txt
+    ├── hero-diagnosticador.b64.txt
     └── template-diagnostico.html
 ```
 
@@ -491,6 +460,7 @@ cp SKILL.md $BASE/
 cp VERSION $BASE/
 cp references/*.md $BASE/references/
 cp assets/template-diagnostico.html $BASE/assets/
+cp assets/*.b64.txt $BASE/assets/
 ```
 
 ### Windows
@@ -503,6 +473,7 @@ Copy-Item SKILL.md $BASE\
 Copy-Item VERSION $BASE\
 Copy-Item references\*.md $BASE\references\
 Copy-Item assets\template-diagnostico.html $BASE\assets\
+Copy-Item assets\*.b64.txt $BASE\assets\
 ```
 
 ### Após instalar

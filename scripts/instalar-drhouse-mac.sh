@@ -92,11 +92,14 @@ download_file "dr-house-triwer/SKILL.md" "$DRHOUSE_DIR/SKILL.md"
 download_file "dr-house-triwer/references/conceitos.md" "$DRHOUSE_DIR/references/conceitos.md"
 download_file "dr-house-triwer/references/criterios.md" "$DRHOUSE_DIR/references/criterios.md"
 download_file "dr-house-triwer/references/mecanismo.md" "$DRHOUSE_DIR/references/mecanismo.md"
+download_file "dr-house-triwer/references/competitividade.md" "$DRHOUSE_DIR/references/competitividade.md"
 download_file "dr-house-triwer/references/objetivo-ticket.md" "$DRHOUSE_DIR/references/objetivo-ticket.md"
 download_file "dr-house-triwer/references/regras.md" "$DRHOUSE_DIR/references/regras.md"
 download_file "dr-house-triwer/references/template-html.md" "$DRHOUSE_DIR/references/template-html.md"
 download_file "dr-house-triwer/references/salvamento.md" "$DRHOUSE_DIR/references/salvamento.md"
 download_file "dr-house-triwer/assets/template-diagnostico.html" "$DRHOUSE_DIR/assets/template-diagnostico.html"
+download_file "dr-house-triwer/assets/hero-diagnosticador.b64.txt" "$DRHOUSE_DIR/assets/hero-diagnosticador.b64.txt"
+download_file "dr-house-triwer/assets/corpo-biometrico.b64.txt" "$DRHOUSE_DIR/assets/corpo-biometrico.b64.txt"
 
 # memoria.md: nunca sobrescrever se já existir
 if [ ! -f "$DRHOUSE_DIR/memoria.md" ]; then

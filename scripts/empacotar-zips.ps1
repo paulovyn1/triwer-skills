@@ -1,4 +1,4 @@
-﻿# =============================================================
+# =============================================================
 # Triwer Skills — Empacota cada skill em um .zip para upload manual
 # (uso do mantenedor — gera dist/, não é para o aluno rodar)
 # =============================================================
@@ -53,7 +53,7 @@ foreach ($skill in $SKILLS) {
     New-Item -ItemType Directory -Force -Path $tempDir | Out-Null
 
     Copy-Item -Path "$skillPath\*" -Destination $tempDir -Recurse -Force `
-        -Exclude @("memoria.md", "scripts", ".git", "*.zip")
+        -Exclude @("memoria.md", "scripts", ".git", "*.zip", "_draft-redesign")
 
     # Compress-Archive grava os caminhos internos do zip com "\" (separador do
     # Windows) em vez de "/" (exigido pelo formato ZIP) -- o validador de

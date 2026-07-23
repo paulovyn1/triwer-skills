@@ -18,6 +18,20 @@ frontmatter do `SKILL.md` (não duplicado aqui).
 
 ---
 
+## 1.6.0 - 2026-07-23
+- **Adiciona Fase 4.5 — Criar ou atualizar a Ficha de Produto no Notion:**
+  ao final de cada diagnóstico, a skill agora busca o produto na database
+  `produtos_db_url`, cria a entrada se não existir ou atualiza apenas os
+  campos novos se já existir, e grava os campos nas 4 seções do corpo da
+  página (Identidade, Transformação, Ganchos, Linha Editorial). Sempre
+  apresenta resumo ao aluno e aguarda confirmação antes de gravar.
+- **Adiciona `references/ficha-produto.md`:** documenta o schema exato da
+  database de Produtos (nome dos campos, tipos, relations a não preencher)
+  e a estrutura do corpo de cada página de produto (tabelas, callouts e
+  parágrafos com nomes literais como aparecem no Notion), obtido via API
+  diretamente do Template Perfil do Aluno Triwer. Elimina a necessidade de
+  o modelo inferir nomes de campo por approximate matching.
+
 ## 1.5.0 - 2026-07-23
 - **Corrige BOOT Passo 1:** ao carregar `memoria.md`, agora valida se todas
   as 4 URLs (`quem_sou_eu_url`, `historias_db_url`, `meu_publico_db_url`,

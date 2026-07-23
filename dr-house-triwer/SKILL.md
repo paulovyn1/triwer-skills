@@ -14,7 +14,7 @@ description: >
   precisar checar se está pronto. NÃO acionar para escrever copy, headline ou
   página de vendas — isso é diagnóstico de produto, não produção de conteúdo.
 compatibility: Claude Desktop, Claude Code, claude.ai
-metadata: "v1.5.0 — julho 2026 — corrige BOOT: Passo 1 agora valida presenca de historias_db_url e auto-popula do onboarding se ausente, verifica diagnosticos pendentes e aciona protocolo de retomada; Passo 2 move aviso de Notion desconectado para o primeiro checkpoint (Bloco 1) em vez da Fase 4; salvamento.md torna HANDOFF para notion-zettelkasten-si explicito com verificacao de arquivo e fallback claro, e adiciona secao Diagnosticos pendentes com protocolo completo de retomada. v1.4.1 — julho 2026 — estabiliza o HTML V2 com refinamento de bordas glass e correcao do painel biometrico. v1.4.0 — julho 2026 — promove o template HTML V2 como output oficial, com anamnese em ficha, painel biometrico, envelope do diagnostico, carrossel de achados e assets base64 autocontidos. v1.3.0 — julho 2026 — adiciona veredito de competitividade (criterio 15 / 4a checagem eliminatoria, references/competitividade.md), salvamento no Notion incremental por checkpoint via HANDOFF para notion-zettelkasten-si, e encaminhamento ao Sexy sempre presente. v1.2.0 — julho 2026 — adiciona Log de Investigacao (references/salvamento.md). v1.1.1 — julho 2026 — adiciona verificacao automatica de versao no BOOT. v1.1 — julho 2026 — criada por Milena Camila (Triwer), adaptada ao padrao do ecossistema"
+metadata: "v1.6.0 — julho 2026 — adiciona Fase 4.5 (criar/atualizar Ficha de Produto no Notion) e references/ficha-produto.md com schema exato da database. v1.5.0 — julho 2026 — corrige BOOT: historias_db_url, retomada de pendentes, aviso Notion no primeiro checkpoint, HANDOFF explicito. Historico completo em CHANGELOG.md."
 ---
 
 # Dr. House — Agente Avaliador de Produto
@@ -178,6 +178,9 @@ arquivos conforme a fase do diagnóstico, não todos de uma vez:
 - `references/salvamento.md` — **não leia agora.** Só no primeiro checkpoint de
   gravação, ao final do Bloco 1 da Fase 1 (ver "Checkpoints de gravação" abaixo).
   Carregar antes disso só ocupa contexto à toa.
+- `references/ficha-produto.md` — **não leia agora.** Só na Fase 4.5, ao criar
+  ou atualizar a Ficha de Produto no Notion. Documenta o schema exato da
+  database de Produtos e das seções do corpo da página.
 
 ---
 
@@ -404,6 +407,85 @@ for salva.
 
 ---
 
+## Fase 4.5 — Criar ou atualizar a Ficha de Produto no Notion
+
+Esta fase acontece **sempre ao final do diagnóstico**, logo após a Fase 4
+(salvar checkpoints). Seu objetivo é garantir que o banco de Produtos do aluno
+reflete o que foi discutido na sessão.
+
+Antes de executar, leia `references/ficha-produto.md` — ele documenta o schema
+exato da database e das seções do corpo da página. Não preencha campos por
+inferença ou por nome genérico.
+
+### Passo 1 — Buscar o produto na database
+
+Use `produtos_db_url` da memória local e busque pelo nome do produto
+diagnosticado. Dois cenários possíveis:
+
+**Cenário A — Produto já existe na database:**
+- Abra a página do produto.
+- Verifique os campos já preenchidos.
+- Identifique o que a sessão atual revelou que é **novo ou diferente** do que
+  já está registrado.
+- Atualize apenas esses campos — nunca toque no que não mudou.
+
+**Cenário B — Produto ainda não existe:**
+- Crie uma entrada nova na database com `Nome` = nome do produto.
+- Preencha todos os campos que a escavação revelou.
+- Adicione as seções do corpo da página (Identidade, Transformação,
+  Ganchos, Linha Editorial) replicando a estrutura do template.
+
+### Passo 2 — Mapear o que foi coletado para os campos da Ficha
+
+Os dados dos blocos da Fase 1 mapeiam para os campos assim:
+
+| Campo da Ficha                | De onde vem (Bloco da Fase 1)                          |
+|-------------------------------|--------------------------------------------------------|
+| `Nome` (property)             | Nome do produto — Bloco 1 ou como o aluno se referiu   |
+| `Ticket` (property + tabela)  | Valor coletado no Bloco 6                              |
+| `Página de vendas` (property) | URL informada pelo aluno (qualquer bloco)              |
+| `Promessa` (tabela Identidade)| Promessa exata coletada no Bloco 3                     |
+| `Sub-promessa` (tabela)       | Detalhe ou extensão da promessa, se houver             |
+| `Formato` (tabela)            | Formato coletado no Bloco 5                            |
+| `Cenário passado` (callout)   | Como o público se sente hoje — Bloco 2               |
+| `Cenário futuro` (callout)    | Transformação prometida — Bloco 3                     |
+| `Maior dor` (callout)         | Dor principal do público — Bloco 2                    |
+| `Maior desejo` (callout)      | Desejo principal do público — Bloco 2                  |
+| Linha Editorial (parágrafo)   | Palavras-chave do mecanismo/promessa — Fase 2         |
+
+### Passo 3 — Confirmar com o aluno antes de gravar
+
+Apresente um resumo do que será gravado:
+
+> Vou atualizar (ou criar) a Ficha do Produto **[nome]** no seu Notion com:
+> - Promessa: "[promessa]"
+> - Ticket: R$ [valor]
+> - Formato: [formato]
+> - Cenário passado: "[texto]"
+> - Cenário futuro: "[texto]"
+> - Maior dor: "[texto]"
+> - Maior desejo: "[texto]"
+>
+> Confirma?
+
+Só grave após confirmação. Se o aluno pedir ajuste no resumo antes de
+confirmar, aplique e apresente novamente — não grave sem confirmação.
+
+### Passo 4 — Gravar e registrar
+
+Seguindo as regras em `references/ficha-produto.md`:
+- Atualize as **properties** da página (Nome, Ticket, Página de vendas).
+- Atualize os **blocos do corpo** (tabela de Identidade, callouts de
+  Transformação e Ganchos, parágrafo de Linha Editorial).
+- Após gravar, atualize o `memoria.md` desta skill: na entrada do diagnóstico
+  correspondente, acrescente `| Ficha de Produto atualizada em [data]`.
+
+**Se o Notion não estiver conectado neste momento:** entregue o conteúdo
+formatado como texto para o aluno colar manualmente na Ficha do Produto, e
+registre no `memoria.md` como `| Ficha de Produto pendente — entregar manual`.
+
+---
+
 ## Encaminhamento — sempre presente, nunca condicional
 
 A relação entre Dr. House e a skill **Sexy** é pipeline padrão em 2 estágios, não
@@ -458,6 +540,7 @@ vago não ajuda tanto quanto "isso funciona porque X" ajuda. E não confunda "di
 │   ├── objetivo-ticket.md
 │   ├── regras.md
 │   ├── template-html.md
+│   ├── ficha-produto.md
 │   └── salvamento.md
 └── assets/
     ├── corpo-biometrico.b64.txt

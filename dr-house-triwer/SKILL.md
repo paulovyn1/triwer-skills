@@ -14,7 +14,7 @@ description: >
   precisar checar se está pronto. NÃO acionar para escrever copy, headline ou
   página de vendas — isso é diagnóstico de produto, não produção de conteúdo.
 compatibility: Claude Desktop, Claude Code, claude.ai
-metadata: "v1.4.1 — julho 2026 — estabiliza o HTML V2 com refinamento de bordas glass e correcao do painel biometrico. v1.4.0 — julho 2026 — promove o template HTML V2 como output oficial, com anamnese em ficha, painel biometrico, envelope do diagnostico, carrossel de achados e assets base64 autocontidos. v1.3.0 — julho 2026 — adiciona veredito de competitividade (criterio 15 / 4a checagem eliminatoria, references/competitividade.md), salvamento no Notion incremental por checkpoint via HANDOFF para notion-zettelkasten-si, e encaminhamento ao Sexy sempre presente. v1.2.0 — julho 2026 — adiciona Log de Investigacao (references/salvamento.md). v1.1.1 — julho 2026 — adiciona verificacao automatica de versao no BOOT. v1.1 — julho 2026 — criada por Milena Camila (Triwer), adaptada ao padrao do ecossistema"
+metadata: "v1.5.0 — julho 2026 — corrige BOOT: Passo 1 agora valida presenca de historias_db_url e auto-popula do onboarding se ausente, verifica diagnosticos pendentes e aciona protocolo de retomada; Passo 2 move aviso de Notion desconectado para o primeiro checkpoint (Bloco 1) em vez da Fase 4; salvamento.md torna HANDOFF para notion-zettelkasten-si explicito com verificacao de arquivo e fallback claro, e adiciona secao Diagnosticos pendentes com protocolo completo de retomada. v1.4.1 — julho 2026 — estabiliza o HTML V2 com refinamento de bordas glass e correcao do painel biometrico. v1.4.0 — julho 2026 — promove o template HTML V2 como output oficial, com anamnese em ficha, painel biometrico, envelope do diagnostico, carrossel de achados e assets base64 autocontidos. v1.3.0 — julho 2026 — adiciona veredito de competitividade (criterio 15 / 4a checagem eliminatoria, references/competitividade.md), salvamento no Notion incremental por checkpoint via HANDOFF para notion-zettelkasten-si, e encaminhamento ao Sexy sempre presente. v1.2.0 — julho 2026 — adiciona Log de Investigacao (references/salvamento.md). v1.1.1 — julho 2026 — adiciona verificacao automatica de versao no BOOT. v1.1 — julho 2026 — criada por Milena Camila (Triwer), adaptada ao padrao do ecossistema"
 ---
 
 # Dr. House — Agente Avaliador de Produto
@@ -91,6 +91,11 @@ Tente ler `~/.claude/skills/onboarding-triwer/memoria.md`.
 Tente ler `~/.claude/skills/dr-house-triwer/memoria.md`.
 
 - **Se existir:** carregue as URLs do Notion em memória de trabalho.
+  Verifique se todas as 4 URLs estão presentes:
+  `quem_sou_eu_url`, `historias_db_url`, `meu_publico_db_url` e
+  `produtos_db_url`. Se alguma estiver ausente, leia
+  `~/.claude/skills/onboarding-triwer/memoria.md` e extraia apenas a URL
+  faltante, depois atualize o `memoria.md` desta skill com ela.
 - **Se não existir:** leia `~/.claude/skills/onboarding-triwer/memoria.md`
   diretamente, extraia `quem_sou_eu_url`, `historias_db_url`,
   `meu_publico_db_url` e `produtos_db_url` da seção "Notion — URLs
@@ -110,13 +115,22 @@ Tente ler `~/.claude/skills/dr-house-triwer/memoria.md`.
   - [produto/serviço diagnosticado] | [data] | [caminho do HTML gerado]
   ```
 
+Após carregar as URLs, verifique a seção "Diagnósticos gerados" do
+`memoria.md`. Se houver qualquer entrada com status indicando salvamento
+pendente, siga o protocolo de retomada descrito em
+`references/salvamento.md` — seção "Diagnósticos pendentes — como
+retomar". Nunca bloqueie o início de um novo diagnóstico por isso; a
+oferta de retomada é oportunidade, não bloqueio.
+
 ### Passo 2 — Verificar conexão com o Notion
 
-Só é bloqueante para a Fase 4 (salvar descobertas), não para o diagnóstico em
-si. Tente uma busca simples com a ferramenta `notion`.
+Só é bloqueante para os checkpoints de gravação (que começam no fim do
+Bloco 1, já na Fase 1), não para o diagnóstico em si. Tente uma busca
+simples com a ferramenta `notion`.
 
 - **Se disponível:** confirme internamente.
-- **Se não disponível:** ao chegar na Fase 4, exiba:
+- **Se não disponível:** guarde esse estado e, ao chegar no **primeiro
+  checkpoint** (fim do Bloco 1), exiba antes de tentar salvar:
 
   > ⚠️ **Notion não conectado**
   >
@@ -131,8 +145,9 @@ si. Tente uma busca simples com a ferramenta `notion`.
   >
   > **Claude Code:** `claude mcp add --transport http notion https://mcp.notion.com/mcp` → `/mcp`
 
-  Não bloqueie a entrega do diagnóstico por causa disso — apenas pule a Fase
-  4 e informe o que não pôde ser salvo.
+  Não bloqueie a entrega do diagnóstico por causa disso — apenas pule os
+  checkpoints de gravação e informe ao aluno, ao final da sessão, quais
+  informações não puderam ser salvas automaticamente.
 
 ---
 

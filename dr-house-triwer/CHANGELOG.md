@@ -18,6 +18,28 @@ frontmatter do `SKILL.md` (não duplicado aqui).
 
 ---
 
+## 1.5.0 - 2026-07-23
+- **Corrige BOOT Passo 1:** ao carregar `memoria.md`, agora valida se todas
+  as 4 URLs (`quem_sou_eu_url`, `historias_db_url`, `meu_publico_db_url`,
+  `produtos_db_url`) estão presentes — e auto-popula do `onboarding-triwer`
+  a URL ausente em vez de continuar com dado incompleto. Resolve falha
+  silenciosa no checkpoint do Bloco 7 (Prova) quando `historias_db_url`
+  estava faltando.
+- **Adiciona protocolo de retomada de diagnósticos pendentes:** após carregar
+  a memória, o BOOT lê a seção \"Diagnósticos gerados\" e oferece ao aluno
+  salvar um diagnóstico anterior pendente antes de iniciar um novo, sem
+  bloquear o fluxo. Protocolo completo em `references/salvamento.md` —
+  seção \"Diagnósticos pendentes — como retomar\".
+- **Corrige BOOT Passo 2:** aviso de Notion não conectado agora é exibido
+  no **primeiro checkpoint** (fim do Bloco 1, Fase 1), não ao chegar na
+  Fase 4. O modelo incremental de salvamento começa na Fase 1 — o aviso
+  tardio fazia o aluno perder todos os checkpoints sem ser avisado.
+- **Torna HANDOFF para `notion-zettelkasten-si` explícito:** `salvamento.md`
+  agora instrui o modelo a verificar se `~/.claude/skills/notion-zettelkasten-si/SKILL.md`
+  existe antes de invocar o protocolo, e define o fallback de escrita direta
+  via Notion quando a skill não estiver instalada — eliminando comportamento
+  ambíguo que levava o modelo a não salvar nada ou salvar de forma errada.
+
 ## 1.4.1 - 2026-07-21
 - Refina o template HTML V2 com tratamento de bordas em glassmorphism nas superfícies principais, sem alterar o contrato de conteúdo da skill.
 - Corrige o painel biométrico para manter o ECG em loop e os gauges de clareza, aderência e especificidade com o comportamento original.

@@ -57,29 +57,30 @@ fechar um checkpoint:
 1. Formule o conteúdo da nota (ou notas) — o que foi descoberto naquele
    bloco, já como tese/conclusão, não como transcrição bruta da conversa
    (a transcrição bruta só se aplica ao Log de Investigação, ver abaixo).
-2. Invoque o comportamento da skill `notion-zettelkasten-si` com esse
-   conteúdo — ela já resolve a localização do Acervo por workspace, checa
-   duplicata antes de criar, tem `Tipo: Central` pronto pra funcionar como
-   índice quando aplicável, aplica a diagramação e a disciplina de
-   Âncoras/menções inline. Não reimplemente essa mecânica aqui.
+2. Verifique se a skill `notion-zettelkasten-si` está instalada tentando
+   ler `~/.claude/skills/notion-zettelkasten-si/SKILL.md`.
+   - **Se o arquivo existir:** leia-o e siga seu protocolo completo de
+     criação/atualização de nota (Passo 0 → Passo 5 do `SKILL.md` dela).
+     Ela já resolve localização do Acervo por workspace, checa duplicata
+     antes de criar, aplica a diagramação e a disciplina de
+     Âncoras/menções inline. Não reimplemente essa mecânica aqui.
+   - **Se o arquivo não existir (fallback):** escreva diretamente com as
+     ferramentas Notion, seguindo a estrutura das notas já existentes na
+     mesma base como referência de formato — mas com o mesmo cuidado que
+     já vale em qualquer skill Triwer que grava no Notion do aluno:
+     `notion-update-page` com `command: update_content` (inserção pontual,
+     search-and-replace de um trecho específico) é seguro; `replace_content`
+     apaga a página inteira e a substitui pelo conteúdo enviado — use
+     `replace_content` **somente** quando a página for nova ou estiver
+     vazia, nunca numa página que já tem conteúdo do aluno ou de sessões
+     anteriores. Se criar um banco/database novo (não uma página simples),
+     sempre marque `is_inline: true` logo depois de criar — é o padrão de
+     todo banco no workspace do aluno; um banco não-inline quebra o layout
+     esperado.
 
 Isso substitui o padrão antigo (escrever direto via `notion-update-page`
 com `command: update_content`) — a mecânica de escrita fica inteira do lado
-de `notion-zettelkasten-si`.
-
-**Fallback se `notion-zettelkasten-si` não estiver disponível no workspace
-do aluno:** escreva diretamente com as ferramentas Notion, seguindo a
-estrutura das notas já existentes na mesma base como referência de
-formato — mas com o mesmo cuidado que já vale em qualquer skill Triwer que
-grava no Notion do aluno: `notion-update-page` com `command:
-update_content` (inserção pontual, search-and-replace de um trecho
-específico) é seguro; `replace_content` apaga a página inteira e a
-substitui pelo conteúdo enviado — use `replace_content` **somente** quando
-a página for nova ou estiver vazia, nunca numa página que já tem conteúdo
-do aluno ou de sessões anteriores. Se criar um banco/database novo (não
-uma página simples), sempre marque `is_inline: true` logo depois de criar —
-é o padrão de todo banco no workspace do aluno; um banco não-inline quebra
-o layout esperado.
+de `notion-zettelkasten-si` sempre que ela estiver disponível.
 
 ## O que o HTML final cita
 
@@ -187,6 +188,40 @@ origem:
 
 Isso ajuda o aluno (ou você mesmo, numa sessão futura) a distinguir o que
 veio de diagnóstico do que ele escreveu manualmente.
+
+## Diagnósticos pendentes — como retomar
+
+Se o `memoria.md` desta skill registrar um diagnóstico com status contendo
+"pendente" ou "não salvo", o BOOT deve agir assim:
+
+1. Logo após carregar as URLs de memória (Passo 1 do BOOT), leia a seção
+   "Diagnósticos gerados" do `memoria.md`.
+2. Se houver qualquer entrada com status que indique salvamento pendente
+   (ex.: "Não salvo no Notion ainda", "pendente confirmação",
+   "pendente de salvamento"), exiba ao aluno:
+
+   > 📋 **Diagnóstico anterior com salvamento pendente**
+   >
+   > Encontrei o diagnóstico de **[nome do produto]** ([data]) ainda não
+   > salvo no Notion. Quer que eu tente salvar agora antes de começar um
+   > novo diagnóstico? Caso prefira continuar sem salvar, me avise e
+   > prosseguiremos normalmente.
+
+3. Se o aluno confirmar que quer salvar:
+   - Leia o HTML gerado (caminho registrado no `memoria.md`) e extraia
+     as informações dos 8 blocos e do diagnóstico da Fase 2.
+   - Aplique os checkpoints 1–9 do `salvamento.md` para esse diagnóstico
+     anterior, na mesma mecânica de HANDOFF para `notion-zettelkasten-si`.
+   - Ao concluir, atualize o status da entrada no `memoria.md` para
+     "Salvo no Notion em [data]".
+4. Se o aluno pedir para ignorar ou não houver HTML para ler:
+   - Atualize o status no `memoria.md` para "Descartado — aluno optou por
+     não salvar" e prossiga para o novo diagnóstico.
+
+**Importante:** nunca bloqueie o início de um novo diagnóstico por causa
+de um pendente — a oferta de retomada é oportunidade, não bloqueio.
+
+---
 
 ## O que não fazer
 

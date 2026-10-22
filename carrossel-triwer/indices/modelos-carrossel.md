@@ -49,6 +49,7 @@ related: "[[Triwer — Índice de Modelos de Headline]]"
 | [[Triwer — MC013 Tirinha Arco de Personagem\|MC013]] | `[TIRINHA] Personagem em erro → desenvolvimento com consequências visuais → virada ou insight → CTA` | Provocação/Descoberta | Tirinhas com arco de transformação de personagem. Nunca usar MC convencional em tirinha. | Consolidado |
 | [[Triwer — MC014 Tirinha Ciclo Comportamental\|MC014]] | `[TIRINHA] Dias da semana como cenas com ciclo repetido irônico → derrota/resignação → narrador nomeia o padrão → CTA` | Provocação | Tirinhas com loop comportamental semanal. Sem virada de personagem — o ciclo se repete. | Consolidado |
 | [[Triwer — MC015 Dissecação de Referência em Pilares com Isca de Direct\|MC015]] | `Ímã + headline de contraste → validação → 3 pilares nomeados em destaque tipográfico → slide espelho → diagnóstico → escassez de espaço → CTA código` | Descoberta | Análise com figura pública, produto viral ou fenômeno cultural. Crescer alcance + captar leads simultâneo. | Consolidado |
+| [[Triwer — MC016 Confissão de Ruptura com Aprendizados Enumerados\|MC016]] | `Confissão de parar X por período → contexto + motivação → ceticismo externo → virada lógica → prova visual → aprendizados enumerados (N itens) → promessa de isca → CTA Manychat → quebra de objeção com case` | Descoberta | Pré-lançamento para captação de leads. Criador tem resultado real de um experimento ou período de mudança. 9 slides fixos. | Consolidado |
 
 ---
 
@@ -71,6 +72,7 @@ related: "[[Triwer — Índice de Modelos de Headline]]"
 | Headline | Estrutura | Task IDs de referência |
 |---|---|---|
 | MH001 Confissão Contraintuitiva | MC003 Narrativa de Virada | `86a5gzw3w`, `86a2b2hcf` |
+| MH001 Confissão Contraintuitiva (variante com enumeração) | MC016 Confissão de Ruptura com Aprendizados | `86a839p4q` |
 | MH002 Negação de Crença | MC001 Cascata de Negação | `86a3fyv60`, `86a3va788` |
 | MH003 Imperativo + Resultado | MC002 Antes-Depois com Método | `86a2cjng7`, `86a2krju7` |
 | MH004 Transformação de Banal | MC003 Narrativa de Virada | `86a2dfgb6`, `86a2krh5m` |

@@ -9,7 +9,7 @@ description: >
   como fallback quando Notion não estiver conectado. Detecta iscas novas
   mencionadas na conversa e oferece cadastrá-las no Notion automaticamente.
 compatibility: Claude Desktop, Claude Code, claude.ai
-metadata: "v4.0.1 — julho 2026 — adiciona verificação automática de versão no BOOT (ver CHANGELOG.md). v4.0 — julho 2026 — onboarding delegado ao onboarding-triwer"
+metadata: "v4.0.2, outubro 2026: código Manychat no formato 3 letras + 2 números. v4.0.1 — julho 2026 — adiciona verificação automática de versão no BOOT (ver CHANGELOG.md). v4.0 — julho 2026 — onboarding delegado ao onboarding-triwer"
 ---
 
 # CTA Triwer
@@ -225,7 +225,7 @@ Com as iscas carregadas no Passo 1, aplique os critérios em ordem:
 1. **Próximo passo natural** — a isca entrega a continuação direta do que o post ensinou. Nunca produto diferente do tema.
 2. **Objetivo MC compatível** — o objetivo da isca bate com a decisão do Passo 2. Prioridade: Isca/Engajamento > Captação > Looping > Venda.
 3. **Status ✅ Ativa** — isca com ⚠️ Verificar só usar se for a única opção, avisando o usuário para confirmar.
-4. **Código curto e temático** — 2 a 6 letras relacionadas ao tema. Nunca genérico ("INFO", "MAIS", "QUERO").
+4. **Código temático no formato 3 letras + 2 números** (ex.: FUN01, MAP01). Nunca palavra solta ("FUNIL", "INFO", "QUERO"): dispara a automação por acidente em conversa comum no Direct.
 
 **Se nenhuma isca existente encaixar:** leia o arquivo de padrões e sinalize ao usuário:
 

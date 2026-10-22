@@ -4,7 +4,9 @@ description: >
   Cria posts de carrossel para o Instagram seguindo o Método de Conteúdo
   Triwer (framework DOPA). Use esta skill sempre que pedir um carrossel,
   post de feed, slide deck de conteúdo, ou quando mencionar qualquer objetivo
-  DOPA (Descoberta, Oportunidade, Provocação, Autoridade). Requer o
+  DOPA (Descoberta, Oportunidade, Provocação, Autoridade). Também acionar
+  quando colar um post já publicado e pedir para adaptar, reaproveitar ou
+  fazer um novo na mesma estrutura (modo adaptação). Requer o
   ecossistema Triwer configurado (onboarding-triwer, e idealmente
   prisma-triwer e oraculo-triwer já rodados) — conexão com Notion como base
   de dados, estrutura dos 5 blocos fixos, aplicação de tom de voz via Forge,
@@ -12,7 +14,7 @@ description: >
   sessões. NÃO acionar para stories, lives, scripts de vídeo, headlines
   avulsas ou outros formatos — escopo exclusivo de carrossel de feed.
 compatibility: Claude Desktop, Claude Code, claude.ai
-metadata: "v4.1.1 — julho 2026 — adiciona verificação automática de versão no BOOT (ver CHANGELOG.md). v4.1 — julho 2026 — cadastro de histórias delegado à historias-triwer"
+metadata: "v4.2.0, outubro 2026: MC manda na estrutura, testes de escrita sim/não, modo adaptação de post validado, código Manychat 3 letras + 2 números. v4.1.1 — julho 2026 — adiciona verificação automática de versão no BOOT (ver CHANGELOG.md). v4.1 — julho 2026 — cadastro de histórias delegado à historias-triwer"
 ---
 
 # Agente de Carrosseis — Triwer
@@ -23,9 +25,9 @@ metadata: "v4.1.1 — julho 2026 — adiciona verificação automática de vers�
 > **Arquivos incluídos nesta skill (instalar juntos):**
 > - `SKILL.md` — este arquivo (orquestrador principal)
 > - `indices/modelos-headline.md` — índice leve MH001–MH016 para seleção
-> - `indices/modelos-carrossel.md` — índice leve MC001–MC015 com pares canônicos
+> - `indices/modelos-carrossel.md` — índice leve MC001–MC016 com pares canônicos
 > - `modelos/mh/MH001.md` … `MH016.md` — arquivos completos de cada modelo de headline
-> - `modelos/mc/MC001.md` … `MC015.md` — arquivos completos de cada modelo de carrossel
+> - `modelos/mc/MC001.md` … `MC016.md` — arquivos completos de cada modelo de carrossel
 > - `referencias/manual-headline.md` — processo de construção e 9 testes de validação
 > - `referencias/outliers-headline.md` — anti-padrões e checklist negativo
 > - `memoria.md` — criado automaticamente no primeiro uso (ou propagado pelo `onboarding-triwer`)
@@ -261,6 +263,13 @@ Guarde a lista em memória de trabalho. Não exiba ao usuário. **Não abra pág
 Se tudo carregou sem erro: aguarde o input do usuário sem exibir nada.
 Se houve erro de acesso ao Notion: informe brevemente e ofereça continuar manualmente.
 
+### 0.3 — Decidir o modo
+
+- O usuário colou um post já publicado (texto, print ou descrição slide a
+  slide) e pediu para adaptar, reaproveitar, "fazer um igual" ou "nessa
+  estrutura" → **MODO ADAPTAÇÃO** (seção própria, depois da Etapa 4).
+- Qualquer outro pedido → **MODO NOVO**, a partir da Etapa 1.
+
 ---
 
 ## ETAPA 1 — COLETA DE INPUTS
@@ -317,9 +326,9 @@ Use a lista carregada na Etapa 0. Escolha 2–3 por relevância temática e tipo
 ```
 Encontrei [N] histórias que combinam com esse tema:
 
-1. [título] — [resumo em 1 linha] | Tipo: [tipos]
-2. [título] — [resumo em 1 linha] | Tipo: [tipos]
-3. [título] — [resumo em 1 linha] | Tipo: [tipos]
+1. [título]: [resumo em 1 linha] | Tipo: [tipos]
+2. [título]: [resumo em 1 linha] | Tipo: [tipos]
+3. [título]: [resumo em 1 linha] | Tipo: [tipos]
 
 Qual você quer usar? Ou prefere criar uma nova?
 ```
@@ -346,7 +355,7 @@ Use o índice `indices/modelos-carrossel.md` já carregado. Aplique os pares can
 ~/.claude/skills/carrossel-triwer/modelos/mc/MC[ID].md
 ```
 
-Informe `MC[ID] — [nome]` antes de avançar.
+Informe `MC[ID]: [nome]` antes de avançar.
 
 ---
 
@@ -360,7 +369,7 @@ Métrica principal: [o que medir]
 Ignorar: [o que não medir]
 
 Modelo de headline: a confirmar na geração
-Modelo de carrossel: [MC ID] — [nome]
+Modelo de carrossel: [MC ID]: [nome]
 História: [título]
 Público: [nome do perfil]
 
@@ -384,18 +393,46 @@ Leia: [path registrado na memória — ex: ~/.claude/skills/estilo-paulinho/SKIL
 
 ---
 
-## ETAPA 4 — GERAÇÃO DOS 5 BLOCOS FIXOS
+## ETAPA 4 — GERAÇÃO
 
-Todo carrossel segue esta sequência. A ordem não muda. Aplique as regras do MC selecionado sobre os blocos abaixo.
+### Quem manda na estrutura: o MC
+
+O MC confirmado define a ordem dos slides, a função de cada um e quem é o
+sujeito do texto (o leitor, você, um terceiro). Siga a sequência funcional
+do arquivo `modelos/mc/MC[ID].md` slide a slide.
+
+Os 5 blocos abaixo são a **estrutura padrão**, usada só quando nenhum MC
+encaixou (sinalize "sem MC" no debriefe). Se o MC e um bloco padrão
+discordarem, o MC ganha. Exemplo: o MC006 pede o leitor como sujeito, e o
+Bloco 3 pede história pessoal em 3 slides; vale o MC006.
+
+Em qualquer MC, estas funções valem sempre: o espelho não resolve nada, o
+método tem no máximo 3 trocas, e o CTA segue o Bloco 5.
 
 **Regras operacionais por DOPA:**
 
 | DOPA | Regras |
 |---|---|
-| Descoberta | 8–10 slides. Gancho em minúsculo + reticências no final da virada. |
-| Oportunidade | Prova no slide 03, **antes** do método. Se vier depois, o post deixa de ser Oportunidade. Número em linha isolada. |
-| Provocação | 6–8 slides. Uma ideia por slide, frases curtas. |
+| Descoberta | 8 a 10 slides. Gancho em minúsculo + reticências no final da virada. |
+| Oportunidade | Prova no slide 03, **antes** do método. Se vier depois, o post deixa de ser Oportunidade. O número de resultado pode ficar sozinho em destaque (decisão visual). |
+| Provocação | 6 a 8 slides. Uma ideia por slide, escrita em parágrafo corrido. Os slides 02 e 03 já trazem uma promessa implícita: o leitor precisa sentir que vale ficar até o fim, não só ver a objeção normalizada. |
 | Autoridade | Sempre 2 tipos de prova diferentes (número + depoimento literal, ou número + comportamento espontâneo). Nunca apenas 1 tipo. |
+
+**Regras por MC:**
+- **MC006 (Confronto de Objeção com Reframing):** o leitor é o sujeito dos
+  slides 02 a 06. A história pessoal entra como prova rápida (1 a 2 linhas),
+  nunca como espinha dorsal. Teste: 3 ou mais slides seguidos no formato
+  "eu fazia / eu parei / eu comecei" → o post virou narrativa pessoal;
+  reescreva com o leitor como sujeito.
+
+**Post de urgência de evento** (último dia, vagas acabando, encerramento):
+além do DOPA, o post responde às 3 perguntas abaixo. Conceito + "último
+dia" sem elas não gera urgência.
+1. O que a pessoa sai com nas mãos depois do evento? Específico:
+   ferramenta, framework, automação pronta.
+2. Como a semana dela fica diferente depois disso?
+3. O que ela perde se não entrar hoje?
+A prova com número real da última edição vem antes do cenário e do método.
 
 ---
 
@@ -412,7 +449,7 @@ Use o índice `indices/modelos-headline.md` já carregado. Identifique 2–3 can
 ~/.claude/skills/carrossel-triwer/modelos/mh/MH[ID].md
 ```
 
-Informe `MH[ID] — [nome]` antes de escrever.
+Informe `MH[ID]: [nome]` antes de escrever.
 
 #### Passo 2 — Construir com o Manual
 
@@ -435,7 +472,7 @@ Aplique a **Categoria 2 — Anti-padrões** como checklist antes de fechar o sli
 - [ ] A headline descreve o conteúdo em vez de confrontar algo?
 - [ ] Tem mais de 12 palavras sem densidade alta por palavra?
 - [ ] Tem uma pergunta com resposta óbvia ou reconfortante?
-- [ ] Tem prefixo de DOPA ("PROVOCAÇÃO — ", "AUTORIDADE — ")?
+- [ ] Tem prefixo de DOPA ("PROVOCAÇÃO:", "AUTORIDADE:")?
 - [ ] Tem número grande sem credencial que o ancore?
 - [ ] Tem três ou mais referências simultâneas?
 - [ ] O tom é de quem ensina ("você deve") em vez de quem viveu ("eu fiz")?
@@ -492,7 +529,65 @@ Use as **falas reais** do perfil de público lido no Notion. Priorize transcriç
 **Regras fixas:**
 - A isca é sobre o tema do post, não sobre o produto
 - O produto aparece dentro do Manychat — nunca no slide 09 ou 10
-- Código: 2 a 6 letras, fácil de digitar, relacionado ao tema
+- Código no formato **3 letras + 2 números** (ex.: FUN01, MAP01), ligado
+  ao tema. Nunca palavra solta (FUNIL, MAPA, QUERO): dispara a automação
+  por acidente em conversa comum no Direct.
+
+---
+
+## TESTES DE ESCRITA (slide a slide, antes de entregar)
+
+Cada teste tem resposta sim ou não. Aplique em todos os slides; se
+falhar, corrija antes de entregar. Vale também para o modo adaptação. Se a
+skill de estilo reescrever o texto depois, os testes continuam valendo.
+
+| # | Teste | Se falhar |
+|---|---|---|
+| 1 | O texto tem o caractere travessão (—)? | Trocar por vírgula, ponto, dois-pontos ou parênteses. |
+| 2 | Algum slide tem 2 ou mais linhas seguidas com uma frase só cada, ou uma frase partida em duas linhas? | Juntar em parágrafo corrido de 2 a 4 frases conectadas. Exceções: número de resultado em destaque, código do Manychat, lista com marcadores. |
+| 3 | Algum slide fecha com aforismo ou contraste do tipo "não é X, é Y"? | Cortar. A história ou o dado fecham o ponto. As 3 trocas do Bloco 4 não contam: são o formato do método. |
+| 4 | O slide termina em "mas...." ou outro gancho suspenso? Se sim: a primeira frase do slide seguinte completa gramaticalmente a frase interrompida? | Se não completa, construir a ponte ou trocar o gancho. |
+| 5 | No meio de uma história em 1ª pessoa, o slide seguinte muda para afirmação genérica ou discurso de mercado ("ainda ensinam que...", "e você fica...") antes de a história fechar? | Continuar em 1ª pessoa até revelar o aprendizado. |
+| 6 | Aparece "criar desejo"? | Trocar por "gerar desejo". |
+| 7 | Quando o post mostra a reação do público, ela é um adjetivo vago ("te acham inteligente")? | Nomear o comportamento real: "dizem que teu conteúdo é incrível, mas compram do outro". |
+
+---
+
+## MODO ADAPTAÇÃO (post validado)
+
+Usado quando o usuário traz um post que já performou (dele ou de outro
+criador) e quer um novo na mesma estrutura. Pula a coleta completa da
+Etapa 1. O BOOT continua obrigatório.
+
+**A1. Dissecar o original.** Para cada slide, registre a função, não o
+texto. Identifique o DOPA, o MH e o MC mais próximos pelos índices (ou
+"sem modelo"). Mostre em tabela curta:
+
+```
+| Slide | Função | Recurso usado |
+|---|---|---|
+| 01 | [função] | [ex.: número + objeto específico] |
+```
+
+**A2. Perguntar só o que muda:**
+- Tema novo em 1 frase
+- História ou prova: do banco (Etapa 1.5, item 1) ou fato novo (cadastro
+  via detecção de histórias da Etapa 1)
+- Para onde vai a isca
+
+O DOPA é herdado do original, a menos que o usuário mude. Não peça os 6
+inputs. Confirme o perfil de público (Etapa 1.5, item 2).
+
+**A3. Escrever.** Aplique o tom de voz (Etapa 3). Mantenha a sequência de
+funções e o ritmo do original com conteúdo novo. Nunca copie frases do
+original. Se o post é de outro criador, só a estrutura vem. Se é do próprio
+usuário, expressões-assinatura podem se repetir; o resto é escrito do zero.
+Nunca invente número.
+
+**A4. Validar.** Testes de escrita + checklist negativo da headline. No
+debriefe, acrescente: "Original adaptado: o que foi mantido e o que mudou".
+
+Depois segue para a Etapa 5 e o HANDOFF normalmente.
 
 ---
 
@@ -519,9 +614,11 @@ Use as **falas reais** do perfil de público lido no Notion. Priorize transcriç
 2. **História e público:** quais foram usados e por que encaixaram
 3. **Tom de voz:** se foi aplicado ou está pendente
 4. **Headline:** anti-padrão evitado, se algum apareceu durante a construção
-5. **Inputs fracos:** o que foi compensado e como
-6. **Sensação de saída:** se a estrutura entrega o que foi definido no input 3
-7. **Métricas:** o que medir e o que ignorar para este DOPA
+5. **Testes de escrita:** quais falharam no rascunho e como foram corrigidos
+6. **Inputs fracos:** o que foi compensado e como
+7. **Sensação de saída:** se a estrutura entrega o que foi definido no input 3
+8. **Métricas:** o que medir e o que ignorar para este DOPA
+9. **Original adaptado** (só modo adaptação): o que foi mantido e o que mudou
 
 ---
 
@@ -583,7 +680,7 @@ Se aceitar → atualize `memoria.md` com data de atualização.
 | 1 | DOPA definido antes de escrever o slide 01 | Post híbrido |
 | 2 | Produto nunca aparece no post | Post vira anúncio |
 | 3 | Provas sempre específicas. Nunca vago. | Credibilidade cai |
-| 4 | Cada slide termina criando lacuna para o próximo | Leitor para no meio |
+| 4 | Cada slide termina criando lacuna para o próximo, e o próximo fecha essa lacuna (teste 4) | Leitor para no meio, ou se perde |
 | 5 | Isca sobre o tema, não sobre o produto | Conversão Manychat cai |
 | 6 | Bloco 2 nunca resolve nada — só espelha | Leitor pula para o final |
 | 7 | Nunca mais de 3 trocas no Bloco 4 | Impacto dilui |
@@ -594,6 +691,8 @@ Se aceitar → atualize `memoria.md` com data de atualização.
 | 12 | Checklist de outliers aplicado antes de fechar o slide 01 | Anti-padrão passa despercebido |
 | 13 | Memória atualizada apenas com confirmação do usuário | Privacidade e controle |
 | 14 | Nunca gerar conteúdo com "Quem sou eu" ou "Meu Público" vazios — orientar `/prisma-triwer` ou `/oraculo-triwer` | Conteúdo genérico, sem voz nem ressonância real |
+| 15 | O MC manda na estrutura; os 5 blocos são padrão | Post vira narrativa pessoal quando o MC pedia o leitor |
+| 16 | Testes de escrita aplicados antes de entregar | Texto soa como IA |
 
 ---
 
@@ -614,6 +713,7 @@ Se aceitar → atualize `memoria.md` com data de atualização.
 HANDOFF → próxima skill
 {
   "modo": "aluno",
+  "origem": "[novo | adaptação]",
   "nome_usuario": "[nome registrado na memória]",
   "dopa": "[Descoberta | Oportunidade | Provocação | Autoridade]",
   "historia_id": "[URL da página no Notion — ou 'manual' se não veio do banco]",
@@ -651,7 +751,7 @@ O handoff vai para `estilo-[nome]` (se existir) e depois para `cta-triwer`.
 │   ├── mh/
 │   │   └── MH001.md … MH016.md
 │   └── mc/
-│       └── MC001.md … MC015.md
+│       └── MC001.md … MC016.md
 └── referencias/
     ├── manual-headline.md
     └── outliers-headline.md

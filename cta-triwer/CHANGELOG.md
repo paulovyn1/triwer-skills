@@ -18,6 +18,10 @@ frontmatter do `SKILL.md` (não duplicado aqui).
 
 ---
 
+## 4.0.2 - 2026-10-22
+- Código Manychat no formato 3 letras + 2 números (ex.: FUN01). Palavra
+  solta disparava a automação por acidente em conversa comum no Direct.
+
 ## 4.0.1 - 2026-07-10
 - Adiciona verificação automática de versão no BOOT: a skill agora compara
   sua própria versão com a mais recente publicada neste arquivo e avisa o

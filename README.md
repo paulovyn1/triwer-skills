@@ -9,7 +9,7 @@ conteúdo personalizado (carrosséis, CTAs) em vez de genérico.
 
 ## O que está incluído
 
-13 skills, cada uma com uma responsabilidade específica. A tabela segue a
+15 skills, cada uma com uma responsabilidade específica. A tabela segue a
 ordem recomendada de uso — não precisa instalar todas de uma vez, mas cada
 skill de conteúdo (Carrossel) depende de algumas anteriores já terem sido
 rodadas pelo menos uma vez.
@@ -29,6 +29,8 @@ rodadas pelo menos uma vez.
 | 11 | **cta-triwer** | Decide se o carrossel leva Manychat, escolhe a isca certa e escreve os slides finais (09-10). |
 | — | **notion-zettelkasten-si** | Comportamento contínuo (não precisa comando): transforma qualquer conversa em notas conectadas no Acervo Notion do aluno. |
 | — | **leitura-ativa** | Comportamento contínuo (não precisa comando): processa uma leitura completa (artigo, livro, aula, podcast) em notas do Acervo — Obsidian ou Notion, à escolha do aluno — e conduz sessão socrática para transformar reflexão pessoal em notas permanentes. |
+| — | **pagina-links-triwer** | Construtor da página de links da bio (estilo Linktree, com identidade e animações de página de verdade): levanta os links, define prioridade, escreve os textos curtos e entrega em HTML único ou React, com publicação na Vercel. Aciona por pedido ("monta minha página de links"). |
+| — | **pagina-paquera-triwer** | Construtor da página de vendas do produto paquera / low ticket (e-book, guia, kit, mini curso): coleta insumos, escreve a copy no modelo Pitstop e monta a página em HTML único ou React. Aciona por pedido ("monta a página do meu produto paquera"). |
 
 `carrossel-triwer` → `cta-triwer` é um pipeline automático (handoff direto).
 As demais são independentes entre si, mas leem o que as anteriores já
@@ -93,7 +95,7 @@ curl -fsSL https://raw.githubusercontent.com/paulovyn1/triwer-skills/main/script
 irm https://raw.githubusercontent.com/paulovyn1/triwer-skills/main/scripts/instalar-tudo-windows.ps1 | iex
 ```
 
-Instala (ou atualiza) as 13 skills em sequência. Rodar de novo no futuro só
+Instala (ou atualiza) as 15 skills em sequência. Rodar de novo no futuro só
 atualiza o que tiver versão nova.
 
 ### Opção B — Uma skill por vez
@@ -113,6 +115,7 @@ irm https://raw.githubusercontent.com/paulovyn1/triwer-skills/main/scripts/insta
 
 Troque `<skill>` por: `onboarding`, `dexter`, `drhouse`, `oraculo`, `sexy`,
 `prisma`, `historias`, `mdi`, `carrossel`, `cta`, `zettelkasten`,
+`pagina-links`, `pagina-paquera`,
 `leitura-ativa`. A `estilo-forge` tem instalador próprio, num caminho
 diferente:
 
@@ -239,6 +242,8 @@ rodar primeiro.
 │   └── referencias/  iscas-regras.md, padroes-de-iscas.md, iscas-local.md
 ├── notion-zettelkasten-si/  SKILL.md, VERSION, memoria.md, references/
 ├── leitura-ativa/           SKILL.md, VERSION, memoria.md
+├── pagina-links-triwer/     SKILL.md, VERSION, references/, assets/, scripts/
+├── pagina-paquera-triwer/   SKILL.md, VERSION, references/, assets/, scripts/
 └── estilo-[seu-nome]/       gerada pela estilo-forge
 ```
 

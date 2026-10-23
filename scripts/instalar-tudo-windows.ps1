@@ -53,7 +53,9 @@ $INSTALLERS = @(
     @{ Name = "Notion Zettelkasten"; Path = "main/scripts/instalar-zettelkasten-windows.ps1" },
     @{ Name = "Leitura Ativa"; Path = "main/scripts/instalar-leitura-ativa-windows.ps1" },
     @{ Name = "Página de Links/Bio"; Path = "main/scripts/instalar-pagina-links-windows.ps1" },
-    @{ Name = "Página de Paquera/Low Ticket"; Path = "main/scripts/instalar-pagina-paquera-windows.ps1" }
+    @{ Name = "Página de Paquera/Low Ticket"; Path = "main/scripts/instalar-pagina-paquera-windows.ps1" },
+    @{ Name = "Criar Aula"; Path = "main/scripts/instalar-criar-aula-windows.ps1" },
+    @{ Name = "Mapa Mental (MindMeister)"; Path = "main/scripts/instalar-mind-windows.ps1" }
 )
 
 $TOTAL = $INSTALLERS.Count

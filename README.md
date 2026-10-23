@@ -31,6 +31,8 @@ rodadas pelo menos uma vez.
 | — | **leitura-ativa** | Comportamento contínuo (não precisa comando): processa uma leitura completa (artigo, livro, aula, podcast) em notas do Acervo — Obsidian ou Notion, à escolha do aluno — e conduz sessão socrática para transformar reflexão pessoal em notas permanentes. |
 | — | **pagina-links-triwer** | Construtor da página de links da bio (estilo Linktree, com identidade e animações de página de verdade): levanta os links, define prioridade, escreve os textos curtos e entrega em HTML único ou React, com publicação na Vercel. Aciona por pedido ("monta minha página de links"). |
 | — | **pagina-paquera-triwer** | Construtor da página de vendas do produto paquera / low ticket (e-book, guia, kit, mini curso): coleta insumos, escreve a copy no modelo Pitstop e monta a página em HTML único ou React. Aciona por pedido ("monta a página do meu produto paquera"). |
+| — | **criar-aula-triwer** | Construtor de aula do seu produto (curso, mentoria, live com venda): reconcilia material disperso, valida padrões contra casos reais, monta aula ao vivo na sequência de 7 movimentos com pitch no meio e entrega o roteiro em versões e o material final. Aciona por pedido ("monta minha aula"). |
+| — | **mind-triwer** | Gera o mapa mental da aula ou live pronto para importar no MindMeister (.mind), no seu tom, e entrega só o ramo novo quando o mapa já foi personalizado. Aciona por pedido ("transforma isso em mapa mental"). |
 
 `carrossel-triwer` → `cta-triwer` é um pipeline automático (handoff direto).
 As demais são independentes entre si, mas leem o que as anteriores já
@@ -115,7 +117,7 @@ irm https://raw.githubusercontent.com/paulovyn1/triwer-skills/main/scripts/insta
 
 Troque `<skill>` por: `onboarding`, `dexter`, `drhouse`, `oraculo`, `sexy`,
 `prisma`, `historias`, `mdi`, `carrossel`, `cta`, `zettelkasten`,
-`pagina-links`, `pagina-paquera`,
+`pagina-links`, `pagina-paquera`, `criar-aula`, `mind`,
 `leitura-ativa`. A `estilo-forge` tem instalador próprio, num caminho
 diferente:
 
@@ -244,6 +246,8 @@ rodar primeiro.
 ├── leitura-ativa/           SKILL.md, VERSION, memoria.md
 ├── pagina-links-triwer/     SKILL.md, VERSION, references/, assets/, scripts/
 ├── pagina-paquera-triwer/   SKILL.md, VERSION, references/, assets/, scripts/
+├── criar-aula-triwer/       SKILL.md, VERSION, references/
+├── mind-triwer/             SKILL.md, VERSION, references/, assets/ (gerador gen_map.py)
 └── estilo-[seu-nome]/       gerada pela estilo-forge
 ```
 

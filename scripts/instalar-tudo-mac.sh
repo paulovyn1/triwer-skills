@@ -64,6 +64,8 @@ INSTALLERS=(
     "Leitura Ativa|main/scripts/instalar-leitura-ativa-mac.sh"
     "Página de Links/Bio|main/scripts/instalar-pagina-links-mac.sh"
     "Página de Paquera/Low Ticket|main/scripts/instalar-pagina-paquera-mac.sh"
+    "Criar Aula|main/scripts/instalar-criar-aula-mac.sh"
+    "Mapa Mental (MindMeister)|main/scripts/instalar-mind-mac.sh"
 )
 
 TOTAL=${#INSTALLERS[@]}

@@ -9,7 +9,7 @@ conteúdo personalizado (carrosséis, CTAs) em vez de genérico.
 
 ## O que está incluído
 
-15 skills, cada uma com uma responsabilidade específica. A tabela segue a
+18 skills, cada uma com uma responsabilidade específica. A tabela segue a
 ordem recomendada de uso — não precisa instalar todas de uma vez, mas cada
 skill de conteúdo (Carrossel) depende de algumas anteriores já terem sido
 rodadas pelo menos uma vez.
@@ -33,6 +33,7 @@ rodadas pelo menos uma vez.
 | — | **pagina-paquera-triwer** | Construtor da página de vendas do produto paquera / low ticket (e-book, guia, kit, mini curso): coleta insumos, escreve a copy no modelo Pitstop e monta a página em HTML único ou React. Aciona por pedido ("monta a página do meu produto paquera"). |
 | — | **criar-aula-triwer** | Construtor de aula do seu produto (curso, mentoria, live com venda): reconcilia material disperso, valida padrões contra casos reais, monta aula ao vivo na sequência de 7 movimentos com pitch no meio e entrega o roteiro em versões e o material final. Aciona por pedido ("monta minha aula"). |
 | — | **mind-triwer** | Gera o mapa mental da aula ou live pronto para importar no MindMeister (.mind), no seu tom, e entrega só o ramo novo quando o mapa já foi personalizado. Aciona por pedido ("transforma isso em mapa mental"). |
+| — | **edicao-motion-triwer** | Edição de vídeo vertical (Reels, anúncio, VSL curta, vídeo narrado) com motion: cortes de silêncio e gagueira, voz tratada, legenda animada no tempo da fala, painéis animados, trilha escolhida pela emoção e efeitos sonoros, com catálogo de 7 estilos de edição e preferências que a skill aprende a cada ajuste. **Só no Claude Code** (ver [Requisitos da edicao-motion-triwer](#requisitos-da-edicao-motion-triwer-edição-de-vídeo)). Aciona por pedido ("edita esse vídeo"). |
 
 `carrossel-triwer` → `cta-triwer` é um pipeline automático (handoff direto).
 As demais são independentes entre si, mas leem o que as anteriores já
@@ -50,7 +51,8 @@ Três formas de instalar, dependendo de como você usa o Claude.
 ### O que os instaladores fazem (leia antes de rodar)
 
 Todo instalador deste repositório (o de "tudo de uma vez" e os individuais)
-só baixa arquivos de texto (`.md`, `VERSION`) deste repositório **público**
+só baixa arquivos deste repositório **público** (texto, como `.md` e
+`VERSION`, e os scripts das skills que trabalham com arquivos, como `.py`)
 para `~/.claude/skills/<skill>/` (ou `%USERPROFILE%\.claude\skills\<skill>\`
 no Windows). Nenhum deles:
 
@@ -97,7 +99,7 @@ curl -fsSL https://raw.githubusercontent.com/paulovyn1/triwer-skills/main/script
 irm https://raw.githubusercontent.com/paulovyn1/triwer-skills/main/scripts/instalar-tudo-windows.ps1 | iex
 ```
 
-Instala (ou atualiza) as 15 skills em sequência. Rodar de novo no futuro só
+Instala (ou atualiza) as 18 skills em sequência. Rodar de novo no futuro só
 atualiza o que tiver versão nova.
 
 ### Opção B — Uma skill por vez
@@ -118,7 +120,7 @@ irm https://raw.githubusercontent.com/paulovyn1/triwer-skills/main/scripts/insta
 Troque `<skill>` por: `onboarding`, `dexter`, `drhouse`, `oraculo`, `sexy`,
 `prisma`, `historias`, `mdi`, `carrossel`, `cta`, `zettelkasten`,
 `pagina-links`, `pagina-paquera`, `criar-aula`, `mind`,
-`leitura-ativa`. A `estilo-forge` tem instalador próprio, num caminho
+`leitura-ativa`, `edicao-motion`. A `estilo-forge` tem instalador próprio, num caminho
 diferente:
 
 ```bash
@@ -165,6 +167,34 @@ a versão instalada e só baixa se houver uma versão mais nova.
 - **Plano pago do Claude** (Pro ou superior) — necessário para conectar o Notion via Connectors
 - **Notion** com uma cópia do [Template Perfil do Aluno — Triwer](https://triwer.notion.site/Template-Perfil-do-Aluno-3588e7e25d248106b767e8eaaba3e47f?source=copy_link) — a skill `onboarding-triwer` te guia nisso
 - Conexão com internet para instalar
+
+A `edicao-motion-triwer` é exceção: não usa o Notion, mas precisa do Claude
+Code e de alguns programas no computador (abaixo).
+
+### Requisitos da edicao-motion-triwer (edição de vídeo)
+
+- **Claude Code** no computador (terminal ou extensão do VS Code). A skill
+  roda scripts no terminal: **não funciona** no chat do Claude Desktop nem no
+  claude.ai.
+- **ffmpeg**, **Node 20+** e **Python 3.12 com [uv](https://docs.astral.sh/uv/)**.
+  No primeiro uso a skill roda uma checagem (`preflight.py`) que mostra o que
+  falta e o comando de instalação de cada item. Atalhos comuns: no Windows,
+  `winget install Gyan.FFmpeg` e o Node de [nodejs.org](https://nodejs.org);
+  no Mac, `brew install ffmpeg node uv`.
+- **Chave grátis do Groq** (`GROQ_API_KEY`, em
+  [console.groq.com](https://console.groq.com)) para a transcrição, e o
+  **Chrome** instalado.
+- Opcionais: **yt-dlp** (trechos de vídeos do YouTube) e chaves grátis do
+  **Pexels** (`PEXELS_API_KEY`) e do **Pixabay** (`PIXABAY_API_KEY`) para
+  bancos de vídeo e foto. Sem eles a skill funciona, só perde essas fontes.
+- Alguns GB livres em disco: o render copia arquivos para a pasta temporária.
+- Sons e músicas vêm do [Mixkit](https://mixkit.co) e são baixados na hora do
+  uso (a licença do Mixkit não permite redistribuir os arquivos).
+
+> **Licença do Remotion.** A skill monta os vídeos com o
+> [Remotion](https://www.remotion.dev). Ele é grátis para pessoa física e
+> para empresa de até 3 pessoas. Empresa maior que isso precisa comprar a
+> licença do Remotion antes de usar: [remotion.dev/license](https://www.remotion.dev/license).
 
 ---
 
@@ -215,6 +245,11 @@ comando — depois de instaladas, ficam atentas durante qualquer conversa e
 oferecem agir quando fizer sentido (contar um caso real, pedir para salvar
 algo no Notion, processar um artigo/livro/aula lido).
 
+`edicao-motion-triwer` não depende do Notion nem das outras skills: no Claude
+Code, abra a pasta do vídeo e peça ("edita esse vídeo no estilo Fala
+Dinâmica"). Suas preferências ficam em `~/.claude/edicao-motion-triwer/`,
+fora da pasta da skill, e não somem quando você atualiza.
+
 `carrossel-triwer` bloqueia a geração se "Quem sou eu" (Prisma) ou "Meu
 Público" (Oráculo) ainda estiverem vazios — ele avisa e orienta qual skill
 rodar primeiro.
@@ -248,6 +283,7 @@ rodar primeiro.
 ├── pagina-paquera-triwer/   SKILL.md, VERSION, references/, assets/, scripts/
 ├── criar-aula-triwer/       SKILL.md, VERSION, references/
 ├── mind-triwer/             SKILL.md, VERSION, references/, assets/ (gerador gen_map.py)
+├── edicao-motion-triwer/    SKILL.md, VERSION, estilos/, references/, scripts/, template/, biblioteca/
 └── estilo-[seu-nome]/       gerada pela estilo-forge
 ```
 

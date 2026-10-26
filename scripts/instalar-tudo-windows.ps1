@@ -11,12 +11,12 @@
 # cada skill nunca é sobrescrito.
 #
 # O que este script faz (leia antes de rodar):
-#   - Baixa, um de cada vez, os 15 instaladores individuais abaixo do
+#   - Baixa, um de cada vez, os 18 instaladores individuais abaixo do
 #     repositório público https://github.com/paulovyn1/triwer-skills e
 #     salva cada um em arquivo temporário (%TEMP%) antes de rodar -- nada
 #     é executado sem primeiro existir em disco, então dá pra abrir e ler
 #     qualquer um deles antes ou durante a instalação.
-#   - Cada instalador baixado só grava arquivos de texto (.md, VERSION) em
+#   - Cada instalador baixado só grava arquivos (texto e scripts da skill) em
 #     %USERPROFILE%\.claude\skills\<skill>\. Não coleta credenciais, não
 #     envia dados para lugar nenhum.
 #   - Nunca sobrescreve memoria.md (seus dados pessoais ficam intactos).
@@ -55,7 +55,8 @@ $INSTALLERS = @(
     @{ Name = "Página de Links/Bio"; Path = "main/scripts/instalar-pagina-links-windows.ps1" },
     @{ Name = "Página de Paquera/Low Ticket"; Path = "main/scripts/instalar-pagina-paquera-windows.ps1" },
     @{ Name = "Criar Aula"; Path = "main/scripts/instalar-criar-aula-windows.ps1" },
-    @{ Name = "Mapa Mental (MindMeister)"; Path = "main/scripts/instalar-mind-windows.ps1" }
+    @{ Name = "Mapa Mental (MindMeister)"; Path = "main/scripts/instalar-mind-windows.ps1" },
+    @{ Name = "Edição com Motion (Claude Code)"; Path = "main/scripts/instalar-edicao-motion-windows.ps1" }
 )
 
 $TOTAL = $INSTALLERS.Count

@@ -13,12 +13,12 @@
 # cada skill nunca é sobrescrito.
 #
 # O que este script faz (leia antes de rodar):
-#   - Baixa, um de cada vez, os 15 instaladores individuais abaixo do
+#   - Baixa, um de cada vez, os 18 instaladores individuais abaixo do
 #     repositório público https://github.com/paulovyn1/triwer-skills e
 #     salva cada um num arquivo temporário antes de rodar -- nada é
 #     executado sem primeiro existir em disco, então dá pra abrir e ler
 #     qualquer um deles antes ou durante a instalação.
-#   - Cada instalador baixado só grava arquivos de texto (.md, VERSION) em
+#   - Cada instalador baixado só grava arquivos (texto e scripts da skill) em
 #     ~/.claude/skills/<skill>/. Não coleta credenciais, não envia dados
 #     para lugar nenhum.
 #   - Nunca sobrescreve memoria.md (seus dados pessoais ficam intactos).
@@ -66,6 +66,7 @@ INSTALLERS=(
     "Página de Paquera/Low Ticket|main/scripts/instalar-pagina-paquera-mac.sh"
     "Criar Aula|main/scripts/instalar-criar-aula-mac.sh"
     "Mapa Mental (MindMeister)|main/scripts/instalar-mind-mac.sh"
+    "Edição com Motion (Claude Code)|main/scripts/instalar-edicao-motion-mac.sh"
 )
 
 TOTAL=${#INSTALLERS[@]}

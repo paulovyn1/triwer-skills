@@ -1,0 +1,2 @@
+# scripts de shell sempre com LF: com CRLF o bash do boot quebra ("$'\r': command not found") em máquina com core.autocrlf=true
+*.sh text eol=lf

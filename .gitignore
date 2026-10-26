@@ -8,6 +8,8 @@ user-profile.md
 .DS_Store
 Thumbs.db
 *.tmp
+__pycache__/
+*.pyc
 
 # Configurações locais do Claude Code
 .claude/

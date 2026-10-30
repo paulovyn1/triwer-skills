@@ -18,7 +18,7 @@ Contador regressivo só se o desconto acabar numa data real.
 ## 2. Selo de autoridade (acima da headline)
 **Trabalho:** dizer em uma linha por que essa pessoa pode ensinar isso.
 Formato: "Escrito por quem [conquista com número e prazo]".
-> Exemplo: "Escrito por quem saiu de 0 a 40 pacientes fixos em 8 meses sem anúncio"
+> Exemplo: "Escrito por quem saiu de 0 a [X] clientes fixos em [Y] meses sem anúncio"
 
 ## 3. Headline
 **Trabalho:** prometer a transformação e já mostrar como ela chega.

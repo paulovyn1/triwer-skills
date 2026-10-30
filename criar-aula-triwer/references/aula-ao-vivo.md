@@ -44,7 +44,7 @@ Fechamento: volta para a história de abertura e termina com uma tarefa de 24 ho
 
 ## A ponte para o pitch
 
-- A aula sempre amarra no conceito central do produto vendido. Perguntar ao expert qual é esse conceito se não estiver claro (ex.: "ter uma proposta tão única que a pessoa tem que comprar de você")
+- A aula sempre amarra no conceito central do produto vendido. Perguntar ao expert qual é esse conceito se não estiver claro (ex.: "ter uma oferta tão específica que a pessoa não encontra igual em outro lugar")
 - Plantar esse conceito antes, como a última causa do bloco 3, e retomar na ponte usando uma história que já apareceu na aula. Uma história contada pela metade no início e concluída na ponte funciona bem
 - A oferta aparece cedo na abertura, como informação ("vou abrir uma condição especial durante a aula"), nunca como pitch
 - O pitch e as condições só são escritos depois que o expert aprovar a aula

@@ -13,7 +13,7 @@
 # cada skill nunca é sobrescrito.
 #
 # O que este script faz (leia antes de rodar):
-#   - Baixa, um de cada vez, os 18 instaladores individuais abaixo do
+#   - Baixa, um de cada vez, os 19 instaladores individuais abaixo do
 #     repositório público https://github.com/paulovyn1/triwer-skills e
 #     salva cada um num arquivo temporário antes de rodar -- nada é
 #     executado sem primeiro existir em disco, então dá pra abrir e ler
@@ -64,6 +64,7 @@ INSTALLERS=(
     "Leitura Ativa|main/scripts/instalar-leitura-ativa-mac.sh"
     "Página de Links/Bio|main/scripts/instalar-pagina-links-mac.sh"
     "Página de Paquera/Low Ticket|main/scripts/instalar-pagina-paquera-mac.sh"
+    "Página de Ticket Médio|main/scripts/instalar-ticket-medio-mac.sh"
     "Criar Aula|main/scripts/instalar-criar-aula-mac.sh"
     "Mapa Mental (MindMeister)|main/scripts/instalar-mind-mac.sh"
     "Edição com Motion (Claude Code)|main/scripts/instalar-edicao-motion-mac.sh"

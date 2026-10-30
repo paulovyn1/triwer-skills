@@ -1,4 +1,4 @@
-"""Gerador de .mind para o MindMeister (identidade Triwer).
+"""Gerador de .mind para o MindMeister.
 
 Uso:
     python gen_map.py conteudo.py saida.mind
@@ -10,10 +10,21 @@ Uso:
       n("Bloco 1",
         n("Subtópico", n("Detalhe"))))
 
+Cores (opcional): para usar as cores da marca do expert, defina no mesmo
+arquivo, em hex sem "#":
+
+    PALETA = {"marca": "1F3A5F", "fundo": "F5F7FA"}
+
+`marca` é a cor das linhas e do texto do nó central; `fundo` é o fundo claro
+do nó central. Sem PALETA, o mapa sai em cinza neutro.
+
 O script monta o map.json, empacota o .mind (zip com map.json) e imprime
 estatísticas para conferência antes de entregar.
 """
-import json, runpy, statistics, sys, zipfile
+import json, re, runpy, statistics, sys, zipfile
+
+PALETA_PADRAO = {"marca": "3D474D", "fundo": "F5F5F5"}
+P = dict(PALETA_PADRAO)
 
 F = [{"id": 1, "name": "Avenir", "url": None}, {"id": 2, "name": "Segoe UI", "url": None},
      {"id": 3, "name": "Helvetica", "url": None}, {"id": 4, "name": "Arial", "url": None},
@@ -30,12 +41,12 @@ def sA(lc):
 def sB():
     return {"color": None, "backgroundColor": None, "borderColor": None, "boxStyle": None, "bold": True,
             "italic": False, "fontSize": None, "borderWidth": None, "line_position": None, "line_width": None,
-            "line_type": None, "line_color": "421900", "border_style": None, "image_color": None,
+            "line_type": None, "line_color": P["marca"], "border_style": None, "image_color": None,
             "line_style": None, "fonts": F, "gradient": 0, "boxShadow": False, "name": None}
 
 
 def sRoot():
-    return {"color": "421900", "backgroundColor": "FFF8F3", "borderColor": None, "boxStyle": None, "bold": False,
+    return {"color": P["marca"], "backgroundColor": P["fundo"], "borderColor": None, "boxStyle": None, "bold": False,
             "italic": False, "fontSize": None, "borderWidth": None, "line_position": None, "line_width": None,
             "line_type": None, "line_color": None, "border_style": None, "image_color": None, "line_style": None,
             "fonts": F, "gradient": 0, "boxShadow": False, "name": None}
@@ -61,7 +72,7 @@ def build(spec, depth, rank):
     if depth == 0:
         style, layout, pos = sRoot(), "mind_map", [None, None]
     elif depth == 1:
-        style = sA("3D474D") if rank == 1 else (sB() if rank % 2 == 0 else sA("421900"))
+        style = sB() if rank % 2 == 0 else sA(P["marca"])
         layout, pos = None, [450, (rank - 1) * 400]
     elif depth == 2:
         style, layout, pos = None, None, [900, (rank - 1) * 200]
@@ -82,8 +93,15 @@ def walk(nd, d=0):
 
 def main():
     content, out = sys.argv[1], sys.argv[2]
-    root = build(runpy.run_path(content)["MAP"], 0, None)
-    doc = {"map_version": "3.0", "layout": 1, "theme": THEME, "custom_colors": ["#421900", "#b3b3b3"],
+    ns = runpy.run_path(content)
+    for chave, valor in (ns.get("PALETA") or {}).items():
+        valor = str(valor).lstrip("#")
+        if chave in P and re.fullmatch(r"[0-9A-Fa-f]{6}", valor):
+            P[chave] = valor.upper()
+        else:
+            print(f"aviso: PALETA[{chave!r}]={valor!r} ignorado (use marca/fundo em hex de 6 dígitos)")
+    root = build(ns["MAP"], 0, None)
+    doc = {"map_version": "3.0", "layout": 1, "theme": THEME, "custom_colors": ["#" + P["marca"], "#b3b3b3"],
            "connections": [], "slides": [], "attachments": [], "images": [], "root": root}
     with zipfile.ZipFile(out, "w", zipfile.ZIP_DEFLATED) as z:
         z.writestr("map.json", json.dumps(doc, ensure_ascii=False, indent=2))

@@ -12,7 +12,7 @@ description: >
   pago com evento (pagina-vendas-lancamento-pago), mentoria high ticket ou
   página de captura gratuita.
 compatibility: Claude Code, claude.ai, Claude Desktop
-metadata: "v1.0.0, outubro 2026. Histórico em CHANGELOG.md."
+metadata: "v1.1.0, outubro 2026. Histórico em CHANGELOG.md."
 ---
 
 # Página Paquera Triwer
@@ -34,9 +34,17 @@ em primeira pessoa. Se o aluno tiver uma skill de estilo própria (por exemplo
 
 ---
 
+## BOOT, executar sempre ao iniciar
+
+0. **Verificação de versão:** leia o arquivo `VERSION` desta skill (sibling do `SKILL.md`), que é a versão local. Tente buscar `https://raw.githubusercontent.com/paulovyn1/triwer-skills/main/pagina-paquera-triwer/CHANGELOG.md` com a ferramenta de acesso à web do ambiente. Se não conseguir acessar, não mencione nada e siga. Se a entrada mais recente do CHANGELOG remoto for igual à local, siga sem dizer nada. **Só se a remota for mais nova:** leia e siga `references/atualizacao-versao.md`.
+1. **Memória:** leia `~/.claude/skills/pagina-paquera-triwer/memoria.md`, se existir. Ela guarda o perfil do aluno, as regras dele, onde estão os arquivos, as páginas já entregues e as preferências aprendidas nas correções. Se não existir, rode o onboarding rápido de `references/memoria-modelo.md` (uma mensagem só) e crie o arquivo.
+2. **Notion do aluno (opcional):** leia `~/.claude/skills/onboarding-triwer/memoria.md`, se existir com `onboarding_completo: true`. Dali saem nome, Instagram, pasta de fotos e as URLs do Notion (Quem sou eu, Meu Público, Histórias, Depoimentos, Produtos). Não pergunte de novo o que já está lá. Sem o onboarding, siga sem Notion e use a entrevista curta da Fase 1.
+
+---
+
 ## Fase 0. Onde estou e com quem estou falando
 
-Antes de qualquer pergunta sobre o produto, descubra duas coisas:
+Confira a memória primeiro e só pergunte o que não estiver lá. Antes de qualquer pergunta sobre o produto, descubra duas coisas:
 
 1. **Ambiente.** Se você tem ferramentas de arquivo e terminal (Claude Code), dá
    para criar o projeto, otimizar imagens e tirar prints da página para revisar.
@@ -160,7 +168,9 @@ Leia `references/layout-secoes.md` (o desenho de cada seção, as animações e 
 regras de celular, iguais nos dois modos) e depois o arquivo do modo escolhido,
 que diz como construir.
 
-A copy aprovada entra como está. Se o layout pedir um texto que não existe na
+A copy aprovada entra como está. Os rótulos fixos que já vêm no modelo estão
+no tratamento "tu": passe para o tratamento do aluno (`memoria.md`) ou troque
+pela copy. Se o layout pedir um texto que não existe na
 copy (um rótulo de seção, um selo), ele precisa ser neutro e sem promessa nova.
 Nada de preço no hero se a copy não pôs.
 
@@ -182,6 +192,19 @@ depoimentos de leitores, prints, CNPJ).
 
 Ajustes depois da entrega seguem a mesma regra da copy: leia o estado atual,
 mude só o que foi pedido, confira com print, entregue de novo.
+
+---
+
+## Aprender com as correções do aluno
+
+A skill evolui com o gosto de quem a usa. Tudo o que vale para as próximas páginas fica em `memoria.md`:
+
+- **Registrar preferência.** Quando o aluno corrigir, recusar ou pedir um ajuste que se aplicaria de novo (tom da copy, tratamento "tu"/"você", cor, animação, seção que ele nunca quer, palavra que ele não usa), grave uma linha em "Preferências registradas": `[data] Quando [situação], [faça X] (não [Y])`. Avise em uma frase: "Anotei na sua memória: [regra]. Se não quiser que eu lembre disso, é só avisar." Ajuste de uma página só ("troca essa foto") não vira regra.
+- **Aplicar.** Antes de escrever ou montar qualquer coisa, releia as preferências e siga. Elas valem mais que os padrões deste arquivo e das referências, menos as "Regras que valem o processo inteiro": se o aluno pedir algo que quebre uma delas (inventar número ou depoimento, por exemplo), explique e não aplique.
+- **Guardar caminhos e regras.** Quando o aluno disser onde algo está (pasta de materiais, produto em PDF, página de referência, link publicado) ou uma regra dele (o que nunca pode aparecer), grave em "Fontes e caminhos", "Regras do aluno" ou "Entregas feitas" e confira ali antes de pedir de novo.
+- **Nunca gravar** telefone, e-mail, senha, token, CPF/CNPJ ou dado de cliente. Só caminhos, gostos e regras.
+- **Contradição.** Se uma preferência nova contradiz uma antiga, atualize a antiga e avise.
+- **Fecho de cada entrega.** Atualize "Entregas feitas", "Pendências" e a data de atualização.
 
 ---
 

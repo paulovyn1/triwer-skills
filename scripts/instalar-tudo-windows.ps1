@@ -11,7 +11,7 @@
 # cada skill nunca é sobrescrito.
 #
 # O que este script faz (leia antes de rodar):
-#   - Baixa, um de cada vez, os 18 instaladores individuais abaixo do
+#   - Baixa, um de cada vez, os 19 instaladores individuais abaixo do
 #     repositório público https://github.com/paulovyn1/triwer-skills e
 #     salva cada um em arquivo temporário (%TEMP%) antes de rodar -- nada
 #     é executado sem primeiro existir em disco, então dá pra abrir e ler
@@ -54,6 +54,7 @@ $INSTALLERS = @(
     @{ Name = "Leitura Ativa"; Path = "main/scripts/instalar-leitura-ativa-windows.ps1" },
     @{ Name = "Página de Links/Bio"; Path = "main/scripts/instalar-pagina-links-windows.ps1" },
     @{ Name = "Página de Paquera/Low Ticket"; Path = "main/scripts/instalar-pagina-paquera-windows.ps1" },
+    @{ Name = "Página de Ticket Médio"; Path = "main/scripts/instalar-ticket-medio-windows.ps1" },
     @{ Name = "Criar Aula"; Path = "main/scripts/instalar-criar-aula-windows.ps1" },
     @{ Name = "Mapa Mental (MindMeister)"; Path = "main/scripts/instalar-mind-windows.ps1" },
     @{ Name = "Edição com Motion (Claude Code)"; Path = "main/scripts/instalar-edicao-motion-windows.ps1" }

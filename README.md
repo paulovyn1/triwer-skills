@@ -9,7 +9,7 @@ conteúdo personalizado (carrosséis, CTAs) em vez de genérico.
 
 ## O que está incluído
 
-18 skills, cada uma com uma responsabilidade específica. A tabela segue a
+19 skills, cada uma com uma responsabilidade específica. A tabela segue a
 ordem recomendada de uso — não precisa instalar todas de uma vez, mas cada
 skill de conteúdo (Carrossel) depende de algumas anteriores já terem sido
 rodadas pelo menos uma vez.
@@ -31,6 +31,7 @@ rodadas pelo menos uma vez.
 | — | **leitura-ativa** | Comportamento contínuo (não precisa comando): processa uma leitura completa (artigo, livro, aula, podcast) em notas do Acervo — Obsidian ou Notion, à escolha do aluno — e conduz sessão socrática para transformar reflexão pessoal em notas permanentes. |
 | — | **pagina-links-triwer** | Construtor da página de links da bio (estilo Linktree, com identidade e animações de página de verdade): levanta os links, define prioridade, escreve os textos curtos e entrega em HTML único ou React, com publicação na Vercel. Aciona por pedido ("monta minha página de links"). |
 | — | **pagina-paquera-triwer** | Construtor da página de vendas do produto paquera / low ticket (e-book, guia, kit, mini curso): coleta insumos, escreve a copy no modelo Pitstop e monta a página em HTML único ou React. Aciona por pedido ("monta a página do meu produto paquera"). |
+| — | **pagina-ticket-medio-triwer** | Construtor da página de vendas de produto de ticket médio (curso gravado, programa ou mentoria em grupo de R$ 100 a R$ 1.000) com VSL no topo: estuda a página de referência do aluno, escreve a copy (preço só na ancoragem, bônus, garantia) e monta a página em HTML único ou React, com publicação na Vercel. Aciona por pedido ("monta a página de vendas do meu curso"). |
 | — | **criar-aula-triwer** | Construtor de aula do seu produto (curso, mentoria, live com venda): reconcilia material disperso, valida padrões contra casos reais, monta aula ao vivo na sequência de 7 movimentos com pitch no meio e entrega o roteiro em versões e o material final. Aciona por pedido ("monta minha aula"). |
 | — | **mind-triwer** | Gera o mapa mental da aula ou live pronto para importar no MindMeister (.mind), no seu tom, e entrega só o ramo novo quando o mapa já foi personalizado. Aciona por pedido ("transforma isso em mapa mental"). |
 | — | **edicao-motion-triwer** | Edição de vídeo vertical (Reels, anúncio, VSL curta, vídeo narrado) com motion: cortes de silêncio e gagueira, voz tratada, legenda animada no tempo da fala, painéis animados, trilha escolhida pela emoção e efeitos sonoros, com catálogo de 7 estilos de edição e preferências que a skill aprende a cada ajuste. **Só no Claude Code** (ver [Requisitos da edicao-motion-triwer](#requisitos-da-edicao-motion-triwer-edição-de-vídeo)). Aciona por pedido ("edita esse vídeo"). |
@@ -99,7 +100,7 @@ curl -fsSL https://raw.githubusercontent.com/paulovyn1/triwer-skills/main/script
 irm https://raw.githubusercontent.com/paulovyn1/triwer-skills/main/scripts/instalar-tudo-windows.ps1 | iex
 ```
 
-Instala (ou atualiza) as 18 skills em sequência. Rodar de novo no futuro só
+Instala (ou atualiza) as 19 skills em sequência. Rodar de novo no futuro só
 atualiza o que tiver versão nova.
 
 ### Opção B — Uma skill por vez
@@ -119,7 +120,7 @@ irm https://raw.githubusercontent.com/paulovyn1/triwer-skills/main/scripts/insta
 
 Troque `<skill>` por: `onboarding`, `dexter`, `drhouse`, `oraculo`, `sexy`,
 `prisma`, `historias`, `mdi`, `carrossel`, `cta`, `zettelkasten`,
-`pagina-links`, `pagina-paquera`, `criar-aula`, `mind`,
+`pagina-links`, `pagina-paquera`, `ticket-medio`, `criar-aula`, `mind`,
 `leitura-ativa`, `edicao-motion`. A `estilo-forge` tem instalador próprio, num caminho
 diferente:
 
@@ -279,10 +280,11 @@ rodar primeiro.
 │   └── referencias/  iscas-regras.md, padroes-de-iscas.md, iscas-local.md
 ├── notion-zettelkasten-si/  SKILL.md, VERSION, memoria.md, references/
 ├── leitura-ativa/           SKILL.md, VERSION, memoria.md
-├── pagina-links-triwer/     SKILL.md, VERSION, references/, assets/, scripts/
-├── pagina-paquera-triwer/   SKILL.md, VERSION, references/, assets/, scripts/
-├── criar-aula-triwer/       SKILL.md, VERSION, references/
-├── mind-triwer/             SKILL.md, VERSION, references/, assets/ (gerador gen_map.py)
+├── pagina-links-triwer/     SKILL.md, VERSION, memoria.md, references/, assets/, scripts/
+├── pagina-paquera-triwer/   SKILL.md, VERSION, memoria.md, references/, assets/, scripts/
+├── pagina-ticket-medio-triwer/ SKILL.md, VERSION, memoria.md, references/, assets/, scripts/
+├── criar-aula-triwer/       SKILL.md, VERSION, memoria.md, references/
+├── mind-triwer/             SKILL.md, VERSION, memoria.md, references/, assets/ (gerador gen_map.py)
 ├── edicao-motion-triwer/    SKILL.md, VERSION, estilos/, references/, scripts/, template/, biblioteca/
 └── estilo-[seu-nome]/       gerada pela estilo-forge
 ```

@@ -10,7 +10,7 @@ Se não existir referência, use as regras abaixo.
 
 ## Regras gerais do nó
 
-- **Frase completa, com artigo.** Nós de 40 a 120 caracteres são normais. Nunca nó telegráfico de 2 ou 3 palavras quando a ideia pede frase ("Abri carrinho" / "130 leads" / "5 vagas" vira "Abri carrinho com 130 leads e vendi 5 vagas")
+- **Frase completa, com artigo.** Nós de 40 a 120 caracteres são normais. Nunca nó telegráfico de 2 ou 3 palavras quando a ideia pede frase ("Abri carrinho" / "80 leads" / "3 vagas" vira "Abri carrinho com 80 leads e vendi 3 vagas")
 - **Um pensamento por nó.** Se a ideia tem motivo, consequência e resultado, viram nós em cadeia, não uma frase de 200 caracteres
 - **CAPS numa palavra só**, para marcar ênfase ("EXATAMENTE", "MESMA")
 - **`**negrito**`** no trecho-chave ou no nó que funciona como título de seção. Vira negrito real ao importar no MindMeister
@@ -28,7 +28,7 @@ Se não existir referência, use as regras abaixo.
 
 **Vai:**
 - A tese em uma linha
-- Número exato com escopo, sem a hesitação da fala ("Não fizemos nem 30k", e logo abaixo o que não entra na conta)
+- Número exato com escopo, sem a hesitação da fala ("Não fizemos nem R$ 30 mil", e logo abaixo o que não entra na conta)
 - Estudo de caso que prova o método, em movimentos rotulados
 - Combinados e logística que o expert lê em voz alta (cronograma, como mandar dúvida)
 - A oferta como informação, logo na abertura

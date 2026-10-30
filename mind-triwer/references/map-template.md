@@ -130,7 +130,7 @@ Sempre que um nó tiver `style` não-nulo, incluir este array no campo `fonts`:
   "map_version": "3.0",
   "layout": 1,
   "theme": { ... },
-  "custom_colors": ["#421900", "#b3b3b3"],
+  "custom_colors": ["#{marca}", "#b3b3b3"],
   "connections": [],
   "slides": [],
   "attachments": [],
@@ -140,4 +140,4 @@ Sempre que um nó tiver `style` não-nulo, incluir este array no campo `fonts`:
 ```
 
 `map_version`, `layout`, `connections`, `slides`, `attachments`, `images` — nunca alterar.
-`custom_colors` — fixo para identidade Triwer.
+`custom_colors` — a primeira cor é a `marca` da paleta do mapa (ver `visual-identity.md`).

@@ -1,7 +1,20 @@
-# Referência: Identidade Visual Triwer
+# Referência: identidade visual do mapa
 
-Estilos exatos validados no MindMeister.
+Estilos exatos validados no MindMeister. O gerador (`assets/gen_map.py`) já
+aplica tudo isto; leia só se for mexer no formato à mão.
 Copiar os objetos `style` literalmente — incluindo todos os campos `null`.
+
+## Cores
+
+Duas cores definem o mapa. O gerador as lê de `PALETA` no `conteudo.py`
+(hex sem `#`); sem `PALETA`, usa o cinza neutro:
+
+| Token | Para que serve | Padrão neutro |
+|---|---|---|
+| `{marca}` | linhas dos blocos e texto do nó central | `3D474D` |
+| `{fundo}` | fundo claro do nó central | `F5F5F5` |
+
+Nos blocos abaixo, `{marca}` e `{fundo}` são esses dois valores.
 
 ---
 
@@ -9,8 +22,8 @@ Copiar os objetos `style` literalmente — incluindo todos os campos `null`.
 
 ```json
 "style": {
-  "color": "421900",
-  "backgroundColor": "FFF8F3",
+  "color": "{marca}",
+  "backgroundColor": "{fundo}",
   "borderColor": null,
   "boxStyle": null,
   "bold": false,
@@ -44,9 +57,7 @@ Root também tem `"property": {..., "layout": "mind_map"}` — único nó com es
 ## Nível 1 — Padrão A (rank ímpar: 1, 3, 5…)
 
 Linha grossa rounded. Fundo transparente (sem caixa visível em volta do texto).
-
-**rank 1** usa `line_color: "3D474D"` (cinza escuro).
-**rank 3, 5, 7…** usam `line_color: "421900"` (marrom Triwer).
+`line_color` é sempre `{marca}`.
 
 ```json
 "style": {
@@ -61,7 +72,7 @@ Linha grossa rounded. Fundo transparente (sem caixa visível em volta do texto).
   "line_position": null,
   "line_width": 4,
   "line_type": "rounded",
-  "line_color": "3D474D",
+  "line_color": "{marca}",
   "border_style": null,
   "image_color": null,
   "line_style": "solid",
@@ -77,8 +88,6 @@ Linha grossa rounded. Fundo transparente (sem caixa visível em volta do texto).
   "name": null
 }
 ```
-
-Para rank 3+, substituir `"line_color": "3D474D"` por `"line_color": "421900"`.
 
 ---
 
@@ -99,7 +108,7 @@ Linha simples sem espessura extra. Sem fundo.
   "line_position": null,
   "line_width": null,
   "line_type": null,
-  "line_color": "421900",
+  "line_color": "{marca}",
   "border_style": null,
   "image_color": null,
   "line_style": null,
@@ -133,11 +142,8 @@ qualquer objeto colocado aqui sobrescreve o herança e pode quebrar a aparência
 
 | rank | Padrão | line_color |
 |------|--------|------------|
-| 1 | A (rounded) | `3D474D` (cinza) |
-| 2 | B (simples) | `421900` (marrom) |
-| 3 | A (rounded) | `421900` (marrom) |
-| 4 | B (simples) | `421900` (marrom) |
-| 5+ | A (rounded) | `421900` (marrom) |
+| ímpar (1, 3, 5…) | A (rounded) | `{marca}` |
+| par (2, 4, 6…) | B (simples) | `{marca}` |
 
 ---
 

@@ -38,8 +38,8 @@ Cada item abaixo já virou erro real quando foi suposto:
 2. **Valores de referência** de cada item do "Recapitulando" e de onde vêm.
 3. **Bônus reais**: o que são, prazo, limite de vagas, valor de referência.
 4. **Garantia em dias e condição.** O prazo vem do aluno. Fichas e briefings
-   internos podem estar desatualizados (a página original saiu com 14 dias
-   quando eram 7). Pergunte se a garantia é incondicional ou tem condição.
+   internos podem estar desatualizados (já saiu página com um prazo na ficha
+   e outro de verdade). Pergunte se a garantia é incondicional ou tem condição.
 5. Link de checkout, WhatsApp da equipe, CNPJ, link da VSL (se já existir).
 
 ## Bloco 5. Prova

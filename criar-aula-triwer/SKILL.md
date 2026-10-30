@@ -14,7 +14,7 @@ description: >
   em aula" ou pedir só uma etapa do processo ("só acha os padrões", "só gera o
   material"). NÃO usar para carrossel, stories, página de vendas ou e-mail.
 compatibility: Claude Code, claude.ai, Claude Desktop
-metadata: "v1.0.0, outubro 2026. Histórico em CHANGELOG.md."
+metadata: "v1.1.0, outubro 2026. Histórico em CHANGELOG.md."
 ---
 
 # Criar Aula Triwer
@@ -31,6 +31,7 @@ Idioma: português brasileiro. Se o expert tiver uma skill de estilo própria (p
 
 0. **Verificação de versão:** leia o arquivo `VERSION` desta skill (sibling do `SKILL.md`), que é a versão local. Tente buscar `https://raw.githubusercontent.com/paulovyn1/triwer-skills/main/criar-aula-triwer/CHANGELOG.md` com a ferramenta de acesso à web do ambiente. Se não conseguir acessar, não mencione nada e siga. Se a entrada mais recente do CHANGELOG remoto for igual à local, siga sem dizer nada. **Só se a remota for mais nova:** leia e siga `references/atualizacao-versao.md`.
 1. **Fontes do expert:** tente ler `~/.claude/skills/onboarding-triwer/memoria.md`. Se existir, use as URLs do Notion do expert (bancos de histórias, público, produtos) como fonte de casos. Se não existir, siga sem Notion e peça as fontes na conversa.
+2. **Memória:** leia `~/.claude/skills/criar-aula-triwer/memoria.md`, se existir. Ela guarda o produto do expert, onde ficam as aulas dele, as aulas já construídas e as preferências aprendidas nas correções. Se não existir, rode o onboarding rápido de `references/memoria-modelo.md` (uma mensagem só) e crie o arquivo. Confira a memória antes de pedir qualquer fonte ou caminho de novo.
 
 ---
 
@@ -99,8 +100,20 @@ Só depois das etapas 5 e 6.
 - Salva na pasta que o expert indicar
 - Abre no navegador para conferência antes de entregar
 
+## Aprender com as correções do expert
+
+A skill evolui com o jeito de quem a usa. Tudo o que vale para as próximas aulas fica em `memoria.md`:
+
+- **Registrar preferência.** Quando o expert corrigir, recusar ou pedir um ajuste que se aplicaria de novo (como ele abre uma aula, tamanho dos blocos, tipo de exercício, o que ele nunca fala, como ele nomeia as coisas), grave uma linha em "Preferências registradas": `[data] Quando [situação], [faça X] (não [Y])`. Avise em uma frase: "Anotei na sua memória: [regra]. Se não quiser que eu lembre disso, é só avisar." Ajuste de uma aula só não vira regra.
+- **Aplicar.** Antes de estruturar ou escrever qualquer bloco, releia as preferências e siga. Elas valem mais que os padrões deste arquivo e das referências, menos a regra de não inventar caso, número ou nome: se o expert pedir algo que quebre isso, explique e não aplique.
+- **Guardar caminhos.** Quando o expert disser onde algo está (pasta das aulas, database do Notion, aula de referência), grave em "Fontes e caminhos" e confira ali antes de pedir de novo.
+- **Nunca gravar** telefone, e-mail, senha, token, CPF/CNPJ ou dado pessoal de aluno ou cliente. Só caminhos, gostos e regras.
+- **Contradição.** Se uma preferência nova contradiz uma antiga, atualize a antiga e avise.
+- **Fecho de cada aula.** Atualize "Aulas construídas", "Pendências" e a data de atualização.
+
 ## Arquivos de referência
 
+- `references/memoria-modelo.md`: onboarding rápido e formato do `memoria.md`
 - `references/aula-ao-vivo.md`: ordem de trabalho, sequência de 7 movimentos, ponte para o pitch, histórias, estratégias prontas (opcional), escrita e o que entra no mapa
 - `references/validar-padroes.md`: o ciclo de testar hipótese contra caso real, com exemplo
 - `references/estruturar-aula.md`: anatomia dos blocos e travamento como diagnóstico

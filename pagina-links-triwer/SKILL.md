@@ -14,7 +14,7 @@ description: >
   pagina-vendas-lancamento-pago), página de captura com formulário ou site
   institucional com várias páginas.
 compatibility: Claude Code, claude.ai, Claude Desktop
-metadata: "v1.0.0, outubro 2026. Histórico em CHANGELOG.md."
+metadata: "v1.1.0, outubro 2026. Histórico em CHANGELOG.md."
 ---
 
 # Página de Links Triwer
@@ -36,9 +36,17 @@ outra pessoa.
 
 ---
 
+## BOOT, executar sempre ao iniciar
+
+0. **Verificação de versão:** leia o arquivo `VERSION` desta skill (sibling do `SKILL.md`), que é a versão local. Tente buscar `https://raw.githubusercontent.com/paulovyn1/triwer-skills/main/pagina-links-triwer/CHANGELOG.md` com a ferramenta de acesso à web do ambiente. Se não conseguir acessar, não mencione nada e siga. Se a entrada mais recente do CHANGELOG remoto for igual à local, siga sem dizer nada. **Só se a remota for mais nova:** leia e siga `references/atualizacao-versao.md`.
+1. **Memória:** leia `~/.claude/skills/pagina-links-triwer/memoria.md`, se existir. Ela guarda o perfil do aluno, onde estão os arquivos dele, as páginas já entregues e as preferências aprendidas nas correções. Se não existir, rode o onboarding rápido de `references/memoria-modelo.md` (uma mensagem só) e crie o arquivo.
+2. **Notion do aluno (opcional):** leia `~/.claude/skills/onboarding-triwer/memoria.md`, se existir com `onboarding_completo: true`. Dali saem nome, Instagram, pasta de fotos e as URLs do Notion. Não pergunte de novo o que já está lá. Sem o onboarding, siga sem Notion.
+
+---
+
 ## Fase 0. Ambiente, nível e onde vai ficar
 
-Descubra antes de tudo:
+Confira a memória primeiro e só pergunte o que não estiver lá. Descubra antes de tudo:
 
 1. **Ambiente.** Com ferramentas de arquivo e terminal (Claude Code), dá para
    criar o projeto, publicar e tirar prints. No chat (claude.ai), a entrega é um
@@ -149,6 +157,19 @@ de `assets/LEIA-ME-modelo.md`, o link publicado e a lista do que ainda falta
 
 Ajustes depois da entrega: leia o estado atual, mude só o que foi pedido,
 confira, publique de novo no mesmo endereço.
+
+---
+
+## Aprender com as correções do aluno
+
+A skill evolui com o gosto de quem a usa. Tudo o que vale para as próximas páginas fica em `memoria.md`:
+
+- **Registrar preferência.** Quando o aluno corrigir, recusar ou pedir um ajuste que se aplicaria de novo (ordem dos cards, tom do texto, cor, animação, o que ele nunca quer ver), grave uma linha em "Preferências registradas": `[data] Quando [situação], [faça X] (não [Y])`. Avise em uma frase: "Anotei na sua memória: [regra]. Se não quiser que eu lembre disso, é só avisar." Ajuste de uma página só ("troca essa foto") não vira regra.
+- **Aplicar.** Antes de escrever ou montar qualquer coisa, releia as preferências e siga. Elas valem mais que os padrões deste arquivo, menos as "Regras que valem o processo inteiro": se o aluno pedir algo que quebre uma delas (inventar número, por exemplo), explique e não aplique.
+- **Guardar caminhos.** Quando o aluno disser onde algo está (pasta de fotos, página de vendas de referência, link publicado), grave em "Fontes e caminhos" ou "Entregas feitas" e confira ali antes de pedir de novo.
+- **Nunca gravar** telefone, e-mail, senha, token, CPF/CNPJ ou dado de cliente. Só caminhos, gostos e regras.
+- **Contradição.** Se uma preferência nova contradiz uma antiga, atualize a antiga e avise.
+- **Fecho de cada entrega.** Atualize "Entregas feitas", "Pendências" e a data de atualização.
 
 ---
 

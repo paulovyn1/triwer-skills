@@ -1,8 +1,10 @@
 # Método de granularidade: como um mapa de aula real é estruturado
 
-Extraído por análise estrutural de um mapa real de aula ao vivo de 1 hora (142 nós, profundidade máxima 10, 4 blocos-raiz). Este é o padrão
-de referência — qualquer mapa gerado pela skill deve seguir esta lógica, não uma
-aproximação por estilo de texto.
+Extraído por análise estrutural de mapas reais de aula ao vivo de 1 hora (cerca
+de 142 nós, profundidade máxima 10, 4 blocos-raiz). Este é o padrão de
+referência — qualquer mapa gerado pela skill deve seguir esta lógica, não uma
+aproximação por estilo de texto. Os exemplos abaixo são ilustrativos, de nichos
+diferentes, e não vêm de nenhum aluno.
 
 ---
 
@@ -33,26 +35,26 @@ elementos do mesmo grupo.
 
 ```
 "O que já vimos:"
-  -> Como separar e criar ativos
-  -> As 3 fases do funil
-  -> Como gerar conteúdos infinitos usando o MDI
-  -> Funil Trampolim
-  -> Super desafio
+  -> Como definir a oferta
+  -> As 3 etapas do atendimento
+  -> Como criar conteúdo toda semana
+  -> O funil de captação
+  -> O desafio de 7 dias
 ```
 
 ```
-"Para ter um bom LUCRO não é suficiente..."
-  -> Fazer lançamentos a cada 3 meses
-  -> Produzir bons conteúdos no Instagram
-  -> Ter uma narrativa super legal
-  -> Ter vários produtos de tickets diferentes
-  -> Ter sucesso do cliente
-  -> Ter comercial
+"Para ter uma agenda cheia não é suficiente..."
+  -> Postar todo dia
+  -> Ter um perfil bonito
+  -> Ter uma oferta clara
+  -> Fazer anúncios
+  -> Ter indicação de clientes
+  -> Ter um atendimento organizado
   -> Você vai precisar...
 ```
 
 Reconhecível porque: o pai termina com ":", "...", ou é um rótulo curto ("Estrutura",
-"Estrutura do fluxo") — e os filhos, se reordenados entre si, não quebrariam nada.
+"Passo a passo") — e os filhos, se reordenados entre si, não quebrariam nada.
 
 ### Modo B — Linha de raciocínio (cadeia sequencial, 1 filho por vez)
 
@@ -61,16 +63,16 @@ um item de lista, é a continuação direta. Aqui é onde nascem as cadeias de 1
 (29 dos 45 nós não-folha do mapa de referência têm exatamente 1 filho).
 
 ```
-"Ele usa como inicializador caixinhas e dá o poder para a audiência escolher o que ela quer receber"
-  -> "A lógica do nosso funil orgânico é uma só: Qual é o próximo passo?"
-    -> "Depois de votarem, voltamos para revelar o ganhador e liberar a isca"
-      -> "Estamos criando um 2° filtro, quem tem interesse nessa isca"
+"Ela usa enquete como porta de entrada e deixa a audiência escolher o que quer receber"
+  -> "A lógica do funil é uma só: qual é o próximo passo?"
+    -> "Depois de votarem, volto para revelar o resultado e liberar o material"
+      -> "É um segundo filtro: só avança quem tem interesse de verdade"
 ```
 
 ```
-"A real é que não existe um momento em que você pode deixar de aprender"
-  -> "E o que te trouxe até aqui não é o que vai te levar adiante"
-    -> "Te assusta ou tranquiliza?"
+"A real é que ninguém chega num ponto em que pode parar de ajustar a oferta"
+  -> "E o que trouxe você até aqui não é o que vai levar adiante"
+    -> "Isso te assusta ou tranquiliza?"
 ```
 
 Reconhecível porque: cada filho não substitui nem compete com os "irmãos" — ele SÓ
@@ -108,16 +110,17 @@ cadeia em vez de fundir)
 
 ---
 
-## Erros documentados nesta skill e como este método os resolve
+## Erros comuns e como este método os resolve
 
 1. **Nós fragmentados tipo frase de efeito, sem conexão** (o mapa vira coleção de frases soltas): o erro não era ter nós curtos — nós curtos são o padrão certo. O erro era
    cortar a CONEXÃO entre eles, apresentá-los soltos sem que um levasse ao outro pela
    estrutura pai→filho. A correção não é alongar o texto, é encadear em Modo B.
 
-2. **Fundir tudo em parágrafos longos de texto corrido** (correção errada de 2026-08-10):
-   isso reduziu o número de nós e destruiu a granularidade — o oposto do padrão real.
-   "Soar natural e falado" é uma propriedade do TOM de cada frase, não motivo para
-   reduzir quantos nós existem ou aumentar o tamanho de cada um.
+2. **Fundir tudo em parágrafos longos de texto corrido** (a correção que costuma ser
+   tentada depois do erro 1 e piora o mapa): isso reduz o número de nós e destrói a
+   granularidade — o oposto do padrão real. "Soar natural e falado" é uma propriedade
+   do TOM de cada frase, não motivo para reduzir quantos nós existem ou aumentar o
+   tamanho de cada um.
 
 3. **Achatar em 2-3 níveis**: o pico real de conteúdo fica nos níveis 4-6. Um bloco que
    para no nível 2 ou 3 está raso — falta descer mais uma ou duas cadeias de raciocínio
@@ -128,17 +131,16 @@ cadeia em vez de fundir)
 ## O que a análise estrutural (fanout/profundidade) não mostra — padrões de raciocínio e persuasão
 
 Contar filhos e medir profundidade revela a FORMA da árvore, mas não o que
-realmente vai dentro de cada nó. Uma primeira leitura de conteúdo confundiu
-vocabulário específico daquela aula (nomes de campo de um fluxo Manychat,
-URLs, preço de produto — tudo do tema "funil orgânico" daquele dia) com
-padrão real de estilo. Isso foi corrigido: os itens abaixo são só o que se
-repete **independente do tema da aula** — mecânica de raciocínio e
-persuasão, não vocabulário de um framework específico. Teste para qualquer
-achado novo: isso se repetiria numa aula sobre um tema totalmente diferente?
-Se a resposta depende de palavras técnicas daquele contexto, não é padrão.
+realmente vai dentro de cada nó. Cuidado ao tirar "padrão de estilo" de um mapa:
+o vocabulário técnico do tema daquele dia (nomes de ferramenta, campos, URLs,
+preço de produto) não é padrão, é assunto. Os itens abaixo são só o que se
+repete **independente do tema da aula** — mecânica de raciocínio e persuasão.
+Teste para qualquer achado novo: isso se repetiria numa aula sobre um tema
+totalmente diferente? Se a resposta depende de palavras técnicas daquele
+contexto, não é padrão.
 
 **1. Abre a verdade desconfortável direto, sem suavizar.** "A real é que
-não existe um momento em que você pode deixar de aprender" — afirmação
+ninguém chega num ponto em que pode parar de ajustar a oferta" — afirmação
 categórica, sem "eu acho", "talvez", "de certa forma". A tese chega inteira
 na primeira frase do bloco.
 
@@ -158,8 +160,8 @@ solta: "Tempo colocado no lugar errado", "Complexidade desnecessária",
 "Falta de direção" — cada rótulo é a CONCLUSÃO do diagnóstico, os filhos do
 nó são a evidência que sustenta aquela conclusão.
 
-**4. Constrói o argumento por negação antes da afirmação.** "Para ter um
-bom LUCRO não é suficiente..." lista tudo que parece certo mas não resolve,
+**4. Constrói o argumento por negação antes da afirmação.** "Para ter uma
+agenda cheia não é suficiente..." lista tudo que parece certo mas não resolve,
 numa enumeração que vai ficando mais genérica e cansativa de propósito, até
 estourar em "Você vai precisar..." como o corte que separa o que não basta
 do que resolve de verdade.
@@ -171,33 +173,35 @@ pontos, sem exceção". Nós minúsculos que fazem a virada de tom do bloco
 inteiro — não decoração, são a dobradiça entre tensão e alívio.
 
 **6. Estudo de caso segue estrutura fixa de 3 movimentos.** Situação
-inicial com prova ("vendia MUITO bem em lançamentos") → a insatisfação que
-ela sentia apesar da prova ("mas tava cansada de depender só de
-lançamentos") → a virada com resultado numérico exato ("18k de faturamento
-mensal"). Número real nunca aproximado — nunca inventar dado fictício "pra
-parecer completo", mesma regra inegociável de carrossel.
+inicial com prova ("atendia muito bem em projetos avulsos") → a insatisfação
+que ela sentia apesar da prova ("mas estava cansada de começar todo mês do
+zero") → a virada com resultado numérico exato ("R$ 8 mil de receita
+recorrente por mês", exemplo hipotético). Número real nunca aproximado —
+nunca inventar dado fictício "pra parecer completo".
 
-## Posição da virada emocional — depende do arco do dia, não é fixa
+## Posição da virada emocional — depende do arco do evento, não é fixa
 
-Cruzando dois mapas reais (Dia 01 = abertura do workshop, Dia 02 = segunda
-manhã do mesmo workshop): no Dia 02 o técnico vem antes da quebra de crença
-(fecha o período). No Dia 01 é o oposto — crença/contexto de mercado abre,
-técnico vem depois. **Não existe ordem fixa "técnico antes" ou "emocional
-antes"** — depende de que posição aquele bloco ocupa no dia inteiro:
-abertura de workshop precisa justificar atenção antes de entregar técnico;
+Comparando dois mapas reais do mesmo evento de vários dias (um da abertura,
+outro da segunda manhã): no mapa do segundo dia o técnico vem antes da quebra de
+crença (fecha o período). No da abertura é o oposto — crença/contexto de mercado
+abre, técnico vem depois. **Não existe ordem fixa "técnico antes" ou "emocional
+antes"** — depende de que posição aquele bloco ocupa no evento inteiro:
+abertura de evento precisa justificar atenção antes de entregar técnico;
 fechamento de período já tem audiência comprometida, entrega valor primeiro.
 Antes de estruturar um mapa novo, decidir essa posição primeiro.
 
-## Marcadores de voz — tom, humor, ironia (camada própria, não incluída em conteúdo/persuasão)
+## Marcadores de voz — tom, humor, ironia (sempre do expert, nunca da skill)
 
-- **"rs" marca autoironia especificamente sobre a própria estratégia de
-  venda** — aparece no momento em que ela confessa abertamente uma tática
-  própria, não é decoração aleatória.
-- **Aspas têm 3 funções distintas:** jargão/piada interna introduzido sem
-  explicar ("inceptions"), discurso direto citando fala de mercado/cliente
-  ("Não se escolhe mais um profissional por 'capacidade'"), ou a frase-chave
-  que virou o produto/mensagem em si ("Você cuida do seu negócio enquanto eu
-  cuido do seu marketing").
+Estes marcadores existem em muitos experts, mas **quem decide quais usar e
+com que frequência é o mapa de referência do próprio expert** (ver
+`escrita-do-no.md`). Não imponha nenhum que ele não use.
+
+- **Autoironia ("rs")** aparece quando o expert confessa abertamente uma tática
+  própria, não como decoração aleatória.
+- **Aspas têm 3 funções distintas:** jargão ou piada interna introduzida sem
+  explicar ("o método do degrau"), discurso direto citando fala de mercado ou de
+  cliente ("Ninguém compra mais por 'desconto'"), ou a frase-chave que virou a
+  mensagem em si ("Você cuida da obra, eu cuido da burocracia").
 - **CAPS e pontuação múltipla (!!!!)** marcam pico de energia vocal — sempre
   em palavra ou frase curta, nunca frase inteira longa.
 - **Informalidade ortográfica ("vc", "tbm")** é pontual, em nó de comentário
@@ -205,7 +209,7 @@ Antes de estruturar um mapa novo, decidir essa posição primeiro.
 
 ## Checklist antes de gerar o script
 
-- [ ] Decidi a posição da virada emocional considerando o lugar desse bloco no arco do dia?
+- [ ] Decidi a posição da virada emocional considerando o lugar desse bloco no arco do evento?
 - [ ] Cada bloco de nível 1 tem pelo menos um ramo que desce até nível 6+?
 - [ ] Para cada nó com 2+ filhos, os filhos são realmente paralelos (Modo A) — não uma
       sequência forçada em lista?
@@ -214,4 +218,4 @@ Antes de estruturar um mapa novo, decidir essa posição primeiro.
 - [ ] Nenhum nó individual passa de ~1-2 frases curtas? Se passar, fatiar em cadeia.
 - [ ] O outline tem MUITOS nós (mapas de aula real ficam na casa de 100-150), não uma
       dúzia de blocos grandes?
-- [ ] Marcadores de voz (rs, aspas, CAPS pontual) aplicados com critério pontual — não uniformemente em todo nó?
+- [ ] Marcadores de voz (rs, aspas, CAPS pontual) só os que o expert usa, com critério pontual — não uniformemente em todo nó?

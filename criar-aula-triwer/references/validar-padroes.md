@@ -12,7 +12,9 @@ Um padrão só é confiável depois de sobreviver a uma tentativa real de derrub
 
 ## Exemplo de execução (aula sobre bio do Instagram)
 
-**Rodada 1, filtro de exclusão.** Hipótese inicial: a bio precisa de um filtro demográfico, tipo "para mulheres". Testando contra a bio real de um mentorado ("sair do amadorismo"), a primeira leitura classificou a frase como filtro fraco.
+Os casos abaixo são ilustrativos, inventados para mostrar o ciclo. Na sua aula, use casos reais e nomeados do expert.
+
+**Rodada 1, filtro de exclusão.** Hipótese inicial: a bio precisa de um filtro demográfico, tipo "para mulheres". Testando contra a bio de um mentorado do expert ("para quem quer sair do amadorismo"), a primeira leitura classificou a frase como filtro fraco.
 
 O expert contestou: a frase excluía sim, quem acha isso besteira. Em vez de recuar para "ok, é filtro", a pergunta que destravou foi: "isso é o mesmo tipo de corte que 'para mulheres' faz, ou é diferente?". A resposta: a frase cortava por **estágio** (não fala com iniciante) e por **autopercepção** (só ressoa em quem já se sente amador).
 

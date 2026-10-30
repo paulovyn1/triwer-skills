@@ -1,12 +1,12 @@
 # Estrutura de referência e como estudar uma referência
 
 ## Por que isto existe
-Na primeira versão da página que originou esta skill, o esqueleto foi
-reaproveitado de uma página anterior do mesmo expert, só com o conteúdo trocado.
-O aluno rejeitou: "ficou idêntica, era para estar na estrutura da referência".
-A causa foi ler a referência só em texto, sem ver o layout. Texto diz o que tem
-na página. Só o screenshot diz como ela se organiza, e a estrutura é o que o
-aluno pediu para copiar.
+O erro mais comum nesta skill é reaproveitar o esqueleto de uma página anterior
+do mesmo expert, só com o conteúdo trocado, quando o aluno pediu a estrutura de
+uma referência. O aluno percebe na hora: "ficou idêntica, era para estar na
+estrutura da referência". A causa é ler a referência só em texto, sem ver o
+layout. Texto diz o que tem na página. Só o screenshot diz como ela se
+organiza, e a estrutura é o que o aluno pediu para copiar.
 
 ## Como estudar uma referência (sempre, antes da copy)
 1. Abra a página no navegador (Claude in Chrome ou print) e role de cima a baixo
